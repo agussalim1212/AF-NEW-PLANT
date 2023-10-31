@@ -1,0 +1,76 @@
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.deps.json
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.AssemblyReference.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfoInputs.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfo.cs
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CoreCompileInputs.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CopyComplete
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.deps.json
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.dll
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.pdb
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\SkeletonApi\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.AssemblyReference.cache
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.GeneratedMSBuildEditorConfig.editorconfig
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfoInputs.cache
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfo.cs
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CoreCompileInputs.cache
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CopyComplete
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.dll
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.pdb
+C:\SkeletonApi\SkeletonApi\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.deps.json
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.dll
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.pdb
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.AssemblyReference.cache
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.GeneratedMSBuildEditorConfig.editorconfig
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfoInputs.cache
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfo.cs
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CoreCompileInputs.cache
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CopyComplete
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.dll
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.pdb
+C:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.deps.json
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.AssemblyReference.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfoInputs.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfo.cs
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CoreCompileInputs.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CopyComplete
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll

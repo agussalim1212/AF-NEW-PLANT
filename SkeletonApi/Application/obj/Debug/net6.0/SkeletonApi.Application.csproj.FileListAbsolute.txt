@@ -1,0 +1,85 @@
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.AssemblyReference.cache
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfoInputs.cache
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfo.cs
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CoreCompileInputs.cache
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.deps.json
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CopyComplete
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\refint\SkeletonApi.Application.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.pdb
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Application\obj\Debug\net6.0\ref\SkeletonApi.Application.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.deps.json
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.AssemblyReference.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfoInputs.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfo.cs
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CoreCompileInputs.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CopyComplete
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\refint\SkeletonApi.Application.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\ref\SkeletonApi.Application.dll
+C:\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.deps.json
+C:\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\SkeletonApi\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.AssemblyReference.cache
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfoInputs.cache
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfo.cs
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CoreCompileInputs.cache
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CopyComplete
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.dll
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\refint\SkeletonApi.Application.dll
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.pdb
+C:\SkeletonApi\SkeletonApi\Application\obj\Debug\net6.0\ref\SkeletonApi.Application.dll
+C:\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.deps.json
+C:\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.AssemblyReference.cache
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfoInputs.cache
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfo.cs
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CoreCompileInputs.cache
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CopyComplete
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.dll
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\refint\SkeletonApi.Application.dll
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.pdb
+C:\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\ref\SkeletonApi.Application.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.deps.json
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.AssemblyReference.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfoInputs.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfo.cs
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CoreCompileInputs.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CopyComplete
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\refint\SkeletonApi.Application.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\ref\SkeletonApi.Application.dll

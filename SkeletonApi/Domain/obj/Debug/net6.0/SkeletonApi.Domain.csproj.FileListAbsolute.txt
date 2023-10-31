@@ -1,0 +1,60 @@
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.deps.json
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.AssemblyReference.cache
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Users\muham\DevPT2\AHM-NP\SkeletonApi\Domain\obj\Debug\net6.0\ref\SkeletonApi.Domain.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.deps.json
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.AssemblyReference.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb
+D:\Project-kantor\Backend\New Plant\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\ref\SkeletonApi.Domain.dll
+C:\SkeletonApi\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.deps.json
+C:\SkeletonApi\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\SkeletonApi\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.AssemblyReference.cache
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.dll
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\SkeletonApi\SkeletonApi\Domain\obj\Debug\net6.0\ref\SkeletonApi.Domain.dll
+C:\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.deps.json
+C:\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.AssemblyReference.cache
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.dll
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\ref\SkeletonApi.Domain.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.deps.json
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.AssemblyReference.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\ref\SkeletonApi.Domain.dll

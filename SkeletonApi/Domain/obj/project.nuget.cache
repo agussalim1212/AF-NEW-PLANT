@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "OU/jEFMJkF7RxiwTSErJU3jqsxmL76l1KuXG2BcwwKwqM891b9PkNDLsTXLwoZzvYHqAXYIRq27mbWC65pHZwg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\elect\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\elect\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\elect\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
