@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkeletonApi.Presentation.Controllers
+namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetAllSubjectMachine
 {
-    internal class CategoryMachine : ApiControllerBase
+    internal class GetAllSubjectMachineQuery
     {
     }
 }

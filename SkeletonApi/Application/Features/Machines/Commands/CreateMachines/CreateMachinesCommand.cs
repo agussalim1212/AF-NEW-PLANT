@@ -37,7 +37,7 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
             };
-
+            
             await _unitOfWork.Repository<Machine>().AddAsync(machines);
             machines.AddDomainEvent(new MachinesCreatedEvent(machines));
             await _unitOfWork.Save(cancellationToken);

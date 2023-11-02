@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SkeletonApi.Domain.Entities
 {
-    public class SubjectHasMachine : BaseAuditableEntity
+    public class SubjectHasMachine : BaseManyToMany
     {
         [Column("machine_id")]
         public Guid MachineId { get; set; }

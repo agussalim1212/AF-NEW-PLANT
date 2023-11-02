@@ -11,6 +11,7 @@ namespace SkeletonApi.Domain.Common.Abstracts
     public abstract class BaseAuditableEntity : BaseEntity,IAuditableEntity
     {
         [Column("created_by")]
+        
         public Guid? CreatedBy { get; set; }
         [Column("update_by")]
         public Guid? UpdatedBy { get; set; }
