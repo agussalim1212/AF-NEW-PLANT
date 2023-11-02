@@ -42,7 +42,6 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
             services
                 .AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork))
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
-                .AddTransient(typeof(IGenRepository<>), typeof(GenRepository<>))
                 .AddTransient<ISubjectRepository, SubjectRepository>()
                 .AddTransient<IMachinesRepository, MachinesRepository>()
                 .AddTransient<ICategoryMachineRepository, CategoryMachinesRepository>()
