@@ -11,14 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 // Add services to the container.
-
-builder.Services.AddHttpContextAccessor();
-//builder.Services.ConfigureIdentity();
-builder.Services.AddAuthentication();
-//builder.Services.ConfigurePermissionService();
-builder.Services.ConfigureJWT(builder.Configuration);
-builder.Services.AddJwtConfiguration(builder.Configuration);
-
 builder.Services.AddApplicationLayer();
 builder.Services.AddInfrastructureLayer();
 builder.Services.AddPersistenceLayer(builder.Configuration);
