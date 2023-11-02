@@ -29,14 +29,4 @@
     <ProjectReference Include="..\SkeletonApi.Shared\SkeletonApi.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Queries\EnergyConsumption\" />
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Queries\ListQuality\" />
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Commands\" />
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Queries\MachineInformation\" />
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Queries\TotalProduction\" />
-    <Folder Include="Features\DetailMachine\AssyWheelLine\" />
-    <Folder Include="Features\DetailMachine\GensubAssyLine\" />
-  </ItemGroup>
-
 </Project>
