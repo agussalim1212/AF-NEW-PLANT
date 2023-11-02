@@ -12,8 +12,8 @@ using SkeletonApi.Persistence.Contexts;
 namespace SkeletonApi.WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231030075710_part2.0")]
-    partial class part20
+    [Migration("20231101021355_part1.0")]
+    partial class part10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,10 +81,12 @@ namespace SkeletonApi.WebAPI.Migrations
             modelBuilder.Entity("SkeletonApi.Domain.Entities.CategoryMachineHasMachine", b =>
                 {
                     b.Property<Guid>("MachineId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("machine_id");
 
                     b.Property<Guid>("CategoryMachineId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("category_machine_id");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")

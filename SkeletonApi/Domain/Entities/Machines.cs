@@ -19,4 +19,5 @@ namespace SkeletonApi.Domain.Entities
 
 
     }
+
 }

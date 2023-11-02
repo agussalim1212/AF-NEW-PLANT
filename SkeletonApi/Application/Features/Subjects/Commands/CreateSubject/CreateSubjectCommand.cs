@@ -37,7 +37,8 @@ namespace SkeletonApi.Application.Features.Subjects.Commands.CreateSubject
             {
                 Vid = request.Vid,
                 Subjects = request.Subjects,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
             };
 
             await _unitOfWork.Repository<Subject>().AddAsync(subject);

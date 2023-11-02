@@ -72,16 +72,18 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.CategoryMachineHasMachine", b =>
                 {
                     b.Property<Guid>("MachineId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("machine_id");
 
                     b.Property<Guid>("CategoryMachineId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("category_machine_id");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -98,10 +100,6 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -156,7 +154,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoryMachines");
+                    b.ToTable("CategoryMachines", (string)null);
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Machine", b =>
@@ -196,7 +194,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Machines");
+                    b.ToTable("Machines", (string)null);
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
@@ -240,7 +238,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Subject", (string)null);
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.SubjectHasMachine", b =>
@@ -268,10 +266,6 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")

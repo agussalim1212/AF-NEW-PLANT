@@ -25,7 +25,7 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<Subject> Subject => Set<Subject>();
         public DbSet<CategoryMachines> CategoryMachines => Set<CategoryMachines>(); 
         public DbSet<CategoryMachineHasMachine> CategoryMachineHasMachines => Set<CategoryMachineHasMachine>();
-        public DbSet<SubjectHasMachine> subjectHasMachines => Set<SubjectHasMachine>();
+        public DbSet<SubjectHasMachine> SubjectHasMachines => Set<SubjectHasMachine>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

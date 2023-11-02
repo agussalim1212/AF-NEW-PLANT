@@ -34,10 +34,10 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
             {
                 
                 Name = request.Name,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
             };
-
+            
             await _unitOfWork.Repository<Machine>().AddAsync(machines);
             machines.AddDomainEvent(new MachinesCreatedEvent(machines));
             await _unitOfWork.Save(cancellationToken);
