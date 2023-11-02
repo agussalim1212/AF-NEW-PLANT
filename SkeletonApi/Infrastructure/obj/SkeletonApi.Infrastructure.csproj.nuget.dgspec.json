@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj": {}
+    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
         "projectName": "SkeletonApi.Application",
-        "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
         "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
+        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
-                "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
+              "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+                "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
               },
-              "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
-                "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
+              "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+                "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
               }
             }
           }
@@ -92,14 +92,14 @@
         }
       }
     },
-    "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
         "projectName": "SkeletonApi.Domain",
-        "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
         "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
+        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -165,14 +165,14 @@
         }
       }
     },
-    "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj": {
+    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj",
         "projectName": "SkeletonApi.Infrastructure",
-        "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj",
+        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -189,11 +189,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
-                "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
+              "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+                "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
               },
-              "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
-                "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
+              "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+                "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
               }
             }
           }
@@ -249,14 +249,14 @@
         }
       }
     },
-    "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
+        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
         "projectName": "SkeletonApi.Shared",
-        "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
+        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
         "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\obj\\",
+        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
