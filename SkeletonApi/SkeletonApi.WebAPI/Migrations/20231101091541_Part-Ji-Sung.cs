@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SkeletonApi.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class part10 : Migration
+    public partial class PartJiSung : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,7 @@ namespace SkeletonApi.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryMachine",
+                name: "CategoryMachines",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -48,7 +48,21 @@ namespace SkeletonApi.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryMachine", x => x.id);
+                    table.PrimaryKey("PK_CategoryMachines", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dummy",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
                 });
 
             migrationBuilder.CreateTable(
@@ -94,6 +108,7 @@ namespace SkeletonApi.WebAPI.Migrations
                 {
                     CategoryMachineId = table.Column<Guid>(type: "uuid", nullable: false),
                     MachineId = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
                     update_by = table.Column<Guid>(type: "uuid", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -105,9 +120,9 @@ namespace SkeletonApi.WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_CategoryMachineHasMachine", x => new { x.MachineId, x.CategoryMachineId });
                     table.ForeignKey(
-                        name: "FK_CategoryMachineHasMachine_CategoryMachine_CategoryMachineId",
+                        name: "FK_CategoryMachineHasMachine_CategoryMachines_CategoryMachineId",
                         column: x => x.CategoryMachineId,
-                        principalTable: "CategoryMachine",
+                        principalTable: "CategoryMachines",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -124,6 +139,7 @@ namespace SkeletonApi.WebAPI.Migrations
                 {
                     machine_id = table.Column<Guid>(type: "uuid", nullable: false),
                     subject_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
                     update_by = table.Column<Guid>(type: "uuid", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -169,10 +185,13 @@ namespace SkeletonApi.WebAPI.Migrations
                 name: "CategoryMachineHasMachine");
 
             migrationBuilder.DropTable(
+                name: "Dummy");
+
+            migrationBuilder.DropTable(
                 name: "SubjectHasMachine");
 
             migrationBuilder.DropTable(
-                name: "CategoryMachine");
+                name: "CategoryMachines");
 
             migrationBuilder.DropTable(
                 name: "Machines");

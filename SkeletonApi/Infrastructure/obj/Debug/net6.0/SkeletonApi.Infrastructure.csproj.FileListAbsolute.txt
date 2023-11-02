@@ -93,3 +93,22 @@ C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\Skeleton
 C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\refint\SkeletonApi.Infrastructure.dll
 C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.pdb
 C:\Users\elect\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\ref\SkeletonApi.Infrastructure.dll
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.deps.json
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.dll
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.pdb
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.AssemblyReference.cache
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfoInputs.cache
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfo.cs
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CoreCompileInputs.cache
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CopyComplete
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.dll
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\refint\SkeletonApi.Infrastructure.dll
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.pdb
+C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\ref\SkeletonApi.Infrastructure.dll

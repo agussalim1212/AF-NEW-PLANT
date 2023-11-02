@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SkeletonApi.Presentation.Controllers
 {
-    internal class CategoryMachine
+    internal class CategoryMachine : ApiControllerBase
     {
     }
 }

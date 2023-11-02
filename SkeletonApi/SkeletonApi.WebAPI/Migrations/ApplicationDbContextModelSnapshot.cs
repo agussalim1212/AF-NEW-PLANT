@@ -159,6 +159,33 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("CategoryMachines");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Dummy", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("Dummy");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Machine", b =>
                 {
                     b.Property<Guid>("Id")
