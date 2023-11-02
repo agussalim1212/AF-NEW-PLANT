@@ -78,12 +78,10 @@ namespace SkeletonApi.WebAPI.Migrations
             modelBuilder.Entity("SkeletonApi.Domain.Entities.CategoryMachineHasMachine", b =>
                 {
                     b.Property<Guid>("MachineId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("machine_id");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CategoryMachineId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("category_machine_id");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -100,6 +98,10 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -155,6 +157,33 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CategoryMachines");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Dummy", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("Dummy");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Machine", b =>
@@ -266,6 +295,10 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")

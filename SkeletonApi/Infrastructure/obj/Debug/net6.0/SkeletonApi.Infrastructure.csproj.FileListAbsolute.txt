@@ -112,22 +112,3 @@ C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonAp
 C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\refint\SkeletonApi.Infrastructure.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.pdb
 C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\ref\SkeletonApi.Infrastructure.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.deps.json
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.pdb
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.pdb
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.pdb
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.pdb
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.AssemblyReference.cache
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfoInputs.cache
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfo.cs
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CopyComplete
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\refint\SkeletonApi.Infrastructure.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.pdb
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\ref\SkeletonApi.Infrastructure.dll

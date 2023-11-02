@@ -70,15 +70,3 @@ C:\back back\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain
 C:\back back\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb
 C:\back back\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\ref\SkeletonApi.Domain.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.deps.json
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\bin\Debug\net6.0\SkeletonApi.Domain.pdb
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.AssemblyReference.cache
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb
-C:\Doc\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\ref\SkeletonApi.Domain.dll
