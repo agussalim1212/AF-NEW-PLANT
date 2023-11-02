@@ -118,11 +118,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+      "projectUniqueName": "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
       "projectName": "SkeletonApi.Domain",
-      "projectPath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+      "projectPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
       "packagesPath": "C:\\Users\\elect\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
+      "outputPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\elect\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BYVGV2pZxAtcPvWjV8WQb91dsDXVIiVeM8bgl8tF3N14B0zW3RzBOYmL6IXFNzt+8HYHYlRgTyksmrOD3vXcaQ==",
+  "dgSpecHash": "DlSHam+nEebctPHPxPixU6MdIDYluzVbaxMLIoVlbJihD/74GgiACtFR6ugHRdXYHyKuBVGrXSuhfBXHMniraA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\SkeletonApi.WebAPI.csproj",
+  "projectFilePath": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\SkeletonApi.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elect\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

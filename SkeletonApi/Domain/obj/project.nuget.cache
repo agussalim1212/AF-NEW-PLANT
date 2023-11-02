@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OU/jEFMJkF7RxiwTSErJU3jqsxmL76l1KuXG2BcwwKwqM891b9PkNDLsTXLwoZzvYHqAXYIRq27mbWC65pHZwg==",
+  "dgSpecHash": "Bs2+4d+E282zTQYqDAPeQvD3P4a+iXbUKf7ncEISZPTUrkpcQxpt32AgrzLeDTe9hUkR67SnZJRI8Vc2v1m36g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+  "projectFilePath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elect\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

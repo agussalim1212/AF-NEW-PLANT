@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4juo7Ee3W/q32NW90+Nc2+KsoQxGa/Olbo7gH4aQL0+257RYJ2n5vf2HkxE0Qh7HQr2CF9dr/yly/3SEmmriCA==",
+  "dgSpecHash": "p89AMMmDFc4aiuTdkMmtPoqM0SIi7L/ifeTkoLO301KecwvKCogfRvAGKZzUV7dSxh/clFHWu8n9hLWe/dNIFw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj",
+  "projectFilePath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elect\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

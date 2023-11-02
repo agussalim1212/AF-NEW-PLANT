@@ -1136,11 +1136,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj",
+      "projectUniqueName": "D:\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj",
       "projectName": "SkeletonApi.Persistence",
-      "projectPath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj",
+      "projectPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj",
       "packagesPath": "C:\\Users\\elect\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\obj\\",
+      "outputPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\elect\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1157,11 +1157,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
-              "projectPath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
+            "D:\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+              "projectPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
             },
-            "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
-              "projectPath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
+            "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+              "projectPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
             }
           }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9xa95KAY2K4amHs4gKboo3dr54vNFa5sPbAmDBq+C+TGZ9gwN+jzw61hXiIVHbPtPeLkwMonfJR9yWPhL0omww==",
+  "dgSpecHash": "aerYtNnqQaMC+G5MRH1PErXNWryUlJzw9zSNBvRa4BfyaKg3uVmmaZEPVBl5IyiKVijwcosGJzQBfd3ERajkYA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elect\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
+  "projectFilePath": "D:\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elect\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
