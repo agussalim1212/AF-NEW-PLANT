@@ -40,8 +40,8 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSub
                     {
 
                         MachineId = request.MachineId,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
                     };
 
                     foreach (var subId in request.SubjectId)

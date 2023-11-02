@@ -23,6 +23,7 @@ namespace SkeletonApi.Domain.Common.Abstracts
         [Column("update_at")]
         public DateTime? UpdatedAt { get; set; }
         [Column("deleted_at")]
+
         public DateTime? DeletedAt { get; set; }
 
         [NotMapped]

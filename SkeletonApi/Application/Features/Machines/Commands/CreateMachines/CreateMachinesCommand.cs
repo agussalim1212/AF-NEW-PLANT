@@ -34,8 +34,8 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
             {
                 
                 Name = request.Name,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
             };
             
             await _unitOfWork.Repository<Machine>().AddAsync(machines);

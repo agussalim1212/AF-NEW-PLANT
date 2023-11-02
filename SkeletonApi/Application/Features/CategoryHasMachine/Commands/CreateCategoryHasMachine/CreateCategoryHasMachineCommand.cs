@@ -43,8 +43,8 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCatego
                 {
 
                     CategoryMachineId = request.CategoryMachineId,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
                 };
 
                 foreach (var mc_id in request.MachineId)
