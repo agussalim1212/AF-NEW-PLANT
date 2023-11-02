@@ -112,3 +112,22 @@ C:\back back\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.P
 C:\back back\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\refint\SkeletonApi.Persistence.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.pdb
 C:\back back\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\ref\SkeletonApi.Persistence.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Persistence.deps.json
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Persistence.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Persistence.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.csproj.AssemblyReference.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.AssemblyInfoInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.AssemblyInfo.cs
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.csproj.CoreCompileInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.csproj.CopyComplete
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\refint\SkeletonApi.Persistence.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\ref\SkeletonApi.Persistence.dll

@@ -93,3 +93,22 @@ C:\back back\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerServi
 C:\back back\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.pdb
 C:\back back\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.deps.json
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\LoggerService.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Application.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.AssemblyReference.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfoInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfo.cs
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CoreCompileInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CopyComplete
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll

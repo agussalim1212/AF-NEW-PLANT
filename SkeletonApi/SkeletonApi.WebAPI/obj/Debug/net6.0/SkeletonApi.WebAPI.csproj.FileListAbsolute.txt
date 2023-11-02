@@ -550,3 +550,13 @@ C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\Skelet
 C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\ref\SkeletonApi.WebAPI.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.csproj.AssemblyReference.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.AssemblyInfoInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.AssemblyInfo.cs
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.csproj.CoreCompileInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\refint\SkeletonApi.WebAPI.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.pdb

@@ -69,3 +69,15 @@ C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\Skelet
 C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\refint\SkeletonApi.Shared.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.pdb
 C:\back back\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\ref\SkeletonApi.Shared.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\bin\Debug\net6.0\SkeletonApi.Shared.deps.json
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\bin\Debug\net6.0\SkeletonApi.Shared.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.csproj.AssemblyReference.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.AssemblyInfoInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.AssemblyInfo.cs
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.csproj.CoreCompileInputs.cache
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\refint\SkeletonApi.Shared.dll
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.pdb
+C:\Doc\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\ref\SkeletonApi.Shared.dll
