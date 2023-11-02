@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SkeletonApi.Domain.Entities
@@ -15,6 +16,7 @@ namespace SkeletonApi.Domain.Entities
         [Column("subject")]
         public string? Subjects { get; set; }
 
+        [JsonIgnore]
         public ICollection<SubjectHasMachine> SubjectHasMachines { get; set; } = new List<SubjectHasMachine>();
     }
 }
