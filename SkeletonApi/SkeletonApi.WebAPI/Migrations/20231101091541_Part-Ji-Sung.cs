@@ -49,7 +49,6 @@ namespace SkeletonApi.WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CategoryMachines", x => x.id);
-<<<<<<<< HEAD:SkeletonApi/SkeletonApi.WebAPI/Migrations/20231101091541_Part-Ji-Sung.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -64,8 +63,6 @@ namespace SkeletonApi.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-========
->>>>>>>> 42d67ed0bc4f74e3cc1960db778e2906ee982bec:SkeletonApi/SkeletonApi.WebAPI/Migrations/20231102062355_part1.0.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -109,14 +106,9 @@ namespace SkeletonApi.WebAPI.Migrations
                 name: "CategoryMachineHasMachine",
                 columns: table => new
                 {
-<<<<<<<< HEAD:SkeletonApi/SkeletonApi.WebAPI/Migrations/20231101091541_Part-Ji-Sung.cs
                     CategoryMachineId = table.Column<Guid>(type: "uuid", nullable: false),
                     MachineId = table.Column<Guid>(type: "uuid", nullable: false),
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-========
-                    category_machine_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    machine_id = table.Column<Guid>(type: "uuid", nullable: false),
->>>>>>>> 42d67ed0bc4f74e3cc1960db778e2906ee982bec:SkeletonApi/SkeletonApi.WebAPI/Migrations/20231102062355_part1.0.cs
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
                     update_by = table.Column<Guid>(type: "uuid", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -126,21 +118,16 @@ namespace SkeletonApi.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryMachineHasMachine", x => new { x.machine_id, x.category_machine_id });
+                    table.PrimaryKey("PK_CategoryMachineHasMachine", x => new { x.MachineId, x.CategoryMachineId });
                     table.ForeignKey(
-<<<<<<<< HEAD:SkeletonApi/SkeletonApi.WebAPI/Migrations/20231101091541_Part-Ji-Sung.cs
                         name: "FK_CategoryMachineHasMachine_CategoryMachines_CategoryMachineId",
                         column: x => x.CategoryMachineId,
-========
-                        name: "FK_CategoryMachineHasMachine_CategoryMachines_category_machine~",
-                        column: x => x.category_machine_id,
->>>>>>>> 42d67ed0bc4f74e3cc1960db778e2906ee982bec:SkeletonApi/SkeletonApi.WebAPI/Migrations/20231102062355_part1.0.cs
                         principalTable: "CategoryMachines",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CategoryMachineHasMachine_Machines_machine_id",
-                        column: x => x.machine_id,
+                        name: "FK_CategoryMachineHasMachine_Machines_MachineId",
+                        column: x => x.MachineId,
                         principalTable: "Machines",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -178,9 +165,9 @@ namespace SkeletonApi.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryMachineHasMachine_category_machine_id",
+                name: "IX_CategoryMachineHasMachine_CategoryMachineId",
                 table: "CategoryMachineHasMachine",
-                column: "category_machine_id");
+                column: "CategoryMachineId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubjectHasMachine_subject_id",

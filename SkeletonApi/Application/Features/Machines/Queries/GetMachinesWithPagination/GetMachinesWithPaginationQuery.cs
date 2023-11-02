@@ -15,17 +15,16 @@ namespace SkeletonApi.Application.Features.Machines.Queries.GetAllMachines
         //[JsonPropertyName("page_number")] tidak fungsi
         public int page_number { get; set; }
         public int page_size { get; set; }
-        public string search_term { get; set; }
 
 
         public GetMachinesWithPaginationQuery() { }
 
-        public GetMachinesWithPaginationQuery(int pageNumber, int pageSize, string SearchTerm) 
+        public GetMachinesWithPaginationQuery(int pageNumber, int pageSize) 
         {
             page_number = pageNumber;
             page_size = pageSize;
-            search_term = SearchTerm;
-         
+            
+
         }
     }
     internal class GetMachinesWithPaginationQueryHandler : IRequestHandler<GetMachinesWithPaginationQuery, PaginatedResult<GetMachinesWithPaginationDto>>
@@ -41,12 +40,11 @@ namespace SkeletonApi.Application.Features.Machines.Queries.GetAllMachines
 
         public async Task<PaginatedResult<GetMachinesWithPaginationDto>> Handle(GetMachinesWithPaginationQuery query, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.Repository<Machine>().Entities.Where(x => query.search_term == null || x.Name.ToLower() == query.search_term.ToLower().Trim())
-                   .OrderBy(c => c.UpdatedAt)
+            return await _unitOfWork.Repository<Machine>().Entities
+                   .OrderBy(x => x.Name)
                    .ProjectTo<GetMachinesWithPaginationDto>(_mapper.ConfigurationProvider)
                    .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }
-
         
 
 

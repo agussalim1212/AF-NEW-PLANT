@@ -2395,11 +2395,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
+      "projectUniqueName": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
       "projectName": "LoggerService",
-      "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
+      "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
       "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-      "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\obj\\",
+      "outputPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2416,8 +2416,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
-              "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
+            "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+              "projectPath": "C:\\back back\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
             }
           }
         }
