@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Features.Machines.Queries.GetMachinesWithPagination;
+using SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSubjectHasMachine;
+using SkeletonApi.Application.Features.SubjectHasMachines.Commands.DeleteSubjectHasMachine;
+using SkeletonApi.Application.Features.SubjectHasMachines.Commands.UpdateSubjectHasMachine_;
+using SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectMachineWithPagination;
 using SkeletonApi.Application.Features.Subjects.Commands.CreateSubject;
 using SkeletonApi.Application.Features.Subjects.Commands.DeleteSubject;
 using SkeletonApi.Application.Features.Subjects.Commands.UpdateSubject;
@@ -87,6 +91,57 @@ namespace SkeletonApi.Presentation.Controllers
         public async Task<ActionResult<Result<Guid>>> Delete(Guid id)
         {
             return await _mediator.Send(new DeleteSubjectCommand(id));
+        }
+
+        [HttpPost("create-subject-machine")]
+        public async Task<ActionResult<Result<SubjectHasMachine>>> CreateSubjectMachine(CreateSubjectHasMachineCommand command)
+        {
+            return await _mediator.Send(command);
+        }
+
+        [HttpPut("update-subject-machine/{id}")]
+        public async Task<ActionResult<Result<SubjectHasMachine>>> UpdateSubjectMachine(Guid id, UpdateSubjectHasMachinesCommand command)
+        {
+            if (id != command.MachineId)
+            {
+                return BadRequest();
+            }
+            return await _mediator.Send(command);
+        }
+
+        [HttpDelete("delete-subject-machine/{id}")]
+        public async Task<ActionResult<Result<Guid>>> DeleteSubject(Guid id)
+        {
+            return await _mediator.Send(new DeleteSubjectHasMachinesCommand(id));
+        }
+
+        [HttpGet("get-all-subject-machine")]
+        public async Task<ActionResult<PaginatedResult<GetSubjectMachineWithPaginationDto>>> GetSubjectMachinesWithPagination([FromQuery] GetSubjectMachineWithPaginationQuery query)
+        {
+            // Call Validate or ValidateAsync and pass the object which needs to be validated
+            var validator = new GetSubjectMachineWithPaginationValidator();
+
+            var result = validator.Validate(query);
+
+            if (result.IsValid)
+            {
+                var pg = await _mediator.Send(query);
+                var paginationData = new
+                {
+                    pg.page_number,
+                    pg.total_pages,
+                    pg.page_size,
+                    pg.total_count,
+                    pg.has_previous,
+                    pg.has_next
+                };
+
+                Response.Headers.Add("x-pagination", JsonSerializer.Serialize(paginationData));
+                return Ok(pg);
+            }
+
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            return BadRequest(errorMessages);
         }
     }
 }

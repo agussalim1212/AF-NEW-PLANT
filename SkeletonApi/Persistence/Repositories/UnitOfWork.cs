@@ -75,5 +75,24 @@ namespace SkeletonApi.Persistence.Repositories
             //dispose unmanaged resources
             disposed = true;
         }
+        public IGenRepository<T> Repo<T>() where T : BaseManyToMany
+        {
+            if (_repositories == null)
+                _repositories = new Hashtable();
+
+            var type = typeof(T).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(GenRepository<>);
+
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _dbContext);
+
+                _repositories.Add(type, repositoryInstance);
+            }
+
+            return (IGenRepository<T>)_repositories[type];
+        }
+
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SkeletonApi.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class PartJiSung : Migration
+    public partial class part1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -108,7 +108,6 @@ namespace SkeletonApi.WebAPI.Migrations
                 {
                     CategoryMachineId = table.Column<Guid>(type: "uuid", nullable: false),
                     MachineId = table.Column<Guid>(type: "uuid", nullable: false),
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
                     update_by = table.Column<Guid>(type: "uuid", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -139,7 +138,6 @@ namespace SkeletonApi.WebAPI.Migrations
                 {
                     machine_id = table.Column<Guid>(type: "uuid", nullable: false),
                     subject_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
                     update_by = table.Column<Guid>(type: "uuid", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: true),

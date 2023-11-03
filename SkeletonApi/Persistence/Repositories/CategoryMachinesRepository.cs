@@ -11,12 +11,7 @@ namespace SkeletonApi.Persistence.Repositories
 {
     public class CategoryMachinesRepository : ICategoryMachineRepository
     {
-        private readonly IGenericRepository<CategoryMachineHasMachine> _repository;
-
-        public CategoryMachinesRepository(IGenericRepository<CategoryMachineHasMachine> repository)
-        {
-            _repository = repository;
-        }
+        
 
            
     }
