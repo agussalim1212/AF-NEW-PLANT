@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
 using SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCategoryHasMachine;
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetAllCategoryMachine;
+using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachinesWithPagination;
+using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination;
+using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination_;
 using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
 using SkeletonApi.Application.Features.Machines.Commands.DeleteMachines;
 using SkeletonApi.Application.Features.Machines.Commands.UpdateMachines;
@@ -76,9 +78,37 @@ namespace SkeletonApi.Presentation.Controllers
         {
             return await _mediator.Send(new GetAllMachinesQuery());
         }
+        [HttpGet("get-all-category-machine-has-machine")]
+        public async Task<ActionResult<PaginatedResult<GetCategoryMachinesWithPaginationDto>>> GetCategoryMachinesWithPagination([FromQuery] GetCategoryMachinesWithPaginationQuery query)
+        {
+            // Call Validate or ValidateAsync and pass the object which needs to be validated
+            var validator = new GetCategoryMachineWithPaginationValidator();
 
-        [HttpGet("get-all-category-machine")]
-        public async Task<ActionResult<Result<List<GetAllCategoryMachineDto>>>> GetAllCategoryMachine()
+            var result = validator.Validate(query);
+
+            if (result.IsValid)
+            {
+                var pg = await _mediator.Send(query);
+                var paginationData = new
+                {
+                    pg.page_number,
+                    pg.total_pages,
+                    pg.page_size,
+                    pg.total_count,
+                    pg.has_previous,
+                    pg.has_next
+                };
+
+                Response.Headers.Add("x-pagination", JsonSerializer.Serialize(paginationData));
+                return Ok(pg);
+            }
+
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            return BadRequest(errorMessages);
+        }
+
+        [HttpGet("get-list-category-machine")]
+        public async Task<ActionResult<Result<List<GetAllCategoryMachineDto>>>> GetAllCategory()
         {
             return await _mediator.Send(new GetAllCategoryMachineQuery());
         }

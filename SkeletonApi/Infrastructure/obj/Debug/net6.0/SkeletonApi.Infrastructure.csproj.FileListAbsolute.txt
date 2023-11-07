@@ -112,3 +112,41 @@ C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonAp
 C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\refint\SkeletonApi.Infrastructure.dll
 C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.pdb
 C:\back back\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\ref\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.deps.json
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.pdb
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.dll
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.dll
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.dll
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.pdb
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.AssemblyReference.cache
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfoInputs.cache
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfo.cs
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CoreCompileInputs.cache
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CopyComplete
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\refint\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.pdb
+D:\AF-NEW-PLANT\AF-NEW-PLANT (1)\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\ref\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.deps.json
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Infrastructure.pdb
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.dll
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.dll
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.dll
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Application.pdb
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Domain.pdb
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\bin\Debug\net6.0\SkeletonApi.Shared.pdb
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.AssemblyReference.cache
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfoInputs.cache
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.AssemblyInfo.cs
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CoreCompileInputs.cache
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.csproj.CopyComplete
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\refint\SkeletonApi.Infrastructure.dll
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\SkeletonApi.Infrastructure.pdb
+D:\AF-NEW-PLANT\SkeletonApi\Infrastructure\obj\Debug\net6.0\ref\SkeletonApi.Infrastructure.dll

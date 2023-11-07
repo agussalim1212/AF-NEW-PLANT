@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.EnergyConsumptionGensubAssyLine;
+using SkeletonApi.Shared;
+
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -14,10 +12,20 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
-        public GensubAssyLineController(IMediator mediator, ILogger<MachineController> logger)
+        public GensubAssyLineController(IMediator mediator, ILogger<GensubAssyLineController> logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
+
+        [HttpGet("energy-consumption")]
+        public async Task<ActionResult<Result<GetAllEnergyConsumptionGensubDto>>> GetEnergyConsumptionGensub(Guid machineId, string type, DateTime start, DateTime end)
+        {
+            return await _mediator.Send(new GetAllEnergyConsumptionGensubQuery(machineId, type, start, end));
+        }
+
     }
 }
+
+
+

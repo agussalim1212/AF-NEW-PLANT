@@ -42,7 +42,7 @@ namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
                 machines.Name = request.Name;
                 machines.UpdatedAt = DateTime.UtcNow;
 
-                await _unitOfWork.Repository<Machine>().UpdateAsync(machines);
+                await _unitOfWork.Repository<Machine>().UpdateAsync(machines, request.Id);
                 machines.AddDomainEvent(new MachinesUpdateEvent(machines));
 
                 await _unitOfWork.Save(cancellationToken);

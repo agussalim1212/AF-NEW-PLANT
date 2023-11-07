@@ -20,8 +20,6 @@ namespace SkeletonApi.Domain.Common.Abstracts
         public void AddDomainEvent(BaseEvent domainEvent) => _domainEvents.Add(domainEvent);
         public void RemoveDomainEvent(BaseEvent domainEvent) => _domainEvents.Remove(domainEvent);
         public void ClearDomainEvents() => _domainEvents.Clear();
-        //public DateTimeOffset CreatedAt { get; set; }
-        //public DateTimeOffset UpdatedAt { get; set; }
-        //public DateTimeOffset DeletedAt { get; set; }
+    
     }
 }
