@@ -34,7 +34,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
         public decimal ValueCo2 { get; set; }
         [JsonPropertyName("label")]
         public string Label { get; set; }
-        //[JsonPropertyName("date_time")]
-        //public DateTime DateTime { get; set; }
+        [JsonPropertyName("date_time")]
+        public DateTime DateTime { get; set; }
     }
 }

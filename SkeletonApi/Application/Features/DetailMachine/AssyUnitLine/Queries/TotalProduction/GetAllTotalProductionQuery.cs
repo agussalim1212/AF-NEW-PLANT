@@ -2,21 +2,16 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.EnergyConsumptionAssyUnitLine;
-using SkeletonApi.Application.Features.Dummys.DummyDto;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.TotalProduction
 {
-    public class GetAllTotalProductionQuery : IRequest<Result<GetAllTotalProductionDto>>
+    public record GetAllTotalProductionQuery : IRequest<Result<GetAllTotalProductionDto>>
     {
+        
         public Guid MachineId { get; set; }
         public string Type { get; set; }
         public DateTime Start { get; set; }
@@ -69,15 +64,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.To
 
             if (categorys.Count() == 0)
             {
-                var category = await _unitOfWork.Data<Dummy>().Entities.Select(g =>
-                new GetAllTotalProductionDto
+                data = new GetAllTotalProductionDto
                 {
                     MachineName = machineName,
-                    SubjectName = subjectName,
-                })
-                .ProjectTo<GetAllTotalProductionDto>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
-
+                    SubjectName = subjectName,                
+                };
             }
             else
             {
@@ -87,19 +78,16 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.To
                     totalNG += rs.resultNg;
                 }
 
-                var category = await _unitOfWork.Data<Dummy>().Entities.Select(g =>
-                new GetAllTotalProductionDto
-                    {
-                        MachineName = machineName,
-                        SubjectName = subjectName,
-                        ValueOkTotal = totalOK,
-                        ValueNgTotal = totalNG,
-                        ValueOKPresentase = Math.Round((totalOK / (totalOK + totalNG)) * 100, 2),
-                        ValueNgPresentase = Math.Round((totalNG / (totalNG + totalOK)) * 100, 2),
-                    })
-                    .ProjectTo<GetAllTotalProductionDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
-
-                data = category;
+                data =
+                 new GetAllTotalProductionDto
+                 {
+                     MachineName = machineName,
+                     SubjectName = subjectName,
+                     ValueOkTotal = totalOK,
+                     ValueNgTotal = totalNG,
+                     ValueOKPresentase = Math.Round((totalOK / (totalOK + totalNG)) * 100, 2),
+                     ValueNgPresentase = Math.Round((totalNG / (totalNG + totalOK)) * 100, 2),
+                 };
             }
 
             return await Result<GetAllTotalProductionDto>.SuccessAsync(data, "Successfully fetch data");

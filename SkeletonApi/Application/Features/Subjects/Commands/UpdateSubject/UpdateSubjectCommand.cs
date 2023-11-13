@@ -44,7 +44,7 @@ namespace SkeletonApi.Application.Features.Subjects.Commands.UpdateSubject
                 subject.Subjects = request.Subject;
                 subject.UpdatedAt = DateTime.UtcNow;
 
-                await _unitOfWork.Repository<Subject>().UpdateAsync(subject, request.Id);
+                await _unitOfWork.Repository<Subject>().UpdateAsync(subject);
                 subject.AddDomainEvent(new SubjectUpdatedEvent(subject));
 
                 await _unitOfWork.Save(cancellationToken);

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SkeletonApi.Shared;
+using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination;
+
 namespace SkeletonApi.Application.Extensions
 {
     public static class QueryableExtensions
@@ -19,5 +21,7 @@ namespace SkeletonApi.Application.Extensions
    
             return PaginatedResult<T>.Create(items, count, pageNumber, pageSize);
         }
+
+       
     }
 }

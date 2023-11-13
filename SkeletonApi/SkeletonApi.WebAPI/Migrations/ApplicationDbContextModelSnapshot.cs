@@ -182,6 +182,93 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("Dummy");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumber", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("update_by");
+
+                    b.Property<string>("Vid")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("vid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FrameNumber");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumberHasSubject", b =>
+                {
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("subject_id");
+
+                    b.Property<Guid>("FrameNumberId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("frame_number_id");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("update_by");
+
+                    b.HasKey("SubjectId", "FrameNumberId");
+
+                    b.HasIndex("FrameNumberId");
+
+                    b.ToTable("FrameNumberHasSubject", (string)null);
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Machine", b =>
                 {
                     b.Property<Guid>("Id")
@@ -220,6 +307,64 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Machines");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Setting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<string>("MachineName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("machine_name");
+
+                    b.Property<decimal?>("Maximum")
+                        .HasColumnType("numeric")
+                        .HasColumnName("maximum");
+
+                    b.Property<decimal?>("Medium")
+                        .HasColumnType("numeric")
+                        .HasColumnName("medium");
+
+                    b.Property<decimal?>("Minimum")
+                        .HasColumnType("numeric")
+                        .HasColumnName("minimum");
+
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("subject_name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("update_by");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
@@ -326,6 +471,25 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Navigation("Machine");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumberHasSubject", b =>
+                {
+                    b.HasOne("SkeletonApi.Domain.Entities.FrameNumber", "FrameNumber")
+                        .WithMany("FrameNumberHasSubjects")
+                        .HasForeignKey("FrameNumberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SkeletonApi.Domain.Entities.Subject", "Subject")
+                        .WithMany("FrameNumberHasSubjects")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FrameNumber");
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.SubjectHasMachine", b =>
                 {
                     b.HasOne("SkeletonApi.Domain.Entities.Machine", "Machine")
@@ -350,6 +514,11 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Navigation("CategoryMachineHasMachines");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumber", b =>
+                {
+                    b.Navigation("FrameNumberHasSubjects");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Machine", b =>
                 {
                     b.Navigation("CategoryMachineHasMachines");
@@ -359,6 +528,8 @@ namespace SkeletonApi.WebAPI.Migrations
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
                 {
+                    b.Navigation("FrameNumberHasSubjects");
+
                     b.Navigation("SubjectHasMachines");
                 });
 #pragma warning restore 612, 618

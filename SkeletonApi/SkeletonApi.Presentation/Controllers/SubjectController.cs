@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
-using SkeletonApi.Application.Features.Machines.Queries.GetMachinesWithPagination;
 using SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSubjectHasMachine;
 using SkeletonApi.Application.Features.SubjectHasMachines.Commands.DeleteSubjectHasMachine;
 using SkeletonApi.Application.Features.SubjectHasMachines.Commands.UpdateSubjectHasMachine_;
 using SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectMachineWithPagination;
+using SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectWithParam;
+using SkeletonApi.Application.Features.Subjects;
 using SkeletonApi.Application.Features.Subjects.Commands.CreateSubject;
 using SkeletonApi.Application.Features.Subjects.Commands.DeleteSubject;
 using SkeletonApi.Application.Features.Subjects.Commands.UpdateSubject;
@@ -30,13 +30,14 @@ namespace SkeletonApi.Presentation.Controllers
             _mediator = mediator;
             _logger = logger;
         }
+
         [HttpGet("get-subject-all")]
         public async Task<ActionResult<PaginatedResult<GetSubjectWithPaginationDto>>> GetMachinesWithPagination([FromQuery] GetSubjectWithPaginationQuery query)
         {
             var validator = new GetSubjectWithPaginationValidator();
 
             // Call Validate or ValidateAsync and pass the object which needs to be validated
-            //Response.Headers.Add("x-pagination", JsonSerializer.Serialize(pagedResult.metaData));
+       
             var result = validator.Validate(query);
 
             if (result.IsValid)
@@ -72,7 +73,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpPost("create-subject")]
-        public async Task<ActionResult<Result<Subject>>> Create(CreateSubjectCommand command)
+        public async Task<ActionResult<Result<CreateSubjectResponseDto>>> Create(CreateSubjectRequest command)
         {
             return await _mediator.Send(command);
         }
@@ -142,6 +143,12 @@ namespace SkeletonApi.Presentation.Controllers
 
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
+        }
+
+        [HttpGet("get-subject-with-param")]
+        public async Task<ActionResult<Result<List<GetSubjectWithParamDto>>>> GetSubjectWithParam(Guid machine_id)
+        {
+            return await _mediator.Send(new GetSubjectWithParamQuery(machine_id));
         }
     }
 }

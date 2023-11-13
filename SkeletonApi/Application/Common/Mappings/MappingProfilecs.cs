@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
+using SkeletonApi.Application.Features.Machines;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using SkeletonApi.Domain.Entities;
+using SkeletonApi.Application.Features.Subjects.Commands.CreateSubject;
+using SkeletonApi.Application.Features.Subjects;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -13,6 +13,12 @@ namespace SkeletonApi.Application.Common.Mappings
         public MappingProfile()
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+
+            CreateMap<CreateMachineRequest, Machine>();
+            CreateMap<Machine, CreateMachineResponseDto>();
+
+            CreateMap<CreateSubjectRequest, Subject>();
+            CreateMap<Subject, CreateSubjectResponseDto>();
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

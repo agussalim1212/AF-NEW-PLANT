@@ -8,11 +8,20 @@
 
   <ItemGroup>
     <Compile Remove="Features\Clubs\**" />
+    <Compile Remove="Features\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\**" />
     <Compile Remove="Features\Stadiums\**" />
     <EmbeddedResource Remove="Features\Clubs\**" />
+    <EmbeddedResource Remove="Features\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\**" />
     <EmbeddedResource Remove="Features\Stadiums\**" />
     <None Remove="Features\Clubs\**" />
+    <None Remove="Features\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\**" />
     <None Remove="Features\Stadiums\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Features\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubDto.cs" />
+    <Compile Include="Features\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubQuery.cs" />
+    <Compile Include="Features\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubValidator.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,11 +40,11 @@
 
   <ItemGroup>
     <Folder Include="Features\DetailMachine\AssyUnitLine\Commands\" />
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Queries\ListQuality\" />
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Queries\MachineInformation\" />
+    <Folder Include="Features\DetailMachine\AssyWheelLine\Commands\" />
     <Folder Include="Features\DetailMachine\GensubAssyLine\Commands\" />
-    <Folder Include="Features\DetailMachine\GensubAssyLine\Queries\MachineInformation\" />
-    <Folder Include="Features\DetailMachine\GensubAssyLine\Queries\TotalProduction\" />
+    <Folder Include="Features\FrameNumberHasSubject\Commands\CreateFrameNumberHasSubject\" />
+    <Folder Include="Features\FrameNumberHasSubject\Queries\" />
+    <Folder Include="Features\FrameNumb\Queries\" />
   </ItemGroup>
 
 </Project>

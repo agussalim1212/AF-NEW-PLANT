@@ -1,12 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SkeletonApi.Application.Features.CategoryHasMachine.Queries.GetCategoryMachine;
 using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
 using SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCategoryHasMachine;
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetAllCategoryMachine;
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachinesWithPagination;
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination;
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination_;
+using SkeletonApi.Application.Features.Machines;
 using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
 using SkeletonApi.Application.Features.Machines.Commands.DeleteMachines;
 using SkeletonApi.Application.Features.Machines.Commands.UpdateMachines;
@@ -112,7 +114,11 @@ namespace SkeletonApi.Presentation.Controllers
         {
             return await _mediator.Send(new GetAllCategoryMachineQuery());
         }
-
+        [HttpGet("get-category-machine")]
+        public async Task<ActionResult<Result<List<GetCategoryMachineDto>>>> GetCategory()
+        {
+            return await _mediator.Send(new GetCategoryMachineQuery());
+        }
         [HttpPost("create-category-machine")]
         public async Task<ActionResult<Result<CategoryMachineHasMachine>>> CreateCategoryMachine(CreateCategoryHasMachineCommand command)
         {
@@ -130,7 +136,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Result<Machine>>> Create(CreateMachinesCommand command)
+        public async Task<ActionResult<Result<CreateMachineResponseDto>>> Create(CreateMachineRequest command)
         {
             return await _mediator.Send(command);
         }
@@ -138,12 +144,11 @@ namespace SkeletonApi.Presentation.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult<Result<Guid>>> Delete(Guid id)
         {
-            return await _mediator.Send(new DeleteMachinesCommand(id));
+            return await _mediator.Send(new DeleteMachineRequest(id));
         }
 
-
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<Result<Machine>>> Update(Guid id, UpdateMachinesCommand command)
+        public async Task<ActionResult<Result<Machine>>> Update(Guid id, UpdateMachineRequest command)
         {
             if (id != command.Id)
             {

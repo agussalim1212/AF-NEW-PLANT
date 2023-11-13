@@ -16,5 +16,6 @@ namespace SkeletonApi.Domain.Entities
         public string? Subjects { get; set; }
 
         public ICollection<SubjectHasMachine> SubjectHasMachines { get; set; } = new List<SubjectHasMachine>();
+        public ICollection<FrameNumberHasSubject> FrameNumberHasSubjects { get; set; } = new List<FrameNumberHasSubject>();
     }
 }

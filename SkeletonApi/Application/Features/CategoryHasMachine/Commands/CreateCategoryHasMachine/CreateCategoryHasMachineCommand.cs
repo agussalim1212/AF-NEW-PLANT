@@ -6,6 +6,7 @@ using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
+using System.Reflection.PortableExecutable;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -32,36 +33,32 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCatego
 
         public async Task<Result<CategoryMachineHasMachine>> Handle(CreateCategoryHasMachineCommand request, CancellationToken cancellationToken)
         {
-            foreach (var machineId in request.MachineId)
+            var categoryMachine = new CategoryMachineHasMachine()
             {
-                var categoryMachines = await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => request.CategoryMachineId == x.CategoryMachineId && machineId == x.MachineId).ToListAsync();
 
-                if(categoryMachines.Count == 0)
-                {
+                CategoryMachineId = request.CategoryMachineId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+            };
 
-                var categoryMachine = new CategoryMachineHasMachine()
-                {
+            foreach (var mc_id in request.MachineId)
+            {
+                var categoryMachines = await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => request.CategoryMachineId == x.CategoryMachineId && mc_id == x.MachineId).ToListAsync();
 
-                    CategoryMachineId = request.CategoryMachineId,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
-                };
-
-                foreach (var mc_id in request.MachineId)
+                if(categoryMachines == null)
                 {
                     categoryMachine.MachineId = mc_id;
                     await _unitOfWork.Repo<CategoryMachineHasMachine>().AddAsync(categoryMachine);
                     categoryMachine.AddDomainEvent(new CategoryCreatedEvent(categoryMachine));
                     await _unitOfWork.Save(cancellationToken);
                 }
-                return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Has Machines Created");
-                }
                 else
                 {
-                 return await Result<CategoryMachineHasMachine>.FailureAsync("Category Has Machine Already Exist");
+                    return await Result<CategoryMachineHasMachine>.FailureAsync("Category Has Machine Already Exist");
                 }
+                return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Has Machines Created");
             }
-            return await Result<CategoryMachineHasMachine>.FailureAsync("CategoryId Or MachineId Not Found");
+             return await Result<CategoryMachineHasMachine>.FailureAsync("CategoryId Or MachineId Not Found");
         }
     }
 }

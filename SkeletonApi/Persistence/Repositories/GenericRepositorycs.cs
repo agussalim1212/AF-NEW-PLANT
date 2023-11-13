@@ -31,12 +31,12 @@ namespace SkeletonApi.Persistence.Repositories
 
         public Task UpdateAsync(T entity)
         {
-            T exist = _dbContext.Set<T>().Find(entity);
+            T exist = _dbContext.Set<T>().Find(entity.Id);
             _dbContext.Entry(exist).CurrentValues.SetValues(entity);
             return Task.CompletedTask;
         }
 
-        public Task UpdateAsync(T entity, Guid id)
+        public Task UpdateAsyncById(T entity, Guid id)
         {
             T exist = _dbContext.Set<T>().Find(id);
             _dbContext.Entry(exist).CurrentValues.SetValues(entity);
@@ -67,12 +67,6 @@ namespace SkeletonApi.Persistence.Repositories
 
         }
 
-        public Task UpdateByAsync(T entity,Guid machineId, Guid categoryId)
-        {
-            T exist = _dbContext.Set<T>().Find(machineId,categoryId);
-            _dbContext.Entry(exist).CurrentValues.SetValues(exist);
-            return Task.CompletedTask;
-        }
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression,bool trackChanges) =>
        !trackChanges ?
         _dbContext.Set<T>()

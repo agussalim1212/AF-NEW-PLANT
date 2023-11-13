@@ -27,12 +27,35 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<CategoryMachines> CategoryMachines => Set<CategoryMachines>(); 
         public DbSet<CategoryMachineHasMachine> CategoryMachineHasMachines => Set<CategoryMachineHasMachine>();
         public DbSet<SubjectHasMachine> subjectHasMachines => Set<SubjectHasMachine>();
-
+        public DbSet<Setting> Settings => Set<Setting>();
+        public DbSet<FrameNumberHasSubject> FrameNumberHasSubjects => Set<FrameNumberHasSubject>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<FrameNumberHasSubject>(m =>
+            {
+                m.HasKey(t => new { t.SubjectId, t.FrameNumberId });
+                m.ToTable("FrameNumberHasSubject");
+            });
+
+            modelBuilder.Entity<FrameNumberHasSubject>(m =>
+            {
+                m.HasOne(t => t.Subject)
+                .WithMany(t => t.FrameNumberHasSubjects)
+                .HasForeignKey(t => t.SubjectId);
+                m.ToTable("FrameNumberHasSubject");
+            });
+
+            modelBuilder.Entity<FrameNumberHasSubject>(m =>
+            {
+                m.HasOne(t => t.FrameNumber)
+                .WithMany(t => t.FrameNumberHasSubjects)
+                .HasForeignKey(t => t.FrameNumberId);
+                m.ToTable("FrameNumberHasSubject");
+            });
 
             modelBuilder.Entity<CategoryMachineHasMachine>(m =>
             {

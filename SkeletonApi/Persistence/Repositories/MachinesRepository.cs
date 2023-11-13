@@ -23,10 +23,11 @@ namespace SkeletonApi.Persistence.Repositories
 
         public async Task<bool> ValidateData(Machine machines)
         {
-            var x = await _repository.Entities.Where(o => o.Id == machines.Id && o.Name == machines.Name).CountAsync();
+            var x = await _repository.Entities.Where(o => machines.Name.ToLower() == o.Name.ToLower()).CountAsync();
             if (x > 0)
             {
                 return false;
+
             }
             return true;
         }

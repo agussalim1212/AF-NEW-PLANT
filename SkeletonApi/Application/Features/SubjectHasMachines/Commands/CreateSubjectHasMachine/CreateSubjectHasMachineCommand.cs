@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSubjectHasMachine
 {
@@ -36,23 +31,30 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSub
         public async Task<Result<SubjectHasMachine>> Handle(CreateSubjectHasMachineCommand request, CancellationToken cancellationToken)
         {
         
-                    var subjectMachine = new SubjectHasMachine()
-                    {
+        var subjectMachine = new SubjectHasMachine()
+        {
+            MachineId = request.MachineId,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+        };
 
-                        MachineId = request.MachineId,
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                    };
+        foreach (var subId in request.SubjectId)
+        {
+            var subjectMachines = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Where(x => request.MachineId == x.MachineId && subId == x.SubjectId).ToListAsync();
 
-                    foreach (var subId in request.SubjectId)
-                    {
-                        subjectMachine.SubjectId = subId;
-                        await _unitOfWork.Repo<SubjectHasMachine>().AddAsync(subjectMachine);
-                        subjectMachine.AddDomainEvent(new SubjectCreatedEvent(subjectMachine));
-                        await _unitOfWork.Save(cancellationToken);
-                    }
-                    return await Result<SubjectHasMachine>.SuccessAsync(subjectMachine, "Subject Has Machines Created");
+            if(subjectMachine == null)
+            {
+                subjectMachine.SubjectId = subId;
+                await _unitOfWork.Repo<SubjectHasMachine>().AddAsync(subjectMachine);
+                subjectMachine.AddDomainEvent(new SubjectCreatedEvent(subjectMachine));
+                await _unitOfWork.Save(cancellationToken);
+            }
+            else
+            {
+                return await Result<SubjectHasMachine>.FailureAsync("Subject Has Machines Already Exist");
+            }
         }
-               
+        return await Result<SubjectHasMachine>.SuccessAsync(subjectMachine, "Subject Has Machines Created");
+        }               
     }
 }

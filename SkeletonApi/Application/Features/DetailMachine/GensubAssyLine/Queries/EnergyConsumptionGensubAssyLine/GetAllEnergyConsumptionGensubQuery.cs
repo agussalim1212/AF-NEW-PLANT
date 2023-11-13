@@ -40,11 +40,14 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
 
         public async Task<Result<GetAllEnergyConsumptionGensubDto>> Handle(GetAllEnergyConsumptionGensubQuery query, CancellationToken cancellationToken)
         {
-            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => query.MachineId == m.MachineId).FirstOrDefaultAsync();
+            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("PWM-KWH")).ToListAsync();
+            string vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
+            string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
+            string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();
 
             var data = new GetAllEnergyConsumptionGensubDto();
 
-            var categorys = await _unitOfWork.Data<Dummy>().Entities.Where(c => machine.Subject.Vid == c.Id).Select(g =>
+            var categorys = await _unitOfWork.Data<Dummy>().Entities.Where(c => vid == c.Id).Select(g =>
                 new DummyDto
                 {
                     Id = g.Id,
@@ -57,41 +60,31 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
 
             if (categorys.Count() == 0)
             {
-                var category = await _unitOfWork.Data<Dummy>().Entities.Where(c => machine.Subject.Vid == c.Id).Select(g =>
-                new GetAllEnergyConsumptionGensubDto
+                data = new GetAllEnergyConsumptionGensubDto
                 {
-                    MachineName = machine.Machine.Name,
-                    SubjectName = machine.Subject.Subjects,
-                })
-                .ProjectTo<GetAllEnergyConsumptionGensubDto>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
-
+                    MachineName = machineName,
+                    SubjectName = subjectName,
+                    Data = new List<EnergyGensubDto>(),
+                };
             }
             else
             {
-                var category = await _unitOfWork.Data<Dummy>().Entities.Where(c => machine.Subject.Vid == c.Id).Select(g =>
+                data =
                     new GetAllEnergyConsumptionGensubDto
                     {
-                        MachineName = machine.Machine.Name,
-                        SubjectName = machine.Subject.Subjects,
+                        MachineName = machineName,
+                        SubjectName = subjectName,
                         Data = categorys.Select(val => new EnergyGensubDto
                         {
                             ValueKwh = Convert.ToDecimal(val.Value),
-                            ValueCo2 = Math.Round((Convert.ToDecimal(val.Value) * Convert.ToDecimal(0.87)),2),
-                            Label = "senin",
-                           // DateTime = DateTime.,
+                            ValueCo2 = Math.Round((Convert.ToDecimal(val.Value) * Convert.ToDecimal(0.87)), 2),
+                            Label = val.DateTime.AddHours(7).ToString("HH:mm:ss"),
+                            DateTime = val.DateTime,
 
-
-
-
-                        }).ToList()
-                    })
-                    .ProjectTo<GetAllEnergyConsumptionGensubDto>(_mapper.ConfigurationProvider)
-                    .FirstOrDefaultAsync();
-
-                data = category;
+                        }).OrderBy(x => x.DateTime).ToList()
+                    };
             }
-          //  var lucky = category;
+          
             return await Result<GetAllEnergyConsumptionGensubDto>.SuccessAsync(data, "Successfully fetch data");
         }
 

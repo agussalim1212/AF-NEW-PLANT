@@ -12,16 +12,8 @@ using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
 {
-    public record UpdateMachinesCommand : IRequest<Result<Machine>>
-    {
-        [JsonPropertyName("id")]
-        public Guid Id { get; set; }
-        [JsonPropertyName("machine")]
-        public string Name { get; set; }
- 
-    }
-
-    internal class UpdateMachinesCommandHandler : IRequestHandler<UpdateMachinesCommand, Result<Machine>> 
+   
+    internal class UpdateMachinesCommandHandler : IRequestHandler<UpdateMachineRequest, Result<Machine>> 
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -32,7 +24,7 @@ namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
             _mapper = mapper;
         }
 
-        public async Task<Result<Machine>> Handle(UpdateMachinesCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Machine>> Handle(UpdateMachineRequest request, CancellationToken cancellationToken)
         {
             var machines = await _unitOfWork.Repository<Machine>().GetByIdAsync(request.Id);
             Console.WriteLine(machines);
@@ -42,7 +34,7 @@ namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
                 machines.Name = request.Name;
                 machines.UpdatedAt = DateTime.UtcNow;
 
-                await _unitOfWork.Repository<Machine>().UpdateAsync(machines, request.Id);
+                await _unitOfWork.Repository<Machine>().UpdateAsync(machines);
                 machines.AddDomainEvent(new MachinesUpdateEvent(machines));
 
                 await _unitOfWork.Save(cancellationToken);

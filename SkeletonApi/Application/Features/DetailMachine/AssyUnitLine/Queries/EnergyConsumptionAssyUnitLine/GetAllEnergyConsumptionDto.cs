@@ -18,18 +18,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.En
         [JsonPropertyName("data")]
         public List<EnergyDto> Data { get; set; }
 
-        [JsonIgnore]
-       // [JsonPropertyName("value_kwh")]
-        public decimal ValueKwh { get; set; }
-        //  [JsonPropertyName("value_co2")]
-        [JsonIgnore]
-        public decimal ValueCo2 { get; set; }
-        // [JsonPropertyName("label")]
-        [JsonIgnore]
-        public string Label { get; set; }
-       // [JsonPropertyName("date_time")]
-        [JsonIgnore]
-        public DateTime DateTime { get; set; }
     }
 
     public class EnergyDto : IMapFrom<GetAllEnergyConsumptionDto>

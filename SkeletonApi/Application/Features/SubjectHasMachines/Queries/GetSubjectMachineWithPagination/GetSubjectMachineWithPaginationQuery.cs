@@ -19,7 +19,7 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
 {
     public record GetSubjectMachineWithPaginationQuery : IRequest<PaginatedResult<GetSubjectMachineWithPaginationDto>>
     {
-        //[JsonPropertyName("page_number")] tidak fungsi
+        
         public int page_number { get; set; }
         public int page_size { get; set; }
         public string search_term { get; set; }
