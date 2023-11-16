@@ -16,14 +16,6 @@ namespace SkeletonApi.Shared
 
         #region Success Methods 
 
-        public static Result<T> Success()
-        {
-            return new Result<T>
-            {
-                Succeeded = true
-            };
-        }
-
         public static Result<T> Success(string message)
         {
             return new Result<T>
@@ -118,11 +110,6 @@ namespace SkeletonApi.Shared
         #region Async Methods 
 
         #region Success Methods 
-
-        public static Task<Result<T>> SuccessAsync()
-        {
-            return Task.FromResult(Success());
-        }
 
         public static Task<Result<T>> SuccessAsync(string message)
         {

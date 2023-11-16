@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "GfXumvzI8kGHnLKJohX7/DlH4eTl7n2yAErmCKzjqqk=",
+  "Source": "SkeletonApi.WebAPI",
+  "BasePath": "_content/SkeletonApi.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

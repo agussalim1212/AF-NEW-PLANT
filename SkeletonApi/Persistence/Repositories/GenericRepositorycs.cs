@@ -31,7 +31,14 @@ namespace SkeletonApi.Persistence.Repositories
 
         public Task UpdateAsync(T entity)
         {
-            T exist = _dbContext.Set<T>().Find(entity   );
+            T exist = _dbContext.Set<T>().Find(entity);
+            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateAsync(T entity, Guid id)
+        {
+            T exist = _dbContext.Set<T>().Find(id);
             _dbContext.Entry(exist).CurrentValues.SetValues(entity);
             return Task.CompletedTask;
         }

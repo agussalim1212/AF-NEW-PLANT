@@ -26,6 +26,8 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<CategoryMachines> CategoryMachines => Set<CategoryMachines>(); 
         public DbSet<CategoryMachineHasMachine> CategoryMachineHasMachines => Set<CategoryMachineHasMachine>();
         public DbSet<SubjectHasMachine> subjectHasMachines => Set<SubjectHasMachine>();
+        public DbSet<MaintenacePreventive> maintenacePreventives => Set<MaintenacePreventive>();
+        public DbSet<MaintCorrective> maintenanceCorrectives => Set<MaintCorrective>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -75,6 +77,37 @@ namespace SkeletonApi.Persistence.Contexts
                 .HasForeignKey(t => t.SubjectId);
                 m.ToTable("SubjectHasMachine");
             });
+
+            #region "Maintenance Preventive"
+            modelBuilder.Entity<MaintenacePreventive>(m =>
+            {
+                m.HasKey(t => new { t.Id });
+                m.ToTable("maintenacePreventives");
+            });
+
+            modelBuilder.Entity<MaintenacePreventive>(m =>
+            {
+                m.HasOne(t => t.machine)
+                .WithMany(t => t.maintenacePreventives)
+                .HasForeignKey(t => t.MachineId);
+                m.ToTable("maintenacePreventives");
+            });
+            #endregion
+            #region "Maintenance Corrective"
+            modelBuilder.Entity<MaintCorrective>(m =>
+            {
+                m.HasKey(t => new { t.Id });
+                m.ToTable("maintenanceCorrectives");
+            });
+
+            modelBuilder.Entity<MaintCorrective>(m =>
+            {
+                m.HasOne(t => t.machine)
+                .WithMany(t => t.maintCorrectives)
+                .HasForeignKey(t => t.MachineId);
+                m.ToTable("maintenanceCorrectives");
+            });
+            #endregion
 
         }
 

@@ -199,6 +199,140 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("Machines");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.MaintCorrective", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Actual")
+                        .HasColumnType("text")
+                        .HasColumnName("actual");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("text")
+                        .HasColumnName("category");
+
+                    b.Property<decimal?>("CountActual")
+                        .HasColumnType("numeric")
+                        .HasColumnName("count_actual");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<DateOnly?>("EndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("end_date");
+
+                    b.Property<Guid?>("MachineId")
+                        .IsRequired()
+                        .HasColumnType("uuid")
+                        .HasColumnName("machine_id");
+
+                    b.Property<DateOnly?>("StartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("start_date");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("update_by");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MachineId");
+
+                    b.ToTable("maintenanceCorrectives", (string)null);
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.MaintenacePreventive", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Actual")
+                        .HasColumnType("text")
+                        .HasColumnName("actual");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("text")
+                        .HasColumnName("category");
+
+                    b.Property<decimal?>("CountActual")
+                        .HasColumnType("numeric")
+                        .HasColumnName("count_actual");
+
+                    b.Property<decimal?>("CountPlan")
+                        .HasColumnType("numeric")
+                        .HasColumnName("count_plan");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<DateOnly?>("EndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("end_date");
+
+                    b.Property<Guid?>("MachineId")
+                        .IsRequired()
+                        .HasColumnType("uuid")
+                        .HasColumnName("machine_id");
+
+                    b.Property<string>("Plan")
+                        .HasColumnType("text")
+                        .HasColumnName("plan");
+
+                    b.Property<DateOnly?>("StartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("start_date");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("update_by");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MachineId");
+
+                    b.ToTable("maintenacePreventives", (string)null);
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
                 {
                     b.Property<Guid>("Id")
@@ -307,6 +441,28 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Navigation("Machine");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.MaintCorrective", b =>
+                {
+                    b.HasOne("SkeletonApi.Domain.Entities.Machine", "machine")
+                        .WithMany("maintCorrectives")
+                        .HasForeignKey("MachineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("machine");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.MaintenacePreventive", b =>
+                {
+                    b.HasOne("SkeletonApi.Domain.Entities.Machine", "machine")
+                        .WithMany("maintenacePreventives")
+                        .HasForeignKey("MachineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("machine");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.SubjectHasMachine", b =>
                 {
                     b.HasOne("SkeletonApi.Domain.Entities.Machine", "Machine")
@@ -336,6 +492,10 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Navigation("CategoryMachineHasMachines");
 
                     b.Navigation("SubjectHasMachines");
+
+                    b.Navigation("maintCorrectives");
+
+                    b.Navigation("maintenacePreventives");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
