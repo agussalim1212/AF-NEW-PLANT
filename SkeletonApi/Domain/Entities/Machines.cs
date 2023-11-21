@@ -10,7 +10,9 @@ namespace SkeletonApi.Domain.Entities
 {
     public class Machine : BaseAuditableEntity
     {
-       
+        [Column("vid")]
+        public string? Vid { get; set; }
+
         [Column("name")]
         public string? Name { get; set; }
         

@@ -45,7 +45,7 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCatego
             {
                 var categoryMachines = await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => request.CategoryMachineId == x.CategoryMachineId && mc_id == x.MachineId).ToListAsync();
 
-                if(categoryMachines == null)
+                if(categoryMachines.Count() == 0)
                 {
                     categoryMachine.MachineId = mc_id;
                     await _unitOfWork.Repo<CategoryMachineHasMachine>().AddAsync(categoryMachine);

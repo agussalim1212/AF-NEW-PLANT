@@ -52,7 +52,7 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMa
         {
            return await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => query.search_term == null || x.CategoryMachine.Name.ToLower() == query.search_term.ToLower().Trim())
                 .Include(o => o.Machine)
-                .Include(x => x.CategoryMachine).GroupBy(x => new { x.CategoryMachineId, x.CategoryMachine.Name, x.UpdatedAt })
+                .Include(x => x.CategoryMachine).GroupBy(x => new { x.CategoryMachineId, x.CategoryMachine.Name, x.CategoryMachine.UpdatedAt })
                 .Select(g => new GetCategoryMachinesWithPaginationDto
                 {
                     CategoryMachineId = g.Key.CategoryMachineId,

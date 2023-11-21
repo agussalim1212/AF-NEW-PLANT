@@ -14,6 +14,6 @@ namespace SkeletonApi.Application.Interfaces.Repositories
         Task UpdateAsync(T entity);
         Task UpdateAsyncById(T entity, Guid id);
         Task DeleteAsync(T entity);
-        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression,bool trackChanges);
+        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
     }
 }

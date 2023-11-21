@@ -62,9 +62,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.St
 
             }
             else
-            {
-
-               
+            {     
             data =
                     new GetAllStopLineDto
                     {

@@ -67,12 +67,8 @@ namespace SkeletonApi.Persistence.Repositories
 
         }
 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression,bool trackChanges) =>
-       !trackChanges ?
-        _dbContext.Set<T>()
-           .Where(expression)
-           .AsNoTracking() :
-         _dbContext.Set<T>()
-           .Where(expression);
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
+          _dbContext.Set<T>()
+          .Where(expression);
     }
 }

@@ -7,12 +7,12 @@ using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.Machines.Commands.DeleteMachines
 {
-    internal class DeleteMachinesCommandHandle : IRequestHandler<DeleteMachineRequest, Result<Guid>>
+    internal class DeleteMachinesCommandHandler : IRequestHandler<DeleteMachineRequest, Result<Guid>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteMachinesCommandHandle(IMapper mapper, IUnitOfWork unitOfWork)
+        public DeleteMachinesCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

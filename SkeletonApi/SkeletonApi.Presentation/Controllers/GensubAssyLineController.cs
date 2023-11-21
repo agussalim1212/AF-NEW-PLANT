@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.EnergyConsumptionGensubAssyLine;
+using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.MachineInformation;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.TotalProduction;
@@ -45,6 +46,35 @@ namespace SkeletonApi.Presentation.Controllers
         {
             // Call Validate or ValidateAsync and pass the object which needs to be validated
             var validator = new GetListQualityGensubValidator();
+
+            var result = validator.Validate(query);
+
+            if (result.IsValid)
+            {
+                var pg = await _mediator.Send(query);
+                var paginationData = new
+                {
+                    pg.page_number,
+                    pg.total_pages,
+                    pg.page_size,
+                    pg.total_count,
+                    pg.has_previous,
+                    pg.has_next
+                };
+
+                Response.Headers.Add("x-pagination", JsonSerializer.Serialize(paginationData));
+                return Ok(pg);
+            }
+
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            return BadRequest(errorMessages);
+        }
+
+        [HttpGet("list-quality-auto-tightening-fc")]
+        public async Task<ActionResult<PaginatedResult<GetListQualityAutoTIghteningFcDto>>> GetListQualityAutoTighteningFcWithPagination([FromQuery] GetListQualityAutoTIghteningFcQuery query)
+        {
+            // Call Validate or ValidateAsync and pass the object which needs to be validated
+            var validator = new GetListQualityAutoTIghteningFcValidator();
 
             var result = validator.Validate(query);
 

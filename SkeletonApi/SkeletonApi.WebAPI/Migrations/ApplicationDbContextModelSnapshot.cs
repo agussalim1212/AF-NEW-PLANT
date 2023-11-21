@@ -225,10 +225,10 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FrameNumber");
+                    b.ToTable("FrameNumbers");
                 });
 
-            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumberHasSubject", b =>
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumberHasSubjects", b =>
                 {
                     b.Property<Guid>("SubjectId")
                         .HasColumnType("uuid")
@@ -304,9 +304,50 @@ namespace SkeletonApi.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("update_by");
 
+                    b.Property<string>("Vid")
+                        .HasColumnType("text")
+                        .HasColumnName("vid");
+
                     b.HasKey("Id");
 
                     b.ToTable("Machines");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Setting", b =>
@@ -452,6 +493,97 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("SubjectHasMachine", (string)null);
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.UserRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRole");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.CategoryMachineHasMachine", b =>
                 {
                     b.HasOne("SkeletonApi.Domain.Entities.CategoryMachines", "CategoryMachine")
@@ -471,7 +603,7 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Navigation("Machine");
                 });
 
-            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumberHasSubject", b =>
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumberHasSubjects", b =>
                 {
                     b.HasOne("SkeletonApi.Domain.Entities.FrameNumber", "FrameNumber")
                         .WithMany("FrameNumberHasSubjects")
@@ -509,6 +641,25 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.UserRole", b =>
+                {
+                    b.HasOne("SkeletonApi.Domain.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SkeletonApi.Domain.Entities.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.CategoryMachines", b =>
                 {
                     b.Navigation("CategoryMachineHasMachines");
@@ -526,11 +677,21 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Navigation("SubjectHasMachines");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
                 {
                     b.Navigation("FrameNumberHasSubjects");
 
                     b.Navigation("SubjectHasMachines");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.User", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

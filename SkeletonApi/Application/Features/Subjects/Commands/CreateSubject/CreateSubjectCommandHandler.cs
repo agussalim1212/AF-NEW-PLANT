@@ -30,6 +30,9 @@ namespace SkeletonApi.Application.Features.Subjects.Commands.CreateSubject
             //    return await Result<CreateSubjectResponseDto>.FailureAsync("Data already exist");
             //}
 
+            Subjects.CreatedAt = DateTime.UtcNow;
+            Subjects.UpdatedAt = DateTime.UtcNow;
+
             await _unitOfWork.Repository<Subject>().AddAsync(Subjects);
             Subjects.AddDomainEvent(new SubjectCreatedEvent(Subjects));
             await _unitOfWork.Save(cancellationToken);

@@ -5,6 +5,10 @@ using System.Reflection;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Application.Features.Subjects.Commands.CreateSubject;
 using SkeletonApi.Application.Features.Subjects;
+using SkeletonApi.Application.Features.FrameNumb.Commands.CreateFrameNumber;
+using SkeletonApi.Application.Features.FrameNumb;
+using SkeletonApi.Application.Features.FrameNumberHasSubject.Commands.CreateFrameNumberHasSubject;
+using SkeletonApi.Application.Features.FrameNumberHasSubject;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -19,6 +23,10 @@ namespace SkeletonApi.Application.Common.Mappings
 
             CreateMap<CreateSubjectRequest, Subject>();
             CreateMap<Subject, CreateSubjectResponseDto>();
+
+            CreateMap<CreateFrameNumberRequest, FrameNumber>();
+            CreateMap<FrameNumber, CreateFrameNumberResponseDto>();
+
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

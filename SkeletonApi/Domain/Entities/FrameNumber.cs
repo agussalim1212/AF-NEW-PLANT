@@ -14,6 +14,6 @@ namespace SkeletonApi.Domain.Entities
         public string Name { get; set; }
         [Column("vid")]
         public string Vid { get; set; }
-        public ICollection<FrameNumberHasSubject> FrameNumberHasSubjects { get; set; } = new List<FrameNumberHasSubject>();
+        public ICollection<FrameNumberHasSubjects> FrameNumberHasSubjects { get; set; } = new List<FrameNumberHasSubjects>();
     }
 }

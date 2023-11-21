@@ -6,8 +6,10 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.Repositories;
+using SkeletonApi.Persistence.Repositories.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,7 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
             //services.AddMappings();
             services.AddDbContext(configuration);
             services.AddRepositories();
+           
         }
 
         //private static void AddMappings(this IServiceCollection services)
@@ -47,8 +50,10 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient<ISubjectRepository, SubjectRepository>()
                 .AddTransient<IMachinesRepository, MachinesRepository>()
                 .AddTransient<ICategoryMachineRepository, CategoryMachinesRepository>()
+               // .AddTransient<IAuthenticationUserRepository, AuthenticationRepository>()
                 .AddTransient<IAccountRepository, AccountRepository>();
                 
+
         }
     }
 }

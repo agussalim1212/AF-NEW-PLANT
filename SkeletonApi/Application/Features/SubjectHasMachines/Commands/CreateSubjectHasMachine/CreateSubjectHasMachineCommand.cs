@@ -40,9 +40,9 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSub
 
         foreach (var subId in request.SubjectId)
         {
-            var subjectMachines = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Where(x => request.MachineId == x.MachineId && subId == x.SubjectId).ToListAsync();
+                var subjectMachines = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Where(x => request.MachineId == x.MachineId && subId == x.SubjectId).ToListAsync();
 
-            if(subjectMachine == null)
+            if(subjectMachines.Count() == 0)
             {
                 subjectMachine.SubjectId = subId;
                 await _unitOfWork.Repo<SubjectHasMachine>().AddAsync(subjectMachine);

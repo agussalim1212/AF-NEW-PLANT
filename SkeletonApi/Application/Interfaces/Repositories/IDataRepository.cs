@@ -9,5 +9,6 @@ namespace SkeletonApi.Application.Interfaces.Repositories
     public interface IDataRepository<T>
     {
         IQueryable<T> Entities { get; }
+        Task<T> AddAsync(T entity);
     }
 }

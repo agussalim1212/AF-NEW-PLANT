@@ -13,11 +13,12 @@ namespace SkeletonApi.Application.Features.Machines.Queries.GetAllMachines
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
+        [JsonPropertyName("vid")]
+        public string Vid { get; set; }
         [JsonPropertyName("machine")]
         public string Name { get; set; }
         [JsonPropertyName("last_created")]
-        public string CreatedAt { get; set; }
-
+        public DateTime? UpdatedAt { get; set; }
 
     }
 }

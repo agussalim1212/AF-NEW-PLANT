@@ -2,17 +2,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
-using SkeletonApi.Application.Features.Machines.Commands.UpdateMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCategoryHasMachine
 {
@@ -54,7 +48,6 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCatego
                 var categoryMachine = new CategoryMachineHasMachine()
                 {
                     CategoryMachineId = request.CategoryMachineId,
-                    CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                 };
 

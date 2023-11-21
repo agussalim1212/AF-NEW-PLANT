@@ -62,13 +62,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                     SubjectName = subjectName,
 
                 };
-
             }
             else
             {
                 var lastRunTimes = categorys.Select(x => Convert.ToDecimal(x.LastRunTime?.Value)).Skip(1).ToList();
                 var lastCycleCounts = categorys.Select(c => Convert.ToDecimal(c.LastCycleCount?.Value)).ToList();
-
 
                 data =
                 new GetAllMachineInformationGensubDto
@@ -81,9 +79,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
 
                 };
             }
-
             return await Result<GetAllMachineInformationGensubDto>.SuccessAsync(data, "Successfully fetch data");
         }
-
     }
 }

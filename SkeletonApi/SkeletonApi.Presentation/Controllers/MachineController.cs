@@ -14,7 +14,6 @@ using SkeletonApi.Application.Features.Machines.Commands.DeleteMachines;
 using SkeletonApi.Application.Features.Machines.Commands.UpdateMachines;
 using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Features.Machines.Queries.GetMachinesWithPagination;
-using SkeletonApi.Application.Features.Subjects.Queries.GetAllSubject;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json;
@@ -80,6 +79,7 @@ namespace SkeletonApi.Presentation.Controllers
         {
             return await _mediator.Send(new GetAllMachinesQuery());
         }
+
         [HttpGet("get-all-category-machine-has-machine")]
         public async Task<ActionResult<PaginatedResult<GetCategoryMachinesWithPaginationDto>>> GetCategoryMachinesWithPagination([FromQuery] GetCategoryMachinesWithPaginationQuery query)
         {

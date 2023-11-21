@@ -2,6 +2,7 @@
 using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Common.Interfaces;
 using SkeletonApi.Domain.Entities;
+using System.Data;
 using System.Reflection;
 
 namespace SkeletonApi.Persistence.Contexts
@@ -28,20 +29,40 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<CategoryMachineHasMachine> CategoryMachineHasMachines => Set<CategoryMachineHasMachine>();
         public DbSet<SubjectHasMachine> subjectHasMachines => Set<SubjectHasMachine>();
         public DbSet<Setting> Settings => Set<Setting>();
-        public DbSet<FrameNumberHasSubject> FrameNumberHasSubjects => Set<FrameNumberHasSubject>();
+        public DbSet<FrameNumberHasSubjects> FrameNumberHasSubjects => Set<FrameNumberHasSubjects>();
+        public DbSet<FrameNumber> FrameNumbers => Set<FrameNumber>();
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Role> Roles => Set<Role>();
+
+
+        
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<FrameNumberHasSubject>(m =>
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId);
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId);
+            });
+
+            modelBuilder.Entity<FrameNumberHasSubjects>(m =>
             {
                 m.HasKey(t => new { t.SubjectId, t.FrameNumberId });
                 m.ToTable("FrameNumberHasSubject");
             });
 
-            modelBuilder.Entity<FrameNumberHasSubject>(m =>
+            modelBuilder.Entity<FrameNumberHasSubjects>(m =>
             {
                 m.HasOne(t => t.Subject)
                 .WithMany(t => t.FrameNumberHasSubjects)
@@ -49,7 +70,7 @@ namespace SkeletonApi.Persistence.Contexts
                 m.ToTable("FrameNumberHasSubject");
             });
 
-            modelBuilder.Entity<FrameNumberHasSubject>(m =>
+            modelBuilder.Entity<FrameNumberHasSubjects>(m =>
             {
                 m.HasOne(t => t.FrameNumber)
                 .WithMany(t => t.FrameNumberHasSubjects)
@@ -125,5 +146,7 @@ namespace SkeletonApi.Persistence.Contexts
         {
             return SaveChangesAsync().GetAwaiter().GetResult();
         }
+
+        public IDbConnection Connection { get; }
     }
 }

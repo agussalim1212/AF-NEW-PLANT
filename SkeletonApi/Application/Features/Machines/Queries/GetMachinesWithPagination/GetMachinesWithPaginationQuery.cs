@@ -40,8 +40,8 @@ namespace SkeletonApi.Application.Features.Machines.Queries.GetAllMachines
 
         public async Task<PaginatedResult<GetMachinesWithPaginationDto>> Handle(GetMachinesWithPaginationQuery query, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.Repository<Machine>().Entities
-                   .OrderBy(x => x.Name)
+            return await _unitOfWork.Repository<Machine>().FindByCondition(x => x.DeletedAt == null)
+                   .OrderBy(x => x.UpdatedAt)
                    .ProjectTo<GetMachinesWithPaginationDto>(_mapper.ConfigurationProvider)
                    .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }

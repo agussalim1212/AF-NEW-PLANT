@@ -51,14 +51,10 @@ namespace SkeletonApi.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(machineId, categoryId);
         }
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
-          !trackChanges ?
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
            _dbContext.Set<T>()
-              .Where(expression)
-              .AsNoTracking() :
-            _dbContext.Set<T>()
-              .Where(expression);
+           .Where(expression);
 
-      
+
     }
 }

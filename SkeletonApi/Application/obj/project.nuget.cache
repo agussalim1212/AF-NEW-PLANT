@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "KZykbfOh8JV5mqYRz7hk6YvJxr1nbp/cdvY/PVCk0i+y/Beix7iL+62+2qRP80GoJdDRJ95UjOb26QorIja8mQ==",
+  "dgSpecHash": "Zz4Dye8jXdU7XDDPtOBEnTAwYpEXZ6x7pQ/1YctHqWZ4lc3dBlX/tCccOlMZGJZPr/bW5RpJyTmnJX5m0v7QQQ==",
   "success": true,
   "projectFilePath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elect\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "C:\\Users\\elect\\.nuget\\packages\\dapper\\2.0.143\\dapper.2.0.143.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",

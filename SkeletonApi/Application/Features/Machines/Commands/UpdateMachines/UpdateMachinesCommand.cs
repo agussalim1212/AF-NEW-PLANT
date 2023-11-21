@@ -30,8 +30,8 @@ namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
             Console.WriteLine(machines);
             if (machines != null)
             {
-
-                machines.Name = request.Name;
+                machines.Vid = request.Vid;
+                machines.Name = request.Machine;
                 machines.UpdatedAt = DateTime.UtcNow;
 
                 await _unitOfWork.Repository<Machine>().UpdateAsync(machines);

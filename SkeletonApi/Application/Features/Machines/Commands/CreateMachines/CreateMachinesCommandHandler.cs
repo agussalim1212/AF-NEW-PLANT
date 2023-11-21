@@ -29,6 +29,9 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
                 return await Result<CreateMachineResponseDto>.FailureAsync("Data already exist");
             }
 
+            Machine.CreatedAt = DateTime.UtcNow;
+            Machine.UpdatedAt = DateTime.UtcNow;
+
             await _unitOfWork.Repository<Machine>().AddAsync(Machine);
             Machine.AddDomainEvent(new MachinesCreatedEvent(Machine));
             await _unitOfWork.Save(cancellationToken);

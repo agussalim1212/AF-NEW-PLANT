@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkeletonApi.Shared", "Skele
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkeletonApi.WebAPI", "SkeletonApi.WebAPI\SkeletonApi.WebAPI.csproj", "{81986D20-002F-47CE-9CAF-E2DF0FF4BE10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{A6E45AAE-A89E-4B3E-B9E3-37C6A844E1AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{A6E45AAE-A89E-4B3E-B9E3-37C6A844E1AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkeletonApi.Presentation", "SkeletonApi.Presentation\SkeletonApi.Presentation.csproj", "{49B37BCC-8364-4D1B-9A74-A8C7C9AE4938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkeletonApi.Presentation", "SkeletonApi.Presentation\SkeletonApi.Presentation.csproj", "{49B37BCC-8364-4D1B-9A74-A8C7C9AE4938}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -19,6 +19,6 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagina
         [JsonPropertyName("subject")]
         public string? Subjects { get; set; }
         [JsonPropertyName("last_created")]
-        public string CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }
