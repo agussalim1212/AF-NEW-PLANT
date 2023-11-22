@@ -1,24 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Common.Interfaces;
 using SkeletonApi.Domain.Entities;
 using System.Data;
-using System.Reflection;
+using System.Reflection.Metadata;
+
 
 namespace SkeletonApi.Persistence.Contexts
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, Role, string, IdentityUserClaim<string>,
+    UserRole, IdentityUserLogin<string>,
+    IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         private readonly IDomainEventDispatcher _dispatcher;
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
-          IDomainEventDispatcher dispatcher = null)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options , IDomainEventDispatcher dispatcher = null)
             : base(options)
         {
             _dispatcher = dispatcher;
         }
 
-     
+     //   public DbSet<IdentityUserClaim<string>> IdentityUserClaim { get; set; }
+    //    User, Role, string, IdentityUserClaim<string>,
+    //UserRole, IdentityUserLogin<string>,
+    //IdentityRoleClaim<string>, IdentityUserToken<string>>
         public DbSet<Account> Accounts => Set<Account>();
        
         public DbSet<Machine> Machines => Set<Machine>();
@@ -33,8 +40,8 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<FrameNumber> FrameNumbers => Set<FrameNumber>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Role> Roles => Set<Role>();
-
-
+        public DbSet<UserRole> UserRoles => Set<UserRole>();
+        public DbSet<Permission> Permissions => Set<Permission>();
         
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,6 +62,12 @@ namespace SkeletonApi.Persistence.Contexts
                     .WithMany(r => r.UserRoles)
                     .HasForeignKey(ur => ur.UserId);
             });
+
+            modelBuilder.Entity<Role>()
+           .HasMany(e => e.Permissions)
+           .WithOne(e => e.Role)
+           .HasForeignKey(e => e.RoleId)
+           .IsRequired(false);
 
             modelBuilder.Entity<FrameNumberHasSubjects>(m =>
             {

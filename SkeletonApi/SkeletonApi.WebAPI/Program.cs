@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Domain.Entities;
 using SkeletonApi.Infrastructure.Extensions;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.IServiceCollectionExtensions;
-using SkeletonApi.Persistence.Repositories;
 using SkeletonApi.Persistence.Repositories.Configuration;
 using SkeletonApi.WebAPI.Extensions;
 
@@ -16,12 +17,11 @@ builder.Host.UseSerilog((context, configuration) =>
 // Add services to the container.
 
 builder.Services.AddHttpContextAccessor();
-//builder.Services.ConfigureIdentity();
+builder.Services.ConfigureIdentity();
 builder.Services.AddAuthentication();
 //builder.Services.ConfigurePermissionService();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddJwtConfiguration(builder.Configuration);
-
 builder.Services.AddApplicationLayer();
 builder.Services.AddInfrastructureLayer();
 builder.Services.AddPersistenceLayer(builder.Configuration);

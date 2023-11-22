@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SkeletonApi.Application.Features.Users;
 using SkeletonApi.Shared;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.Users.CreateUser
+namespace SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateUser
 {
     public record CreateUserRequest : IRequest<Result<CreateUserResponseDto>>
     {

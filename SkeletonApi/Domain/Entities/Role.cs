@@ -13,5 +13,7 @@ namespace SkeletonApi.Domain.Entities
         public DateTime? DeletedAt { get; set; }
         [NotMapped]
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<Permission> Permissions { get; } = new List<Permission>();
+
     }
 }

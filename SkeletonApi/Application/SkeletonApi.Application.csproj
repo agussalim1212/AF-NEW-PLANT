@@ -44,9 +44,9 @@
     <Folder Include="Features\DetailMachine\AssyUnitLine\Commands\" />
     <Folder Include="Features\DetailMachine\AssyWheelLine\Commands\" />
     <Folder Include="Features\DetailMachine\GensubAssyLine\Commands\" />
-    <Folder Include="Features\Users\Login\Queries\" />
-    <Folder Include="Features\Users\DeleteUser\" />
-    <Folder Include="Features\Users\UpdateUser\" />
+    <Folder Include="Features\ManagementUser\Login\Queries\" />
+    <Folder Include="Features\ManagementUser\Permissions\Commands\DeletePermissions\" />
+    <Folder Include="Features\ManagementUser\Permissions\Commands\UpdatePermissions\" />
   </ItemGroup>
 
 </Project>

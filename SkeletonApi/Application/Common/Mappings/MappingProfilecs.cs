@@ -7,8 +7,10 @@ using SkeletonApi.Application.Features.Subjects.Commands.CreateSubject;
 using SkeletonApi.Application.Features.Subjects;
 using SkeletonApi.Application.Features.FrameNumb.Commands.CreateFrameNumber;
 using SkeletonApi.Application.Features.FrameNumb;
-using SkeletonApi.Application.Features.FrameNumberHasSubject.Commands.CreateFrameNumberHasSubject;
-using SkeletonApi.Application.Features.FrameNumberHasSubject;
+using SkeletonApi.Application.Features.Users;
+using SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateUser;
+using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.CreateRoles;
+using SkeletonApi.Application.Features.ManagementUser.Roles;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -25,7 +27,13 @@ namespace SkeletonApi.Application.Common.Mappings
             CreateMap<Subject, CreateSubjectResponseDto>();
 
             CreateMap<CreateFrameNumberRequest, FrameNumber>();
-            CreateMap<FrameNumber, CreateFrameNumberResponseDto>();
+            CreateMap<FrameNumber, CreateFrameNumberResponseDto>(); 
+            
+            CreateMap<CreateUserRequest, User>();
+            CreateMap<User, CreateUserResponseDto>();
+
+            CreateMap<CreateRolesRequest, Role>();
+            CreateMap<Role, CreateRolesResponseDto>();
 
         }
 

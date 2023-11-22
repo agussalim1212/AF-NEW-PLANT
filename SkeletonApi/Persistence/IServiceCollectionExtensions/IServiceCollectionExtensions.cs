@@ -50,7 +50,7 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient<ISubjectRepository, SubjectRepository>()
                 .AddTransient<IMachinesRepository, MachinesRepository>()
                 .AddTransient<ICategoryMachineRepository, CategoryMachinesRepository>()
-               // .AddTransient<IAuthenticationUserRepository, AuthenticationRepository>()
+                .AddTransient<IRoleRepository, RoleRepository>()
                 .AddTransient<IAccountRepository, AccountRepository>();
                 
 
