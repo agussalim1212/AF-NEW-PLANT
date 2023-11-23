@@ -171,6 +171,26 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.ActivityUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LogType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityUsers");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.CategoryMachineHasMachine", b =>
                 {
                     b.Property<Guid>("MachineId")

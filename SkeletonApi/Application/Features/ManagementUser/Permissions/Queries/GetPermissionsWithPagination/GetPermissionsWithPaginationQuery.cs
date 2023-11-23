@@ -41,29 +41,27 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.Ge
 
         public async Task<PaginatedResult<GetPermissionsWithPaginationDto>> Handle(GetPermissionsWithPaginationQuery query, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.Data<Role>().FindByCondition(g => g.DeletedAt == null).Include(o => o.Permissions)
-           .Select(m => new GetPermissionsWithPaginationDto
+
+
+            var user = _unitOfWork.Data<UserRole>().Entities.Include(k => k.User).Include(m => m.Role).
+            Where(j => j.Role.DeletedAt == null).Select(o => new { o.Role.Id, o.User.Email, o.User.UserName });
+
+            return await _unitOfWork.Data<Permission>().Entities.Where(c => query.search_term == null
+            || query.search_term.ToLower() == c.ClaimType.ToLower()
+            || query.search_term.ToLower() == c.Role.Name.ToLower())
+           .Include(k => k.Role)
+           .GroupBy(n => new { n.Role.Name, n.ClaimType, n.UpdatedAt, n.Role.Id }).Select(m => new GetPermissionsWithPaginationDto
            {
-               //UserName = m.Key.UserName,
-               //Email = m.Key.Email,
-               RoleName = m.Name,
-               //Permissions = m.Permissions.Select(d => d.ClaimType),
-               //UpdateAt = m.Key.UpdatedAt.Value.AddHours(7)
+               Id = m.Key.Id,
+               UserName = user.Where( f => m.Key.Id == f.Id).Select(g => g.UserName).FirstOrDefault(),
+               Email = user.Where(f => m.Key.Id == f.Id).Select(g => g.Email).FirstOrDefault(),
+               RoleName = m.Key.Name,
+               Permissions = m.Key.ClaimType,
+               UpdateAt = m.Key.UpdatedAt.Value.AddHours(7)
            })
-                
+
             .ProjectTo<GetPermissionsWithPaginationDto>(_mapper.ConfigurationProvider)
             .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
-
-            //return await _unitOfWork.Data<Role>().FindByCondition(x => x.DeletedAt == null).Where(j => (query.search_term == null)
-            //|| (query.search_term.ToLower() == j.Name.ToLower())).Select(c => new GetRolesWithPaginationDto
-            //{
-            //    Id = c.Id,
-            //    Name = c.Name,
-            //    UpdateAt = c.UpdatedAt.Value.AddHours(7)
-            //}).ProjectTo<GetRolesWithPaginationDto>(_mapper.ConfigurationProvider)
-            //.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
-
-
         }
     }
 }

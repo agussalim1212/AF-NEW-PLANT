@@ -5,9 +5,10 @@ using SkeletonApi.Application.Features.ManagementUser.Roles;
 using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.CreateRoles;
 using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.DeleteRoles;
 using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.UpdateRoles;
+using SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetAllRole;
 using SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleWithPagination;
-using SkeletonApi.Application.Features.ManagementUser.Users.Queries.GetUserWithPagination;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Presentation.ActionFilter;
 using SkeletonApi.Shared;
 using System.Text.Json;
 
@@ -44,6 +45,14 @@ namespace SkeletonApi.Presentation.Controllers
                 return BadRequest();
             }
             return await _mediator.Send(command);
+        }
+
+
+        [HttpGet("get-all-role")]
+        [ServiceFilter(typeof(AuditLoggingFilter))]
+        public async Task<ActionResult<Result<List<GetAllRoleDto>>>> GetAll()
+        {
+            return await _mediator.Send(new GetAllRoleQuery());
         }
 
         [HttpGet("list-role")]

@@ -42,6 +42,7 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<Role> Roles => Set<Role>();
         public DbSet<UserRole> UserRoles => Set<UserRole>();
         public DbSet<Permission> Permissions => Set<Permission>();
+        public DbSet<ActivityUser> ActivityUsers => Set<ActivityUser>();
         
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)

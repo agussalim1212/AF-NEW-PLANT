@@ -30,7 +30,8 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Ma
 
             public async Task<Result<GetAllMachineInformationDto>> Handle(GetAllMachineInformationQuery query, CancellationToken cancellationToken)
             {
-                var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => (query.MachineId == m.MachineId && m.Subject.Vid.Contains("CYCLE-COUNT")) 
+                var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)
+                .Where(m => (query.MachineId == m.MachineId && m.Subject.Vid.Contains("CYCLE-COUNT")) 
                 || (query.MachineId == m.MachineId && m.Subject.Vid.Contains("RUN-TIME")) 
                 || (query.MachineId == m.MachineId && m.Subject.Vid.Contains("RIM-CALIBRATION"))).ToListAsync();
 
@@ -80,8 +81,8 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Ma
                     SubjectName = subjectName,
                     DateTime = DateTime.Now,
                     ValueRunning = categorys.Select(c => Convert.ToDecimal(c.LastCycleCount?.Value)).FirstOrDefault(),
-                    CycleCount = categorys.Select(x => Convert.ToDecimal(x.LastRunTime?.Value)).Skip(2).FirstOrDefault(),
-                    LastTimeCalibration = categorys.Select(n => n.LastKalibrasi?.Value).Skip(1).FirstOrDefault(),
+                    CycleCount = categorys.Select(x => Convert.ToDecimal(x.LastRunTime?.Value)).Skip(1).FirstOrDefault(),
+                    LastTimeCalibration = categorys.Select(n => n.LastKalibrasi?.Value).Skip(2).FirstOrDefault(),
 
                 };
             }

@@ -8,7 +8,7 @@ using SkeletonApi.Shared;
 namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.DeleteRoles
 {
      internal class DeleteRolesCommandHandler : IRequestHandler<DeleteRolesRequest, Result<string>>
-    {
+     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly RoleManager<Role> _roleManager;
@@ -33,5 +33,5 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.DeleteR
 
             return await Result<string>.SuccessAsync("Success");
         }
-    }
+     }
 }

@@ -8,7 +8,9 @@ using SkeletonApi.Domain.Entities;
 using SkeletonApi.Infrastructure.Extensions;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.IServiceCollectionExtensions;
+using SkeletonApi.Persistence.Repositories;
 using SkeletonApi.Persistence.Repositories.Configuration;
+using SkeletonApi.Presentation.ActionFilter;
 using SkeletonApi.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +31,8 @@ builder.Services.ConfigureApiBehavior();
 builder.Services.ConfigureCorsPolicy(builder.Configuration);
 builder.Services.AddScoped<IDapperReadDbConnection, DapperReadDbConnection>();
 builder.Services.AddScoped<IDapperWriteDbConnection, DapperWriteDbConnection>();
+builder.Services.AddScoped<AuditLoggingFilter>();
+builder.Services.AddScoped<AuditRepository>();
 builder.Services.ConfigureIISIntegration();
 builder.Services.AddHostedMqttClient(builder.Configuration);
 builder.Services.ConfigureSwagger();

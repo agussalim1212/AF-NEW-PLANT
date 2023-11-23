@@ -30,7 +30,8 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.St
 
         public async Task<Result<GetAllStopLineDto>> Handle(GetAllStopLineQuery query, CancellationToken cancellationToken)
         {
-            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("OFF-TIME")).ToListAsync();
+            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)
+            .Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("OFF-TIME")).ToListAsync();
             IEnumerable<string> vids = machine.Select(m => m.Subject.Vid).ToList();
             string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
             string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();

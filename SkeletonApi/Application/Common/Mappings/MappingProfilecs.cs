@@ -11,6 +11,9 @@ using SkeletonApi.Application.Features.Users;
 using SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateUser;
 using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.CreateRoles;
 using SkeletonApi.Application.Features.ManagementUser.Roles;
+using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.CreatePermissions;
+using SkeletonApi.Application.Features.ManagementUser.Permissions;
+using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.UpdatePermissions;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -34,6 +37,12 @@ namespace SkeletonApi.Application.Common.Mappings
 
             CreateMap<CreateRolesRequest, Role>();
             CreateMap<Role, CreateRolesResponseDto>();
+
+            CreateMap<CreatePermissionsRequest, Permission>();
+            CreateMap<Permission, CreatePermissionsResponseDto>();
+
+            CreateMap<UpdatePermissionsRequest, Permission>();
+            //CreateMap<Permission, UpdatePermissionsRequest>();
 
         }
 

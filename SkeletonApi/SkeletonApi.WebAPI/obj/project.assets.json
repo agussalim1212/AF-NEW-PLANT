@@ -2193,7 +2193,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
-          "SkeletonApi.Application": "1.0.0"
+          "SkeletonApi.Application": "1.0.0",
+          "SkeletonApi.Persistence": "1.0.0"
         },
         "compile": {
           "bin/placeholder/SkeletonApi.Presentation.dll": {}

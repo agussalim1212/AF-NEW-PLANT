@@ -11,6 +11,11 @@ using SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleWithP
 using SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.GetRoleWithPagination;
 using SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.GetPermissionsWithPagination;
 using System.Text.Json;
+using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.DeleteRoles;
+using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.DeletePermissions;
+using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.UpdateRoles;
+using SkeletonApi.Domain.Entities;
+using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.UpdatePermissions;
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -31,7 +36,22 @@ namespace SkeletonApi.Presentation.Controllers
             return await _mediator.Send(command);
         }
 
-        [HttpGet("list-permission")]
+        [HttpDelete("delete-permission/{id}")]
+        public async Task<ActionResult<Result<string>>> DeletePermissions(string id)
+        {
+            return await _mediator.Send(new DeletePermissionsRequest(id));
+        }
+
+        [HttpPut("update-permission/{id}")]
+        public async Task<ActionResult<Result<Permission>>> UpdatePermissions(string id, UpdatePermissionsRequest command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+            return await _mediator.Send(command);
+        }
+        [HttpGet("get-list-permission")]
         public async Task<ActionResult<PaginatedResult<GetPermissionsWithPaginationDto>>> GetUserWithPagination([FromQuery] GetPermissionsWithPaginationQuery query)
         {
             var validator = new GetPermissionsWithPaginationValidator();

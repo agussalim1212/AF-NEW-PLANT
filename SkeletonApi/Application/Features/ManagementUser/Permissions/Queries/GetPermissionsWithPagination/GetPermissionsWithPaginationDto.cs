@@ -5,8 +5,8 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.Ge
 {
     public class GetPermissionsWithPaginationDto : IMapFrom<GetPermissionsWithPaginationDto>
     {
-    //    [JsonPropertyName("id")]
-    //    public int Id { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
         [JsonPropertyName("user_name")]
         public string UserName { get; set; }
         [JsonPropertyName("email")]

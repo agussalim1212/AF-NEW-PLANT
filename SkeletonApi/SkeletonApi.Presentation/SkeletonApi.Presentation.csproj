@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\SkeletonApi.Application.csproj" />
+    <ProjectReference Include="..\Persistence\SkeletonApi.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

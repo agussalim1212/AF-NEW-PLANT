@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System.Security.Claims;
+
 
 namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.CreatePermissions
 {
@@ -23,40 +23,53 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
 
         public async Task<Result<CreatePermissionsResponseDto>> Handle(CreatePermissionsRequest request, CancellationToken cancellationToken)
         {
+            var permission = _mapper.Map<Permission>(request);
           
             var validateRole = await _roleManager.FindByNameAsync(request.RoleName);
             if (validateRole == null) 
             {
                 return await Result<CreatePermissionsResponseDto>.FailureAsync("Role not found.");
             }
-
+ 
             foreach (var type in request.Claim)
             {
-                
 
+                var pms = new Permission
+                {
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    RoleId = validateRole.Id,
+                    ClaimType = type.ClaimValue,
+                    ClaimValue = type.ClaimValue,
+                };
+       
                 if (type.ClaimValue == "Edit")
                 {
-                    Claim claims = new Claim("Edit", "Permissions.Users.Edit");
-                    await _roleManager.AddClaimAsync(validateRole, claims);
+                    permission.ClaimType = type.ClaimValue;
+                    permission.ClaimValue = "Permissions.Users.Edit";
                 }
                 else if (type.ClaimValue == "Delete")
                 {
-                    Claim claims = new Claim("Delete", "Permissions.Users.Delete");
-                    await _roleManager.AddClaimAsync(validateRole, claims);
+                    permission.ClaimType = type.ClaimValue;
+                    permission.ClaimValue = "Permissions.Users.Delete";
                 }
                 else if (type.ClaimValue == "Create")
                 {
-                    Claim claims = new Claim("Create", "Permissions.Users.Create");
-                    await _roleManager.AddClaimAsync(validateRole, claims);
+                    permission.ClaimType = type.ClaimValue;
+                    permission.ClaimValue = "Permissions.Users.Create";
                 }
                 else
                 {
-                    Claim claims = new Claim("View", "Permissions.Users.View");
-                    await _roleManager.AddClaimAsync(validateRole, claims);
-                }  
-            }
+                    permission.ClaimType = type.ClaimValue;
+                    permission.ClaimValue = "Permissions.Users.View";
+                }    
 
-            return await Result<CreatePermissionsResponseDto>.SuccessAsync("Permissions created.");
+                await _unitOfWork.Data<Permission>().AddAsync(pms);
+                await _unitOfWork.Save(cancellationToken);
+            }
+                var rolePermission = _mapper.Map<CreatePermissionsResponseDto>(permission);
+
+            return await Result<CreatePermissionsResponseDto>.SuccessAsync(rolePermission,"Permissions created.");
 
         }
     }

@@ -48,7 +48,8 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.En
 
         public async Task<Result<GetAllEnergyConsumptionDto>> Handle(GetAllEnergyConsumptionQuery query, CancellationToken cancellationToken)
         {
-            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("PWM-KWH")).ToListAsync();
+            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)
+            .Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("PWM-KWH")).ToListAsync();
             string vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
             string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
             string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();

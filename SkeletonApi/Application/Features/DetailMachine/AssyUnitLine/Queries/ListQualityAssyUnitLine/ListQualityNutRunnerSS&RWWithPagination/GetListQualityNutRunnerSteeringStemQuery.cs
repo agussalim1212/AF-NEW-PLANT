@@ -68,7 +68,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
                        (@"SELECT * FROM ""list_quality_nut_runner_steering_stem_and_rear_wheel"" WHERE id = @vid
                        AND date_trunc('day', bucket::date) = date_trunc('day', @now)
                        ORDER BY  bucket DESC",
-                       new { vid = status.Subject.Vid, nom = DateTime.Now.Date, });
+                       new { vid = status.Subject.Vid, now = DateTime.Now.Date, });
 
                 if (statusConsumption.Count() == 0)
                 {
