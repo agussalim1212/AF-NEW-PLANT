@@ -56,9 +56,8 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCatego
                 {
                     return await Result<CategoryMachineHasMachine>.FailureAsync("Category Has Machine Already Exist");
                 }
-                return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Has Machines Created");
             }
-             return await Result<CategoryMachineHasMachine>.FailureAsync("CategoryId Or MachineId Not Found");
+                return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Has Machines Created");
         }
     }
 }

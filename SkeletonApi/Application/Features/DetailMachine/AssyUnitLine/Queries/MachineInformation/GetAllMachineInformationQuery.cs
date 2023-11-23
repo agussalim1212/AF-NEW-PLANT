@@ -33,7 +33,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Ma
                 var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)
                 .Where(m => (query.MachineId == m.MachineId && m.Subject.Vid.Contains("CYCLE-COUNT")) 
                 || (query.MachineId == m.MachineId && m.Subject.Vid.Contains("RUN-TIME")) 
-                || (query.MachineId == m.MachineId && m.Subject.Vid.Contains("RIM-CALIBRATION"))).ToListAsync();
+                || (query.MachineId == m.MachineId && m.Subject.Vid.Contains("RIM"))).ToListAsync();
 
 
                 IEnumerable<string> vids = machine.Select(m => m.Subject.Vid).ToList();
@@ -54,7 +54,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Ma
                      LastCycleCount = groups.Where(g => g.Id.Contains("CYCLE-COUNT"))
                          .OrderByDescending(g => g.DateTime)
                          .FirstOrDefault(), // Get the last "Cycle-Count" element
-                     LastKalibrasi = groups.Where(g => g.Id.Contains("RIM-CALIBRATION"))
+                     LastKalibrasi = groups.Where(g => g.Id.Contains("RIM"))
                          .OrderByDescending(g => g.DateTime)
                          .FirstOrDefault(), // Get the last "rim-calibration" element
                  })

@@ -43,6 +43,8 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<UserRole> UserRoles => Set<UserRole>();
         public DbSet<Permission> Permissions => Set<Permission>();
         public DbSet<ActivityUser> ActivityUsers => Set<ActivityUser>();
+        public DbSet<MaintenacePreventive> MaintenacePreventives => Set<MaintenacePreventive>();
+        public DbSet<MaintCorrective> MaintCorrectives => Set<MaintCorrective>();
         
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -136,6 +138,14 @@ namespace SkeletonApi.Persistence.Contexts
                 m.ToTable("SubjectHasMachine");
             });
 
+            modelBuilder.Entity<ActivityUser>(
+   eb =>
+   {
+       eb.Property(b => b.Id).HasColumnName("id").HasColumnType("uuid");
+       eb.Property(b => b.UserName).HasColumnName("username").HasColumnType("text");
+       eb.Property(b => b.LogType).HasColumnName("logtype").HasColumnType("text");
+       eb.Property(b => b.DateTime).HasColumnName("datetime").HasColumnType("timestamp");
+   });
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

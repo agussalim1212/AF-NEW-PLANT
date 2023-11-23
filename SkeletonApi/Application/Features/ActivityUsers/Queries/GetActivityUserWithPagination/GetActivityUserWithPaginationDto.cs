@@ -1,4 +1,5 @@
 ﻿using SkeletonApi.Application.Common.Mappings;
+using SkeletonApi.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

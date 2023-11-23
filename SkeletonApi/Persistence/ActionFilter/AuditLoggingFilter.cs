@@ -16,14 +16,14 @@ namespace SkeletonApi.Presentation.ActionFilter
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-
+            DateTime date = DateTime.Now;
 
             var activityUser = new ActivityUser
             {
                 Id = Guid.NewGuid(),
                 UserName = context.HttpContext.User.Identity.Name,
                 LogType = context.HttpContext.Request.Method,
-                DateTime = DateTime.UtcNow,
+                DateTime = new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second),
 
             };
 
