@@ -60,4 +60,35 @@ namespace SkeletonApi.Domain.Entities
         public string Id { get; set; }
         public string Value { get; set; }
     }
+
+    public class EnergyConsumption
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class AirConsumption
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class ProductConsumption
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class EnergyConsumptionDetail
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public string FirstValue { get; set; }
+        public string LastValue { get; set; }
+    }
+
+
 }

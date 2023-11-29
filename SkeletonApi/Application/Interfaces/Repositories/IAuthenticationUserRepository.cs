@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SkeletonApi.Application.Features.Users;
+using SkeletonApi.Application.Features.Users.Login.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace SkeletonApi.Application.Interfaces.Repositories
     {
         Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration);
 
-        Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
+        Task<bool> ValidateUser(UserLoginRequest userForAuth);
 
         Task<TokenDto> CreateToken(bool populateExp);
     }

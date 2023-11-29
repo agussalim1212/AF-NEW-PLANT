@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using SkeletonApi.Application.Features.Users;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Domain.Entities.Exceptions;
 using SkeletonApi.Shared;
 
 
@@ -48,6 +49,12 @@ namespace SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateU
             {
                 await _userManager.AddToRolesAsync(user, request.Roles);
             }
+            else
+            {
+                throw new FailedAuthenticationException($": Failed to create user, ${result.Errors}.");
+            }
+          
+
 
             var userResponse = _mapper.Map<CreateUserResponseDto>(user);
 

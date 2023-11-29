@@ -1,0 +1,26 @@
+﻿
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination
+{
+    public class GetListWheelFrontDto
+    {
+        [JsonPropertyName("date_time")]
+        public DateTime DateTime { get; set; }
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+        [JsonPropertyName("data_distance")]
+        public decimal DataDistance { get; set; }
+        [JsonPropertyName("data_tonase")]
+        public decimal DataTonase { get; set; }
+        [JsonPropertyName("data_dial_horizontal")]
+        public decimal DataDialHorizontal { get; set; }
+        [JsonPropertyName("data_dial_vertical")]
+        public decimal DataDialVertical { get; set;}
+        [JsonPropertyName("tire_presure")]
+        public decimal TirePresure { get; set; }
+        [JsonPropertyName("data_torsi")]
+        public decimal DataTorQ { get; set; }
+    }
+}

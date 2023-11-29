@@ -10,6 +10,7 @@ namespace SkeletonApi.Application.Features.Users
 {
     public record UserForRegistrationDto
     {
+
         [Required(ErrorMessage = "Username is required")]
         [JsonPropertyName("username")]
         public string? UserName { get; init; }

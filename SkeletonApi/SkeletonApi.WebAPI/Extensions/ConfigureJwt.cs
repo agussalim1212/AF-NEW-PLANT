@@ -28,6 +28,7 @@ namespace SkeletonApi.WebAPI.Extensions
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 10;
                 o.User.RequireUniqueEmail = true;
+                
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 //.AddDefaultUI()

@@ -139,14 +139,14 @@ namespace SkeletonApi.Persistence.Contexts
             });
 
             modelBuilder.Entity<ActivityUser>(
-   eb =>
-   {
-       eb.Property(b => b.Id).HasColumnName("id").HasColumnType("uuid");
-       eb.Property(b => b.UserName).HasColumnName("username").HasColumnType("text");
-       eb.Property(b => b.LogType).HasColumnName("logtype").HasColumnType("text");
-       eb.Property(b => b.DateTime).HasColumnName("datetime").HasColumnType("timestamp");
-   });
-        }
+            eb =>
+            {
+            eb.Property(b => b.Id).HasColumnName("id").HasColumnType("uuid");
+            eb.Property(b => b.UserName).HasColumnName("username").HasColumnType("text");
+            eb.Property(b => b.LogType).HasColumnName("logtype").HasColumnType("text");
+            eb.Property(b => b.DateTime).HasColumnName("datetime").HasColumnType("timestamp");
+            });
+            }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.Users
 {
-    public record UserForAuthenticationDto
+    public record UserForAuthenticationDto 
     {
         [Required(ErrorMessage = "User name is required")]
         [JsonPropertyName("username")]

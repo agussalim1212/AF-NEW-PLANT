@@ -1,8 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateUser;
 using SkeletonApi.Application.Features.Users;
+using SkeletonApi.Application.Features.Users.Login.Commands;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Shared;
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -20,32 +23,11 @@ namespace SkeletonApi.Presentation.Controllers
             _userRepository = authenticationUser;
         }
 
+
         [HttpPost]
-       // [ServiceFilter(typeof(ValidationFilterAttribute))]
-       
-        public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
+        public async Task<ActionResult<Result<TokenDto>>> CreateUser(UserLoginRequest command)
         {
-            var result = await _userRepository.RegisterUser(userForRegistration);
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.TryAddModelError(error.Code, error.Description);
-                }
-                return BadRequest(ModelState);
-            }
-
-            return StatusCode(201);
-        }
-
-        [HttpPost("login")]
-       // [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
-        {
-            if (!await _userRepository.ValidateUser(user))
-                return Unauthorized();
-            var tokenDto = await _userRepository.CreateToken(populateExp: true);
-            return Ok(tokenDto);
+            return await _mediator.Send(command);
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SkeletonApi.Application.Features.Users;
-using SkeletonApi.Application.Interfaces;
+using SkeletonApi.Application.Features.Users.Login.Commands;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Domain.Entities.ConfigurationModels;
@@ -49,7 +49,7 @@ namespace SkeletonApi.Persistence.Repositories
             _user.RefreshToken = refreshToken;
 
             if (populateExp)
-                _user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(30);
+                _user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(30);
 
             await _userManager.UpdateAsync(_user);
 
@@ -137,7 +137,7 @@ namespace SkeletonApi.Persistence.Repositories
                 issuer: _jwtConfiguration.ValidIssuer,
                 audience: _jwtConfiguration.ValidAudience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtConfiguration.Expires)),
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_jwtConfiguration.Expires)),
                 signingCredentials: signingCredentials
             );
 
@@ -154,7 +154,8 @@ namespace SkeletonApi.Persistence.Repositories
             return result;
         }
 
-        public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
+
+        public async Task<bool> ValidateUser(UserLoginRequest userForAuth)
         {
             _user = await _userManager.FindByNameAsync(userForAuth.UserName);
 
@@ -166,7 +167,5 @@ namespace SkeletonApi.Persistence.Repositories
             }
             return result;
         }
-
-      
     }
 }

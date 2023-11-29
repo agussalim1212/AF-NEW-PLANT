@@ -14,6 +14,7 @@ using SkeletonApi.Application.Features.ManagementUser.Roles;
 using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.CreatePermissions;
 using SkeletonApi.Application.Features.ManagementUser.Permissions;
 using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.UpdatePermissions;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -42,7 +43,7 @@ namespace SkeletonApi.Application.Common.Mappings
             CreateMap<Permission, CreatePermissionsResponseDto>();
 
             CreateMap<UpdatePermissionsRequest, Permission>();
-            //CreateMap<Permission, UpdatePermissionsRequest>();
+      
 
         }
 
