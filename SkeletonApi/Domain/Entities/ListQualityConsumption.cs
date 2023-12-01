@@ -79,10 +79,26 @@ namespace SkeletonApi.Domain.Entities
     {
         public DateTime Bucket { get; set; }
         public string Id { get; set; }
-        public string Value { get; set; }
+        public string LastValue { get; set; }
     }
 
     public class EnergyConsumptionDetail
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public string FirstValue { get; set; }
+        public string LastValue { get; set; }
+    }
+
+    public class AirConsumptionDetail
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public string FirstValue { get; set; }
+        public string LastValue { get; set; }
+    }
+
+    public class ElectricConsumptionDetail
     {
         public DateTime Bucket { get; set; }
         public string Id { get; set; }
