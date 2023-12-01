@@ -145,7 +145,7 @@ namespace SkeletonApi.Presentation.Controllers
                                 worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
                                 worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).Status;
                                 worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataDistance;
-                                worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataTonase;
+                                worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).DataTonase;
 
                             }
                         }
@@ -162,7 +162,7 @@ namespace SkeletonApi.Presentation.Controllers
                                 query.type_wheel = "Press Bearing";
                             }
                             var fileName = $"List_Quality_{query.type_wheel}_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx";
-                            Response.Headers.Add("x-download", $"List_Quality_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx");
+                            Response.Headers.Add("x-download", $"List_Quality_{query.type_wheel}_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx");
 
                             return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
                         }
@@ -280,7 +280,7 @@ namespace SkeletonApi.Presentation.Controllers
                                 worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
                                 worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).Status;
                                 worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataDistance;
-                                worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataTonase;
+                                worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).DataTonase;
 
                             }
                         }
@@ -297,7 +297,7 @@ namespace SkeletonApi.Presentation.Controllers
                                 query.type_wheel = "Press Bearing";
                             }
                             var fileName = $"List_Quality_{query.type_wheel}_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx";
-                            Response.Headers.Add("x-download", $"List_Quality_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx");
+                            Response.Headers.Add("x-download", $"List_Quality_{query.type_wheel}_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx");
 
                             return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
                         }

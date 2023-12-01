@@ -120,12 +120,10 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.En
                           {
                               //o.DateTime.Year,
                               //o.DateTime.Month,
-                              d.Bucket,
                               WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.Bucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
                           })
                           .Select(g => new
                           {
-                              time = g.Key.Bucket,
                               date_group = new DateTime(g.Key.WeekNumber, 1, 1).AddDays((g.Key.WeekNumber - 1) * 7),
                               total_first = g.Sum(d => Convert.ToDecimal(d.FirstValue)),
                               total_last = g.Sum(d => Convert.ToDecimal(d.LastValue)),
@@ -152,7 +150,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.En
                                     ValueKwh = val.total_first - val.total_last,
                                     ValueCo2 = Math.Round(val.total_first - val.total_last * Convert.ToDecimal(0.87), 2),
                                     Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(val.date_group, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
-                                    DateTime = val.time,
+                                    DateTime = val.date_group,
                                 }).OrderByDescending(x => x.DateTime).ToList()
 
                             };

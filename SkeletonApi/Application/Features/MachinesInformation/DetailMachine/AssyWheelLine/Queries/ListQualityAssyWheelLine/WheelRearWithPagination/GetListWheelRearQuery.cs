@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Extensions;
+using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -15,16 +16,22 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
         public int page_number { get; set; }
         public int page_size { get; set; }
         public string? search_term { get; set; }
+        public string type { get; set; }
+        public DateTime start { get; set; }
+        public DateTime end { get; set; }
 
         public GetListWheelRearQuery() { }
 
-        public GetListWheelRearQuery(string typesWheel, string searchTerm, Guid machineId, int pageNumber, int pageSize)
+        public GetListWheelRearQuery(string typesWheel, string searchTerm, Guid machineId, int pageNumber, int pageSize, string Type, DateTime Start, DateTime End)
         {
             machine_id = machineId;
             page_number = pageNumber;
             page_size = pageSize;
             search_term = searchTerm;
             type_wheel = typesWheel;
+            type = Type;
+            start = Start; 
+            end = End;
         }
 
         internal class GetListWheelRearQueryHandler : IRequestHandler<GetListWheelRearQuery, PaginatedResult<GetListWheelRearDto>>
@@ -49,212 +56,1026 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
                 List<GetListWheelRearDto> dt = new List<GetListWheelRearDto>();
                 var data = new GetListWheelRearDto();
 
+                //disk brake
+                var torQ = machine.Where(m => m.Subject.Vid.Contains("TORQ")).FirstOrDefault();
+
+                //tire inflation
                 var tire = machine.Where(m => m.Subject.Vid.Contains("TIRE-PRESURE")).FirstOrDefault();
+
+                //press bearing
+                var statusPressBearing = machine.Where(m => m.Subject.Vid.Contains("BRNG-STATUS-PRDCT")).FirstOrDefault();
                 var brngDistance = machine.Where(m => m.Subject.Vid.Contains("DISTANCE")).FirstOrDefault();
                 var brngTonase = machine.Where(m => m.Subject.Vid.Contains("TONASE")).FirstOrDefault();
+
+                //final inspection
+                var statusInspection = machine.Where(m => m.Subject.Vid.Contains("INPECT-STATUS-PRDCT")).FirstOrDefault();
                 var horizontal = machine.Where(m => m.Subject.Vid.Contains("DIAL-HOR")).FirstOrDefault();
                 var vertikal = machine.Where(m => m.Subject.Vid.Contains("DIAL-VER")).FirstOrDefault();
-                var torQ = machine.Where(m => m.Subject.Vid.Contains("TORQ")).FirstOrDefault();
-                var statusPressConeRace = machine.Where(m => m.Subject.Vid.Contains("BRNG-STATUS-PRDCT")).FirstOrDefault();
-                var statusInspection = machine.Where(m => m.Subject.Vid.Contains("INPECT-STATUS-PRDCT")).FirstOrDefault();
 
-
-                var tireConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                    (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-                ORDER BY  bucket DESC",
-                new { vid = tire.Subject.Vid, now = DateTime.Now.Date });
-
-                var brngDistnaceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                    (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-                ORDER BY  bucket DESC",
-                new { vid = brngDistance.Subject.Vid, now = DateTime.Now.Date });
-
-                var brngTonaseConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                    (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-                ORDER BY  bucket DESC",
-                new { vid = brngTonase.Subject.Vid, now = DateTime.Now.Date });
-
-                var horizontalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                    (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-                ORDER BY  bucket DESC",
-                new { vid = horizontal.Subject.Vid, now = DateTime.Now.Date });
-
-                var vertikalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                    (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-                ORDER BY  bucket DESC",
-                new { vid = vertikal.Subject.Vid, now = DateTime.Now.Date });
-
-                var statusPressConeRaceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                    (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
-                ORDER BY  bucket DESC",
-                new { vid = statusPressConeRace.Subject.Vid, dateNow = DateTime.Now.Date, });
-
-                var statusInspectionConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                   (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
-                ORDER BY  bucket DESC",
-                new { vid = statusInspection.Subject.Vid, dateNow = DateTime.Now.Date, });
-
-                var torQConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                    (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
-                ORDER BY  bucket DESC",
-                new { vid = torQ.Subject.Vid, dateNow = DateTime.Now.Date, });
-
-
-                switch (query.type_wheel)
+                switch (query.type)
                 {
-                    case "final_inspection":
-
-                        if (statusInspectionConsumption.Count() == 0)
+                    case "day":
+                        switch (query.type_wheel)
                         {
-                            data =
-                            new GetListWheelRearDto
-                            {
-                                DateTime = DateTime.Now,
-                                Status = "-",
-                                DataDistance = 0,
-                                DataTonase = 0,
-                            };
-                            dt.Add(data);
-                        }
-                        else
-                        {
+                            case "final_inspection":
 
-                            foreach (var s in statusInspectionConsumption)
-                            {
-                                GetListWheelRearDto listQuality = new GetListWheelRearDto();
+                                var horizontalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = horizontal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
 
-                                var dataDialHorizontal = horizontalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                                if (dataDialHorizontal != null)
+                                var vertikalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = vertikal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var statusInspectionConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusInspection.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusInspectionConsumption.Count() == 0)
                                 {
-                                    listQuality.DataDialHorizontal = Convert.ToDecimal(dataDialHorizontal.Value);
-                                }
-                                var dataDialVertikal = vertikalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                                if (dataDialVertikal != null)
-                                {
-                                    listQuality.DataDialVertical = Convert.ToDecimal(dataDialVertikal.Value);
-                                }
-                                var statuss = statusInspectionConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
-                                if (statuss != null && statuss.Value.Contains("1"))
-                                {
-                                    listQuality.Status = "OK";
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDialHorizontal = 0,
+                                        DataDialVertical = 0,
+                                    };
+                                    dt.Add(data);
                                 }
                                 else
                                 {
-                                    listQuality.Status = "NG";
+                                    foreach (var s in statusInspectionConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDialHorizontal = horizontalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialHorizontal != null)
+                                        {
+                                            listQuality.DataDialHorizontal = Convert.ToDecimal(dataDialHorizontal.Value);
+                                        }
+                                        var dataDialVertikal = vertikalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialVertikal != null)
+                                        {
+                                            listQuality.DataDialVertical = Convert.ToDecimal(dataDialVertikal.Value);
+                                        }
+                                        var statuss = statusInspectionConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
                                 }
-                                listQuality.DateTime = s.Bucket.AddHours(7);
-                                dt.Add(listQuality);
+                                break;
 
-                            }
+                            case "tire_inflation":
+
+                                var tireConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = tire.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (tireConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        TirePresure = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in tireConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var Tier = tireConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (Tier != null)
+                                        {
+                                            listQuality.TirePresure = Convert.ToDecimal(Tier.Value);
+                                        }
+
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
+
+                            case "disk_brake":
+
+                                var torQConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = torQ.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (torQConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        DataTorQ = 0
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in torQConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        listQuality.DataTorQ = Convert.ToDecimal(s.Value);
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            default:
+
+                                var pressbearingDistanceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngDistance.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var pressbearingTonaseConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngTonase.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var statusBearingConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                                AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusPressBearing.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusBearingConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDistance = 0,
+                                        DataTonase = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+
+                                    foreach (var s in statusBearingConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDial = pressbearingDistanceConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDial != null)
+                                        {
+                                            listQuality.DataDistance = Convert.ToDecimal(dataDial.Value);
+                                        }
+                                        var dataTonase = pressbearingTonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataTonase != null)
+                                        {
+                                            listQuality.DataTonase = Convert.ToDecimal(dataTonase.Value);
+                                        }
+                                        var statuss = statusBearingConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
                         }
                         break;
-                    case "tire_inflation":
-
-                        if (tireConsumption.Count() == 0)
+                    case "week":
+                        switch (query.type_wheel)
                         {
-                            data =
-                            new GetListWheelRearDto
-                            {
-                                DateTime = DateTime.Now,
-                                TirePresure = 0,
-                            };
-                            dt.Add(data);
-                        }
-                        else
-                        {
+                            case "final_inspection":
 
-                            foreach (var s in tireConsumption)
-                            {
-                                GetListWheelRearDto listQuality = new GetListWheelRearDto();
+                                var horizontalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = horizontal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
 
-                                    listQuality.TirePresure = Convert.ToDecimal(s.Value);
+                                var vertikalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = vertikal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
 
-                                listQuality.DateTime = s.Bucket.AddHours(7);
-                                dt.Add(listQuality);
-                                //dt.Where(d => query.search_term == null || query.search_term == d.TirePresure.ToString());
-                            }
+                                var statusInspectionConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusInspection.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusInspectionConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDialHorizontal = 0,
+                                        DataDialVertical = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in statusInspectionConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDialHorizontal = horizontalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialHorizontal != null)
+                                        {
+                                            listQuality.DataDialHorizontal = Convert.ToDecimal(dataDialHorizontal.Value);
+                                        }
+                                        var dataDialVertikal = vertikalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialVertikal != null)
+                                        {
+                                            listQuality.DataDialVertical = Convert.ToDecimal(dataDialVertikal.Value);
+                                        }
+                                        var statuss = statusInspectionConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            case "tire_inflation":
+
+                                var tireConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = tire.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (tireConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        TirePresure = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in tireConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var Tier = tireConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (Tier != null)
+                                        {
+                                            listQuality.TirePresure = Convert.ToDecimal(Tier.Value);
+                                        }
+
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
+
+                            case "disk_brake":
+
+                                var torQConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = torQ.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (torQConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        DataTorQ = 0
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in torQConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        listQuality.DataTorQ = Convert.ToDecimal(s.Value);
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            default:
+
+                                var pressbearingDistnaceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngDistance.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var pressbearingTonaseConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngTonase.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var statusBearingConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusPressBearing.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusBearingConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDistance = 0,
+                                        DataTonase = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+
+                                    foreach (var s in statusBearingConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDial = pressbearingDistnaceConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDial != null)
+                                        {
+                                            listQuality.DataDistance = Convert.ToDecimal(dataDial.Value);
+                                        }
+                                        var dataTonase = pressbearingTonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataTonase != null)
+                                        {
+                                            listQuality.DataTonase = Convert.ToDecimal(dataTonase.Value);
+                                        }
+                                        var statuss = statusBearingConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
                         }
                         break;
-                    case "disk_brake":
-
-                        if (torQConsumption.Count() == 0)
+                    case "month":
+                        switch (query.type_wheel)
                         {
-                            data =
-                            new GetListWheelRearDto
-                            {
-                                DateTime = DateTime.Now,
-                                DataTorQ = 0
-                            };
-                            dt.Add(data);
-                        }
-                        else
-                        {
-                            foreach (var s in torQConsumption)
-                            {
-                                GetListWheelRearDto listQuality = new GetListWheelRearDto();
+                            case "final_inspection":
 
-                                listQuality.DataTorQ = Convert.ToDecimal(s.Value);
-                                listQuality.DateTime = s.Bucket.AddHours(7);
-                                dt.Add(listQuality);
-                            }
+                                var horizontalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = horizontal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var vertikalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = vertikal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var statusInspectionConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusInspection.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusInspectionConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDialHorizontal = 0,
+                                        DataDialVertical = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in statusInspectionConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDialHorizontal = horizontalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialHorizontal != null)
+                                        {
+                                            listQuality.DataDialHorizontal = Convert.ToDecimal(dataDialHorizontal.Value);
+                                        }
+                                        var dataDialVertikal = vertikalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialVertikal != null)
+                                        {
+                                            listQuality.DataDialVertical = Convert.ToDecimal(dataDialVertikal.Value);
+                                        }
+                                        var statuss = statusInspectionConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            case "tire_inflation":
+
+                                var tireConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = tire.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (tireConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        TirePresure = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in tireConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var Tier = tireConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (Tier != null)
+                                        {
+                                            listQuality.TirePresure = Convert.ToDecimal(Tier.Value);
+                                        }
+
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
+
+                            case "disk_brake":
+
+                                var torQConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = torQ.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (torQConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        DataTorQ = 0
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in torQConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        listQuality.DataTorQ = Convert.ToDecimal(s.Value);
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            default:
+
+                                var pressbearingDistnaceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngDistance.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var pressbearingTonaseConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngTonase.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var statusBearingConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                                AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusPressBearing.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusBearingConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDistance = 0,
+                                        DataTonase = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+
+                                    foreach (var s in statusBearingConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDial = pressbearingDistnaceConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDial != null)
+                                        {
+                                            listQuality.DataDistance = Convert.ToDecimal(dataDial.Value);
+                                        }
+                                        var dataTonase = pressbearingTonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataTonase != null)
+                                        {
+                                            listQuality.DataTonase = Convert.ToDecimal(dataTonase.Value);
+                                        }
+                                        var statuss = statusBearingConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
                         }
                         break;
+                    case "year":
+                        switch (query.type_wheel)
+                        {
+                            case "final_inspection":
+
+                                var horizontalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = horizontal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var vertikalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = vertikal.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var statusInspectionConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusInspection.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusInspectionConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDialHorizontal = 0,
+                                        DataDialVertical = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in statusInspectionConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDialHorizontal = horizontalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialHorizontal != null)
+                                        {
+                                            listQuality.DataDialHorizontal = Convert.ToDecimal(dataDialHorizontal.Value);
+                                        }
+                                        var dataDialVertikal = vertikalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialVertikal != null)
+                                        {
+                                            listQuality.DataDialVertical = Convert.ToDecimal(dataDialVertikal.Value);
+                                        }
+                                        var statuss = statusInspectionConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            case "tire_inflation":
+
+                                var tireConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = tire.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (tireConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        TirePresure = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in tireConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var Tier = tireConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (Tier != null)
+                                        {
+                                            listQuality.TirePresure = Convert.ToDecimal(Tier.Value);
+                                        }
+
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
+
+                            case "disk_brake":
+
+                                var torQConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = torQ.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (torQConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        DataTorQ = 0
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in torQConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        listQuality.DataTorQ = Convert.ToDecimal(s.Value);
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            default:
+
+                                var pressbearingDistnaceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngDistance.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var pressbearingTonaseConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = brngTonase.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                var statusBearingConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                                ORDER BY id DESC, bucket DESC", new { vid = statusPressBearing.Subject.Vid, starttime = query.start.Date, endtime = query.end.Date });
+
+                                if (statusBearingConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDistance = 0,
+                                        DataTonase = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+
+                                    foreach (var s in statusBearingConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDial = pressbearingDistnaceConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDial != null)
+                                        {
+                                            listQuality.DataDistance = Convert.ToDecimal(dataDial.Value);
+                                        }
+                                        var dataTonase = pressbearingTonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataTonase != null)
+                                        {
+                                            listQuality.DataTonase = Convert.ToDecimal(dataTonase.Value);
+                                        }
+                                        var statuss = statusBearingConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
+                        }
+                        break;
+
                     default:
 
-                        if (statusPressConeRaceConsumption.Count() == 0)
+                        switch (query.type_wheel)
                         {
-                            data =
-                            new GetListWheelRearDto
-                            {
-                                DateTime = DateTime.Now,
-                                Status = "-",
-                                DataDistance = 0,
-                                DataTonase = 0,
-                            };
-                            dt.Add(data);
-                        }
-                        else
-                        {
+                            case "final_inspection":
 
-                            foreach (var s in statusPressConeRaceConsumption)
-                            {
-                                GetListWheelRearDto listQuality = new GetListWheelRearDto();
+                                var horizontalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = horizontal.Subject.Vid, dateNow = DateTime.Now.Date, });
 
-                                var dataDial = brngDistnaceConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                                if (dataDial != null)
+                                var vertikalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                               (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = vertikal.Subject.Vid, dateNow = DateTime.Now.Date, });
+
+                                var statusInspectionConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = statusInspection.Subject.Vid, dateNow = DateTime.Now.Date, });
+
+                                if (statusInspectionConsumption.Count() == 0)
                                 {
-                                    listQuality.DataDistance = Convert.ToDecimal(dataDial.Value);
-                                }
-                                var dataTonase = brngTonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                                if (dataTonase != null)
-                                {
-                                    listQuality.DataTonase = Convert.ToDecimal(dataTonase.Value);
-                                }
-                                var statuss = statusPressConeRaceConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
-                                if (statuss != null && statuss.Value.Contains("1"))
-                                {
-                                    listQuality.Status = "OK";
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDialHorizontal = 0,
+                                        DataDialVertical = 0,
+                                    };
+                                    dt.Add(data);
                                 }
                                 else
                                 {
-                                    listQuality.Status = "NG";
-                                }
-                                listQuality.DateTime = s.Bucket.AddHours(7);
-                                dt.Add(listQuality);
+                                    foreach (var s in statusInspectionConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
 
-                            }
+                                        var dataDialHorizontal = horizontalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialHorizontal != null)
+                                        {
+                                            listQuality.DataDialHorizontal = Convert.ToDecimal(dataDialHorizontal.Value);
+                                        }
+                                        var dataDialVertikal = vertikalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDialVertikal != null)
+                                        {
+                                            listQuality.DataDialVertical = Convert.ToDecimal(dataDialVertikal.Value);
+                                        }
+                                        var statuss = statusInspectionConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            case "tire_inflation":
+
+                                var tireConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = tire.Subject.Vid, dateNow = DateTime.Now.Date, });
+                                if (tireConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        TirePresure = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in tireConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var Tier = tireConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (Tier != null)
+                                        {
+                                            listQuality.TirePresure = Convert.ToDecimal(Tier.Value);
+                                        }
+
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
+
+                            case "disk_brake":
+
+                                var torQConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = torQ.Subject.Vid, dateNow = DateTime.Now.Date, });
+
+                                if (torQConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        DataTorQ = 0
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+                                    foreach (var s in torQConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        listQuality.DataTorQ = Convert.ToDecimal(s.Value);
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+                                    }
+                                }
+                                break;
+
+                            default:
+
+                                var pressbearingDistnaceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = brngDistance.Subject.Vid, dateNow = DateTime.Now.Date, });
+
+                                var pressbearingTonaseConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = brngTonase.Subject.Vid, dateNow = DateTime.Now.Date, });
+
+                                var statusBearingConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+                                (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
+                                AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                                ORDER BY  bucket DESC",
+                                new { vid = statusPressBearing.Subject.Vid, dateNow = DateTime.Now.Date, });
+
+                                if (statusBearingConsumption.Count() == 0)
+                                {
+                                    data =
+                                    new GetListWheelRearDto
+                                    {
+                                        DateTime = DateTime.Now,
+                                        Status = "-",
+                                        DataDistance = 0,
+                                        DataTonase = 0,
+                                    };
+                                    dt.Add(data);
+                                }
+                                else
+                                {
+
+                                    foreach (var s in statusBearingConsumption)
+                                    {
+                                        GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                                        var dataDial = pressbearingDistnaceConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataDial != null)
+                                        {
+                                            listQuality.DataDistance = Convert.ToDecimal(dataDial.Value);
+                                        }
+                                        var dataTonase = pressbearingTonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                        if (dataTonase != null)
+                                        {
+                                            listQuality.DataTonase = Convert.ToDecimal(dataTonase.Value);
+                                        }
+                                        var statuss = statusBearingConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                        if (statuss != null && statuss.Value.Contains("1"))
+                                        {
+                                            listQuality.Status = "OK";
+                                        }
+                                        else
+                                        {
+                                            listQuality.Status = "NG";
+                                        }
+                                        listQuality.DateTime = s.Bucket.AddHours(7);
+                                        dt.Add(listQuality);
+
+                                    }
+                                }
+                                break;
                         }
                         break;
                 }
-
                 var paginatedList = dt.Where(c => query.search_term == null
                 || (query.search_term == c.DataDistance.ToString())
                 || (query.search_term.ToLower() == c.Status.ToLower())).ToList();
