@@ -663,6 +663,35 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.StatusMachine", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("integer")
+                        .HasColumnName("value");
+
+                    b.Property<string>("Vid")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("vid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("statusmachines");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
                 {
                     b.Property<Guid>("Id")

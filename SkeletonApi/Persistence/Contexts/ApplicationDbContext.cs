@@ -45,8 +45,9 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<ActivityUser> ActivityUsers => Set<ActivityUser>();
         public DbSet<MaintenacePreventive> MaintenacePreventives => Set<MaintenacePreventive>();
         public DbSet<MaintCorrective> MaintCorrectives => Set<MaintCorrective>();
-        
-        
+
+        public DbSet<StatusMachine> statusmachines => Set<StatusMachine>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
