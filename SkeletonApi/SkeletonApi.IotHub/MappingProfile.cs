@@ -31,7 +31,6 @@ public class MappingProfile : Profile
 
         // CreateMap<ConsumptionDataResult, ConsumptionDataResultDto>().ReverseMap();
 
-        CreateMap<MachineStatusDto, Machine>();
         CreateMap<Machine, MachineStatusDto>();
         CreateMap<Machine, MachineStatusDto>().ReverseMap();
 

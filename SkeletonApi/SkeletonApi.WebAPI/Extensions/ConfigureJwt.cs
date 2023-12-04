@@ -20,7 +20,7 @@ namespace SkeletonApi.WebAPI.Extensions
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentity<User, Role> (o =>
+            var builder = services.AddIdentity<User, Role>(o =>
             {
                 o.Password.RequireDigit = true;
                 o.Password.RequireLowercase = false;
@@ -28,7 +28,7 @@ namespace SkeletonApi.WebAPI.Extensions
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 10;
                 o.User.RequireUniqueEmail = true;
-                
+
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 //.AddDefaultUI()
