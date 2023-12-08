@@ -28,5 +28,9 @@ namespace SkeletonApi.Domain.Entities
 
         [NotMapped]
         public string DateTimeString { get; set; }
+        [NotMapped]
+        public Subject Subject { get; set; }
+        [NotMapped]
+        public Machine Machine { get; set; }
     }
 }

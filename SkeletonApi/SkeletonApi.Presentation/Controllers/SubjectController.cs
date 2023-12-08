@@ -7,6 +7,7 @@ using SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSubject
 using SkeletonApi.Application.Features.SubjectHasMachines.Commands.DeleteSubjectHasMachine;
 using SkeletonApi.Application.Features.SubjectHasMachines.Commands.UpdateSubjectHasMachine_;
 using SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectMachineWithPagination;
+using SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectWithParam;
 using SkeletonApi.Application.Features.Subjects.Commands.CreateSubject;
 using SkeletonApi.Application.Features.Subjects.Commands.DeleteSubject;
 using SkeletonApi.Application.Features.Subjects.Commands.UpdateSubject;
@@ -59,7 +60,7 @@ namespace SkeletonApi.Presentation.Controllers
             return BadRequest(errorMessages);
         }
 
-        [HttpGet]
+        [HttpGet("get-list-subject")]
         public async Task<ActionResult<Result<List<GetAllSubjectDto>>>> GetAll()
         {
             return await _mediator.Send(new GetAllSubjectQuery());
@@ -142,6 +143,11 @@ namespace SkeletonApi.Presentation.Controllers
 
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
+        }
+        [HttpGet("get-subject-with-param")]
+        public async Task<ActionResult<Result<List<GetSubjectWithParamDto>>>> GetSubjectWithParam(Guid machine_id)
+        {
+            return await _mediator.Send(new GetSubjectWithParamQuery(machine_id));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SkeletonApi.Shared
     {
         public PaginatedResult()
         {
-            
+
         }
 
         public PaginatedResult(List<T> data)

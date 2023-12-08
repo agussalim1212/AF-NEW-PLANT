@@ -57,7 +57,7 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMa
                 {
                     CategoryMachineId = g.Key.CategoryMachineId,
                     CategoryName = g.Key.Name,
-                    UpdatedAt = g.Key.UpdatedAt,
+                    UpdatedAt = g.Key.UpdatedAt.Value.AddHours(7),
                     Machine = g.Select(s => new MachineDto
                     {
                         Id = s.Machine.Id,

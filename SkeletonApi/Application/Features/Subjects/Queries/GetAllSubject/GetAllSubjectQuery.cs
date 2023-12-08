@@ -24,12 +24,6 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetAllSubject
         public async Task<Result<List<GetAllSubjectDto>>> Handle(GetAllSubjectQuery request, CancellationToken cancellationToken)
         {
             var subject = await _unitOfWork.Repository<Subject>().Entities.Where(x => x.DeletedAt == null)
-                
-                .Select(o => new GetAllSubjectDto
-                {
-                    Id = o.Id,
-                    Vid = o.Vid
-                })
                 .ProjectTo<GetAllSubjectDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

@@ -15,6 +15,8 @@ namespace SkeletonApi.Application.Features.Machines.Queries.GetAllMachines
         public Guid Id { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
-       
+        [JsonPropertyName("category")]
+        public string Category { get; set; }
+
     }
 }

@@ -16,6 +16,7 @@ namespace SkeletonApi.Domain.Entities
         
         public ICollection<CategoryMachineHasMachine> CategoryMachineHasMachines { get; set; } = new List<CategoryMachineHasMachine>();
         public ICollection<SubjectHasMachine> SubjectHasMachines { get; set; } = new List<SubjectHasMachine>();
+       // public ICollection<CategoryMachines> CategoryMachines { get; set; } = new List<CategoryMachines>();
 
 
     }

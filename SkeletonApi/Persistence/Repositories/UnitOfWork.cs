@@ -94,5 +94,23 @@ namespace SkeletonApi.Persistence.Repositories
             return (IGenRepository<T>)_repositories[type];
         }
 
+        public IDataRepository<T> Data<T>()
+        {
+            if (_repositories == null)
+                _repositories = new Hashtable();
+
+            var type = typeof(T).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(DataRepository<>);
+
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _dbContext);
+
+                _repositories.Add(type, repositoryInstance);
+            }
+
+            return (IDataRepository<T>)_repositories[type];
+        }
     }
 }

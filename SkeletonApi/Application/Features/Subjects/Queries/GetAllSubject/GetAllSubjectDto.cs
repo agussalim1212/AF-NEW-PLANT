@@ -6,14 +6,9 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetAllSubject
 {
     public class GetAllSubjectDto : IMapFrom<Subject>
     {
-        public Guid Id { get; init; }
-        public string Name { get; init; }
-        public string Vid { get; init; }
-
-        [JsonIgnore]
-      
-
-        public Guid MasterSubjectId { get; init; }
-        public string MasterSubjectName { get; init; }
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+        [JsonPropertyName("name")]
+        public string? Subjects { get; set; }
     }
 }

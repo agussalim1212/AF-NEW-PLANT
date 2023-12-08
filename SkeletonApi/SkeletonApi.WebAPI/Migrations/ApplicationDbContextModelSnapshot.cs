@@ -222,6 +222,64 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("Machines");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Setting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<string>("MachineName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("machine_name");
+
+                    b.Property<decimal?>("Maximum")
+                        .HasColumnType("numeric")
+                        .HasColumnName("maximum");
+
+                    b.Property<decimal?>("Medium")
+                        .HasColumnType("numeric")
+                        .HasColumnName("medium");
+
+                    b.Property<decimal?>("Minimum")
+                        .HasColumnType("numeric")
+                        .HasColumnName("minimum");
+
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("subject_name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("update_by");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
                 {
                     b.Property<Guid>("Id")

@@ -55,7 +55,7 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
                  {
                      MachineId = g.Key.Id,
                      MachineName = g.Key.Name,
-                     UpdatedAt = g.Key.UpdatedAt,
+                     UpdatedAt = g.Key.UpdatedAt.Value.AddHours(7),
                      Subjects = g.Select(s => new SubjectDto
                      {
                          SubjectId = s.Subject.Id,

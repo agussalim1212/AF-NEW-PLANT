@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.CategoryMachine.Queries.GetAllCategoryMachine
 {
-    public class GetAllCategoryMachineDto : IMapFrom<CategoryMachines>
+    public class GetAllCategoryMachineDto : IMapFrom<GetAllCategoryMachineDto>
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("category")]
+        public string CategoryName { get; set; }
     }
 }
