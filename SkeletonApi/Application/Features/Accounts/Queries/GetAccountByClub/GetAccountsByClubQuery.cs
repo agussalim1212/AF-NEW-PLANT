@@ -2,11 +2,6 @@
 using MediatR;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.Accounts.Queries.GetAccountByClub
 {

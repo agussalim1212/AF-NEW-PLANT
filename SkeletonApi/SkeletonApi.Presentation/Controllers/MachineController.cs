@@ -8,12 +8,12 @@ using SkeletonApi.Application.Features.CategoryMachine.Queries.GetAllCategoryMac
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachinesWithPagination;
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination;
 using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination_;
+using SkeletonApi.Application.Features.Machines;
 using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
 using SkeletonApi.Application.Features.Machines.Commands.DeleteMachines;
 using SkeletonApi.Application.Features.Machines.Commands.UpdateMachines;
 using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Features.Machines.Queries.GetMachinesWithPagination;
-using SkeletonApi.Application.Features.Subjects.Queries.GetAllSubject;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json;
@@ -79,6 +79,7 @@ namespace SkeletonApi.Presentation.Controllers
         {
             return await _mediator.Send(new GetAllMachinesQuery());
         }
+
         [HttpGet("get-all-category-machine-has-machine")]
         public async Task<ActionResult<PaginatedResult<GetCategoryMachinesWithPaginationDto>>> GetCategoryMachinesWithPagination([FromQuery] GetCategoryMachinesWithPaginationQuery query)
         {
@@ -135,7 +136,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Result<Machine>>> Create(CreateMachinesCommand command)
+        public async Task<ActionResult<Result<CreateMachineResponseDto>>> Create(CreateMachineRequest command)
         {
             return await _mediator.Send(command);
         }
@@ -143,12 +144,11 @@ namespace SkeletonApi.Presentation.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult<Result<Guid>>> Delete(Guid id)
         {
-            return await _mediator.Send(new DeleteMachinesCommand(id));
+            return await _mediator.Send(new DeleteMachineRequest(id));
         }
 
-
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<Result<Machine>>> Update(Guid id, UpdateMachinesCommand command)
+        public async Task<ActionResult<Result<Machine>>> Update(Guid id, UpdateMachineRequest command)
         {
             if (id != command.Id)
             {

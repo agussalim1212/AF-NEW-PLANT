@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Persistence.Contexts;
 
 namespace SkeletonApi.WebAPI.ContextFactory
 {
-    //public class ApplicationDbContextFactory
-    //{
-    //}
+ 
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext CreateDbContext(string[] args)

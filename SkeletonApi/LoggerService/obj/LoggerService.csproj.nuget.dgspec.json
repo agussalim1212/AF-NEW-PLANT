@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj": {}
+    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj": {}
   },
   "projects": {
-    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+        "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
         "projectName": "SkeletonApi.Application",
-        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
-        "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
+        "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+        "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
+        "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,17 +25,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.org/api/v2/": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
-                "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
+              "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+                "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
               },
-              "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
-                "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
+              "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+                "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
               }
             }
           }
@@ -55,6 +59,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.143, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.7.1, )"
@@ -66,6 +74,10 @@
             "MediatR": {
               "target": "Package",
               "version": "[12.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -88,21 +100,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+        "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
         "projectName": "SkeletonApi.Domain",
-        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
-        "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
+        "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+        "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
+        "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -110,7 +125,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.org/api/v2/": {}
         },
         "frameworks": {
           "net6.0": {
@@ -161,21 +177,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj": {
+    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
+        "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
         "projectName": "LoggerService",
-        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
-        "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\obj\\",
+        "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\LoggerService.csproj",
+        "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
+        "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\LoggerService\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -183,14 +202,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.org/api/v2/": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
-                "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
+              "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+                "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
               }
             }
           }
@@ -230,21 +250,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
+        "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
         "projectName": "SkeletonApi.Shared",
-        "projectPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
-        "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-        "outputPath": "C:\\Doc\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\obj\\",
+        "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
+        "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
+        "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -252,7 +275,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.org/api/v2/": {}
         },
         "frameworks": {
           "net6.0": {
@@ -285,7 +309,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

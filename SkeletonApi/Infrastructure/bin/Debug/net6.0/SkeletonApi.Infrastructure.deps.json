@@ -8,11 +8,13 @@
     ".NETCoreApp,Version=v6.0": {
       "SkeletonApi.Infrastructure/1.0.0": {
         "dependencies": {
+          "Dapper": "2.1.24",
           "MQTTnet": "4.3.1.873",
           "MQTTnet.Extensions.ManagedClient": "4.3.1.873",
           "MediatR": "12.1.1",
           "Microsoft.AspNetCore.SignalR": "1.1.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
+          "Npgsql": "7.0.6",
           "SkeletonApi.Application": "1.0.0",
           "SkeletonApi.Domain": "1.0.0"
         },
@@ -40,6 +42,14 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.1.0"
+          }
+        }
+      },
+      "Dapper/2.1.24": {
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.24.50284"
           }
         }
       },
@@ -541,6 +551,18 @@
           }
         }
       },
+      "Npgsql/7.0.6": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Npgsql.dll": {
+            "assemblyVersion": "7.0.6.0",
+            "fileVersion": "7.0.6.0"
+          }
+        }
+      },
       "System.Buffers/4.5.0": {},
       "System.IO/4.3.0": {
         "dependencies": {
@@ -653,9 +675,11 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Dapper": "2.1.24",
           "FluentValidation": "11.7.1",
           "FluentValidation.AspNetCore": "11.3.0",
           "MediatR": "12.1.1",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.EntityFrameworkCore": "7.0.10",
           "SkeletonApi.Domain": "1.0.0",
           "SkeletonApi.Shared": "1.0.0"
@@ -701,6 +725,13 @@
       "sha512": "sha512-+g/K+Vpe3gGMKGzjslMOdqNlkikScDjWfVvmWTayrDHaG/n2pPmFBMa+jKX1r/h6BDGFdkyRjAuhFE3ykW+r1g==",
       "path": "automapper.extensions.microsoft.dependencyinjection/12.0.1",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512"
+    },
+    "Dapper/2.1.24": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/2t2vsdJyZRsk13AsWigZpsuFvEwK+o3v862cEULXoww905gyKhJFSuwmZI/4Ui9COX9ZCFCI09UHyH4wVYl3A==",
+      "path": "dapper/2.1.24",
+      "hashPath": "dapper.2.1.24.nupkg.sha512"
     },
     "FluentValidation/11.7.1": {
       "type": "package",
@@ -1135,6 +1166,13 @@
       "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+    },
+    "Npgsql/7.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TAqvwRnm3NJ0QvN7cvu6geJkbI0XPzGVRElVY5hF4gsgA+BnE12x6GM1TLhdeq+7ZKvvo3BD8jXKnXmr3tvdEw==",
+      "path": "npgsql/7.0.6",
+      "hashPath": "npgsql.7.0.6.nupkg.sha512"
     },
     "System.Buffers/4.5.0": {
       "type": "package",

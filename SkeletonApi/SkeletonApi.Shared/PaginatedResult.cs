@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SkeletonApi.Shared
@@ -47,9 +43,15 @@ namespace SkeletonApi.Shared
 
 
 
+
         public static PaginatedResult<T> Create(List<T> data, int count, int pageNumber, int pageSize)
         {
             return new PaginatedResult<T>(true, data, null, count, pageNumber, pageSize);
+
         }
+     
+
+
+
     }
 }

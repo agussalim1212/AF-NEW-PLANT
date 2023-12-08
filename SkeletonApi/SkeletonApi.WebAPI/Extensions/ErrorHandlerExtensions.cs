@@ -16,7 +16,7 @@ namespace SkeletonApi.WebAPI.Extensions
             {
                 appError.Run(async context =>
                 {
-                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature == null) return;
 
                     context.Response.Headers.Add("Access-Control-Allow-Origin", "*");

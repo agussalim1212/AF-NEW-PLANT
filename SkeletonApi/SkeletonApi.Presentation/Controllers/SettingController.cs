@@ -1,10 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
-using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.EnergyConsumptionGensubAssyLine;
-using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
-using SkeletonApi.Application.Features.Machines.Queries.GetMachinesWithPagination;
 using SkeletonApi.Application.Features.Settings.Commands.CreateSetting;
 using SkeletonApi.Application.Features.Settings.Queries.GetSettingWithPagination;
 using SkeletonApi.Domain.Entities;
@@ -55,6 +51,7 @@ namespace SkeletonApi.Presentation.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
         [HttpPost("create-setting")]
         public async Task<ActionResult<Result<Setting>>> CreateSetting(CreateSettingCommand command)
         {

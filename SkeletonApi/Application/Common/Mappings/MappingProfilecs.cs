@@ -1,10 +1,20 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
+using SkeletonApi.Application.Features.Machines;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using SkeletonApi.Domain.Entities;
+using SkeletonApi.Application.Features.Subjects.Commands.CreateSubject;
+using SkeletonApi.Application.Features.Subjects;
+using SkeletonApi.Application.Features.FrameNumb.Commands.CreateFrameNumber;
+using SkeletonApi.Application.Features.FrameNumb;
+using SkeletonApi.Application.Features.Users;
+using SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateUser;
+using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.CreateRoles;
+using SkeletonApi.Application.Features.ManagementUser.Roles;
+using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.CreatePermissions;
+using SkeletonApi.Application.Features.ManagementUser.Permissions;
+using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.UpdatePermissions;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -13,6 +23,28 @@ namespace SkeletonApi.Application.Common.Mappings
         public MappingProfile()
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+
+            CreateMap<CreateMachineRequest, Machine>();
+            CreateMap<Machine, CreateMachineResponseDto>();
+
+            CreateMap<CreateSubjectRequest, Subject>();
+            CreateMap<Subject, CreateSubjectResponseDto>();
+
+            CreateMap<CreateFrameNumberRequest, FrameNumber>();
+            CreateMap<FrameNumber, CreateFrameNumberResponseDto>(); 
+            
+            CreateMap<CreateUserRequest, User>();
+            CreateMap<User, CreateUserResponseDto>();
+
+            CreateMap<CreateRolesRequest, Role>();
+            CreateMap<Role, CreateRolesResponseDto>();
+
+            CreateMap<CreatePermissionsRequest, Permission>();
+            CreateMap<Permission, CreatePermissionsResponseDto>();
+
+            CreateMap<UpdatePermissionsRequest, Permission>();
+      
+
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

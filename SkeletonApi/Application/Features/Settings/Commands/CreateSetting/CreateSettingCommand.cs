@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using SkeletonApi.Application.Common.Mappings;
+using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -29,11 +30,13 @@ namespace SkeletonApi.Application.Features.Settings.Commands.CreateSetting
     internal class CreateSettingCommandHandler : IRequestHandler<CreateSettingCommand, Result<Setting>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMachinesRepository _machinesRepository;
         private readonly IMapper _mapper;
 
-        public CreateSettingCommandHandler(IUnitOfWork unitOfWork,  IMapper mapper)
+        public CreateSettingCommandHandler(IUnitOfWork unitOfWork, IMachinesRepository machinesRepository, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _machinesRepository = machinesRepository;
             _mapper = mapper;
         }
 

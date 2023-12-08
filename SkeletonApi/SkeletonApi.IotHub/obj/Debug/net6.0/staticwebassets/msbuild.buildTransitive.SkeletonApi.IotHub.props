@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\SkeletonApi.IotHub.props" />
+</Project>

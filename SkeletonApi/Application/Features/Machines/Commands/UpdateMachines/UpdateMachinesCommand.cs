@@ -3,25 +3,11 @@ using MediatR;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
 {
-    public record UpdateMachinesCommand : IRequest<Result<Machine>>
-    {
-        [JsonPropertyName("id")]
-        public Guid Id { get; set; }
-        [JsonPropertyName("machine")]
-        public string Name { get; set; }
- 
-    }
-
-    internal class UpdateMachinesCommandHandler : IRequestHandler<UpdateMachinesCommand, Result<Machine>> 
+   
+    internal class UpdateMachinesCommandHandler : IRequestHandler<UpdateMachineRequest, Result<Machine>> 
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -32,14 +18,14 @@ namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
             _mapper = mapper;
         }
 
-        public async Task<Result<Machine>> Handle(UpdateMachinesCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Machine>> Handle(UpdateMachineRequest request, CancellationToken cancellationToken)
         {
             var machines = await _unitOfWork.Repository<Machine>().GetByIdAsync(request.Id);
             Console.WriteLine(machines);
             if (machines != null)
             {
-
-                machines.Name = request.Name;
+                machines.Vid = request.Vid;
+                machines.Name = request.Machine;
                 machines.UpdatedAt = DateTime.UtcNow;
 
                 await _unitOfWork.Repository<Machine>().UpdateAsync(machines, request.Id);

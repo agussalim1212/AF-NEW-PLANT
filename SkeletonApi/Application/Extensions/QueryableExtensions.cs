@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SkeletonApi.Shared;
+using System.Linq;
+
 namespace SkeletonApi.Application.Extensions
 {
     public static class QueryableExtensions
@@ -19,5 +16,19 @@ namespace SkeletonApi.Application.Extensions
    
             return PaginatedResult<T>.Create(items, count, pageNumber, pageSize);
         }
+
+        public static async Task<PaginatedResult<T>> ToPaginatedListAsync<T>(this IList<T> source, int pageNumber, int pageSize, CancellationToken cancellationToken) where T : class
+        {
+            pageNumber = pageNumber == 0 ? 1 : pageNumber;
+            pageSize = pageSize == 0 ? 10 : pageSize;
+            int count = source.Count();
+            pageNumber = pageNumber <= 0 ? 1 : pageNumber;
+            List<T> items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+            return PaginatedResult<T>.Create(items, count, pageNumber, pageSize);
+        }
+
+
+
     }
 }

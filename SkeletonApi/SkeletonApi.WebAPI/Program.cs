@@ -1,10 +1,18 @@
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SkeletonApi.Application.Extensions;
+using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Domain.Entities;
 using SkeletonApi.Infrastructure.Extensions;
+using SkeletonApi.Infrastructure.Services;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.IServiceCollectionExtensions;
+using SkeletonApi.Persistence.Repositories;
+using SkeletonApi.Persistence.Repositories.Configuration;
+using SkeletonApi.Presentation.ActionFilter;
 using SkeletonApi.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,18 +20,23 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 // Add services to the container.
 
+builder.Services.AddSingleton<MqttClientService>();
+
 builder.Services.AddHttpContextAccessor();
-//builder.Services.ConfigureIdentity();
+builder.Services.ConfigureIdentity();
 builder.Services.AddAuthentication();
 //builder.Services.ConfigurePermissionService();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddJwtConfiguration(builder.Configuration);
-
 builder.Services.AddApplicationLayer();
 builder.Services.AddInfrastructureLayer();
 builder.Services.AddPersistenceLayer(builder.Configuration);
 builder.Services.ConfigureApiBehavior();
 builder.Services.ConfigureCorsPolicy(builder.Configuration);
+builder.Services.AddScoped<IDapperReadDbConnection, DapperReadDbConnection>();
+builder.Services.AddScoped<IDapperWriteDbConnection, DapperWriteDbConnection>();
+builder.Services.AddScoped<AuditLoggingFilter>();
+builder.Services.AddScoped<AuditRepository>();
 builder.Services.ConfigureIISIntegration();
 builder.Services.AddHostedMqttClient(builder.Configuration);
 builder.Services.ConfigureSwagger();

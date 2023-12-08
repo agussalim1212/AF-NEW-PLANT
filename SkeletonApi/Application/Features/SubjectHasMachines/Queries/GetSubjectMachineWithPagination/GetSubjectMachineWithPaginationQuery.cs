@@ -9,17 +9,13 @@ using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectMachineWithPagination
 {
     public record GetSubjectMachineWithPaginationQuery : IRequest<PaginatedResult<GetSubjectMachineWithPaginationDto>>
     {
-        //[JsonPropertyName("page_number")] tidak fungsi
+        
         public int page_number { get; set; }
         public int page_size { get; set; }
         public string search_term { get; set; }
@@ -50,7 +46,7 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
         {
             return await _unitOfWork.Repo<SubjectHasMachine>().Entities.Where(x => query.search_term == null || x.Machine.Name.ToLower() == query.search_term.ToLower().Trim())
                  .Include(o => o.Subject)
-                 .Include(x => x.Machine).GroupBy(x => new { x.Machine.Id, x.Machine.Name, x.UpdatedAt})
+                 .Include(x => x.Machine).GroupBy(x => new { x.Machine.Id, x.Machine.Name, x.Machine.UpdatedAt})
                  .Select(g => new GetSubjectMachineWithPaginationDto
                  {
                      MachineId = g.Key.Id,

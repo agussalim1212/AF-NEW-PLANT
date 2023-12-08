@@ -8,19 +8,30 @@
 
   <ItemGroup>
     <Compile Remove="Features\Clubs\**" />
+    <Compile Remove="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\**" />
     <Compile Remove="Features\Stadiums\**" />
     <EmbeddedResource Remove="Features\Clubs\**" />
+    <EmbeddedResource Remove="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\**" />
     <EmbeddedResource Remove="Features\Stadiums\**" />
     <None Remove="Features\Clubs\**" />
+    <None Remove="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\**" />
     <None Remove="Features\Stadiums\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubDto.cs" />
+    <Compile Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubQuery.cs" />
+    <Compile Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubValidator.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Dapper" Version="2.0.143" />
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
   </ItemGroup>
 
@@ -30,8 +41,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\DetailMachine\AssyUnitLine\Commands\" />
-    <Folder Include="Features\DetailMachine\GensubAssyLine\Commands\" />
+    <Folder Include="Features\ActivityUsers\Commands\" />
+    <Folder Include="Features\MachinesInformation\DetailMachine\AssyUnitLine\Commands\" />
+    <Folder Include="Features\MachinesInformation\DetailMachine\AssyWheelLine\Commands\" />
+    <Folder Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Commands\" />
+    <Folder Include="Features\ManagementUser\Login\Queries\" />
   </ItemGroup>
 
 </Project>
