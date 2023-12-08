@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "AIO2QkoU38tMPgz0+vMU5dB4WKkeu7ijeqLn1RDkQN8=",
+  "Source": "SkeletonApi.IotHub",
+  "BasePath": "_content/SkeletonApi.IotHub",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

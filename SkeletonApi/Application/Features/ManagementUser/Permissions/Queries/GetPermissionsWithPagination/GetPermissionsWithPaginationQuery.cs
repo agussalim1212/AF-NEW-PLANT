@@ -2,14 +2,13 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using SkeletonApi.Application.Extensions;
+using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage;
 using SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.GetRoleWithPagination;
-using SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleWithPagination;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System.Linq;
+
 
 namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.GetPermissionsWithPagination
 {
@@ -32,17 +31,22 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.Ge
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IUserRepository _userRepository;
 
-        public GetPermissionsWithPaginationQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetPermissionsWithPaginationQueryHandler(IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userRepository = userRepository;
         }
 
         public async Task<PaginatedResult<GetPermissionsWithPaginationDto>> Handle(GetPermissionsWithPaginationQuery query, CancellationToken cancellationToken)
         {
+            //List<GetPermissionsWithPaginationDto> dt = new List<GetPermissionsWithPaginationDto>();
+            //var data = await _userRepository.GetPermissionsWithPaginationDto();
+            //dt.Add(data);
 
-
+            //return await dt.ToPaginatedListAsync(query.page_number,query.page_size,cancellationToken);
             var user = _unitOfWork.Data<UserRole>().Entities.Include(k => k.User).Include(m => m.Role).
             Where(j => j.Role.DeletedAt == null).Select(o => new { o.Role.Id, o.User.Email, o.User.UserName });
 
@@ -53,7 +57,7 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.Ge
            .GroupBy(n => new { n.Role.Name, n.ClaimType, n.UpdatedAt, n.Role.Id }).Select(m => new GetPermissionsWithPaginationDto
            {
                Id = m.Key.Id,
-               UserName = user.Where( f => m.Key.Id == f.Id).Select(g => g.UserName).FirstOrDefault(),
+               UserName = user.Where(f => m.Key.Id == f.Id).Select(g => g.UserName).FirstOrDefault(),
                Email = user.Where(f => m.Key.Id == f.Id).Select(g => g.Email).FirstOrDefault(),
                RoleName = m.Key.Name,
                Permissions = m.Key.ClaimType,

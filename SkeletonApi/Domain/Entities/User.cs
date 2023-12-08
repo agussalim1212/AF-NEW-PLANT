@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SkeletonApi.Domain.Common.Abstracts;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Domain.Entities
 {
@@ -23,5 +18,6 @@ namespace SkeletonApi.Domain.Entities
         [NotMapped]
         public ICollection<string>? Roles { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
+       
     }
 }

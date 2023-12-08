@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Domain.Entities;
 using SkeletonApi.Infrastructure.Extensions;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.IServiceCollectionExtensions;

@@ -5,7 +5,6 @@ using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Common.Interfaces;
 using SkeletonApi.Domain.Entities;
 using System.Data;
-using System.Reflection.Metadata;
 
 
 namespace SkeletonApi.Persistence.Contexts
@@ -22,14 +21,8 @@ namespace SkeletonApi.Persistence.Contexts
             _dispatcher = dispatcher;
         }
 
-     //   public DbSet<IdentityUserClaim<string>> IdentityUserClaim { get; set; }
-    //    User, Role, string, IdentityUserClaim<string>,
-    //UserRole, IdentityUserLogin<string>,
-    //IdentityRoleClaim<string>, IdentityUserToken<string>>
         public DbSet<Account> Accounts => Set<Account>();
-       
         public DbSet<Machine> Machines => Set<Machine>();
-
         public DbSet<Subject> Subject => Set<Subject>();
         public DbSet<Dummy> Dummy => Set<Dummy>();
         public DbSet<CategoryMachines> CategoryMachines => Set<CategoryMachines>(); 
@@ -66,11 +59,12 @@ namespace SkeletonApi.Persistence.Contexts
                     .HasForeignKey(ur => ur.UserId);
             });
 
-            modelBuilder.Entity<Role>()
-           .HasMany(e => e.Permissions)
-           .WithOne(e => e.Role)
-           .HasForeignKey(e => e.RoleId)
-           .IsRequired(false);
+
+                modelBuilder.Entity<Role>()
+               .HasMany(e => e.Permissions)
+               .WithOne(e => e.Role)
+               .HasForeignKey(e => e.RoleId)
+               .IsRequired(false);
 
             modelBuilder.Entity<FrameNumberHasSubjects>(m =>
             {
@@ -141,12 +135,19 @@ namespace SkeletonApi.Persistence.Contexts
             modelBuilder.Entity<ActivityUser>(
             eb =>
             {
-            eb.Property(b => b.Id).HasColumnName("id").HasColumnType("uuid");
-            eb.Property(b => b.UserName).HasColumnName("username").HasColumnType("text");
-            eb.Property(b => b.LogType).HasColumnName("logtype").HasColumnType("text");
-            eb.Property(b => b.DateTime).HasColumnName("datetime").HasColumnType("timestamp");
+                eb.Property(b => b.Id).HasColumnName("id").HasColumnType("uuid");
+                eb.Property(b => b.UserName).HasColumnName("username").HasColumnType("text");
+                eb.Property(b => b.LogType).HasColumnName("logtype").HasColumnType("text");
+                eb.Property(b => b.DateTime).HasColumnName("datetime").HasColumnType("timestamp");
             });
-            }
+
+            modelBuilder.Entity<Account>(
+            eb =>
+            {
+                eb.Property(b => b.Username).HasColumnName("username").HasColumnType("text");
+                eb.Property(b => b.PhotoURL).HasColumnName("photo_url").HasColumnType("text");
+            });
+        }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

@@ -64,9 +64,9 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpGet("frequency-inverter")]
-        public async Task<ActionResult<Result<GetAllFrequencyInverterDto>>> GetFrequencyInverter(Guid machine_id)
+        public async Task<ActionResult<Result<GetAllFrequencyInverterDto>>> GetFrequencyInverter(Guid machine_id, string type, DateTime start, DateTime end)
         {
-            return await _mediator.Send(new GetAllFrequencyInverterQuery(machine_id));
+            return await _mediator.Send(new GetAllFrequencyInverterQuery(machine_id, type, start, end));
         }
 
         [HttpGet("electric-generator-consumption")]

@@ -1,18 +1,15 @@
-﻿using SkeletonApi.Application.Features.Accounts.Commands.CreateAccount;
-using SkeletonApi.Application.Features.Accounts.Commands.DeleteAccount;
-using SkeletonApi.Application.Features.Accounts.Commands.UpdateAccount;
-using SkeletonApi.Application.Features.Accounts.Queries.GetAccountsWithPagination;
-using SkeletonApi.Application.Features.Accounts.Queries.GetAllAccounts;
-using SkeletonApi.Shared;
+﻿using SkeletonApi.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SkeletonApi.Application.Features.Accounts.Queries.GetAccountByClub;
-using SkeletonApi.Application.Features.Accounts.Queries.GetAccountWithPagination;
-using SkeletonApi.Application.Features.Accounts.Queries.GetAccountById;
 using Microsoft.Extensions.Logging;
+using SkeletonApi.Application.Features.Accounts;
+using SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccountsByUsername;
+using SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAccount;
+using SkeletonApi.Application.Features.Accounts.Password.Command.ChangesPassword;
 
 namespace SkeletonApi.Presentation.Controllers
 {
+    [Route("api/account")]
     public class AccountsController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,70 +20,34 @@ namespace SkeletonApi.Presentation.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<Result<List<GetAllAccountsDto>>>> Get()
+        [HttpGet("{username}")]
+        public async Task<ActionResult<Result<List<GetAllAccountsDto>>>> GetAccount(string username)
         {
-            _logger.LogInformation("Here is info message from our values controller.");
-            _logger.LogDebug("Here is debug message from our values controller.");
-            _logger.LogWarning("Here is warn message from our values controller.");
-            _logger.LogError("Here is an error message from our values controller.");
-            //throw new Exception();
-            //return Ok("OK");
-            return await _mediator.Send(new GetAllAccountsQuery());
+            //_logger.LogInformation("Here is info message from our values controller.");
+            //_logger.LogDebug("Here is debug message from our values controller.");
+            //_logger.LogWarning("Here is warn message from our values controller.");
+            //_logger.LogError("Here is an error message from our values controller.");
+            
+            return await _mediator.Send(new GetAllAccountsQuery(username));
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Result<GetAccountByIdDto>>> GetAccountsById(Guid id)
+
+        [HttpPost("{username}")]
+        public async Task<ActionResult<Result<CreateAccountResponseDto>>> Create(string username, [FromForm] CreateAccountRequest command)
         {
-            return await _mediator.Send(new GetAccountByIdQuery(id));
-        }
-
-        [HttpGet]
-        [Route("club/{clubId}")]
-        public async Task<ActionResult<Result<List<GetAccountsByClubDto>>>> GetAccountsByClub(Guid clubId)
-        {
-            return await _mediator.Send(new GetAccountsByClubQuery(clubId));
-        }
-
-        [HttpGet]
-        [Route("paged")]
-        public async Task<ActionResult<PaginatedResult<GetAccountsWithPaginationDto>>> GetAccountsWithPagination([FromQuery] GetAccountsWithPaginationQuery query)
-        {
-            var validator = new GetAccountsWithPaginationValidator();
-
-            // Call Validate or ValidateAsync and pass the object which needs to be validated
-            var result = validator.Validate(query);
-
-            if (result.IsValid)
-            {
-                return await _mediator.Send(query);
-            }
-
-            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-            return BadRequest(errorMessages);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Result<Guid>>> Create(CreateAccountCommand command)
-        {
+            command.Username = username;
             return await _mediator.Send(command);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Result<Guid>>> Update(Guid id, UpdateAccountCommand command)
+        [HttpPut("{username}")]
+        public async Task<ActionResult<Result<string>>> Update(string username, UpdatePasswordCommand command)
         {
-            if (id != command.Id)
+            if (username != command.Username)
             {
                 return BadRequest();
             }
-
             return await _mediator.Send(command);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Result<Guid>>> Delete(Guid id)
-        {
-            return await _mediator.Send(new DeleteAccountCommand(id));
-        }
     }
 }

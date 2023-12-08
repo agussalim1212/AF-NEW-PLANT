@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Persistence.Repositories
 {
@@ -19,9 +13,16 @@ namespace SkeletonApi.Persistence.Repositories
             _repository = repository;
         }
 
-        public async Task<List<Account>> GetAccountsByClubAsync(Guid clubId)
+        public async Task<bool> ValidateAccount(Account account)
         {
-            return await _repository.Entities.Where(x => x.ClubId == clubId).ToListAsync();
+            var x = await _repository.Entities.Where(o => o.Username.ToLower() == account.Username.ToLower()).CountAsync();
+
+            if (x > 0)
+            {
+                return false;
+            }
+            return true;
         }
+
     }
 }

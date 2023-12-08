@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SkeletonApi.Application.Features.Machines;
 using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
 

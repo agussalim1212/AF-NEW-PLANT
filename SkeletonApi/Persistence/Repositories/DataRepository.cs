@@ -25,8 +25,10 @@ namespace SkeletonApi.Persistence.Repositories
             await _dbContext.Set<T>().AddAsync(entity);
             return entity;
         }
+      
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
         _dbContext.Set<T>()
         .Where(expression);
+
     }
 }

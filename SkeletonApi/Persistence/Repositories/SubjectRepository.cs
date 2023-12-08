@@ -11,7 +11,7 @@ namespace SkeletonApi.Persistence.Repositories
 
         public async Task<bool> ValidateData(Subject subject)
         {
-            var x = await _repository.Entities.Where(o => o.Vid == subject.Vid && o.Subjects.ToLower() == subject.Subjects.ToLower()).CountAsync();
+            var x = await _repository.Entities.Where(o => subject.Vid.ToLower() == o.Vid.ToLower()).CountAsync();
 
             if (x > 0)
             {

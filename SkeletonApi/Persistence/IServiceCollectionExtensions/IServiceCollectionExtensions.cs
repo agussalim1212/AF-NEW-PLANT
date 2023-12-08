@@ -1,18 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using SkeletonApi.Application.Interfaces;
 using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Domain.Entities;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.Repositories;
-using SkeletonApi.Persistence.Repositories.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Persistence.IServiceCollectionExtensions
 {
@@ -51,8 +44,12 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient<IMachinesRepository, MachinesRepository>()
                 .AddTransient<ICategoryMachineRepository, CategoryMachinesRepository>()
                 .AddTransient<IRoleRepository, RoleRepository>()
-                .AddTransient<IAuthenticationUserRepository,AuthenticationRepository>()
-                .AddTransient<IAccountRepository, AccountRepository>();
+                .AddTransient<IAuthenticationUserRepository, AuthenticationRepository>()
+                .AddTransient<IAccountRepository, AccountRepository>()
+                .AddTransient<IStatusMachineRepository, StatusMachineRepository>()
+                .AddTransient<IDetailGensubRespository, DetailGensubRepository>()
+                .AddTransient<IDetailAssyUnitRepository, DetailAssyUnitRepository>()
+                .AddTransient<IUserRepository, UserRepository>();
                 
 
         }

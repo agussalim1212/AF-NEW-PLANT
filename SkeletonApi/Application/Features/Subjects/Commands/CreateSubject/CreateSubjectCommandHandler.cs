@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -23,12 +24,12 @@ namespace SkeletonApi.Application.Features.Subjects.Commands.CreateSubject
         public async Task<Result<CreateSubjectResponseDto>> Handle(CreateSubjectRequest request, CancellationToken cancellationToken)
         {
             var Subjects = _mapper.Map<Subject>(request);
-            //var validateData = await _subjectRepository.ValidateData(Subjects);
+            var validateData = await _unitOfWork.Repository<Subject>().Entities.Where(o => request.Vid.ToLower() == o.Vid).CountAsync();
 
-            //if (validateData != true)
-            //{
-            //    return await Result<CreateSubjectResponseDto>.FailureAsync("Data already exist");
-            //}
+            if (validateData != 0)
+            {
+                return await Result<CreateSubjectResponseDto>.FailureAsync("Data already exist");
+            }
 
             Subjects.CreatedAt = DateTime.UtcNow;
             Subjects.UpdatedAt = DateTime.UtcNow;

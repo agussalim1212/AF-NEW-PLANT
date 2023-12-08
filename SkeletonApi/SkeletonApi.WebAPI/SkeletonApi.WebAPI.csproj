@@ -37,4 +37,12 @@
     <ProjectReference Include="..\SkeletonApi.Shared\SkeletonApi.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\FotoPath\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\FotoPath\npwp.jpg" />
+  </ItemGroup>
+
 </Project>
