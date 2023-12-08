@@ -98,6 +98,7 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\n
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.AssemblyInfoInputs.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.AssemblyInfo.cs
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.csproj.CoreCompileInputs.cache
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.sourcelink.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\refint\SkeletonApi.Shared.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Shared\obj\Debug\net6.0\SkeletonApi.Shared.pdb

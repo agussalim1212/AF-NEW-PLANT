@@ -145,6 +145,7 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfoInputs.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfo.cs
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CoreCompileInputs.cache
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.sourcelink.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.csproj.CopyComplete
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll

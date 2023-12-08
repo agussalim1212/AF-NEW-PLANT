@@ -102,6 +102,7 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\Skelet
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.sourcelink.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\refint\SkeletonApi.Domain.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Debug\net6.0\SkeletonApi.Domain.pdb

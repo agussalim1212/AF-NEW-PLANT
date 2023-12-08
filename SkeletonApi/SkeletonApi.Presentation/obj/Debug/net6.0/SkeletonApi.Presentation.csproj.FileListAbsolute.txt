@@ -168,6 +168,7 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\D
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\Debug\net6.0\SkeletonApi.Presentation.AssemblyInfoInputs.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\Debug\net6.0\SkeletonApi.Presentation.AssemblyInfo.cs
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\Debug\net6.0\SkeletonApi.Presentation.csproj.CoreCompileInputs.cache
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\Debug\net6.0\SkeletonApi.Presentation.sourcelink.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\Debug\net6.0\SkeletonApi.Presentation.csproj.CopyComplete
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\Debug\net6.0\SkeletonApi.Presentation.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.Presentation\obj\Debug\net6.0\refint\SkeletonApi.Presentation.dll

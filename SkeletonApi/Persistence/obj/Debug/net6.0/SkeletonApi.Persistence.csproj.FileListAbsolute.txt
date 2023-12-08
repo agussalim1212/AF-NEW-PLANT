@@ -164,6 +164,7 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\S
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.AssemblyInfoInputs.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.AssemblyInfo.cs
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.csproj.CoreCompileInputs.cache
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.sourcelink.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.csproj.CopyComplete
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\SkeletonApi.Persistence.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Persistence\obj\Debug\net6.0\refint\SkeletonApi.Persistence.dll

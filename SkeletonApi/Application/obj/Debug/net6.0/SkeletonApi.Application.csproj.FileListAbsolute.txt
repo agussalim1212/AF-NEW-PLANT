@@ -146,6 +146,7 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\S
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfoInputs.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.AssemblyInfo.cs
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CoreCompileInputs.cache
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.sourcelink.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.csproj.CopyComplete
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\SkeletonApi.Application.dll
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\Application\obj\Debug\net6.0\refint\SkeletonApi.Application.dll

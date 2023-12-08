@@ -69,7 +69,6 @@ namespace SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Update
                     EndDate = maintPrevDtoOk.EndDate,
                 };
                 await _unitOfWork.Save(cancellationToken);
-                await _unitOfWork.Save(cancellationToken);
                 return await Result<UpdateMaintCorrectiveDto>.SuccessAsync(maintPrevDtoOk, "Maintenance Corrective Updated");
             }
             return await Result<UpdateMaintCorrectiveDto>.FailureAsync("Maintenance Corrective Not Found");

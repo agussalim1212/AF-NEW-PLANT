@@ -873,13 +873,14 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\n
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.csproj.CoreCompileInputs.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.sourcelink.json
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets.build.json
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets.development.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets\msbuild.SkeletonApi.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.SkeletonApi.WebAPI.props
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.SkeletonApi.WebAPI.props
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.SkeletonApi.WebAPI.props
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets.pack.json
-D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets.build.json
-D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\staticwebassets.development.json
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\scopedcss\bundle\SkeletonApi.WebAPI.styles.css
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.csproj.CopyComplete
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.dll

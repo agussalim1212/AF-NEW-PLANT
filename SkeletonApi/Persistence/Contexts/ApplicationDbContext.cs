@@ -5,6 +5,7 @@ using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Common.Interfaces;
 using SkeletonApi.Domain.Entities;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Reflection.Metadata;
 
 
@@ -47,6 +48,8 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<MaintCorrective> MaintCorrectives => Set<MaintCorrective>();
 
         public DbSet<StatusMachine> statusmachines => Set<StatusMachine>();
+
+        public DbSet<Notifications> Notifications => Set<Notifications>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -137,6 +140,12 @@ namespace SkeletonApi.Persistence.Contexts
                 .WithMany(t => t.SubjectHasMachines)
                 .HasForeignKey(t => t.SubjectId);
                 m.ToTable("SubjectHasMachine");
+            });
+
+            modelBuilder.Entity<Notifications>(m =>
+            {
+                m.HasKey(t => t.Id);
+                m.ToTable("Notifications");
             });
 
             modelBuilder.Entity<ActivityUser>(

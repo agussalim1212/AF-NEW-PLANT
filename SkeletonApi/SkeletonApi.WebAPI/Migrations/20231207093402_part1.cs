@@ -220,6 +220,27 @@ namespace SkeletonApi.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    machine_name = table.Column<string>(type: "text", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    message = table.Column<string>(type: "text", nullable: false),
+                    status = table.Column<bool>(type: "boolean", nullable: false),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: true),
+                    update_by = table.Column<Guid>(type: "uuid", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    update_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    deleted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Settings",
                 columns: table => new
                 {
@@ -568,6 +589,9 @@ namespace SkeletonApi.WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "MaintenacePreventives");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Settings");

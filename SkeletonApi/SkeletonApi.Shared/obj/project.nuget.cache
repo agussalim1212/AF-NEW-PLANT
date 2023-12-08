@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LL4esQ7QgEaQG7rGRg0bCvt9bD0skGRzjaXqHCNaMZ3jG/YTOs6WEbKcVTukLQHsjmXnLmBP9RBlRPFu2hBaEg==",
+  "dgSpecHash": "dykeDotgh5L8crr8Ki8LX7I8VWbEcwH03tcTwb6vbFtu44oFLFBSrDNX+L+XPhgIV+4BHopRf6ZCR1c1k2uCIg==",
   "success": true,
   "projectFilePath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\XS\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\XS\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\XS\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
+  ],
   "logs": []
 }
