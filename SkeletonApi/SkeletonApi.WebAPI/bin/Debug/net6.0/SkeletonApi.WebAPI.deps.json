@@ -73,11 +73,11 @@
           }
         }
       },
-      "Dapper/2.0.143": {
+      "Dapper/2.1.24": {
         "runtime": {
           "lib/net5.0/Dapper.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.143.55328"
+            "fileVersion": "2.1.24.50284"
           }
         }
       },
@@ -881,15 +881,15 @@
           }
         }
       },
-      "Npgsql/7.0.4": {
+      "Npgsql/7.0.6": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "runtime": {
           "lib/net6.0/Npgsql.dll": {
-            "assemblyVersion": "7.0.4.0",
-            "fileVersion": "7.0.4.0"
+            "assemblyVersion": "7.0.6.0",
+            "fileVersion": "7.0.6.0"
           }
         }
       },
@@ -898,7 +898,7 @@
           "Microsoft.EntityFrameworkCore": "7.0.11",
           "Microsoft.EntityFrameworkCore.Abstractions": "7.0.11",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.11",
-          "Npgsql": "7.0.4"
+          "Npgsql": "7.0.6"
         },
         "runtime": {
           "lib/net6.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
@@ -1764,7 +1764,7 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
-          "Dapper": "2.0.143",
+          "Dapper": "2.1.24",
           "FluentValidation": "11.7.1",
           "FluentValidation.AspNetCore": "11.3.0",
           "MediatR": "12.1.1",
@@ -1790,11 +1790,13 @@
       },
       "SkeletonApi.Infrastructure/1.0.0": {
         "dependencies": {
+          "Dapper": "2.1.24",
           "MQTTnet": "4.3.1.873",
           "MQTTnet.Extensions.ManagedClient": "4.3.1.873",
           "MediatR": "12.1.1",
           "Microsoft.AspNetCore.SignalR": "1.1.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
+          "Npgsql": "7.0.6",
           "SkeletonApi.Application": "1.0.0",
           "SkeletonApi.Domain": "1.0.0"
         },
@@ -1804,7 +1806,7 @@
       },
       "SkeletonApi.Persistence/1.0.0": {
         "dependencies": {
-          "Dapper": "2.0.143",
+          "Dapper": "2.1.24",
           "MediatR": "12.1.1",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.4",
@@ -1861,12 +1863,12 @@
       "path": "closedxml/0.97.0",
       "hashPath": "closedxml.0.97.0.nupkg.sha512"
     },
-    "Dapper/2.0.143": {
+    "Dapper/2.1.24": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Vh0U+Fins3IpS7APUlrzga3+1mswWngB5fZ0xj4w+FQR5JhJzA5uHV5rSepkahvmshNZUA0YcHtae9vFQpiVTw==",
-      "path": "dapper/2.0.143",
-      "hashPath": "dapper.2.0.143.nupkg.sha512"
+      "sha512": "sha512-/2t2vsdJyZRsk13AsWigZpsuFvEwK+o3v862cEULXoww905gyKhJFSuwmZI/4Ui9COX9ZCFCI09UHyH4wVYl3A==",
+      "path": "dapper/2.1.24",
+      "hashPath": "dapper.2.1.24.nupkg.sha512"
     },
     "DocumentFormat.OpenXml/2.16.0": {
       "type": "package",
@@ -2463,12 +2465,12 @@
       "path": "newtonsoft.json/13.0.3",
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
-    "Npgsql/7.0.4": {
+    "Npgsql/7.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7UVPYy2RP0ci04PED1tc9ZCaTw/DfSdSkLiGEFCAvwMwsgA/bAluj1liNzP1IpN0MFofnOF0cm1zJfmbEuCehg==",
-      "path": "npgsql/7.0.4",
-      "hashPath": "npgsql.7.0.4.nupkg.sha512"
+      "sha512": "sha512-TAqvwRnm3NJ0QvN7cvu6geJkbI0XPzGVRElVY5hF4gsgA+BnE12x6GM1TLhdeq+7ZKvvo3BD8jXKnXmr3tvdEw==",
+      "path": "npgsql/7.0.6",
+      "hashPath": "npgsql.7.0.6.nupkg.sha512"
     },
     "Npgsql.EntityFrameworkCore.PostgreSQL/7.0.4": {
       "type": "package",

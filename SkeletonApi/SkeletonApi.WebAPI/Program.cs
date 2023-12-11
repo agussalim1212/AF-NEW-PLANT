@@ -1,9 +1,11 @@
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Infrastructure.Extensions;
+using SkeletonApi.Infrastructure.Services;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.IServiceCollectionExtensions;
 using SkeletonApi.Persistence.Repositories;
@@ -15,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 // Add services to the container.
+
+builder.Services.AddSingleton<MqttClientService>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureIdentity();

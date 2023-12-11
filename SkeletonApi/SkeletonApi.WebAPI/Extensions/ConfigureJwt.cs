@@ -20,7 +20,7 @@ namespace SkeletonApi.WebAPI.Extensions
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentity<User, Role> (o =>
+            var builder = services.AddIdentity<User, Role>(o =>
             {
                 o.Password.RequireDigit = true;
                 o.Password.RequireLowercase = false;
@@ -28,7 +28,7 @@ namespace SkeletonApi.WebAPI.Extensions
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 10;
                 o.User.RequireUniqueEmail = true;
-                
+
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 //.AddDefaultUI()
@@ -50,14 +50,14 @@ namespace SkeletonApi.WebAPI.Extensions
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+                    //ValidateIssuer = true,
+                    //ValidateAudience = true,
+                    //ValidateLifetime = true,
+                    //ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = jwtConfiguration.ValidIssuer,
-                    ValidAudience = jwtConfiguration.ValidAudience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                    //ValidIssuer = jwtConfiguration.ValidIssuer,
+                    //ValidAudience = jwtConfiguration.ValidAudience,
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
         }
