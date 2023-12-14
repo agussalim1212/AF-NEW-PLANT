@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Create;
 using SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Delete;
 using SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Update;
+using SkeletonApi.Application.Features.MaintenanceCorrective.Queries.DownloadList;
 using SkeletonApi.Application.Features.MaintenanceCorrective.Queries.GetAll;
 using SkeletonApi.Application.Features.MaintenanceCorrective.Queries.GetDetail;
 using SkeletonApi.Application.Features.MaintenanceCorrective.Queries.GetListWithPagination;
@@ -95,6 +96,39 @@ namespace SkeletonApi.Presentation.Controllers
         public async Task<ActionResult<Result<List<GetAllMaintCorrectiveDto>>>> GetAllMaintenance(DateTime? start_date, DateTime? end_date)
         {
             return await _mediator.Send(new GetAllMaintCorrectiveQuery(start_date, end_date));
+        }
+
+        [HttpGet("download-list-maintenance-corrective")]
+        public async Task<ActionResult<PaginatedResult<DownloadListMaintCorrectiveDto>>> DownloadListMaintCorrectiveToExcel([FromQuery] DownloadListMaintCorrectiveQuery query)
+        {
+            var validator = new DownloadListMaintCorrectiveValidator();
+
+            // Call Validate or ValidateAsync and pass the object which needs to be validated
+            var result = validator.Validate(query);
+
+            if (result.IsValid)
+            {
+                var pg = await _mediator.Send(query);
+                byte[]? bytes = null;
+                string filename = string.Empty;
+                try
+                {
+                    if (pg != null)
+                    {
+                        var Export = new DownloadListMaintCorrectiveToExcel(pg);
+                        Export.GetListExcel(ref bytes, ref filename);
+                    }
+                    Response.Headers.Add("x-download", filename);
+                    return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException == null) { return Problem(ex.Message); }
+                    return Problem(ex.InnerException.Message);
+                }
+            }
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            return BadRequest(errorMessages);
         }
     }
 }
