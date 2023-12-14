@@ -4770,19 +4770,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\XS\\.nuget\\packages\\": {}
+    "C:\\Users\\lucky\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.IotHub\\SkeletonApi.IotHub.csproj",
+      "projectUniqueName": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.IotHub\\SkeletonApi.IotHub.csproj",
       "projectName": "SkeletonApi.IotHub",
-      "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.IotHub\\SkeletonApi.IotHub.csproj",
-      "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
-      "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.IotHub\\obj\\",
+      "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.IotHub\\SkeletonApi.IotHub.csproj",
+      "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+      "outputPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.IotHub\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4790,14 +4790,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj": {
-              "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj"
+            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj": {
+              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj"
             }
           }
         }
@@ -4880,7 +4881,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }

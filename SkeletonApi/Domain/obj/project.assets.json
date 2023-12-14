@@ -2020,19 +2020,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\XS\\.nuget\\packages\\": {}
+    "C:\\Users\\lucky\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+      "projectUniqueName": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
       "projectName": "SkeletonApi.Domain",
-      "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
-      "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
-      "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
+      "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+      "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+      "outputPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2091,7 +2091,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -9397,19 +9397,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\XS\\.nuget\\packages\\": {}
+    "C:\\Users\\lucky\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\SkeletonApi.WebAPI.csproj",
+      "projectUniqueName": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\SkeletonApi.WebAPI.csproj",
       "projectName": "SkeletonApi.WebAPI",
-      "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\SkeletonApi.WebAPI.csproj",
-      "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
-      "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\obj\\",
+      "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\SkeletonApi.WebAPI.csproj",
+      "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+      "outputPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9417,26 +9417,27 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
-              "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
+            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj"
             },
-            "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj": {
-              "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj"
+            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj": {
+              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Infrastructure\\SkeletonApi.Infrastructure.csproj"
             },
-            "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj": {
-              "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj"
+            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj": {
+              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Persistence\\SkeletonApi.Persistence.csproj"
             },
-            "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Presentation\\SkeletonApi.Presentation.csproj": {
-              "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Presentation\\SkeletonApi.Presentation.csproj"
+            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Presentation\\SkeletonApi.Presentation.csproj": {
+              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Presentation\\SkeletonApi.Presentation.csproj"
             },
-            "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
-              "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
+            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
             }
           }
         }
@@ -9531,7 +9532,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }

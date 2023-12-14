@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {}
+    "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {}
   },
   "projects": {
-    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
+    "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+        "projectUniqueName": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
         "projectName": "SkeletonApi.Application",
-        "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
-        "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
-        "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
+        "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+        "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+        "outputPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
-                "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
+              "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+                "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
               },
-              "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
-                "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
+              "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+                "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
               }
             }
           }
@@ -96,21 +96,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+    "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+        "projectUniqueName": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
         "projectName": "SkeletonApi.Domain",
-        "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
-        "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
-        "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
+        "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj",
+        "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+        "outputPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -169,21 +169,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+    "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
+        "projectUniqueName": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
         "projectName": "SkeletonApi.Shared",
-        "projectPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
-        "packagesPath": "C:\\Users\\XS\\.nuget\\packages\\",
-        "outputPath": "D:\\ELECTRINDO\\PROJECT\\AF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\obj\\",
+        "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj",
+        "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+        "outputPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\XS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -219,26 +219,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.25, 6.0.25]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.25, 6.0.25]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.25, 6.0.25]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
