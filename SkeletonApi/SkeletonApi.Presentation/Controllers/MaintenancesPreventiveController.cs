@@ -1,10 +1,14 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Create;
 using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Delete;
 using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Update;
 using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.UpdateOK;
+using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.UploadExcel;
+using SkeletonApi.Application.Features.MaintenancesPreventive.Queries.DownloadList;
 using SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetAllMachine;
 using SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetDetail;
 using SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetListWithPagination;
@@ -119,6 +123,48 @@ namespace SkeletonApi.Presentation.Controllers
         public async Task<ActionResult<Result<List<GetDetailMaintPreventiveDto>>>> GetDetail(Guid id)
         {
             return await _mediator.Send(new GetDetailMaintPreventiveQuery(id));
+        }
+
+        [HttpGet("download-list-maintenance-preventive")]
+        public async Task<ActionResult<PaginatedResult<DownloadListMaintPrevDto>>> DownloadListMaintPrevToExcel([FromQuery] DownloadListMaintPrevQuery query)
+        {
+            var validator = new DownloadListMaintPrevValidator();
+
+            // Call Validate or ValidateAsync and pass the object which needs to be validated
+            var result = validator.Validate(query);
+
+            if (result.IsValid)
+            {
+                var pg = await _mediator.Send(query);
+                byte[]? bytes = null;
+                string filename = string.Empty;
+                try
+                {
+                    if (pg != null)
+                    {
+                        var Export = new DownloadListMaintPrevToExcel(pg);
+                        Export.GetListExcel(ref bytes,ref filename);
+                    }
+                    Response.Headers.Add("x-download", filename);
+                    return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException == null){return Problem(ex.Message);}
+                    return Problem(ex.InnerException.Message);
+                }
+            }
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            return BadRequest(errorMessages);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("upload-excel")]
+        //[ServiceFilter(typeof(ValidationforExcell))]
+        public async Task<ActionResult<Result<List<UploadExcelMaintPrevDto>>>> UploadExcel(IFormFile file)
+        {
+            var upload = new UploadExcelMaintPrevCommand(file);
+            return await _mediator.Send(upload);
         }
     }
 }

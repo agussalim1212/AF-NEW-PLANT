@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MDmkTbP9kf9HKFAEDRuCZ5gZfWN4ZzVviF0ZU2XqpoVvO5ylhvhg1+DbBKamcugdbZf8GDp0p7apP3RjAol+xA==",
+  "dgSpecHash": "ZD40OK9ZzpD346QsqCldh0l781QXzRI1+k4kpX92AOyxaLBI/f6jBzDqKB4PF/b4YfYtH5GhQA7ZVV2EmzynPw==",
   "success": true,
   "projectFilePath": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\SkeletonApi.WebAPI.csproj",
   "expectedPackageFiles": [
@@ -196,5 +196,12 @@
     "C:\\Users\\elect\\.nuget\\packages\\utf8json\\1.3.7\\utf8json.1.3.7.nupkg.sha512",
     "C:\\Users\\elect\\.nuget\\packages\\xlparser\\1.5.2\\xlparser.1.5.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
