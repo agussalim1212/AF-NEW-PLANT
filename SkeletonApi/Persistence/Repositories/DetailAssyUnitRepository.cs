@@ -10,8 +10,10 @@ using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQu
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRace;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.TotalProduction;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
+
 using System.Globalization;
 
 
@@ -31,7 +33,7 @@ namespace SkeletonApi.Persistence.Repositories
         public async Task<GetAllAirConsumptionDto> GetAllAirConsumption(Guid machine_id, string type, DateTime start, DateTime end)
         {
             var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities
-            .Include(s => s.Machine).Include(s => s.Subject).Where(m => machine_id == m.MachineId && m.Subject.Vid.Contains("VOL-WIND")).ToListAsync();
+            .Include(s => s.Machine).Include(s => s.Subject).Where(m => machine_id == m.MachineId && m.Subject.Vid.Contains("AIR-CONSUMPTION")).ToListAsync();
             string Vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
             string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
             string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();
@@ -49,11 +51,17 @@ namespace SkeletonApi.Persistence.Repositories
                     {
                         var energyConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumptionDetail>
                         (@"SELECT * FROM ""air_consumption"" WHERE id = @vid
-                         AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
-                         AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
-                         ORDER BY id DESC, bucket DESC"
-                        , new { vid = Vid, starttime = start.Date, endtime = end.Date });
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY id DESC, bucket DESC",
+                        new { vid = Vid, starttime = start.Date, endtime = end.Date });
 
+                        var total = energyConsumption.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
+                        {
+                            date_time = new DateTime(g.Key.Year, g.Key.Month, g.Key.Day),
+                            last = g.Sum(k => Convert.ToDecimal(k.LastValue)),
+                            first = g.Select(p => p.FirstValue).First()
+                        }).ToList();
 
                         if (energyConsumption.Count() == 0)
                         {
@@ -70,11 +78,11 @@ namespace SkeletonApi.Persistence.Repositories
                              {
                                  MachineName = machineName,
                                  SubjectName = subjectName,
-                                 Data = energyConsumption.Select(val => new AirDto
+                                 Data = total.Select(val => new AirDto
                                  {
-                                     Value = Convert.ToDecimal(val.LastValue) - Convert.ToDecimal(val.FirstValue),
-                                     Label = val.Bucket.AddHours(7).ToString("ddd"),
-                                     DateTime = val.Bucket,
+                                     Value = Convert.ToDecimal(val.last) - Convert.ToDecimal(val.last),
+                                     Label = val.date_time.AddHours(7).ToString("ddd"),
+                                     DateTime = val.date_time,
                                  }).OrderByDescending(x => x.DateTime).ToList()
 
                              };
@@ -90,22 +98,29 @@ namespace SkeletonApi.Persistence.Repositories
                     {
                         var energyConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumptionDetail>
                         (@"SELECT * FROM ""air_consumption"" WHERE id = @vid
-                         AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
-                         AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
-                         ORDER BY id DESC, bucket DESC"
-                        , new { vid = Vid, starttime = start.Date, endtime = end.Date });
+                        AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                        AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                        ORDER BY id DESC, bucket DESC",
+                        new { vid = Vid, starttime = start.Date, endtime = end.Date });
 
-                        var groupedQuerys = energyConsumption
+                        var total = energyConsumption.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
+                        {
+                            date_time = new DateTime(g.Key.Year, g.Key.Month, g.Key.Day),
+                            last = g.Sum(k => Convert.ToDecimal(k.LastValue)),
+                            first = g.Select(p => p.FirstValue).First()
+                        }).ToList();
+
+                        var groupedQuerys = total
                           .GroupBy(d => new
                           {
-                              d.Bucket.Month,
-                              d.Bucket.Year
+                              d.date_time.Month,
+                              d.date_time.Year
                           })
                           .Select(g => new
                           {
                               date_group = new DateTime(g.Key.Year, g.Key.Month, 1),
-                              total_first = g.Sum(d => Convert.ToDecimal(d.FirstValue)),
-                              total_last = g.Sum(d => Convert.ToDecimal(d.LastValue)),
+                              total_first = g.Sum(d => Convert.ToDecimal(d.first)),
+                              total_last = g.Sum(d => Convert.ToDecimal(d.last)),
                           }).ToList();
 
                         if (energyConsumption.Count() == 0)
@@ -148,18 +163,25 @@ namespace SkeletonApi.Persistence.Repositories
                         ORDER BY id DESC, bucket DESC",
                         new { vid = Vid, starttime = start.Date, endtime = end.Date });
 
-                        var groupedQuerys = energyConsumption
+                        var total = energyConsumption.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
+                        {
+                            date_time = new DateTime(g.Key.Year, g.Key.Month, g.Key.Day),
+                            last = g.Sum(k => Convert.ToDecimal(k.LastValue)),
+                            first = g.Select(p => p.FirstValue).First()
+                        }).ToList();
+
+                        var groupedQuerys = total
                           .GroupBy(d => new
                           {
                               //o.DateTime.Year,
                               //o.DateTime.Month,
-                              WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.Bucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
+                              WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.date_time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
                           })
                           .Select(g => new
                           {
                               date_group = new DateTime(g.Key.WeekNumber, 1, 1).AddDays((g.Key.WeekNumber - 1) * 7),
-                              total_first = g.Sum(d => Convert.ToDecimal(d.FirstValue)),
-                              total_last = g.Sum(d => Convert.ToDecimal(d.LastValue)),
+                              total_first = g.Sum(d => Convert.ToDecimal(d.first)),
+                              total_last = g.Sum(d => Convert.ToDecimal(d.last)),
                           }).ToList();
 
                         if (energyConsumption.Count() == 0)
@@ -180,7 +202,7 @@ namespace SkeletonApi.Persistence.Repositories
                                 SubjectName = subjectName,
                                 Data = groupedQuerys.Select(val => new AirDto
                                 {
-                                    Value = val.total_first - val.total_last,
+                                    Value = val.total_last - val.total_first,
                                     Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(val.date_group, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
                                     DateTime = val.date_group,
                                 }).OrderByDescending(x => x.DateTime).ToList()
@@ -202,16 +224,23 @@ namespace SkeletonApi.Persistence.Repositories
                         AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
                         ORDER BY id DESC, bucket DESC", new { vid = Vid, starttime = start.Date, endtime = end.Date });
 
-                        var groupedQuerys = energyConsumption
+                        var total = energyConsumption.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
+                        {
+                            date_time = new DateTime(g.Key.Year, g.Key.Month, g.Key.Day),
+                            last = g.Sum(k => Convert.ToDecimal(k.LastValue)),
+                            first = g.Select(p => p.FirstValue).First()
+                        }).ToList();
+
+                        var groupedQuerys = total
                           .GroupBy(d => new
                           {
-                              d.Bucket.Year
+                              d.date_time.Year
                           })
                           .Select(g => new
                           {
                               date_group = new DateTime(g.Key.Year, 1, 1),
-                              total_first = g.Sum(d => Convert.ToDecimal(d.FirstValue)),
-                              total_last = g.Sum(d => Convert.ToDecimal(d.LastValue)),
+                              total_first = g.Sum(d => Convert.ToDecimal(d.first)),
+                              total_last = g.Sum(d => Convert.ToDecimal(d.last)),
                           }).ToList();
 
                         if (energyConsumption.Count() == 0)
@@ -232,7 +261,7 @@ namespace SkeletonApi.Persistence.Repositories
                                 SubjectName = subjectName,
                                 Data = groupedQuerys.Select(val => new AirDto
                                 {
-                                    Value = val.total_first - val.total_last,
+                                    Value = val.total_last - val.total_first,
                                     Label = val.date_group.AddHours(7).ToString("yyy"),
                                     DateTime = val.date_group,
                                 }).OrderByDescending(x => x.DateTime).ToList()
@@ -250,8 +279,8 @@ namespace SkeletonApi.Persistence.Repositories
                     {
                         var energyConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumptionDetail>
                         (@"SELECT * FROM ""air_consumption"" WHERE id = @vid
-                         AND date_trunc('week', bucket) = date_trunc('week', now()) 
-                         ORDER BY id DESC, bucket DESC", new { vid = Vid });
+                        AND date_trunc('week', bucket) = date_trunc('week', now()) 
+                        ORDER BY id DESC, bucket DESC", new { vid = Vid });
 
                         if (energyConsumption.Count() == 0)
                         {
@@ -271,7 +300,7 @@ namespace SkeletonApi.Persistence.Repositories
                                  SubjectName = subjectName,
                                  Data = energyConsumption.Select(val => new AirDto
                                  {
-                                     Value = Convert.ToDecimal(val.FirstValue) - Convert.ToDecimal(val.LastValue),
+                                     Value = Convert.ToDecimal(val.LastValue) - Convert.ToDecimal(val.FirstValue),
                                      Label = val.Bucket.AddHours(7).ToString("ddd"),
                                      DateTime = val.Bucket,
                                  }).OrderByDescending(x => x.DateTime).ToList()
@@ -2529,5 +2558,63 @@ namespace SkeletonApi.Persistence.Repositories
             }
             return dt;
         }
+
+        //Energy Consumption Summary yang Di Machine Information
+        public async Task<GetAllDetailEnergyConsumptionDto> GetAllEnergyConsumptionSummary(Guid machine_id, string type, DateTime start, DateTime end)
+        {
+            var querys = from shm in _unitOfWork.Repo<SubjectHasMachine>().Entities
+                         join s in _unitOfWork.Repository<Subject>().Entities on shm.SubjectId equals s.Id
+                         join m in _unitOfWork.Repository<Machine>().Entities on shm.MachineId equals m.Id
+                         where s.Vid.Contains("POWER-CONSUMPTION")
+                         select new { Machine = m, Subject = s, SubjectMachine = shm };
+
+            var result = await querys.ToListAsync();
+
+            List<GetAllDetailEnergyConsumptionDto> dt = new List<GetAllDetailEnergyConsumptionDto>();
+            var data = new GetAllDetailEnergyConsumptionDto();
+
+            switch (type)
+            {
+                case "day":
+                    break;
+
+                default:
+                var EnergyConsumption = await _dapperReadDbConnection.QueryAsync<EnergyConsumption>
+                         (@"SELECT * FROM ""top_five_energy_consumption"" WHERE id = ANY(@vid)
+                         AND date_trunc('week', bucket::date) = date_trunc('week', @now)
+                         ORDER BY  bucket DESC",
+                         new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
+
+
+                if (EnergyConsumption.Count() == 0)
+                {
+                    data =
+                    new GetAllDetailEnergyConsumptionDto
+                    {
+                        ValueKwh = 0,
+                        ValueCo2 = 0,
+                        Label = "",
+                        DateTime = DateTime.Now
+                    };
+                    dt.Add(data);
+                }
+                else
+                {
+                    data =
+                    new GetAllDetailEnergyConsumptionDto
+                    {
+                        ValueKwh = EnergyConsumption.Sum(g => Convert.ToDecimal(g.Value)),
+                        ValueCo2 = EnergyConsumption.Sum(g => Math.Round((Convert.ToDecimal(g.Value) * Convert.ToDecimal(0.87)), 2)),
+                        Label = EnergyConsumption.Select(g => g.Bucket.ToString("dd-MM-yy")).FirstOrDefault(),
+                        DateTime = DateTime.Now
+
+                    };
+                    dt.Add(data);
+                }
+                    break;
+            }
+            return data;
+        }
     }
 }
+

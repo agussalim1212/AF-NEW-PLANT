@@ -35,7 +35,7 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccou
             var accounts = await _unitOfWork.Repository<Account>().Entities.Where(o => o.Username == query.Username).Select(o => new GetAllAccountsDto
             {
                 Id = o.Id,
-                Foto = "https://localhost:5001/FotoPath/" + o.PhotoURL,
+                Foto = o.PhotoURL,
                 Username = o.Username,
                 Email = emails.Email
             })

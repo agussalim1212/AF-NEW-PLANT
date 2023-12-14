@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFiling;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -40,7 +39,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsu
             var querys = from shm in _unitOfWork.Repo<SubjectHasMachine>().Entities
                          join s in _unitOfWork.Repository<Subject>().Entities on shm.SubjectId equals s.Id
                          join m in _unitOfWork.Repository<Machine>().Entities on shm.MachineId equals m.Id
-                         where s.Vid.Contains("PWM-KWH")
+                         where s.Vid.Contains("POWER-CONSUMPTION")
                          select new { Machine = m, Subject = s, SubjectMachine = shm };
 
             var result = await querys.ToListAsync();
@@ -50,7 +49,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsu
 
             var EnergyConsumption = await _dapperReadDbConnection.QueryAsync<EnergyConsumption>
                      (@"SELECT * FROM ""top_five_energy_consumption"" WHERE id = ANY(@vid)
-                     AND date_trunc('day', bucket::date) = date_trunc('day', @now)
+                     AND date_trunc('week', bucket::date) = date_trunc('week', @now)
                      ORDER BY  bucket DESC",
                      new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
 

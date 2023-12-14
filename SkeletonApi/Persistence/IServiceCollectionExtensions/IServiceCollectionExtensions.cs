@@ -49,7 +49,8 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient<IStatusMachineRepository, StatusMachineRepository>()
                 .AddTransient<IDetailGensubRespository, DetailGensubRepository>()
                 .AddTransient<IDetailAssyUnitRepository, DetailAssyUnitRepository>()
-                .AddTransient<IUserRepository, UserRepository>();
+                .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<IDetailAssyWheelLineRepository, DetailAssyWheelLineRepository>();
                 
 
         }

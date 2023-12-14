@@ -21,7 +21,7 @@ namespace SkeletonApi.Persistence.Repositories
         public async Task<GetAllEnergyConsumptionGensubDto> GetAllEnergyConsumptionGensubDto(Guid machineId, string type, DateTime start, DateTime end)
         {
             var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => machineId == m.MachineId
-            && m.Subject.Vid.Contains("PWM-KWH")).ToListAsync();
+            && m.Subject.Vid.Contains("POWER-CONSUMPTION")).ToListAsync();
             string Vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
             string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
             string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();

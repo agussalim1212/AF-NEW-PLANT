@@ -9,7 +9,7 @@ using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQu
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRace;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.TotalProduction;
-
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 
 namespace SkeletonApi.Application.Interfaces.Repositories
 {
@@ -26,5 +26,7 @@ namespace SkeletonApi.Application.Interfaces.Repositories
         Task<List<GetListQualityOilBrakeDto>> GetAllListQualityOilBrake(Guid machineId, string type, DateTime start, DateTime end);
         Task<List<GetListQualityPressConeRaceDto>> GetAllListQualityPressConeRace(Guid machineId, string type, DateTime start, DateTime end);
         Task<List<GetListQualityRobotScanImageDto>> GetAllListQualityRobotScanImage(Guid machineId, string type, DateTime start, DateTime end);
+        //Energy Consumption Summary yang Di Machine Information
+        Task<GetAllDetailEnergyConsumptionDto> GetAllEnergyConsumptionSummary(Guid machine_id, string type, DateTime start, DateTime end);
     }
 }
