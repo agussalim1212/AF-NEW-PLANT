@@ -426,3 +426,10 @@ D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\obj\Debug\n
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\obj\Debug\net6.0\SkeletonApi.IotHub.pdb
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\obj\Debug\net6.0\SkeletonApi.IotHub.genruntimeconfig.cache
 D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\obj\Debug\net6.0\ref\SkeletonApi.IotHub.dll
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\bin\Debug\net6.0\ClosedXML.dll
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\bin\Debug\net6.0\ExcelNumberFormat.dll
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\bin\Debug\net6.0\Irony.dll
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\bin\Debug\net6.0\SixLabors.Fonts.dll
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\bin\Debug\net6.0\System.IO.Packaging.dll
+D:\ELECTRINDO\PROJECT\AF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.IotHub\bin\Debug\net6.0\XLParser.dll

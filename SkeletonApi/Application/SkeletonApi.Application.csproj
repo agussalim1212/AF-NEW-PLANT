@@ -27,6 +27,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="ClosedXML" Version="0.97.0" />
     <PackageReference Include="Dapper" Version="2.0.143" />
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -45,6 +46,7 @@
     <Folder Include="Features\MachinesInformation\DetailMachine\AssyUnitLine\Commands\" />
     <Folder Include="Features\MachinesInformation\DetailMachine\AssyWheelLine\Commands\" />
     <Folder Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Commands\" />
+    <Folder Include="Features\MaintenanceCorrective\Queries\UploadExcel\" />
     <Folder Include="Features\ManagementUser\Login\Queries\" />
   </ItemGroup>
 

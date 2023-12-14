@@ -28,6 +28,7 @@ namespace SkeletonApi.Application.Features.Notification.Queries.GetListNotif
         public async Task<Result<List<GetListNotifDto>>> Handle(GetListNotifQuery getList, CancellationToken cancellationToken)
         {
             var sql = await _unitOfWork.Repository<Notifications>().Entities
+                .Where(x => x.Status == false)
                 .OrderByDescending(x => x.DateTime)
                 .Take(3)
                 .Select(x => new GetListNotifDto
