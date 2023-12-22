@@ -1,13 +1,7 @@
-﻿using SkeletonApi.Domain.Common.Abstracts;
-using SkeletonApi.Domain.Common.Abstracts.Tsdb;
-using System;
-using System.Collections.Generic;
+﻿using SkeletonApi.Domain.Common.Abstracts.Tsdb;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Domain.Entities.Tsdb
 {
