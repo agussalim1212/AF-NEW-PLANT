@@ -2335,101 +2335,202 @@ namespace SkeletonApi.Persistence.Repositories
             var status = machine.Where(m => m.Subject.Vid.Contains("STATUS-PRDCT")).FirstOrDefault();
             var code = machine.Where(m => m.Subject.Vid.Contains("CODE")).FirstOrDefault();
 
-
             switch (type)
             {
                 case "day":
+                    if (end.Date < start.Date)
+                    {
+                        throw new ArgumentException("End day cannot be earlier than start date.");
+                    }
+                    else
+                    {
+                        var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY  bucket DESC",
+                        new { vid = bc.Subject.Vid, starttime = start.Date, endtime = end.Date });
 
+                        var leakTesterConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY  bucket DESC",
+                        new { vid = leak.Subject.Vid, starttime = start.Date, endtime = end.Date });
+
+                        var volumeOilConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY  bucket DESC",
+                        new { vid = vol.Subject.Vid, starttime = start.Date, endtime = end.Date });
+
+                        var statusConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY  bucket DESC",
+                        new { vid = status.Subject.Vid, starttime = start.Date, endtime = end.Date });
+
+                        var codeConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY  bucket DESC",
+                        new { vid = code.Subject.Vid, starttime = start.Date, endtime = end.Date });
+
+                        if (statusConsumption.Count() == 0)
+                        {
+                            data =
+                            new GetListQualityOilBrakeDto
+                            {
+                                DateTime = DateTime.Now,
+                                DataBarcode = "-",
+                                LeakTester = 0,
+                                VolumeOilBrake = 0,
+                                Status = "-",
+                                ErrorCode = 0
+
+
+                            };
+                        }
+                        else
+                        {
+
+                            foreach (var s in statusConsumption)
+                            {
+                                GetListQualityOilBrakeDto listQuality = new GetListQualityOilBrakeDto();
+
+                                var Barcode = barcodeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (Barcode != null)
+                                {
+                                    listQuality.DataBarcode = Barcode.Value;
+                                }
+                                var leakTester = leakTesterConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (leakTester != null)
+                                {
+                                    listQuality.LeakTester = Convert.ToDecimal(leakTester.Value);
+                                }
+                                var volumeOil = volumeOilConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (volumeOil != null)
+                                {
+                                    listQuality.VolumeOilBrake = Convert.ToDecimal(volumeOil.Value);
+                                }
+                                var errorCode = codeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (errorCode != null)
+                                {
+                                    listQuality.ErrorCode = Convert.ToInt32(errorCode.Value);
+                                }
+                                var statuss = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                if (statuss != null && statuss.Value.Contains("1"))
+                                {
+                                    listQuality.Status = "OK";
+                                }
+                                else
+                                {
+                                    listQuality.Status = "NG";
+                                }
+                                listQuality.DateTime = s.Bucket.AddHours(7);
+                                dt.Add(listQuality);
+
+                            }
+                        }
+                    }
                     break;
                 default:
-
-                    var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                    if (end.Date < start.Date)
+                    {
+                        throw new ArgumentException("End day cannot be earlier than start date.");
+                    }
+                    else
+                    {
+                        var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
                     (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
                     AND date_trunc('day', bucket::date) = date_trunc('day', @now)
                     ORDER BY  bucket DESC",
                     new { vid = bc.Subject.Vid, now = DateTime.Now.Date });
 
-                    var leakTesterConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
-                    (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        var leakTesterConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
                     AND date_trunc('day', bucket::date) = date_trunc('day', @now)
                     ORDER BY  bucket DESC",
-                    new { vid = leak.Subject.Vid, now = DateTime.Now.Date });
+                        new { vid = leak.Subject.Vid, now = DateTime.Now.Date });
 
-                    var volumeOilConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
-                    (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        var volumeOilConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
                     AND date_trunc('day', bucket::date) = date_trunc('day', @now)
                     ORDER BY  bucket DESC",
-                    new { vid = vol.Subject.Vid, now = DateTime.Now.Date });
+                        new { vid = vol.Subject.Vid, now = DateTime.Now.Date });
 
-                    var statusConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
-                    (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        var statusConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
                     AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
                     ORDER BY  bucket DESC",
-                    new { vid = status.Subject.Vid, dateNow = DateTime.Now.Date, });
+                        new { vid = status.Subject.Vid, dateNow = DateTime.Now.Date, });
 
-                    var codeConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
-                    (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
+                        var codeConsumption = await _dapperReadDbConnection.QueryAsync<OilBrakeConsumption>
+                        (@"SELECT * FROM ""list_quality_oil_brake"" WHERE id = @vid
                     AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
                     ORDER BY  bucket DESC",
-                    new { vid = code.Subject.Vid, dateNow = DateTime.Now.Date, });
+                        new { vid = code.Subject.Vid, dateNow = DateTime.Now.Date, });
 
-                    if (statusConsumption.Count() == 0)
-                    {
-                        data =
-                        new GetListQualityOilBrakeDto
+                        if (statusConsumption.Count() == 0)
                         {
-                            DateTime = DateTime.Now,
-                            DataBarcode = "-",
-                            LeakTester = 0,
-                            VolumeOilBrake = 0,
-                            Status = "-",
-                            ErrorCode = 0
+                            data =
+                            new GetListQualityOilBrakeDto
+                            {
+                                DateTime = DateTime.Now,
+                                DataBarcode = "-",
+                                LeakTester = 0,
+                                VolumeOilBrake = 0,
+                                Status = "-",
+                                ErrorCode = 0
 
 
-                        };
-                    }
-                    else
-                    {
-
-                        foreach (var s in statusConsumption)
+                            };
+                        }
+                        else
                         {
-                            GetListQualityOilBrakeDto listQuality = new GetListQualityOilBrakeDto();
 
-                            var Barcode = barcodeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                            if (Barcode != null)
+                            foreach (var s in statusConsumption)
                             {
-                                listQuality.DataBarcode = Barcode.Value;
-                            }
-                            var leakTester = leakTesterConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                            if (leakTester != null)
-                            {
-                                listQuality.LeakTester = Convert.ToDecimal(leakTester.Value);
-                            }
-                            var volumeOil = volumeOilConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                            if (volumeOil != null)
-                            {
-                                listQuality.VolumeOilBrake = Convert.ToDecimal(volumeOil.Value);
-                            }
-                            var errorCode = codeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                            if (errorCode != null)
-                            {
-                                listQuality.ErrorCode = Convert.ToInt32(errorCode.Value);
-                            }
-                            var statuss = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
-                            if (statuss != null && statuss.Value.Contains("1"))
-                            {
-                                listQuality.Status = "OK";
-                            }
-                            else
-                            {
-                                listQuality.Status = "NG";
-                            }
-                            listQuality.DateTime = s.Bucket.AddHours(7);
-                            dt.Add(listQuality);
+                                GetListQualityOilBrakeDto listQuality = new GetListQualityOilBrakeDto();
 
+                                var Barcode = barcodeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (Barcode != null)
+                                {
+                                    listQuality.DataBarcode = Barcode.Value;
+                                }
+                                var leakTester = leakTesterConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (leakTester != null)
+                                {
+                                    listQuality.LeakTester = Convert.ToDecimal(leakTester.Value);
+                                }
+                                var volumeOil = volumeOilConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (volumeOil != null)
+                                {
+                                    listQuality.VolumeOilBrake = Convert.ToDecimal(volumeOil.Value);
+                                }
+                                var errorCode = codeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (errorCode != null)
+                                {
+                                    listQuality.ErrorCode = Convert.ToInt32(errorCode.Value);
+                                }
+                                var statuss = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                if (statuss != null && statuss.Value.Contains("1"))
+                                {
+                                    listQuality.Status = "OK";
+                                }
+                                else
+                                {
+                                    listQuality.Status = "NG";
+                                }
+                                listQuality.DateTime = s.Bucket.AddHours(7);
+                                dt.Add(listQuality);
+
+                            }
                         }
                     }
-
                     break;
             }
             return dt;
@@ -2446,52 +2547,120 @@ namespace SkeletonApi.Persistence.Repositories
             var kedalaman = machine.Where(m => m.Subject.Vid.Contains("DEPTH")).FirstOrDefault();
             var tonase = machine.Where(m => m.Subject.Vid.Contains("TONASE")).FirstOrDefault();
 
-            var kedalamanConsumption = await _dapperReadDbConnection.QueryAsync<PressConeRaceConsumption>
-            (@"SELECT * FROM ""list_quality_press_cone_race"" WHERE id = @vid
-            AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-            ORDER BY  bucket DESC",
-            new { vid = kedalaman.Subject.Vid, now = DateTime.Now.Date });
-
-            var tonaseConsumption = await _dapperReadDbConnection.QueryAsync<PressConeRaceConsumption>
-            (@"SELECT * FROM ""list_quality_press_cone_race"" WHERE id = @vid
-            AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-            ORDER BY  bucket DESC",
-            new { vid = tonase.Subject.Vid, now = DateTime.Now.Date });
-
-
-            if (kedalamanConsumption.Count() == 0)
+            switch (type)
             {
-                data =
-                new GetListQualityPressConeRaceDto
-                {
-                    DateTime = DateTime.Now,
-                    Kedalaman = 0,
-                    Tonase = 0
-
-                };
-            }
-            else
-            {
-
-                foreach (var s in kedalamanConsumption)
-                {
-                    GetListQualityPressConeRaceDto listQuality = new GetListQualityPressConeRaceDto();
-
-                    var Depth = tonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                    if (Depth != null)
+                case "day":
+                    if (end.Date < start.Date)
                     {
-                        listQuality.Kedalaman = Convert.ToDecimal(s.Value);
+                        throw new ArgumentException("End day cannot be earlier than start date.");
                     }
-                    var Tonasee = kedalamanConsumption.Where(k => k.Bucket == Depth.Bucket).FirstOrDefault();
-                    if (Tonasee != null)
+                    else
                     {
-                        listQuality.Tonase = Convert.ToDecimal(Tonasee.Value);
-                    }
-                    listQuality.DateTime = s.Bucket.AddHours(7);
-                    dt.Add(listQuality);
+                        var kedalamanConsumption = await _dapperReadDbConnection.QueryAsync<PressConeRaceConsumption>
+                        (@"SELECT * FROM ""list_quality_press_cone_race"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY id DESC, bucket DESC",
+                        new { vid = kedalaman.Subject.Vid, starttime = start.Date, endtime = end.Date });
 
-                }
+                        var tonaseConsumption = await _dapperReadDbConnection.QueryAsync<PressConeRaceConsumption>
+                        (@"SELECT * FROM ""list_quality_press_cone_race"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY id DESC, bucket DESC",
+                            new { vid = tonase.Subject.Vid, starttime = start.Date, endtime = end.Date });
+                        if (kedalamanConsumption.Count() == 0)
+                        {
+                            data =
+                            new GetListQualityPressConeRaceDto
+                            {
+                                DateTime = DateTime.Now,
+                                Kedalaman = 0,
+                                Tonase = 0
+
+                            };
+                        }
+                        else
+                        {
+
+                            foreach (var s in kedalamanConsumption)
+                            {
+                                GetListQualityPressConeRaceDto listQuality = new GetListQualityPressConeRaceDto();
+
+                                var Depth = tonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (Depth != null)
+                                {
+                                    listQuality.Kedalaman = Convert.ToDecimal(s.Value);
+                                }
+                                var Tonasee = kedalamanConsumption.Where(k => k.Bucket == Depth.Bucket).FirstOrDefault();
+                                if (Tonasee != null)
+                                {
+                                    listQuality.Tonase = Convert.ToDecimal(Tonasee.Value);
+                                }
+                                listQuality.DateTime = s.Bucket.AddHours(7);
+                                dt.Add(listQuality);
+
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    if (end.Date < start.Date)
+                    {
+                        throw new ArgumentException("End day cannot be earlier than start date.");
+                    }
+                    else
+                    {
+                        var kedalamanConsumption = await _dapperReadDbConnection.QueryAsync<PressConeRaceConsumption>
+                        (@"SELECT * FROM ""list_quality_press_cone_race"" WHERE id = @vid
+                        AND date_trunc('day', bucket::date) = date_trunc('day', @now)
+                        ORDER BY  bucket DESC",
+                        new { vid = kedalaman.Subject.Vid, now = DateTime.Now.Date });
+
+                        var tonaseConsumption = await _dapperReadDbConnection.QueryAsync<PressConeRaceConsumption>
+                        (@"SELECT * FROM ""list_quality_press_cone_race"" WHERE id = @vid
+                        AND date_trunc('day', bucket::date) = date_trunc('day', @now)
+                        ORDER BY  bucket DESC",
+                        new { vid = tonase.Subject.Vid, now = DateTime.Now.Date });
+
+
+                        if (kedalamanConsumption.Count() == 0)
+                        {
+                            data =
+                            new GetListQualityPressConeRaceDto
+                            {
+                                DateTime = DateTime.Now,
+                                Kedalaman = 0,
+                                Tonase = 0
+
+                            };
+                        }
+                        else
+                        {
+
+                            foreach (var s in kedalamanConsumption)
+                            {
+                                GetListQualityPressConeRaceDto listQuality = new GetListQualityPressConeRaceDto();
+
+                                var Depth = tonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (Depth != null)
+                                {
+                                    listQuality.Kedalaman = Convert.ToDecimal(s.Value);
+                                }
+                                var Tonasee = kedalamanConsumption.Where(k => k.Bucket == Depth.Bucket).FirstOrDefault();
+                                if (Tonasee != null)
+                                {
+                                    listQuality.Tonase = Convert.ToDecimal(Tonasee.Value);
+                                }
+                                listQuality.DateTime = s.Bucket.AddHours(7);
+                                dt.Add(listQuality);
+
+                            }
+                        }
+                    }
+                    break;
             }
+
             return dt;
         }
         public async Task<List<GetListQualityRobotScanImageDto>> GetAllListQualityRobotScanImage(Guid machineId, string type, DateTime start, DateTime end)
@@ -2505,56 +2674,128 @@ namespace SkeletonApi.Persistence.Repositories
             var bc = machine.Where(m => m.Subject.Vid.Contains("ID-PART")).FirstOrDefault();
             var status = machine.Where(m => m.Subject.Vid.Contains("STATUS-PRDCT")).FirstOrDefault();
 
-
-            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<RobotConsumption>
-                   (@"SELECT * FROM ""list_quality_robot_scan_image_and_abs_tester"" WHERE id = @vid
-                   AND date_trunc('day', bucket::date) = date_trunc('day', @now)
-                   ORDER BY  bucket DESC",
-                   new { vid = bc.Subject.Vid, now = DateTime.Now.Date });
-
-            var statusConsumption = await _dapperReadDbConnection.QueryAsync<RobotConsumption>
-                   (@"SELECT * FROM ""list_quality_robot_scan_image_and_abs_tester"" WHERE id = @vid
-                   AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
-                   ORDER BY  bucket DESC",
-                   new { vid = status.Subject.Vid, dateNow = DateTime.Now.Date, });
-
-            if (statusConsumption.Count() == 0)
+            switch (type)
             {
-                data =
-                new GetListQualityRobotScanImageDto
-                {
-                    DateTime = DateTime.Now,
-                    Status = "-",
-                    DataBarcode = "-",
-
-                };
-            }
-            else
-            {
-
-                foreach (var s in statusConsumption)
-                {
-                    GetListQualityRobotScanImageDto listQuality = new GetListQualityRobotScanImageDto();
-
-                    var Barcode = barcodeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                    if (Barcode != null)
+                case "day":
+                    if (end.Date < start.Date)
                     {
-                        listQuality.DataBarcode = Barcode.Value;
-                    }
-
-                    var statuss = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
-                    if (statuss != null && statuss.Value.Contains("1"))
-                    {
-                        listQuality.Status = "OK";
+                        throw new ArgumentException("End day cannot be earlier than start date.");
                     }
                     else
                     {
-                        listQuality.Status = "NG";
-                    }
-                    listQuality.DateTime = s.Bucket.AddHours(7);
-                    dt.Add(listQuality);
+                        var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<RobotConsumption>
+                        (@"SELECT * FROM ""list_quality_robot_scan_image_and_abs_tester"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY id DESC, bucket DESC",
+                        new { vid = bc.Subject.Vid, starttime = start.Date, endtime = end.Date });
 
-                }
+                        var statusConsumption = await _dapperReadDbConnection.QueryAsync<RobotConsumption>
+                            (@"SELECT * FROM ""list_quality_robot_scan_image_and_abs_tester"" WHERE id = @vid
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY id DESC, bucket DESC",
+                            new { vid = status.Subject.Vid, starttime = start.Date, endtime = end.Date });
+                        if (statusConsumption.Count() == 0)
+                        {
+                            data =
+                            new GetListQualityRobotScanImageDto
+                            {
+                                DateTime = DateTime.Now,
+                                Status = "-",
+                                DataBarcode = "-",
+
+                            };
+                        }
+                        else
+                        {
+
+                            foreach (var s in statusConsumption)
+                            {
+                                GetListQualityRobotScanImageDto listQuality = new GetListQualityRobotScanImageDto();
+
+                                var Barcode = barcodeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (Barcode != null)
+                                {
+                                    listQuality.DataBarcode = Barcode.Value;
+                                }
+
+                                var statuss = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                if (statuss != null && statuss.Value.Contains("1"))
+                                {
+                                    listQuality.Status = "OK";
+                                }
+                                else
+                                {
+                                    listQuality.Status = "NG";
+                                }
+                                listQuality.DateTime = s.Bucket.AddHours(7);
+                                dt.Add(listQuality);
+
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    if (end.Date < start.Date)
+                    {
+                        throw new ArgumentException("End day cannot be earlier than start date.");
+                    }
+                    else
+                    {
+                        var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<RobotConsumption>
+                        (@"SELECT * FROM ""list_quality_robot_scan_image_and_abs_tester"" WHERE id = @vid
+                        AND date_trunc('day', bucket::date) = date_trunc('day', @now)
+                        ORDER BY  bucket DESC",
+                        new { vid = bc.Subject.Vid, now = DateTime.Now.Date });
+
+                        var statusConsumption = await _dapperReadDbConnection.QueryAsync<RobotConsumption>
+                                (@"SELECT * FROM ""list_quality_robot_scan_image_and_abs_tester"" WHERE id = @vid
+                        AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+                        ORDER BY  bucket DESC",
+                                new { vid = status.Subject.Vid, dateNow = DateTime.Now.Date, });
+
+                        if (statusConsumption.Count() == 0)
+                        {
+                            data =
+                            new GetListQualityRobotScanImageDto
+                            {
+                                DateTime = DateTime.Now,
+                                Status = "-",
+                                DataBarcode = "-",
+
+                            };
+                        }
+                        else
+                        {
+
+                            foreach (var s in statusConsumption)
+                            {
+                                GetListQualityRobotScanImageDto listQuality = new GetListQualityRobotScanImageDto();
+
+                                var Barcode = barcodeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                                if (Barcode != null)
+                                {
+                                    listQuality.DataBarcode = Barcode.Value;
+                                }
+
+                                var statuss = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                                if (statuss != null && statuss.Value.Contains("1"))
+                                {
+                                    listQuality.Status = "OK";
+                                }
+                                else
+                                {
+                                    listQuality.Status = "NG";
+                                }
+                                listQuality.DateTime = s.Bucket.AddHours(7);
+                                dt.Add(listQuality);
+
+                            }
+                        }
+                        break;
+
+                    }
             }
             return dt;
         }

@@ -146,12 +146,6 @@
           "System.IO.Packaging": "4.7.0",
           "System.Memory": "4.5.4",
           "XLParser": "1.5.2"
-        },
-        "runtime": {
-          "lib/netstandard2.0/ClosedXML.dll": {
-            "assemblyVersion": "0.97.0.0",
-            "fileVersion": "0.97.0.0"
-          }
         }
       },
       "Dapper/2.0.143": {
@@ -165,22 +159,9 @@
       "DocumentFormat.OpenXml/2.16.0": {
         "dependencies": {
           "System.IO.Packaging": "4.7.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {
-            "assemblyVersion": "2.16.0.0",
-            "fileVersion": "2.16.0.0"
-          }
         }
       },
-      "ExcelNumberFormat/1.1.0": {
-        "runtime": {
-          "lib/netstandard2.0/ExcelNumberFormat.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        }
-      },
+      "ExcelNumberFormat/1.1.0": {},
       "FluentValidation/11.7.1": {
         "runtime": {
           "lib/net6.0/FluentValidation.dll": {
@@ -257,12 +238,6 @@
           "System.Reflection.Extensions": "4.3.0",
           "System.Reflection.TypeExtensions": "4.3.0",
           "System.Runtime.Numerics": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.6/Irony.dll": {
-            "assemblyVersion": "1.0.11.0",
-            "fileVersion": "1.0.11.0"
-          }
         }
       },
       "KubernetesClient/11.0.44": {
@@ -1058,14 +1033,7 @@
           }
         }
       },
-      "SixLabors.Fonts/1.0.0-beta18": {
-        "runtime": {
-          "lib/netcoreapp3.1/SixLabors.Fonts.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
+      "SixLabors.Fonts/1.0.0-beta18": {},
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.4": {
         "dependencies": {
           "SQLitePCLRaw.lib.e_sqlite3": "2.1.4",
@@ -1407,14 +1375,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.IO.Packaging/4.7.0": {
-        "runtime": {
-          "lib/netstandard2.0/System.IO.Packaging.dll": {
-            "assemblyVersion": "4.0.5.0",
-            "fileVersion": "4.700.19.56404"
-          }
-        }
-      },
+      "System.IO.Packaging/4.7.0": {},
       "System.Linq/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -1890,12 +1851,6 @@
         "dependencies": {
           "Irony.NetCore": "1.0.11",
           "NETStandard.Library": "1.6.1"
-        },
-        "runtime": {
-          "lib/netstandard1.6/XLParser.dll": {
-            "assemblyVersion": "1.5.2.0",
-            "fileVersion": "1.5.2.0"
-          }
         }
       },
       "YamlDotNet/13.1.1": {

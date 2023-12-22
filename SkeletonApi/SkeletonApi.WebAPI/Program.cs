@@ -1,4 +1,3 @@
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -16,8 +15,8 @@ using SkeletonApi.WebAPI.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
-// Add services to the container.
 
+// Add services to the container.
 builder.Services.AddSingleton<MqttClientService>();
 
 builder.Services.AddHttpContextAccessor();
@@ -38,6 +37,7 @@ builder.Services.AddScoped<AuditRepository>();
 builder.Services.ConfigureIISIntegration();
 builder.Services.AddHostedMqttClient(builder.Configuration);
 builder.Services.ConfigureSwagger();
+
 builder.Services.AddControllers(
     config =>
     {
@@ -65,6 +65,7 @@ app.UseSwaggerUI(s =>
 {
     s.SwaggerEndpoint("/swagger/v1/swagger.json", "SkeletonAPI v1");
     s.SwaggerEndpoint("/swagger/v2/swagger.json", "SkeletonAPI v2");
+   
 });
 
 app.UseErrorHandler(Log.Logger);

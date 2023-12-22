@@ -30,19 +30,18 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
             {
                 return await Result<CreatePermissionsResponseDto>.FailureAsync("Role not found.");
             }
- 
+            else
+            {
+                var existingClaims = await _roleManager.GetClaimsAsync(validateRole);
+                foreach (var existingClaim in existingClaims)
+                {
+                    await _roleManager.RemoveClaimAsync(validateRole, existingClaim);
+                }
+            }
+
             foreach (var type in request.Claim)
             {
 
-                var pms = new Permission
-                {
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
-                    RoleId = validateRole.Id,
-                    ClaimType = type.ClaimValue,
-                    ClaimValue = type.ClaimValue,
-                };
-       
                 if (type.ClaimValue == "Edit")
                 {
                     permission.ClaimType = type.ClaimValue;
@@ -63,6 +62,16 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
                     permission.ClaimType = type.ClaimValue;
                     permission.ClaimValue = "Permissions.Users.View";
                 }    
+
+                var pms = new Permission
+                {
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    RoleId = validateRole.Id,
+                    ClaimType = type.ClaimValue,
+                    ClaimValue = permission.ClaimValue,
+                    
+                };
 
                 await _unitOfWork.Data<Permission>().AddAsync(pms);
                 await _unitOfWork.Save(cancellationToken);

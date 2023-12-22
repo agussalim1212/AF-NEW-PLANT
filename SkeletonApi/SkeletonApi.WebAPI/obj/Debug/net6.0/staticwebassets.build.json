@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hYfOlQ3w8S48KoakuBjlXSi2qOhexu5b2UJWonsvAGM=",
+  "Hash": "sawNq1VHlv03dLQq+lPgdUiCsGblwERNXhkwCBvSwIU=",
   "Source": "SkeletonApi.WebAPI",
   "BasePath": "_content/SkeletonApi.WebAPI",
   "Mode": "Default",
@@ -1071,6 +1071,23 @@
       "OriginalItemSpec": "wwwroot\\FotoPath\\2023-11-22 (10).png"
     },
     {
+      "Identity": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\2023-11-22 (34).png",
+      "SourceId": "SkeletonApi.WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\",
+      "BasePath": "_content/SkeletonApi.WebAPI",
+      "RelativePath": "FotoPath/2023-11-22 (34).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\FotoPath\\2023-11-22 (34).png"
+    },
+    {
       "Identity": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\2023-11-22 (7).png",
       "SourceId": "SkeletonApi.WebAPI",
       "SourceType": "Discovered",
@@ -1171,6 +1188,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\FotoPath\\npwp.jpg"
+    },
+    {
+      "Identity": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\profiles.png",
+      "SourceId": "SkeletonApi.WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\",
+      "BasePath": "_content/SkeletonApi.WebAPI",
+      "RelativePath": "FotoPath/profiles.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\FotoPath\\profiles.png"
     },
     {
       "Identity": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\WhatsApp Image 2023-12-06 at 16.24.51.jpeg",

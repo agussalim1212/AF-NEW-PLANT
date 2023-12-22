@@ -19,7 +19,7 @@ namespace SkeletonApi.Shared
         {
             Data = data;
             page_number = pageNumber;
-            Succeeded = succeeded;
+            Status = succeeded;
             Messages = messages;
             page_size = pageSize;
             total_pages = (int)Math.Ceiling(count / (double)pageSize);

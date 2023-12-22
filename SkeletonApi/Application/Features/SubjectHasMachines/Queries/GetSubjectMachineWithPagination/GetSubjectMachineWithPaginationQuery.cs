@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Extensions;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachinesWithPagination;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination;
-using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -27,8 +23,6 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
             page_number = pageNumber;
             page_size = pageSize;
             search_term = searchTerm;
-
-
         }
     }
     internal class GetSubjectMachinesWithPaginationQueryHandler : IRequestHandler<GetSubjectMachineWithPaginationQuery, PaginatedResult<GetSubjectMachineWithPaginationDto>>

@@ -10,7 +10,7 @@ namespace SkeletonApi.Shared.Interfaces
     {
         List<string> Messages { get; set; }
 
-        bool Succeeded { get; set; }
+        bool Status { get; set; }
 
         T Data { get; set; }
     }

@@ -87,7 +87,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                                  SubjectName = subjectName,
                                  Data = total.Select(val => new AirAssyWheelDto
                                  {
-                                     Value = Convert.ToDecimal(val.last) - Convert.ToDecimal(val.first),
+                                     Value = (Convert.ToDecimal(val.last)) - (Convert.ToDecimal(val.first)),
                                      Label = val.date_time.AddHours(7).ToString("ddd"),
                                      DateTime = val.date_time,
                                  }).OrderByDescending(x => x.DateTime).ToList()

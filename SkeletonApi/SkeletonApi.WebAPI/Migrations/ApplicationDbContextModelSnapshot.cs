@@ -604,7 +604,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Role", b =>
@@ -735,7 +735,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("statusmachines");
+                    b.ToTable("StatusMachines");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>
