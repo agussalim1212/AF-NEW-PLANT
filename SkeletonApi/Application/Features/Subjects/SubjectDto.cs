@@ -12,3 +12,4 @@ namespace SkeletonApi.Application.Features.Subjects
     }
     public sealed record CreateSubjectResponseDto : SubjectDto { }
 }
+    

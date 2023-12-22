@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.MachineInformation;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -31,7 +30,8 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
 
         public async Task<Result<GetAllMachineInformationGensubDto>> Handle(GetAllMachineInformationGensubQuery query, CancellationToken cancellationToken)
         {
-            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => (query.MachineId == m.MachineId && m.Subject.Vid.Contains("CYCLE-COUNT")) || (query.MachineId == m.MachineId && m.Subject.Vid.Contains("RUN-TIME"))).ToListAsync();
+            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => (query.MachineId == m.MachineId 
+            && m.Subject.Vid.Contains("CYCLE-COUNT")) || (query.MachineId == m.MachineId && m.Subject.Vid.Contains("RUN-TIME"))).ToListAsync();
             IEnumerable<string> vids = machine.Select(m => m.Subject.Vid).ToList();
             string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
             string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();

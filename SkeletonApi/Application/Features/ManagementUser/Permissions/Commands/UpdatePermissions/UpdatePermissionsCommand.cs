@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
@@ -11,13 +10,11 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.U
      internal class UpdatePermissionsCommand : IRequestHandler<UpdatePermissionsRequest, Result<Permission>>
      {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly RoleManager<Role> _roleManager;
 
-        public UpdatePermissionsCommand(IUnitOfWork unitOfWork, IMapper mapper, RoleManager<Role> roleManager)
+        public UpdatePermissionsCommand(IUnitOfWork unitOfWork, RoleManager<Role> roleManager)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _roleManager = roleManager;
         }
 
@@ -34,6 +31,7 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.U
                     await _roleManager.RemoveClaimAsync(validateRole, existingClaim);
                 }
             }
+
             if(request.Claim.Count == 0)
             {
                 return await Result<Permission>.FailureAsync("Permissions cannot be null.");

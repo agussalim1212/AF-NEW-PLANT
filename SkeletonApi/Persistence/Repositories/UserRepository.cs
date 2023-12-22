@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.GetRoleWithPagination;
 using SkeletonApi.Application.Features.Users;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Domain.Entities.ConfigurationModels;
 using SkeletonApi.Domain.Entities.Exceptions;
+using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Shared.Constants;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -23,6 +25,7 @@ namespace SkeletonApi.Persistence.Repositories
         private readonly RoleManager<Role> _roleManager;
         private readonly IOptions<JwtConfiguration> _configuration;
         private readonly JwtConfiguration _jwtConfiguration;
+        private readonly ApplicationDbContext _dbContext;
 
         private User? _user;
        
@@ -169,6 +172,24 @@ namespace SkeletonApi.Persistence.Repositories
 
             return tokenOptions;
         }
+
+        //public Task<GetPermissionsWithPaginationDto> GetPermissionsWithPaginationDto()
+        //{
+        //    var query = from r in _dbContext.Roles
+        //                join rc in _dbContext.PermissionClaim on r.Id equals rc.RoleId into roleClaims
+        //                join x in _dbContext.UserRoles on r.Id equals x.RoleId
+        //                join u in _dbContext.Users on x.UserId equals u.Id
+        //                where roleClaims.Any() // cek claim type yg dimiliki role
+        //                select new GetPermissionsWithPaginationDto
+        //                {
+        //                    Id = r.Id,
+        //                    RoleName = r.Name,
+        //                    Email = u.Email,
+        //                    Permissions = roleClaims.Select(rc => new ClaimType { Id = rc.Id, Claim = rc.ClaimType }).ToList(),
+        //                    UserName = u.UserName,
+        //                    Last_Created = roleClaims.Max(rc => rc.Last_Created)
+        //                };
+        //}
     }
 }
 

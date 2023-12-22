@@ -7029,19 +7029,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucky\\.nuget\\packages\\": {}
+    "C:\\Users\\elect\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+      "projectUniqueName": "D:\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
       "projectName": "SkeletonApi.Application",
-      "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
-      "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
-      "outputPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
+      "projectPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Application\\SkeletonApi.Application.csproj",
+      "packagesPath": "C:\\Users\\elect\\.nuget\\packages\\",
+      "outputPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\elect\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7055,11 +7055,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
-              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
+            "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj": {
+              "projectPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\Domain\\SkeletonApi.Domain.csproj"
             },
-            "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
-              "projectPath": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
+            "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj": {
+              "projectPath": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.Shared\\SkeletonApi.Shared.csproj"
             }
           }
         }
@@ -7127,8 +7127,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\AF-NEW-PLANT\\SkeletonApi\\Application\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

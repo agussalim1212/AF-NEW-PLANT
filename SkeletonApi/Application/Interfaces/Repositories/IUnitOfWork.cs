@@ -1,10 +1,5 @@
 ﻿using SkeletonApi.Domain.Common.Abstracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Application.Interfaces.Repositories
 {

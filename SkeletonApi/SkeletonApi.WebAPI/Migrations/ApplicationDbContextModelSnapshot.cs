@@ -125,12 +125,6 @@ namespace SkeletonApi.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("ClubId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
@@ -147,16 +141,10 @@ namespace SkeletonApi.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("NoNRP")
-                        .HasColumnType("integer");
-
                     b.Property<string>("PhotoURL")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("photo_url");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -165,6 +153,10 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid")
                         .HasColumnName("update_by");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text")
+                        .HasColumnName("username");
 
                     b.HasKey("Id");
 
@@ -657,7 +649,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Role", b =>
@@ -788,7 +780,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("statusmachines");
+                    b.ToTable("StatusMachines");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Subject", b =>

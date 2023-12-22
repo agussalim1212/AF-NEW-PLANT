@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\Download\DownloadLisQualityGensubToExcel.cs" />
     <Compile Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubDto.cs" />
     <Compile Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubQuery.cs" />
     <Compile Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Queries\ListQualityGensub\ListQualityGensubWithPagination\GetListQualityGensubValidator.cs" />

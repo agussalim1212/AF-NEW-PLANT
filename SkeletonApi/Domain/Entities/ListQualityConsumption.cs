@@ -106,5 +106,11 @@ namespace SkeletonApi.Domain.Entities
         public string LastValue { get; set; }
     }
 
+    public class FrqConsumption
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public string Value { get; set; }
+    }
 
 }

@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using SkeletonApi.Domain.Entities;
 using SkeletonApi.Domain.Entities.ConfigurationModels;
+using SkeletonApi.Domain.Entities;
 using SkeletonApi.Persistence.Contexts;
-using System.Data;
-using System.Text;
 
-namespace SkeletonApi.WebAPI.Extensions
+namespace SkeletonApi.IotHub.Extensions
 {
     public static class ConfigureJwt
     {

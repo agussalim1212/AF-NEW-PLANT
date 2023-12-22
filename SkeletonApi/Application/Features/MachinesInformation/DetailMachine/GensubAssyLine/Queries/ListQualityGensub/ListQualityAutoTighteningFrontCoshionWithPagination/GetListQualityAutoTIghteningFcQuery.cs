@@ -64,19 +64,19 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         else
                         {
                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
-                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = ANY(@vid)
+                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                            AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
                            AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
                            ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_ID-PART", starttime = query.start.Date, endtime = query.end.Date });
 
                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
-                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = ANY(@vid)
+                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                            AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
                            AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
                            ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_TORQ", starttime = query.start.Date, endtime = query.end.Date });
 
                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
-                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = ANY(@vid)
+                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                            AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
                            AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
                            ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_STATUS-PRDCT", starttime = query.start.Date, endtime = query.end.Date });

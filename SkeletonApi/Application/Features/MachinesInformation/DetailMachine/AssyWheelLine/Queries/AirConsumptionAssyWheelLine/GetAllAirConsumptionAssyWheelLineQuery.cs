@@ -41,7 +41,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
         public async Task<Result<GetAllAirConsumptionAssyWheelLineDto>> Handle(GetAllAirConsumptionAssyWheelLineQuery query, CancellationToken cancellationToken)
         {
             var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities
-            .Include(s => s.Machine).Include(s => s.Subject).Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("VOL-WIND")).ToListAsync();
+            .Include(s => s.Machine).Include(s => s.Subject).Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("AIR-CONSUMPTION")).ToListAsync();
             string Vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
             string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
             string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();
@@ -59,10 +59,16 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                     {
                         var energyConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumptionDetail>
                         (@"SELECT * FROM ""air_consumption"" WHERE id = @vid
-                         AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
-                         AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
-                         ORDER BY id DESC, bucket DESC", new { vid = Vid, starttime = query.Start.Date, endtime = query.End.Date });
+                        AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
+                        AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
+                        ORDER BY id DESC, bucket DESC", new { vid = Vid, starttime = query.Start.Date, endtime = query.End.Date });
 
+                        var total = energyConsumption.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
+                        {
+                            date_time = new DateTime(g.Key.Year, g.Key.Month, g.Key.Day),
+                            last = g.Sum(k => Convert.ToDecimal(k.LastValue)),
+                            first = g.Select(p => p.FirstValue).First()
+                        }).ToList();
 
                         if (energyConsumption.Count() == 0)
                         {
@@ -79,11 +85,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                              {
                                  MachineName = machineName,
                                  SubjectName = subjectName,
-                                 Data = energyConsumption.Select(val => new AirAssyWheelDto
+                                 Data = total.Select(val => new AirAssyWheelDto
                                  {
-                                     Value = Convert.ToDecimal(val.FirstValue) - Convert.ToDecimal(val.LastValue),
-                                     Label = val.Bucket.AddHours(7).ToString("ddd"),
-                                     DateTime = val.Bucket,
+                                     Value = (Convert.ToDecimal(val.last)) - (Convert.ToDecimal(val.first)),
+                                     Label = val.date_time.AddHours(7).ToString("ddd"),
+                                     DateTime = val.date_time,
                                  }).OrderByDescending(x => x.DateTime).ToList()
 
                              };
@@ -99,9 +105,10 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                     {
                         var energyConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumptionDetail>
                         (@"SELECT * FROM ""air_consumption"" WHERE id = @vid
-                         AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
-                         AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
-                         ORDER BY id DESC, bucket DESC", new { vid = Vid, starttime = query.Start.Date, endtime = query.End.Date });
+                        AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
+                        AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
+                        ORDER BY id DESC, bucket DESC", new { vid = Vid, starttime = query.Start.Date, endtime = query.End.Date });
+
 
                         var groupedQuerys = energyConsumption
                           .GroupBy(d => new

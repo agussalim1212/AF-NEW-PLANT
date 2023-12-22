@@ -1,73 +1,40 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
 using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-
 
 namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.FrequencyInverter
 {
-   public record GetAllFrequencyInverterQuery : IRequest<Result<GetAllFrequencyInverterDto>>
+    public record GetAllFrequencyInverterQuery : IRequest<Result<GetAllFrequencyInverterDto>>
     {
-        public Guid MachineId { get; set; }
+        public Guid machine_id { get; set; }
+        public string type { get; set; }
+        public DateTime start { get; set; }
+        public DateTime end { get; set; }
 
-        public GetAllFrequencyInverterQuery(Guid machineId)
+        public GetAllFrequencyInverterQuery(Guid MachineId, string Type, DateTime Start, DateTime End)
         {
-            MachineId = machineId;
+            machine_id = MachineId;
+            type = Type;
+            start = Start;
+            end = End;
         }
 
     }
     internal class GetAllMachineInformationHandler : IRequestHandler<GetAllFrequencyInverterQuery, Result<GetAllFrequencyInverterDto>>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IDetailAssyUnitRepository _detailAssyUnitRepository;
 
-        public GetAllMachineInformationHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetAllMachineInformationHandler(IDetailAssyUnitRepository detailAssyUnitRepository)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _detailAssyUnitRepository = detailAssyUnitRepository;
         }
 
         public async Task<Result<GetAllFrequencyInverterDto>> Handle(GetAllFrequencyInverterQuery query, CancellationToken cancellationToken)
         {
-            var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject).Where(m => query.MachineId == m.MachineId && m.Subject.Vid.Contains("FRQ_INVERT")).ToListAsync();
-            string vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
-            string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
-            string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();
-
-            var data = new GetAllFrequencyInverterDto();
-
-            var categorys = await _unitOfWork.Data<Dummy>().Entities
-              .Where(c => vid.Contains(c.Id)).OrderByDescending(c => c.DateTime).Take(1)
-              .ToListAsync();
-
-            if (categorys.Count() == 0)
-            {
-                data = new GetAllFrequencyInverterDto
-                {
-                    MachineName = machineName,
-                    SubjectName = subjectName,
-
-                };
-
-            }
-            else
-            {
-               
-                data =
-                new GetAllFrequencyInverterDto
-                {
-                    MachineName = machineName,
-                    SubjectName = subjectName,
-                    DateTime = categorys.Select(x => x.DateTime.AddHours(7)).FirstOrDefault(),
-                    Value = categorys.Select(x => Convert.ToDecimal(x.Value)).FirstOrDefault()
-
-                };
-            }
-
+            var data = await _detailAssyUnitRepository.GetAllFrequencyInverter(query.machine_id, query.type, query.start, query.end);
             return await Result<GetAllFrequencyInverterDto>.SuccessAsync(data, "Successfully fetch data");
         }
 
     }
 }
+

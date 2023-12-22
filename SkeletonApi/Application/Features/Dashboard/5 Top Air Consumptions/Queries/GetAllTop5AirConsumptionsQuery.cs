@@ -28,7 +28,7 @@ namespace SkeletonApi.Application.Features.Dashboard._5_Top_Air_Consumptions.Que
             var querys = from shm in _unitOfWork.Repo<SubjectHasMachine>().Entities
                          join s in _unitOfWork.Repository<Subject>().Entities on shm.SubjectId equals s.Id
                          join m in _unitOfWork.Repository<Machine>().Entities on shm.MachineId equals m.Id
-                         where s.Vid.Contains("VOL-WIND")
+                         where s.Vid.Contains("AIR-CONSUMPTION")
                          select new { Machine = m, Subject = s, SubjectMachine = shm };
 
             var result = await querys.ToListAsync();
@@ -36,19 +36,19 @@ namespace SkeletonApi.Application.Features.Dashboard._5_Top_Air_Consumptions.Que
             var data = new GetAllTop5AirConsumptionsDto();
             var EnergyConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumption>
                      (@"SELECT * FROM ""top_five_air_consumption"" WHERE id = ANY(@vid)
-                     AND date_trunc('day', bucket::date) = date_trunc('day', @now)
+                     AND date_trunc('year', bucket::date) = date_trunc('year', @now)
                      ORDER BY  bucket DESC",
                      new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
 
             var EnergyWeekConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumption>
                      (@"SELECT * FROM ""top_five_air_consumption"" WHERE id = ANY(@vid)
-                     AND date_trunc('week', bucket::date) = date_trunc('week', @now)
+                     AND date_trunc('year', bucket::date) = date_trunc('year', @now)
                      ORDER BY  bucket DESC",
                      new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
 
             var EnergyMonthConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumption>
                      (@"SELECT * FROM ""top_five_air_consumption"" WHERE id = ANY(@vid)
-                     AND date_trunc('month', bucket::date) = date_trunc('month', @now)
+                     AND date_trunc('year', bucket::date) = date_trunc('year', @now)
                      ORDER BY  bucket DESC",
                      new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
 
