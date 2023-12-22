@@ -16,22 +16,22 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
         public Guid Id { get; set; }
 
         [JsonPropertyName("name")]
-        [NotMapped] public string Name { get; set; }
+        [NotMapped] public string? Name { get; set; }
 
         [JsonPropertyName("plan")]
-        public string Plan { get; set; }
+        public string? Plan { get; set; }
 
         [JsonPropertyName("start_date")]
-        public DateOnly StartDate { get; set; }
+        public DateOnly? StartDate { get; set; }
 
         [JsonPropertyName("actual")]
-        public string Actual { get; set; }
+        public string? Actual { get; set; } = null;
 
-        [JsonPropertyName("machine_id")]
-        public Guid? MachineId { get; set; }
+        //[JsonPropertyName("machine_id")]
+        //public Guid? MachineId { get; set; }
 
         [JsonPropertyName("end_date")]
-        public DateOnly? EndDate { get; set; }
+        public DateOnly? EndDate { get; set; } = null;
 
         [NotMapped] public bool ok { get; set; }
     }
