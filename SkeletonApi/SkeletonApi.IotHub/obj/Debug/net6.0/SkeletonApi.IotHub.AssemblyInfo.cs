@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SkeletonApi.IotHub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+446487148c0dec7d55dfca7cf698a201fa8afd38")]
 [assembly: System.Reflection.AssemblyProductAttribute("SkeletonApi.IotHub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SkeletonApi.IotHub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
