@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Common.Interfaces;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Domain.Entities.Tsdb;
 using System.Data;
 using System.Diagnostics.Contracts;
 using System.Reflection.Metadata;
@@ -46,10 +47,10 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<ActivityUser> ActivityUsers => Set<ActivityUser>();
         public DbSet<MaintenacePreventive> MaintenacePreventives => Set<MaintenacePreventive>();
         public DbSet<MaintCorrective> MaintCorrectives => Set<MaintCorrective>();
-
         public DbSet<StatusMachine> statusmachines => Set<StatusMachine>();
-
         public DbSet<Notifications> Notifications => Set<Notifications>();
+        public DbSet<Engine> Engines => Set<Engine>();
+        public DbSet<EnginePart> EngineParts => Set<EnginePart>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

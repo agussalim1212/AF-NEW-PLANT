@@ -3,10 +3,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Dapper;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.Repositories;
 using SkeletonApi.Persistence.Repositories.Configuration;
+using SkeletonApi.Persistence.Repositories.Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,12 +49,14 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
                 .AddTransient(typeof(IGenRepository<>), typeof(GenRepository<>))
                 .AddTransient(typeof(IDataRepository<>), typeof(DataRepository<>))
+                .AddScoped<DapperUnitOfWorkContext>()
                 .AddTransient<ISubjectRepository, SubjectRepository>()
                 .AddTransient<IMachinesRepository, MachinesRepository>()
                 .AddTransient<ICategoryMachineRepository, CategoryMachinesRepository>()
                 .AddTransient<IRoleRepository, RoleRepository>()
                 .AddTransient<IAuthenticationUserRepository, AuthenticationRepository>()
                 .AddTransient<IAccountRepository, AccountRepository>()
+                .AddScoped<IEnginePartRepository, EnginePartRepository>()
                 .AddTransient<IStatusMachineRepository, StatusMachineRepository>();
                 
 

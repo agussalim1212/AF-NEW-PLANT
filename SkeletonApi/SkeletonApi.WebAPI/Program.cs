@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SkeletonApi.Application.Extensions;
+using SkeletonApi.Application.Interfaces;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Infrastructure.Extensions;
@@ -33,6 +34,8 @@ builder.Services.AddInfrastructureLayer();
 builder.Services.AddPersistenceLayer(builder.Configuration);
 builder.Services.ConfigureApiBehavior();
 builder.Services.ConfigureCorsPolicy(builder.Configuration);
+
+builder.Services.AddHttpClient<IRestApiClientService, RestApiClientService>();
 builder.Services.AddScoped<IDapperReadDbConnection, DapperReadDbConnection>();
 builder.Services.AddScoped<IDapperWriteDbConnection, DapperWriteDbConnection>();
 builder.Services.AddScoped<AuditLoggingFilter>();

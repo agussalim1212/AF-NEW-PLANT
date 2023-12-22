@@ -1,0 +1,17 @@
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\bin\Release\net6.0\SkeletonApi.Application.deps.json
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\bin\Release\net6.0\SkeletonApi.Application.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\bin\Release\net6.0\SkeletonApi.Application.pdb
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\bin\Release\net6.0\SkeletonApi.Domain.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\bin\Release\net6.0\SkeletonApi.Shared.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\bin\Release\net6.0\SkeletonApi.Domain.pdb
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\bin\Release\net6.0\SkeletonApi.Shared.pdb
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.csproj.AssemblyReference.cache
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.AssemblyInfoInputs.cache
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.AssemblyInfo.cs
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.csproj.CoreCompileInputs.cache
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.csproj.CopyComplete
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\refint\SkeletonApi.Application.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\SkeletonApi.Application.pdb
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Application\obj\Release\net6.0\ref\SkeletonApi.Application.dll

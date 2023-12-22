@@ -302,6 +302,51 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("Dummy");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Engine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<string>("EngineId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("engine_id");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("update_by");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Engines");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.FrameNumber", b =>
                 {
                     b.Property<Guid>("Id")
@@ -829,6 +874,44 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("SubjectHasMachine", (string)null);
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.EnginePart", b =>
+                {
+                    b.Property<string>("Coolant")
+                        .HasColumnType("text")
+                        .HasColumnName("coolant");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("EngineId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("engine_id");
+
+                    b.Property<string>("FotoDataNG")
+                        .HasColumnType("text")
+                        .HasColumnName("foto_data_ng");
+
+                    b.Property<string>("OilBrake")
+                        .HasColumnType("text")
+                        .HasColumnName("oil_brake");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text")
+                        .HasColumnName("status");
+
+                    b.Property<string>("Torsi")
+                        .HasColumnType("text")
+                        .HasColumnName("torsi");
+
+                    b.Property<string>("abs")
+                        .HasColumnType("text")
+                        .HasColumnName("abs");
+
+                    b.ToTable("EngineParts");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.User", b =>

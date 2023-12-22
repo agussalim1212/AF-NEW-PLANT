@@ -37,7 +37,7 @@ namespace SkeletonApi.Presentation.Controllers
             var validator = new GetSubjectWithPaginationValidator();
 
             // Call Validate or ValidateAsync and pass the object which needs to be validated
-       
+
             var result = validator.Validate(query);
 
             if (result.IsValid)

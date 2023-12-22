@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.IotHub.DTOs;
 using SkeletonApi.IotHub.Model;
 using System;
@@ -30,7 +31,9 @@ public class MappingProfile : Profile
         //CreateMap<TraceabilityResult, TraceabilityResultDto>().ReverseMap();
 
         // CreateMap<ConsumptionDataResult, ConsumptionDataResultDto>().ReverseMap();
-
+        CreateMap<EnginePartDto, EnginePart>().ReverseMap();
+        CreateMap<MqttRawValue, MqttRawValueEntity>()
+           .ForMember(c => c.Datetime, opt => opt.MapFrom(src => DateTimeOffset.FromUnixTimeMilliseconds(src.Time).DateTime));
         CreateMap<Machine, MachineStatusDto>();
         CreateMap<Machine, MachineStatusDto>().ReverseMap();
 

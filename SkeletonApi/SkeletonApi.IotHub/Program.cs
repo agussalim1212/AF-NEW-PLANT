@@ -9,6 +9,11 @@ using SkeletonApi.IotHub.Services.Store;
 using Microsoft.AspNetCore.Mvc;
 using SkeletonApi.IotHub.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using SkeletonApi.WebAPI.Extensions;
+using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Persistence.Repositories.Configuration;
+using SkeletonApi.Application.Interfaces;
+using SkeletonApi.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +23,15 @@ builder.Services.AddConfiuredCors(builder.Configuration);
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddPersistenceLayer(builder.Configuration);
+builder.Services.ConfigureIdentity();
+builder.Services.AddScoped<IDapperReadDbConnection, DapperReadDbConnection>();
+builder.Services.AddScoped<IDapperWriteDbConnection, DapperWriteDbConnection>();
 //builder.Services.AddSignalR();
 //builder.Services.AddObservablePipelines();
 //builder.Services.AddSingleton<IUserRepository>();
 builder.Services.AddSingleton<StatusMachineStore>();
 //builder.Services.AddSingleton<Hub<IMachineHealthHub>, MachineHealthHub>();
+builder.Services.AddHttpClient<IRestApiClientService, RestApiClientService>();
 
 builder.Services.AddSingleton<IIoTHubEventHandler<MqttRawDataEncapsulation>,IotHubMqttEventHandler>();
 builder.Services.AddSingleton<IotHubMachineHealthEventHandler, IotHubMachineHealthEventHandler>();

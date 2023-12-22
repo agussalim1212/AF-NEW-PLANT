@@ -19,9 +19,9 @@ namespace SkeletonApi.Application.Features.Users.Login.Commands
 
         public async Task<Result<TokenDto>> Handle(UserLoginRequest request, CancellationToken cancellationToken)
         {
-            //if (!await _userRepository.ValidateUser(request))
-            //   return new Result<TokenDto>(); 
-            //var tokenDto = await _userRepository.CreateToken(populateExp: true);
+            if (!await _userRepository.ValidateUser(request))
+                return new Result<TokenDto>();
+            var tokenDto = await _userRepository.CreateToken(populateExp: true);
             return await Result<TokenDto>.SuccessAsync("token created.");
 
         }

@@ -6,11 +6,10 @@ namespace SkeletonApi.Shared
 {
     public class Result<T> : IResult<T>
     {
-        public List<string> Messages { get; set; } = new List<string>();
-        [JsonPropertyName("success")]
-        public bool Succeeded { get; set; }
-
+        [JsonPropertyName("status")]
+        public bool Status { get; set; }
         public T Data { get; set; }
+        public List<string> Messages { get; set; } = new List<string>();
 
         #region Non Async Methods 
 
@@ -20,7 +19,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = true
+                Status = true
             };
         }
 
@@ -28,7 +27,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = true,
+                Status = true,
                 Messages = new List<string> { message }
             };
         }
@@ -37,7 +36,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = true,
+                Status = true,
                 Data = data
             };
         }
@@ -46,7 +45,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = true,
+                Status = true,
                 Messages = new List<string> { message },
                 Data = data
             };
@@ -60,7 +59,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = false
+                Status = false
             };
         }
 
@@ -68,7 +67,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = false,
+                Status = false,
                 Messages = new List<string> { message }
             };
         }
@@ -77,7 +76,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = false,
+                Status = false,
                 Messages = messages
             };
         }
@@ -86,7 +85,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = false,
+                Status = false,
                 Data = data
             };
         }
@@ -95,7 +94,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = false,
+                Status = false,
                 Messages = new List<string> { message },
                 Data = data
             };
@@ -105,7 +104,7 @@ namespace SkeletonApi.Shared
         {
             return new Result<T>
             {
-                Succeeded = false,
+                Status = false,
                 Messages = messages,
                 Data = data
             };
