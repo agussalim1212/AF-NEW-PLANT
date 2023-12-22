@@ -5,6 +5,8 @@ using System.Text.Json;
 using SkeletonApi.IotHub.Services.Store;
 using SkeletonApi.IotHub.Helpers;
 using System.Globalization;
+using SkeletonApi.Application.Interfaces.Repositories.Dapper;
+using SkeletonApi.Domain.Entities.Tsdb;
 
 namespace SkeletonApi.IotHub.Services
 {
@@ -42,11 +44,15 @@ namespace SkeletonApi.IotHub.Services
                 {
                     switch (val.topics)
                     {
-                        case string a when a.Contains("MC-STATUS"):
-                            await PersistMachineHealthToDBAsync(val.mqttRawData);
+                        case string a when a.Contains("OCR"):
+                            await PersistTraceabilityToDBAsync(val.mqttRawData);
+                            break;
+                        case string a when a!.Contains("OCR") && a!.Contains("MC-STATUS"):
+                            await PersistDeviceDataToDBAsync(val.mqttRawData);
                             break;
                         default:
-                            await Console.Out.WriteLineAsync("NULL");
+                            if(val.mqttRawData.Values.Count(X => X.Vid.Contains("STATUS")) > 0) 
+                                await PersistMachineHealthToDBAsync(val.mqttRawData);
                             break;
                     }
                 }
@@ -63,7 +69,7 @@ namespace SkeletonApi.IotHub.Services
             {
                 using (var scope = _serviceScopeFactory.CreateScope())
                 {
-                    var machineHealthList = from vls in value.Values
+                    var machineHealthList = from vls in value.Values.Where(x => x.Vid.Contains("STATUS") && x.Quality == true)
                                       join ids in mclist on vls.Vid equals ids.Vid
                                       where vls.Vid == ids.Vid
                                       group new { vls, ids } by vls.Vid into g
@@ -77,6 +83,58 @@ namespace SkeletonApi.IotHub.Services
                                       };
                     
                     _machineHealthEventHandler.Dispatch(machineHealthList);
+                }
+            }
+        }
+
+        private async Task PersistTraceabilityToDBAsync(MqttRawData value)
+        {
+            await Console.Out.WriteLineAsync(JsonSerializer.Serialize(value));
+            if (value.Values is not null)
+            {
+                try
+                {
+                    using (var scope = _serviceScopeFactory.CreateScope())
+                    {
+                        var scoped = scope.ServiceProvider.GetRequiredService<IEnginePartRepository>();
+                        List<MqttRawValue> mqttRawValues = new List<MqttRawValue>();
+                        foreach (var row in value?.Values)
+                        {
+                            mqttRawValues.Add(row);
+                        }
+                        var mqttRawValueEntities = _mapper.Map<IEnumerable<MqttRawValueEntity>>(mqttRawValues);
+                        scoped.Creates(mqttRawValueEntities);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await Console.Out.WriteLineAsync(ex.Message);
+                }
+            }
+        }
+
+        private async Task PersistDeviceDataToDBAsync(MqttRawData value)
+        {
+            await Console.Out.WriteLineAsync(JsonSerializer.Serialize(value));
+            if (value.Values is not null)
+            {
+                try
+                {
+                    using (var scope = _serviceScopeFactory.CreateScope())
+                    {
+                        var scoped = scope.ServiceProvider.GetRequiredService<IEnginePartRepository>();
+                        List<MqttRawValue> mqttRawValues = new List<MqttRawValue>();
+                        foreach (var row in value?.Values)
+                        {
+                            mqttRawValues.Add(row);
+                        }
+                        var mqttRawValueEntities = _mapper.Map<IEnumerable<MqttRawValueEntity>>(mqttRawValues);
+                        scoped.Creates(mqttRawValueEntities);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await Console.Out.WriteLineAsync(ex.Message);
                 }
             }
         }

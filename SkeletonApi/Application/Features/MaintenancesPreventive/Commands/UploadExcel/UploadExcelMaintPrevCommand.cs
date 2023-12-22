@@ -3,7 +3,6 @@ using ClosedXML.Excel;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Create;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -37,7 +36,9 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
 
         public async Task<Result<List<UploadExcelMaintPrevDto>>> Handle(UploadExcelMaintPrevCommand command, CancellationToken cancellationToken)
         {
-            var excelData = new UploadExcelMaintPrevDto();
+            var excelData = new MaintenacePreventive();
+
+            var Resp = new UploadExcelMaintPrevDto();
             var data = new List<UploadExcelMaintPrevDto>();
             using (var stream = new MemoryStream())
             {
@@ -54,21 +55,39 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
 
                     foreach (var row in rows.Skip(1))
                     {
-                        excelData = new UploadExcelMaintPrevDto()
+                        DateOnly Tgl = DateOnly.Parse(row.Cell(3).Value?.ToString());
+                        if (Tgl >= DateOnly.FromDateTime(DateTime.Now))
                         {
-                            Id = Guid.NewGuid(),
-                            Name = row.Cell(1).Value?.ToString(),
-                            Plan = row.Cell(2).Value?.ToString(),
-                            StartDate = DateOnly.TryParse(row.Cell(3).Value?.ToString(), out DateOnly start_Date) ? start_Date : start_Date,
-                            Actual = row.Cell(4).Value?.ToString(),
-                            EndDate = DateOnly.TryParse(row.Cell(5).Value?.ToString(), out DateOnly end_Date) ? end_Date : null,
-                        };
-                        data.Add(excelData);
+                            excelData = new MaintenacePreventive()
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = row.Cell(1).Value?.ToString(),
+                                Plan = row.Cell(2).Value?.ToString(),
+                                StartDate = DateOnly.TryParse(row.Cell(3).Value?.ToString(),
+                                out DateOnly start_Date) ? start_Date : start_Date,
+
+                                CreatedAt = DateTime.UtcNow,
+                            };
+
+                            Resp = new UploadExcelMaintPrevDto()
+                            {
+                                Id = excelData.Id,
+                                Name = excelData.Name,
+                                Plan = excelData.Plan,
+                                StartDate = (DateOnly)excelData.StartDate,
+                                Actual = null,
+                                EndDate = null,
+                                ok = false,
+                            };
+                            data.Add(Resp);
+                            await _unitOfWork.Repository<MaintenacePreventive>().AddAsync(excelData);
+                            await _unitOfWork.Save(cancellationToken);
+                        }
                     }
-                    Console.WriteLine(data);
                 }
             }
-                return Result<List<UploadExcelMaintPrevDto>>.Success("");
+            return await Result<List<UploadExcelMaintPrevDto>>.SuccessAsync(data,
+                @"Import Data Success Of " + data.Count() + " Row(s)");
         }
     }
 }

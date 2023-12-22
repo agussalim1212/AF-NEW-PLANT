@@ -1,0 +1,12 @@
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\bin\Release\net6.0\SkeletonApi.Domain.deps.json
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\bin\Release\net6.0\SkeletonApi.Domain.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\bin\Release\net6.0\SkeletonApi.Domain.pdb
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\SkeletonApi.Domain.csproj.AssemblyReference.cache
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\SkeletonApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\SkeletonApi.Domain.AssemblyInfoInputs.cache
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\SkeletonApi.Domain.AssemblyInfo.cs
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\SkeletonApi.Domain.csproj.CoreCompileInputs.cache
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\SkeletonApi.Domain.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\refint\SkeletonApi.Domain.dll
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\SkeletonApi.Domain.pdb
+C:\AFFFF\AF-NEW-PLANT\SkeletonApi\Domain\obj\Release\net6.0\ref\SkeletonApi.Domain.dll
