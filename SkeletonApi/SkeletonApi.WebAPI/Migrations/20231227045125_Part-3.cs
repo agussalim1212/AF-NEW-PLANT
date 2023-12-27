@@ -6,20 +6,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SkeletonApi.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class part102 : Migration
+    public partial class Part3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Notifications",
+                name: "Engines",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    machine_name = table.Column<string>(type: "text", nullable: false),
+                    engine_id = table.Column<string>(type: "text", nullable: false),
                     date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    message = table.Column<string>(type: "text", nullable: false),
-                    status = table.Column<bool>(type: "boolean", nullable: false),
                     created_by = table.Column<Guid>(type: "uuid", nullable: true),
                     update_by = table.Column<Guid>(type: "uuid", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: true),
@@ -29,22 +27,7 @@ namespace SkeletonApi.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notifications", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StatusMachines",
-                columns: table => new
-                {
-                    id = table.Column<string>(type: "text", nullable: false),
-                    vid = table.Column<string>(type: "text", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    value = table.Column<int>(type: "integer", nullable: false),
-                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StatusMachines", x => x.id);
+                    table.PrimaryKey("PK_Engines", x => x.id);
                 });
         }
 
@@ -52,10 +35,7 @@ namespace SkeletonApi.WebAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Notifications");
-
-            migrationBuilder.DropTable(
-                name: "StatusMachines");
+                name: "Engines");
         }
     }
 }

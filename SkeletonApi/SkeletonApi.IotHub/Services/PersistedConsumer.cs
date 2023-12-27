@@ -7,6 +7,7 @@ using SkeletonApi.IotHub.Helpers;
 using System.Globalization;
 using SkeletonApi.Application.Interfaces.Repositories.Dapper;
 using SkeletonApi.Domain.Entities.Tsdb;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
 
 namespace SkeletonApi.IotHub.Services
 {
@@ -32,10 +33,8 @@ namespace SkeletonApi.IotHub.Services
             _mapper = mapper;
             _machineHealthEventHandler = machineHealthEventHandler;
         }
-
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-           
+        {      
             _mqttStoreEventHandler.Subscribe(
                 subscriberName: typeof(PersistedConsumer).Name,
                 action: async (val) =>
@@ -47,12 +46,18 @@ namespace SkeletonApi.IotHub.Services
                         case string a when a.Contains("OCR"):
                             await PersistTraceabilityToDBAsync(val.mqttRawData);
                             break;
-                        case string a when a!.Contains("OCR") && a!.Contains("MC-STATUS"):
-                            await PersistDeviceDataToDBAsync(val.mqttRawData);
-                            break;
+                        //case string a when a!.Contains("OCR") && a!.Contains("MC-STATUS"):
+                        //    await PersistDeviceDataToDBAsync(val.mqttRawData);
+                        //    break;
                         default:
                             if(val.mqttRawData.Values.Count(X => X.Vid.Contains("STATUS")) > 0) 
+                            { 
                                 await PersistMachineHealthToDBAsync(val.mqttRawData);
+                            }
+                            else
+                            {
+                                await PersistDeviceDataToDBAsync(val.mqttRawData);
+                            }
                             break;
                     }
                 }
@@ -122,7 +127,7 @@ namespace SkeletonApi.IotHub.Services
                 {
                     using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        var scoped = scope.ServiceProvider.GetRequiredService<IEnginePartRepository>();
+                        var scoped = scope.ServiceProvider.GetRequiredService<IDiviceDateRepository>();
                         List<MqttRawValue> mqttRawValues = new List<MqttRawValue>();
                         foreach (var row in value?.Values)
                         {
@@ -137,6 +142,7 @@ namespace SkeletonApi.IotHub.Services
                     await Console.Out.WriteLineAsync(ex.Message);
                 }
             }
+
         }
     }
 }
