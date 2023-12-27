@@ -97,7 +97,6 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                                     break;
                                 }
                             default:
-                                //var query = @"insert into ""EngineParts"" (engine_id,cyl_head,cr_cs_l,cr_cs_r,cyl_comp,cr_shft,status,date_time) values (@engineid,@cylhead,@crcsl,@crcsr,@cylcomp,@crshft,@status,@datetime)";
                                 await Console.Out.WriteLineAsync("NULL");
                                 break;
                         }
