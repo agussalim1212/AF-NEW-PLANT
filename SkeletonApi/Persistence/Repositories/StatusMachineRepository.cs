@@ -1,10 +1,6 @@
 ﻿using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Persistence.Repositories
 {
@@ -17,8 +13,7 @@ namespace SkeletonApi.Persistence.Repositories
             _RepoMachine = RepoMachine;
         }
 
-       public async Task<IEnumerable<Machine>> GetAllMachinesAsync() => 
-            await _RepoMachine.GetAllAsync();
+       public async Task<IEnumerable<Machine>> GetAllMachinesAsync() => await _RepoMachine.GetAllAsync();
        
     }
 }
