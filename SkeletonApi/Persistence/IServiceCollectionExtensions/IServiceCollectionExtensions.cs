@@ -3,9 +3,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SkeletonApi.Application.Interfaces;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
+using SkeletonApi.Application.Interfaces.Repositories.Dapper;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.Repositories;
-
+using SkeletonApi.Persistence.Repositories.Dapper;
 
 namespace SkeletonApi.Persistence.IServiceCollectionExtensions
 {
@@ -40,6 +42,7 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
                 .AddTransient(typeof(IGenRepository<>), typeof(GenRepository<>))
                 .AddTransient(typeof(IDataRepository<>), typeof(DataRepository<>))
+                .AddScoped<DapperUnitOfWorkContext>()
                 .AddTransient<ISubjectRepository, SubjectRepository>()
                 .AddTransient<IMachinesRepository, MachinesRepository>()
                 .AddTransient<ICategoryMachineRepository, CategoryMachinesRepository>()
@@ -49,6 +52,8 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient<IStatusMachineRepository, StatusMachineRepository>()
                 .AddTransient<IDetailGensubRespository, DetailGensubRepository>()
                 .AddTransient<IDetailAssyUnitRepository, DetailAssyUnitRepository>()
+                .AddScoped<IDiviceDateRepository, DeviceDataRepository>()
+                .AddScoped<IEnginePartRepository, EnginePartRepository>()
                 .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<ISettingRepository, SettingRepository>()
                 .AddTransient<IDetailAssyWheelLineRepository, DetailAssyWheelLineRepository>();

@@ -12,6 +12,7 @@ using SkeletonApi.Persistence.Repositories;
 using SkeletonApi.Persistence.Repositories.Configuration;
 using SkeletonApi.Presentation.ActionFilter;
 using SkeletonApi.WebAPI.Extensions;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) =>

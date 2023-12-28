@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Common.Interfaces;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Domain.Entities.Tsdb;
 using System.Data;
-
+using AirConsumption = SkeletonApi.Domain.Entities.Tsdb.AirConsumption;
 
 namespace SkeletonApi.Persistence.Contexts
 {
@@ -40,8 +41,16 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<MaintCorrective> MaintCorrectives => Set<MaintCorrective>();
         public DbSet<Notifications> Notifications => Set<Notifications>();
         public DbSet<StatusMachine> StatusMachines => Set<StatusMachine>();
-        
-        
+        public DbSet<Engine> Engines => Set<Engine>();
+        public DbSet<EnginePart> EngineParts => Set<EnginePart>();
+        public DbSet<AirConsumption> AirConsumptions => Set<AirConsumption>();
+        public DbSet<ElectGntr> ElectGntrs => Set<ElectGntr>();
+        public DbSet<FrequencyInverter> FrequencyInverters => Set<FrequencyInverter>();
+        public DbSet<ListQuality> ListQualities => Set<ListQuality>();
+        public DbSet<MachineInformation> MachineInformation => Set<MachineInformation>();
+        public DbSet<PowerConsumption> PowerConsumptions => Set<PowerConsumption>();
+        public DbSet<StopLine> StopLines => Set<StopLine>();
+        public DbSet<TotalProduction> TotalProductions => Set<TotalProduction>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

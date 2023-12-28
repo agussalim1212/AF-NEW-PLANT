@@ -868,6 +868,60 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("SubjectHasMachine", (string)null);
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.AirConsumption", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("AirConsumptions");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.ElectGntr", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("ElectGntrs");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.EnginePart", b =>
                 {
                     b.Property<string>("Coolant")
@@ -904,6 +958,168 @@ namespace SkeletonApi.WebAPI.Migrations
                         .HasColumnName("abs");
 
                     b.ToTable("EngineParts");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.FrequencyInverter", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("FrequencyInverters");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.ListQuality", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("ListQualities");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.MachineInformation", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("MachineInformation");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.PowerConsumption", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("PowerConsumptions");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.StopLine", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("StopLines");
+                });
+
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.TotalProduction", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Quality")
+                        .HasColumnType("boolean")
+                        .HasColumnName("quality");
+
+                    b.Property<long>("Time")
+                        .HasColumnType("bigint")
+                        .HasColumnName("time");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.ToTable("TotalProductions");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.User", b =>

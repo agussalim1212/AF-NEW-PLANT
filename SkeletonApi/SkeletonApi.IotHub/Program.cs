@@ -9,6 +9,8 @@ using SkeletonApi.IotHub.Hubs;
 using SkeletonApi.IotHub.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Persistence.Repositories.Configuration;
+using SkeletonApi.Application.Interfaces;
+using SkeletonApi.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,7 @@ builder.Services.AddScoped<IDapperWriteDbConnection, DapperWriteDbConnection>();
 //builder.Services.AddObservablePipelines();
 //builder.Services.AddSingleton<IUserRepository>();
 builder.Services.AddSingleton<StatusMachineStore>();
+builder.Services.AddHttpClient<IRestApiClientService, RestApiClientService>();
 //builder.Services.AddSingleton<Hub<IMachineHealthHub>, MachineHealthHub>();
 
 builder.Services.AddSingleton<IIoTHubEventHandler<MqttRawDataEncapsulation>,IotHubMqttEventHandler>();

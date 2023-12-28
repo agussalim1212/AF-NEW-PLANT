@@ -13,7 +13,6 @@ using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.TotalP
 using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-
 using System.Globalization;
 
 
