@@ -1,0 +1,65 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\2023-11-22 (1).png",
+      "PackagePath": "staticwebassets\\FotoPath\\2023-11-22 (1).png"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\2023-11-22 (10).png",
+      "PackagePath": "staticwebassets\\FotoPath\\2023-11-22 (10).png"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\2023-11-22 (34).png",
+      "PackagePath": "staticwebassets\\FotoPath\\2023-11-22 (34).png"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\2023-11-22 (7).png",
+      "PackagePath": "staticwebassets\\FotoPath\\2023-11-22 (7).png"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\2023-11-22 (9).png",
+      "PackagePath": "staticwebassets\\FotoPath\\2023-11-22 (9).png"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\WhatsApp Image 2023-12-06 at 16.24.51.jpeg",
+      "PackagePath": "staticwebassets\\FotoPath\\WhatsApp Image 2023-12-06 at 16.24.51.jpeg"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\erd.png",
+      "PackagePath": "staticwebassets\\FotoPath\\erd.png"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\images.jpeg",
+      "PackagePath": "staticwebassets\\FotoPath\\images.jpeg"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\img.png",
+      "PackagePath": "staticwebassets\\FotoPath\\img.png"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\npwp.jpg",
+      "PackagePath": "staticwebassets\\FotoPath\\npwp.jpg"
+    },
+    {
+      "Id": "C:\\AFFFF\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\profiles.png",
+      "PackagePath": "staticwebassets\\FotoPath\\profiles.png"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.SkeletonApi.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.build.SkeletonApi.WebAPI.props",
+      "PackagePath": "build\\SkeletonApi.WebAPI.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.SkeletonApi.WebAPI.props",
+      "PackagePath": "buildMultiTargeting\\SkeletonApi.WebAPI.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.buildTransitive.SkeletonApi.WebAPI.props",
+      "PackagePath": "buildTransitive\\SkeletonApi.WebAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

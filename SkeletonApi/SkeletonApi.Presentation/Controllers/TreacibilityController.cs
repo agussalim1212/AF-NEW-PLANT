@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagination;
+using SkeletonApi.Application.Features.Treacibility.Queries.GetDetailTreacibility;
 using SkeletonApi.Shared;
 using System;
 using System.Collections.Generic;
@@ -49,6 +51,12 @@ namespace SkeletonApi.Presentation.Controllers
 
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
+        }
+
+        [HttpGet("get-traceability-detail")]
+        public async Task<ActionResult<Result<GetTreacibilityDetailDto>>> GetAllTreacibility(string engine_id, string torsi)
+        {
+            return await _mediator.Send(new GetTreacibilityDetailQuery(engine_id, torsi));
         }
     }
 }
