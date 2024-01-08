@@ -1,11 +1,5 @@
 ﻿using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.EnergyConsumptionAssyUnitLine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.AirConsumption
 {
@@ -15,6 +9,12 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Ai
         public string MachineName { get; set; }
         [JsonPropertyName("subject_name")]
         public string SubjectName { get; set; }
+        [JsonPropertyName("maximum")]
+        public decimal? Maximum { get; set; }
+        [JsonPropertyName("medium")]
+        public decimal? Medium { get; set; }
+        [JsonPropertyName("minimum")]
+        public decimal? Minimum { get; set; }
         [JsonPropertyName("data")]
         public List<AirDto> Data { get; set; }
        

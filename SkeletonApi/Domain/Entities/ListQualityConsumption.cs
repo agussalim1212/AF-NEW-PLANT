@@ -61,13 +61,22 @@ namespace SkeletonApi.Domain.Entities
         public string Value { get; set; }
     }
 
-    public class EnergyConsumption
+    public class EnergyConsumptionDetail
     {
         public DateTime Bucket { get; set; }
         public string Id { get; set; }
-        public string Value { get; set; }
+        public decimal FirstValue { get; set; }
+        public decimal LastValue { get; set; }
     }
 
+    public class EnergyConsumptionTop
+    {
+        public DateTime DayBucket { get; set; }
+        public string Id { get; set; }
+        public decimal FirstValue { get; set; }
+        public decimal LastValue { get; set; }
+        public decimal Value { get; set; }
+    }
     public class AirConsumption
     {
         public DateTime Bucket { get; set; }
@@ -82,20 +91,31 @@ namespace SkeletonApi.Domain.Entities
         public string LastValue { get; set; }
     }
 
-    public class EnergyConsumptionDetail
+    public class EnergyConsumption
     {
-        public DateTime Bucket { get; set; }
+        public DateTime DayBucket { get; set; }
         public string Id { get; set; }
-        public string FirstValue { get; set; }
-        public string LastValue { get; set; }
+        public decimal FirstValue { get; set; }
+        public decimal LastValue { get; set; }
+        public decimal Value { get; set; }
+
     }
 
     public class AirConsumptionDetail
     {
-        public DateTime Bucket { get; set; }
+        public DateTime DayBucket { get; set; }
         public string Id { get; set; }
-        public string FirstValue { get; set; }
-        public string LastValue { get; set; }
+        public decimal FirstValue { get; set; }
+        public decimal LastValue { get; set; }
+    }
+
+    public class AirConsumptionTop
+    {
+        public DateTime DayBucket { get; set; }
+        public string Id { get; set; }
+        public decimal FirstValue { get; set; }
+        public decimal LastValue { get; set; }
+        public decimal Value { get; set; }
     }
 
     public class ElectricConsumptionDetail

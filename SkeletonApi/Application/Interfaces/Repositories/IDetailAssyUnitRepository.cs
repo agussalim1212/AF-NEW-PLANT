@@ -8,6 +8,7 @@ using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQu
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrake;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRace;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage;
+using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.MachineInformation;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.TotalProduction;
 using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 
@@ -15,6 +16,7 @@ namespace SkeletonApi.Application.Interfaces.Repositories
 {
     public interface IDetailAssyUnitRepository
     {
+        Task<GetAllMachineInformationDto> GetAllMachineInformationAsync(Guid machine_id);
         Task<GetAllTotalProductionDto> GetAllTotalProduction(Guid machine_id, string type, DateTime start, DateTime end);
         Task<GetAllFrequencyInverterDto> GetAllFrequencyInverter(Guid machine_id, string type, DateTime start, DateTime end);
         Task<GetAllAirConsumptionDto> GetAllAirConsumption(Guid machine_id, string type, DateTime start, DateTime end);
@@ -27,6 +29,6 @@ namespace SkeletonApi.Application.Interfaces.Repositories
         Task<List<GetListQualityPressConeRaceDto>> GetAllListQualityPressConeRace(Guid machineId, string type, DateTime start, DateTime end);
         Task<List<GetListQualityRobotScanImageDto>> GetAllListQualityRobotScanImage(Guid machineId, string type, DateTime start, DateTime end);
         //Energy Consumption Summary yang Di Machine Information
-        Task<GetAllDetailEnergyConsumptionDto> GetAllEnergyConsumptionSummary(Guid machine_id, string type, DateTime start, DateTime end);
+        Task<List<GetAllDetailEnergyConsumptionDto>> GetAllEnergyConsumptionSummary(string type, DateTime start, DateTime end);
     }
 }

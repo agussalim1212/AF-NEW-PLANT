@@ -7,13 +7,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SkeletonApi.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Part1 : Migration
+    public partial class part1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Accounts",
+                name: "Account",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -28,7 +28,7 @@ namespace SkeletonApi.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts", x => x.id);
+                    table.PrimaryKey("PK_Account", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,6 +43,20 @@ namespace SkeletonApi.WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActivityUsers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AirConsumptions",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
                 });
 
             migrationBuilder.CreateTable(
@@ -116,8 +130,9 @@ namespace SkeletonApi.WebAPI.Migrations
                     table.PrimaryKey("PK_CategoryMachines", x => x.id);
                 });
 
+
             migrationBuilder.CreateTable(
-                name: "Dummy",
+                name: "ElectGntrs",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -128,6 +143,42 @@ namespace SkeletonApi.WebAPI.Migrations
                 },
                 constraints: table =>
                 {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EngineParts",
+                columns: table => new
+                {
+                    engine_id = table.Column<string>(type: "text", nullable: false),
+                    torsi = table.Column<string>(type: "text", nullable: true),
+                    abs = table.Column<string>(type: "text", nullable: true),
+                    foto_data_ng = table.Column<string>(type: "text", nullable: true),
+                    oil_brake = table.Column<string>(type: "text", nullable: true),
+                    coolant = table.Column<string>(type: "text", nullable: true),
+                    status = table.Column<string>(type: "text", nullable: true),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Engines",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    engine_id = table.Column<string>(type: "text", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: true),
+                    update_by = table.Column<Guid>(type: "uuid", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    update_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    deleted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Engines", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -147,6 +198,48 @@ namespace SkeletonApi.WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FrameNumbers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FrequencyInverters",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ListQualities",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MachineInformation",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
                 });
 
             migrationBuilder.CreateTable(
@@ -238,6 +331,20 @@ namespace SkeletonApi.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PowerConsumptions",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Settings",
                 columns: table => new
                 {
@@ -275,6 +382,20 @@ namespace SkeletonApi.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StopLines",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Subject",
                 columns: table => new
                 {
@@ -291,6 +412,20 @@ namespace SkeletonApi.WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Subject", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TotalProductions",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    value = table.Column<string>(type: "text", nullable: false),
+                    quality = table.Column<bool>(type: "boolean", nullable: false),
+                    time = table.Column<long>(type: "bigint", nullable: false),
+                    date_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
                 });
 
             migrationBuilder.CreateTable(
@@ -552,10 +687,13 @@ namespace SkeletonApi.WebAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "Account");
 
             migrationBuilder.DropTable(
                 name: "ActivityUsers");
+
+            migrationBuilder.DropTable(
+                name: "AirConsumptions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -579,7 +717,25 @@ namespace SkeletonApi.WebAPI.Migrations
                 name: "Dummy");
 
             migrationBuilder.DropTable(
+                name: "ElectGntrs");
+
+            migrationBuilder.DropTable(
+                name: "EngineParts");
+
+            migrationBuilder.DropTable(
+                name: "Engines");
+
+            migrationBuilder.DropTable(
                 name: "FrameNumberHasSubject");
+
+            migrationBuilder.DropTable(
+                name: "FrequencyInverters");
+
+            migrationBuilder.DropTable(
+                name: "ListQualities");
+
+            migrationBuilder.DropTable(
+                name: "MachineInformation");
 
             migrationBuilder.DropTable(
                 name: "MaintCorrectives");
@@ -591,13 +747,22 @@ namespace SkeletonApi.WebAPI.Migrations
                 name: "Notifications");
 
             migrationBuilder.DropTable(
+                name: "PowerConsumptions");
+
+            migrationBuilder.DropTable(
                 name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "StatusMachines");
 
             migrationBuilder.DropTable(
+                name: "StopLines");
+
+            migrationBuilder.DropTable(
                 name: "SubjectHasMachine");
+
+            migrationBuilder.DropTable(
+                name: "TotalProductions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -160,7 +160,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.ActivityUser", b =>
