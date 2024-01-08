@@ -63,7 +63,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                         AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
                         ORDER BY id DESC, bucket DESC", new { vid = Vid, starttime = query.Start.Date, endtime = query.End.Date });
 
-                        var total = energyConsumption.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
+                        var total = energyConsumption.GroupBy(p => new { p.DayBucket.Year, p.DayBucket.Month, p.DayBucket.Day }).Select(g => new
                         {
                             date_time = new DateTime(g.Key.Year, g.Key.Month, g.Key.Day),
                             last = g.Sum(k => Convert.ToDecimal(k.LastValue)),
@@ -113,8 +113,8 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                         var groupedQuerys = energyConsumption
                           .GroupBy(d => new
                           {
-                              d.Bucket.Month,
-                              d.Bucket.Year
+                              d.DayBucket.Month,
+                              d.DayBucket.Year
                           })
                           .Select(g => new
                           {
@@ -167,7 +167,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                           {
                               //o.DateTime.Year,
                               //o.DateTime.Month,
-                              WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.Bucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
+                              WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.DayBucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
                           })
                           .Select(g => new
                           {
@@ -219,7 +219,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                         var groupedQuerys = energyConsumption
                           .GroupBy(d => new
                           {
-                              d.Bucket.Year
+                              d.DayBucket.Year
                           })
                           .Select(g => new
                           {
@@ -286,8 +286,8 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.A
                                  Data = energyConsumption.Select(val => new AirAssyWheelDto
                                  {
                                      Value = Convert.ToDecimal(val.FirstValue) - Convert.ToDecimal(val.LastValue),
-                                     Label = val.Bucket.AddHours(7).ToString("ddd"),
-                                     DateTime = val.Bucket,
+                                     Label = val.DayBucket.AddHours(7).ToString("ddd"),
+                                     DateTime = val.DayBucket,
                                  }).OrderByDescending(x => x.DateTime).ToList()
 
                              };

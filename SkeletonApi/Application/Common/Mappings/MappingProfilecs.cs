@@ -14,9 +14,12 @@ using SkeletonApi.Application.Features.ManagementUser.Roles;
 using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.CreatePermissions;
 using SkeletonApi.Application.Features.ManagementUser.Permissions;
 using SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.UpdatePermissions;
-using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 using SkeletonApi.Application.Features.Accounts;
 using SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAccount;
+using SkeletonApi.Application.Features.Settings.Commands.CreateSetting;
+using SkeletonApi.Application.Features.Settings;
+using SkeletonApi.Domain.Entities.Tsdb;
+using SkeletonApi.Application.Features.Dashboard.Traceability_History.Queries;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -49,6 +52,10 @@ namespace SkeletonApi.Application.Common.Mappings
             CreateMap<CreateAccountRequest, Account>();
             CreateMap<Account, CreateAccountResponseDto>();
 
+            CreateMap<CreateSettingRequest, Setting>();
+            CreateMap<Setting, CreateSettingResponseDto>();
+
+            //CreateMap<EnginePart, GetAllTraceabilityHistoryDto>();
 
         }
 

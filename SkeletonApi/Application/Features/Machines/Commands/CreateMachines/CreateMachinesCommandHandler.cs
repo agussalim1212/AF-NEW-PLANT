@@ -22,11 +22,12 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
         public async Task<Result<CreateMachineResponseDto>> Handle(CreateMachineRequest request, CancellationToken cancellationToken)
         {
             var Machine = _mapper.Map<Machine>(request);
+            var subjectMachineResponse = _mapper.Map<CreateMachineResponseDto>(Machine);
             var validateData = await _machinesRepository.ValidateData(Machine);
 
             if (validateData != true)
             {
-                return await Result<CreateMachineResponseDto>.FailureAsync("Data already exist");
+                return await Result<CreateMachineResponseDto>.FailureAsync(subjectMachineResponse,"Data already exist");
             }
 
             Machine.CreatedAt = DateTime.UtcNow;
@@ -35,7 +36,6 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
             await _unitOfWork.Repository<Machine>().AddAsync(Machine);
             Machine.AddDomainEvent(new MachinesCreatedEvent(Machine));
             await _unitOfWork.Save(cancellationToken);
-            var subjectMachineResponse = _mapper.Map<CreateMachineResponseDto>(Machine);
             return await Result<CreateMachineResponseDto>.SuccessAsync(subjectMachineResponse, "Machine created.");
 
         }

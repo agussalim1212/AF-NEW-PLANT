@@ -1,16 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SkeletonApi.Application.Features.Settings;
 using SkeletonApi.Application.Features.Settings.Commands.CreateSetting;
 using SkeletonApi.Application.Features.Settings.Queries.GetSettingWithPagination;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -53,7 +50,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpPost("create-setting")]
-        public async Task<ActionResult<Result<Setting>>> CreateSetting(CreateSettingCommand command)
+        public async Task<ActionResult<Result<CreateSettingResponseDto>>> CreateSetting(CreateSettingRequest command)
         {
             return await _mediator.Send(command);
         }

@@ -1,5 +1,4 @@
-﻿using ClosedXML.Excel;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.AirConsumption;
@@ -22,7 +21,6 @@ using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUni
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrakeWithPagination.Download;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRaceWithPagination.Download;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage_AbsTesterWithPagination.Download;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Queries.DownloadList;
 using SkeletonApi.Shared;
 using System.Text.Json;
 

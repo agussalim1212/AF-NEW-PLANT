@@ -55,6 +55,7 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddScoped<IDiviceDateRepository, DeviceDataRepository>()
                 .AddScoped<IEnginePartRepository, EnginePartRepository>()
                 .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<ISettingRepository, SettingRepository>()
                 .AddTransient<IDetailAssyWheelLineRepository, DetailAssyWheelLineRepository>();
                 
 

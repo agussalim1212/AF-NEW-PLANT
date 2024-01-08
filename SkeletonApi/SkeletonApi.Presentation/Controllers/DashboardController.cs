@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.Dashboard._5_Top_Air_Consumptions.Queries;
 using SkeletonApi.Application.Features.Dashboard._5_Top_Energy_Consumptions;
 using SkeletonApi.Application.Features.Dashboard._5_Top_Machine_Maintenance.Queries;
+using SkeletonApi.Application.Features.Dashboard.Traceability_History.Queries;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.EnergyConsumptionAssyUnitLine;
 using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
 using SkeletonApi.Shared;
@@ -48,6 +49,13 @@ namespace SkeletonApi.Presentation.Controllers
         public async Task<ActionResult<Result<List<GetAllDetailEnergyConsumptionDto>>>> GetEnergyConsumption(string type, DateTime start, DateTime end)
         {
             return await _mediator.Send(new GetAllDetailEnergyConsumptionQuery(type, start, end));
+        }
+
+        [HttpGet("traceability-history")]
+        // [ServiceFilter(typeof(AuditLoggingFilter))]
+        public async Task<ActionResult<Result<List<GetAllTraceabilityHistoryDto>>>> GetTraceability()
+        {
+            return await _mediator.Send(new GetAllTraceabilityHistoryQuery());
         }
     }
 }
