@@ -28,7 +28,10 @@ namespace SkeletonApi.Presentation.Controllers
         [HttpGet("wizard")]
         public async Task<ActionResult> Wizard(string path)
         {
-            Process.Start(path);
+
+           // StreamReader reader = new StreamReader("C:\\wizard\\Wizard_EID\\wpf_wiz_af.db");
+
+            Process.Start(path, "C:\\wizard\\Wizard_EID\\wpf_wiz_af.db");
             return Ok(path);
         }
     }

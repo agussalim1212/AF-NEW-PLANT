@@ -42,3 +42,31 @@
 2023-12-29 11:18:11.587|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
 2023-12-29 11:18:11.588|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
 2023-12-29 11:18:32.365|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
+2024-01-04 11:18:49.264|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
+2024-01-04 11:18:49.277|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
+2024-01-04 11:18:49.278|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-04 11:18:50.991|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
+2024-01-04 11:19:11.261|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
+2024-01-04 11:19:11.269|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
+2024-01-04 11:19:11.270|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-04 11:19:32.920|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
+2024-01-05 08:44:28.242|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
+2024-01-05 08:44:28.253|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
+2024-01-05 08:44:28.253|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-05 08:45:00.111|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
+2024-01-05 10:42:56.890|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
+2024-01-05 10:42:56.899|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
+2024-01-05 10:42:56.900|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-05 10:43:33.582|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
+2024-01-05 10:43:54.273|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
+2024-01-05 10:43:54.283|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
+2024-01-05 10:43:54.283|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-05 10:44:04.986|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
+2024-01-05 11:08:16.371|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
+2024-01-05 11:08:16.380|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
+2024-01-05 11:08:16.380|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-05 11:16:03.327|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
+2024-01-05 11:16:16.169|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
+2024-01-05 11:16:16.179|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
+2024-01-05 11:16:16.179|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-05 11:17:15.230|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
