@@ -17,7 +17,7 @@ namespace SkeletonApi.Domain.Common.Abstracts
         [Column("deleted_by")]
         public Guid? DeletedBy { get; set; }
         [Column("created_at")]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } 
         [Column("update_at")]
         public DateTime? UpdatedAt { get; set; }
         [Column("deleted_at")]

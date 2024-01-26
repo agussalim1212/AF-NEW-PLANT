@@ -9,6 +9,13 @@ namespace SkeletonApi.Persistence.Repositories
     {
         private readonly IGenericRepository<Subject> _repository;
 
+        public SubjectRepository(IGenericRepository<Subject> RepoMachine)
+        {
+            _repository = RepoMachine;
+        }
+
+        public async Task<IEnumerable<Subject>> GetAllSubjectAsync() => await _repository.GetAllAsync();
+
         public async Task<bool> ValidateData(Subject subject)
         {
             var x = await _repository.Entities.Where(o => subject.Vid.ToLower() == o.Vid.ToLower()).CountAsync();

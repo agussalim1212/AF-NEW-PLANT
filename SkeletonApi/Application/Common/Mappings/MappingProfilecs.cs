@@ -20,6 +20,7 @@ using SkeletonApi.Application.Features.Settings.Commands.CreateSetting;
 using SkeletonApi.Application.Features.Settings;
 using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.Application.Features.Dashboard.Traceability_History.Queries;
+using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.UploadExcel;
 
 namespace SkeletonApi.Application.Common.Mappings
 {
@@ -54,6 +55,8 @@ namespace SkeletonApi.Application.Common.Mappings
 
             CreateMap<CreateSettingRequest, Setting>();
             CreateMap<Setting, CreateSettingResponseDto>();
+
+            CreateMap<MaintenacePreventive, UploadExcelMaintPrevDto>().ReverseMap();
 
             //CreateMap<EnginePart, GetAllTraceabilityHistoryDto>();
 

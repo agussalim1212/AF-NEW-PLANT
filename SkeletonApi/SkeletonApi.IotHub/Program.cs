@@ -29,15 +29,20 @@ builder.Services.AddScoped<IDapperWriteDbConnection, DapperWriteDbConnection>();
 //builder.Services.AddObservablePipelines();
 //builder.Services.AddSingleton<IUserRepository>();
 builder.Services.AddSingleton<StatusMachineStore>();
+builder.Services.AddSingleton<NotificationStore>();
+builder.Services.AddSingleton<SubjectStore>();
 builder.Services.AddHttpClient<IRestApiClientService, RestApiClientService>();
 //builder.Services.AddSingleton<Hub<IMachineHealthHub>, MachineHealthHub>();
 
 builder.Services.AddSingleton<IIoTHubEventHandler<MqttRawDataEncapsulation>,IotHubMqttEventHandler>();
 builder.Services.AddSingleton<IotHubMachineHealthEventHandler, IotHubMachineHealthEventHandler>();
+builder.Services.AddSingleton<IotHubNotificationEventHandler, IotHubNotificationEventHandler>();
 
 
 //builder.Services.AddSingleton<PipeServices>();
 builder.Services.AddHostedService<PersistedConsumer>();
+builder.Services.AddHostedService<NotificationConsumer>();
+
 //builder.Services.AddConfiguredHealthChecks(builder.Configuration);
 //builder.Services.AddJwtAuthentication(configuration);
 builder.Services.AddSignalR(opt =>
@@ -83,6 +88,8 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<BrokerHub>("/iothub");
     endpoints.MapHub<MachineHealthHub>("/machine-health-hub");
+    endpoints.MapHub<NotificationHub>("/notification-hub");
+    
 });
 //app.MapGet("api/traceability-result-subject", (SubjectStore subjectStore) =>
 //{
@@ -102,6 +109,7 @@ app.MapGet("api/machine-health-subject", (StatusMachineStore machineStore) =>
     return data;
 
 });
+
 
 app.Run();
 

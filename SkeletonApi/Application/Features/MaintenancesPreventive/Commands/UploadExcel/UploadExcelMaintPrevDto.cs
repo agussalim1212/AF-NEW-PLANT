@@ -23,16 +23,18 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
 
         [JsonPropertyName("start_date")]
         public DateOnly? StartDate { get; set; }
+        [Column("created_at")]
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
         [JsonPropertyName("actual")]
         public string? Actual { get; set; } = null;
 
-        //[JsonPropertyName("machine_id")]
-        //public Guid? MachineId { get; set; }
+        [JsonPropertyName("machine_id")]
+        public Guid? MachineId { get; set; }
 
         [JsonPropertyName("end_date")]
         public DateOnly? EndDate { get; set; } = null;
 
-        [NotMapped] public bool ok { get; set; }
+        [NotMapped] public bool ok { get; set; } = false;
     }
 }
