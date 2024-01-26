@@ -54,14 +54,14 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.Ge
             || query.search_term.ToLower() == c.ClaimType.ToLower()
             || query.search_term.ToLower() == c.Role.Name.ToLower())
            .Include(k => k.Role)
-           .GroupBy(n => new { n.Role.Name, n.ClaimType, n.UpdatedAt, n.Role.Id }).Select(m => new GetPermissionsWithPaginationDto
+           .GroupBy(n => new { n.Role.Name, n.ClaimType, n.UpdatedAt.Value.Date, n.Role.Id }).Select(m => new GetPermissionsWithPaginationDto
            {
                Id = m.Key.Id,
                UserName = user.Where(f => m.Key.Id == f.Id).Select(g => g.UserName).FirstOrDefault(),
                Email = user.Where(f => m.Key.Id == f.Id).Select(g => g.Email).FirstOrDefault(),
                RoleName = m.Key.Name,
                Permissions = m.Key.ClaimType,
-               UpdateAt = m.Key.UpdatedAt.Value.AddHours(7)
+               UpdateAt = m.Key.Date.AddHours(7)
            })
 
             .ProjectTo<GetPermissionsWithPaginationDto>(_mapper.ConfigurationProvider)

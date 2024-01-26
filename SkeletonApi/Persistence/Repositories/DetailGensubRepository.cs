@@ -203,7 +203,7 @@ namespace SkeletonApi.Persistence.Repositories
                                  Minimum = setting.Minimum,
                                  Data = groupedQuerys.Select(val => new EnergyGensubDto
                                  {
-                                     ValueKwh = val.total_last - val.total_first,
+                                     ValueKwh = val.total_last - val.total_first,//REVISI SUM DI HARI ITU
                                      ValueCo2 = Math.Round((val.total_last - val.total_first) * Convert.ToDecimal(0.87), 2),
                                      Label = val.date_group.AddHours(7).ToString("MMM"),
                                      DateTime = val.date_group,
