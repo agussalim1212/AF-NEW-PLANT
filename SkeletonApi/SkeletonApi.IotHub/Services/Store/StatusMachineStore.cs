@@ -26,8 +26,6 @@ namespace SkeletonApi.IotHub.Services.Store
                 var scoped = scope.ServiceProvider.GetRequiredService<IStatusMachineRepository>();
                 var machines = scoped.GetAllMachinesAsync().Result;
 
-                //MainSubject traceAbilityResult = scoped.GetMainSubjectAsync("Process-Part").Result;
-                //_traceabilityResultSubjectStore = _mapper.Map<MainSubjectStoreDto>(traceAbilityResult);
                 _Machine = _mapper.Map<IEnumerable<MachineStatusDto>>(machines);
             }
             return Task.CompletedTask;

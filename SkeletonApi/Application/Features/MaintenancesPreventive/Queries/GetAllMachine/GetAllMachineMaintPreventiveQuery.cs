@@ -65,11 +65,10 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetAll
                                 CountPlan = c.Count(j => j.StartDate != null),
                                 label = new DateTime(c.Key.StartDate.Value.Year, c.Key.StartDate.Value.Month, c.Key.StartDate.Value.Day).ToString("dd MMM", new CultureInfo("en-US")),
                                 StartDate = c.Key.StartDate.Value,
-                            })
-                            //.ProjectTo<GetAllMAchineMaintPreventiveDto>(_mapper.ConfigurationProvider)
-                            .ToListAsync(cancellationToken);
+                            }).ToListAsync(cancellationToken);
 
             return await Result<List<GetAllMAchineMaintPreventiveDto>>.SuccessAsync(data, "Successfully fetch data");
         }
     }
 }
+ 

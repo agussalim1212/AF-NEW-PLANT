@@ -38,6 +38,11 @@ public class MappingProfile : Profile
         CreateMap<Machine, MachineStatusDto>();
         CreateMap<Machine, MachineStatusDto>().ReverseMap();
 
+        CreateMap<Setting, NotificationDto>().ReverseMap();
+        CreateMap<Subject, SubjectDto>().ReverseMap();
+        CreateMap<NotificationModel, Notifications>().ReverseMap();
+            
+
     }
 }
 

@@ -53,9 +53,6 @@ namespace SkeletonApi.IotHub.Services
                             if(val.mqttRawData.Values.Count(X => X.Vid.Contains("STATUS")) > 0) 
                             { 
                                 await PersistMachineHealthToDBAsync(val.mqttRawData);
-                            }
-                            else
-                            {
                                 await PersistDeviceDataToDBAsync(val.mqttRawData);
                             }
                             break;

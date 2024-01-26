@@ -3,6 +3,7 @@ using ClosedXML.Excel;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using SkeletonApi.Application.Common.Mappings;
+using SkeletonApi.Application.Features.Machines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -27,18 +28,20 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMaintenancesPreventive _maintenancesPreventive;
 
-        public UploadExcelMaintPrevCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UploadExcelMaintPrevCommandHandler(IUnitOfWork unitOfWork, IMaintenancesPreventive maintenancesPreventive, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _maintenancesPreventive = maintenancesPreventive;
         }
 
         public async Task<Result<List<UploadExcelMaintPrevDto>>> Handle(UploadExcelMaintPrevCommand command, CancellationToken cancellationToken)
         {
             var excelData = new MaintenacePreventive();
 
-            var Resp = new UploadExcelMaintPrevDto();
+            var resp = new UploadExcelMaintPrevDto();
             var data = new List<UploadExcelMaintPrevDto>();
             using (var stream = new MemoryStream())
             {
@@ -64,23 +67,21 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
                                 Name = row.Cell(1).Value?.ToString(),
                                 Plan = row.Cell(2).Value?.ToString(),
                                 StartDate = DateOnly.TryParse(row.Cell(3).Value?.ToString(),
-                                out DateOnly start_Date) ? start_Date : start_Date,
-
-                                CreatedAt = DateTime.UtcNow,
+                                out DateOnly startDate) ? startDate : startDate,
                             };
 
-                            Resp = new UploadExcelMaintPrevDto()
+                           var maintenance =  _maintenancesPreventive.GetMaintenance(excelData);
+                            resp = new UploadExcelMaintPrevDto()
                             {
-                                Id = excelData.Id,
-                                Name = excelData.Name,
-                                Plan = excelData.Plan,
+                                Id = maintenance.Id,
+                                Name = maintenance.Name,
+                                MachineId = maintenance.MachineId,
+                                Plan = maintenance.Plan,
                                 StartDate = (DateOnly)excelData.StartDate,
-                                Actual = null,
-                                EndDate = null,
-                                ok = false,
                             };
-                            data.Add(Resp);
-                            await _unitOfWork.Repository<MaintenacePreventive>().AddAsync(excelData);
+                            data.Add(resp);
+                            var dataMaintenance = _mapper.Map<MaintenacePreventive>(resp);
+                            await _unitOfWork.Repository<MaintenacePreventive>().AddAsync(dataMaintenance);
                             await _unitOfWork.Save(cancellationToken);
                         }
                     }
