@@ -105,3 +105,4 @@
 2024-01-30 10:32:11.309|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application started. Press Ctrl+C to shut down.
 2024-01-30 10:32:11.319|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Hosting environment: "Production"
 2024-01-30 10:32:11.320|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Content root path: "C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI"
+2024-01-30 11:55:25.926|Level:Information|SourceContext:Microsoft.Hosting.Lifetime|Message:Application is shutting down...
