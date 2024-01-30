@@ -15,22 +15,6 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        //ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
-
-        //CreateMap<EnginePartDto, EnginePart>();
-        //CreateMap<MainSubject, MainSubjectListDto>();
-        //CreateMap<MainSubjectListDto, MainSubject>();
-        //CreateMap<MainSubject, MainSubject>();
-
-        //CreateMap<MqttRawValue, MqttRawValueEntity>()
-        //    .ForMember(c => c.Datetime, opt => opt.MapFrom(src => DateTimeOffset.FromUnixTimeMilliseconds(src.Time).DateTime));
-        //CreateMap<Subject, SubjectStoreDto>();
-        //CreateMap<MainSubject, MainSubjectStoreDto>();
-        //CreateMap<Subject, SubjectStoreDto>().ReverseMap();
-        //CreateMap<TraceabilityResult, TraceabilityResultDto>();
-        //CreateMap<TraceabilityResult, TraceabilityResultDto>().ReverseMap();
-
-        // CreateMap<ConsumptionDataResult, ConsumptionDataResultDto>().ReverseMap();
         CreateMap<EnginePartDto, EnginePart>().ReverseMap();
         CreateMap<MqttRawValue, MqttRawValueEntity>()
            .ForMember(c => c.Datetime, opt => opt.MapFrom(src => DateTimeOffset.FromUnixTimeMilliseconds(src.Time).DateTime));
@@ -41,10 +25,5 @@ public class MappingProfile : Profile
         CreateMap<Setting, NotificationDto>().ReverseMap();
         CreateMap<Subject, SubjectDto>().ReverseMap();
         CreateMap<NotificationModel, Notifications>().ReverseMap();
-            
-
     }
 }
-
-
-
