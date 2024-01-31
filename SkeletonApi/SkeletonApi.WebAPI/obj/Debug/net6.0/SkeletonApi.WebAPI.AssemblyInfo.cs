@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SkeletonApi.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96f487e89cd34f33a83dab7d233ba43f35c20619")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b7eb16c513ef65649f723c1fe9bf18faf8971ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("SkeletonApi.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SkeletonApi.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
