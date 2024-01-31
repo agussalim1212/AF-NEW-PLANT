@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.DeleteRoles;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
@@ -26,7 +24,7 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.D
         public async Task<Result<string>> Handle(DeletePermissionsRequest request, CancellationToken cancellationToken)
         {
            
-            var validateRole = await _roleManager.FindByIdAsync(request.Id.ToString());
+            var validateRole = await _roleManager.FindByIdAsync(request.Id);
             if (validateRole == null)
             {
                 return await Result<string>.FailureAsync("Role not found");

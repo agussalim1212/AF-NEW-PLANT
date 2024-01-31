@@ -1003,3 +1003,4 @@ C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\refint\Ske
 C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.pdb
 C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.genruntimeconfig.cache
 C:\AFFFF\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\ref\SkeletonApi.WebAPI.dll
+D:\AF-NEW-PLANT\SkeletonApi\SkeletonApi.WebAPI\obj\Debug\net6.0\SkeletonApi.WebAPI.sourcelink.json

@@ -1,17 +1,10 @@
 ﻿using Dapper;
-using SkeletonApi.Application.DTOs.RestApiData;
-using SkeletonApi.Application.Interfaces;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.Persistence.Interfaces;
 using SkeletonApi.Persistence.Repositories.Dapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Persistence.Repositories
 {

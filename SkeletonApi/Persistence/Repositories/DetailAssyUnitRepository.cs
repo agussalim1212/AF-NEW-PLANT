@@ -23,16 +23,16 @@ namespace SkeletonApi.Persistence.Repositories
 {
     public class DetailAssyUnitRepository : IDetailAssyUnitRepository
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IDapperReadDbConnection _dapperReadDbConnection;
+        private readonly IGenericRepository<Machine> _repository;
         private readonly ApplicationDbContext _dbContext;
-        public DetailAssyUnitRepository(IUnitOfWork unitOfWork, IDapperReadDbConnection dapperReadDbConnection, ApplicationDbContext dbContext)
+        public DetailAssyUnitRepository(IDapperReadDbConnection dapperReadDbConnection, ApplicationDbContext dbContext, IGenericRepository<Machine> repository)
         {
-            _unitOfWork = unitOfWork;
             _dapperReadDbConnection = dapperReadDbConnection;
             _dbContext = dbContext;
+            _repository = repository;
         }
-
+      
         public async Task<GetAllAirConsumptionDto> GetAllAirConsumption(Guid machine_id, string type, DateTime start, DateTime end)
         {
             var machine = await _dbContext.subjectHasMachines
@@ -3282,6 +3282,7 @@ namespace SkeletonApi.Persistence.Repositories
             return dt;
         }
 
+       
     }
 }
 
