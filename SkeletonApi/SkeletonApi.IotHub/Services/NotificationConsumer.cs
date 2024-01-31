@@ -29,7 +29,7 @@ namespace SkeletonApi.IotHub.Services
             IotHubNotificationEventHandler notificationEventHandler,
             NotificationStore notificationStore,
             SubjectStore subjectStore
-            
+
             )
         {
             _notificationStore = notificationStore;
@@ -48,17 +48,17 @@ namespace SkeletonApi.IotHub.Services
                 {
                     if (val.mqttRawData != null && val.topics != null)
                     {
-                        await PersistNotificationToDBAsync(val.mqttRawData);                        
+                        await PersistNotificationToDBAsync(val.mqttRawData);
                     }
                 });
 
             return Task.CompletedTask;
         }
 
-        private async Task PersistNotificationToDBAsync(MqttRawData value) 
+        private async Task PersistNotificationToDBAsync(MqttRawData value)
         {
             var Subject = _subjectStore.GetAllSubject();
-          
+
             if (value.Values is not null)
             {
                 using (var scope = _serviceScopeFactory.CreateScope())
@@ -73,25 +73,28 @@ namespace SkeletonApi.IotHub.Services
                                                MachineName = g.Last().ids.Subjects,
                                                Message = g.Last().vls.Value.ToString(),
                                                Datetime = DateTimeOffset.FromUnixTimeMilliseconds(g.Last().vls.Time).DateTime
-                                               
                                            };
-                    var notification = _notificationStore.GetAllSetting().Where(x => (x.SubjectName == notificationList.FirstOrDefault().MachineName 
-                    && Convert.ToDecimal(notificationList.FirstOrDefault().Message) > x.Maximum) ||
-                    (x.SubjectName == notificationList.FirstOrDefault().MachineName
-                    && Convert.ToDecimal(notificationList.FirstOrDefault().Message) < x.Minimum));
 
-                    var dataNotification = notificationList.Select(g => new NotificationModel
-                           {
-                                MachineName = g.MachineName,
-                                Message = $"ABNORMAL VALUE, CURRENT VALUE IS {g.Message}",
-                                Datetime = g.Datetime,
-                                Status = false
-                          });
-                    _notificationEventHandler.Dispatch(dataNotification);
+                    var notification = _notificationStore.GetAllSetting().Where(x => (x.SubjectName == notificationList.FirstOrDefault().MachineName
+                    && Convert.ToDecimal(notificationList.FirstOrDefault().Message) > x.Maximum && notificationList.FirstOrDefault().Message != "0") ||
+                    (x.SubjectName == notificationList.FirstOrDefault().MachineName && Convert.ToDecimal(notificationList.FirstOrDefault().Message) < x.Minimum
+                    && notificationList.FirstOrDefault().Message != "0"));
 
-                    var scoped = scope.ServiceProvider.GetRequiredService<INotificationRepository>();
-                    var mqttRawValueEntities = _mapper.Map<IEnumerable<Notifications>>(dataNotification);
-                    scoped.Creates(mqttRawValueEntities);
+                    if (notification.Count() != 0)
+                    {
+                        var dataNotification = notificationList.Select(g => new NotificationModel
+                        {
+                            MachineName = g.MachineName,
+                            Message = $"ABNORMAL VALUE, CURRENT VALUE IS {g.Message} IN {g.MachineName}",
+                            Datetime = g.Datetime,
+                            Status = false
+                        });
+                        _notificationEventHandler.Dispatch(dataNotification);
+
+                        var scoped = scope.ServiceProvider.GetRequiredService<INotificationRepository>();
+                        var mqttRawValueEntities = _mapper.Map<IEnumerable<Notifications>>(dataNotification);
+                        scoped.Creates(mqttRawValueEntities);
+                    }
                 }
             }
         }

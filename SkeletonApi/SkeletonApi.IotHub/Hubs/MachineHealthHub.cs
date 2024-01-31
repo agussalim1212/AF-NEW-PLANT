@@ -21,10 +21,6 @@ namespace SkeletonApi.IotHub.Hubs
         public ChannelReader<IEnumerable<MachineHealthModel>> RealtimeMachine()
         {
             return _machineHealthEventHandler.Observe().ToNewestValueStream(Context.ConnectionAborted);
-            //return _machineHealthEventHandler.Subscribe(subscriberName: typeof(PersistedConsumer).Name, action: async (val) =>
-            //{
-            //    return val.ToObservable().ToNewestValueStream(Context.ConnectionAborted);
-            //});
         }
     }
 }
