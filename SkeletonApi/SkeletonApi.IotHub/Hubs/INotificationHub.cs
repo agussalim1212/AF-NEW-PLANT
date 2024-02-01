@@ -5,7 +5,7 @@ namespace SkeletonApi.IotHub.Hubs
 {
     public interface INotificationHub
     {
-        public ChannelReader<IEnumerable<MachineHealthModel>> RealtimeNotification();
+        public ChannelReader<IEnumerable<NotificationModel>> RealtimeNotification();
     }
 }
 
