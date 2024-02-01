@@ -14,6 +14,12 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.El
         public string MachineName { get; set; }
         [JsonPropertyName("subject_name")]
         public string SubjectName { get; set; }
+        [JsonPropertyName("maximum")]
+        public decimal? Maximum { get; set; }
+        [JsonPropertyName("medium")]
+        public decimal? Medium { get; set; }
+        [JsonPropertyName("minimum")]
+        public decimal? Minimum { get; set; }
         [JsonPropertyName("data")]
         public List<ElectricDto> Data { get; set; }
     }

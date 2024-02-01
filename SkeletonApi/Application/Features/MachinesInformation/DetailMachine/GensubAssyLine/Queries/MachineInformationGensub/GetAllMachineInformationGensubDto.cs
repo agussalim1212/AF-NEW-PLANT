@@ -20,5 +20,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
         public decimal ValueRunning { get; set; }
         [JsonPropertyName("value_cycle_count")]
         public decimal CycleCount { get; set; }
+        [JsonPropertyName("value_last_time_calibration")]
+        public string LastTimeCalibration { get; set; }
     }
 }

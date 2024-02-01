@@ -3,8 +3,6 @@ using SkeletonApi.IotHub.Model;
 using SkeletonApi.IotHub.Services.Handler;
 using System.Text.Json;
 using SkeletonApi.IotHub.Services.Store;
-using SkeletonApi.IotHub.Helpers;
-using System.Globalization;
 using SkeletonApi.Application.Interfaces.Repositories.Dapper;
 using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
@@ -52,7 +50,12 @@ namespace SkeletonApi.IotHub.Services
                         default:
                             if(val.mqttRawData.Values.Count(X => X.Vid.Contains("STATUS")) > 0) 
                             { 
+                                
                                 await PersistMachineHealthToDBAsync(val.mqttRawData);
+                                await PersistDeviceDataToDBAsync(val.mqttRawData);
+                            }
+                            else
+                            {
                                 await PersistDeviceDataToDBAsync(val.mqttRawData);
                             }
                             break;
@@ -83,7 +86,7 @@ namespace SkeletonApi.IotHub.Services
                                           Value = int.Parse(g.Last().vls.Value.ToString()),
                                           Datetime = DateTimeOffset.FromUnixTimeMilliseconds(g.Last().vls.Time).DateTime
                                       };
-                    
+                    machineHealthList.OrderBy(x => x.Name).ToList();
                     _machineHealthEventHandler.Dispatch(machineHealthList);
                 }
             }

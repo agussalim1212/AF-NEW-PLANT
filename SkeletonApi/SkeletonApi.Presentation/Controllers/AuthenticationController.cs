@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateUser;
 using SkeletonApi.Application.Features.Users;
 using SkeletonApi.Application.Features.Users.Login.Commands;
 using SkeletonApi.Application.Interfaces.Repositories;

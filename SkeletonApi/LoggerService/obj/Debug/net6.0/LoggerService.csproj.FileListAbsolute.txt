@@ -170,3 +170,4 @@ C:\AFFFF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.d
 C:\AFFFF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
 C:\AFFFF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.pdb
 C:\AFFFF\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
+D:\AF-NEW-PLANT\SkeletonApi\LoggerService\obj\Debug\net6.0\LoggerService.sourcelink.json

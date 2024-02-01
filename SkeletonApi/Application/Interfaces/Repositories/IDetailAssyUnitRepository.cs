@@ -16,6 +16,7 @@ namespace SkeletonApi.Application.Interfaces.Repositories
 {
     public interface IDetailAssyUnitRepository
     {
+      
         Task<GetAllMachineInformationDto> GetAllMachineInformationAsync(Guid machine_id);
         Task<GetAllTotalProductionDto> GetAllTotalProduction(Guid machine_id, string type, DateTime start, DateTime end);
         Task<GetAllFrequencyInverterDto> GetAllFrequencyInverter(Guid machine_id, string type, DateTime start, DateTime end);

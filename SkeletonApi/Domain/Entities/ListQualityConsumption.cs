@@ -95,8 +95,8 @@ namespace SkeletonApi.Domain.Entities
     {
         public DateTime DayBucket { get; set; }
         public string Id { get; set; }
-        public decimal FirstValue { get; set; }
-        public decimal LastValue { get; set; }
+        public decimal ValueFirst { get; set; }
+        public decimal ValueLast { get; set; }
         public decimal Value { get; set; }
 
     }
@@ -105,8 +105,9 @@ namespace SkeletonApi.Domain.Entities
     {
         public DateTime DayBucket { get; set; }
         public string Id { get; set; }
-        public decimal FirstValue { get; set; }
-        public decimal LastValue { get; set; }
+        public decimal ValueFirst { get; set; }
+        public decimal ValueLast { get; set; }
+        public decimal Value { get; set; }
     }
 
     public class AirConsumptionTop
@@ -120,10 +121,11 @@ namespace SkeletonApi.Domain.Entities
 
     public class ElectricConsumptionDetail
     {
-        public DateTime Bucket { get; set; }
+        public DateTime DayBucket { get; set; }
         public string Id { get; set; }
-        public string FirstValue { get; set; }
-        public string LastValue { get; set; }
+        public decimal ValueFirst { get; set; }
+        public decimal ValueLast { get; set; }
+        public decimal Value { get; set; }
     }
 
     public class FrqConsumption

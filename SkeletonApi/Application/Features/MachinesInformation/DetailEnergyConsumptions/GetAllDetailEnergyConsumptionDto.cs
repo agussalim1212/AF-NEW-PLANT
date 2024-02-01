@@ -14,6 +14,12 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsu
         public decimal ValueKwh { get; set; }
         [JsonPropertyName("value_co2")]
         public decimal ValueCo2 { get; set; }
+        [JsonPropertyName("maximum")]
+        public decimal? Maximum { get; set; }
+        [JsonPropertyName("medium")]
+        public decimal? Medium { get; set; }
+        [JsonPropertyName("minimum")]
+        public decimal? Minimum { get; set; }
         [JsonPropertyName("label")]
         public string Label { get; set; }
         [JsonPropertyName("date_time")]

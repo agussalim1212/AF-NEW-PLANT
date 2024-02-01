@@ -2,15 +2,10 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using SkeletonApi.Application.Extensions;
-using SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleWithPagination;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Application.Features.ActivityUsers.Queries.GetActivityUserWithPagination
 {
