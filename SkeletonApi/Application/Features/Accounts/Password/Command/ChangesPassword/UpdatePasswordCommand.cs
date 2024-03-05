@@ -34,11 +34,11 @@ namespace SkeletonApi.Application.Features.Accounts.Password.Command.ChangesPass
 
         public async Task<Result<string>> Handle(UpdatePasswordCommand command, CancellationToken cancellationToken)
         {
-            var cekUser = _unitOfWork.Data<User>().Entities.Where(o => o.UserName == command.Username).FirstOrDefault();
+            var cekUser = _unitOfWork.Data<User>().FindByCondition(o => o.UserName == command.Username).FirstOrDefault();
             if (cekUser != null)
             {
                 _userManager.ChangePasswordAsync(cekUser, command.CurrentPassword, command.RepeatPassword);
-                return await Result<string>.SuccessAsync("Password Updated.");
+                return await Result<string>.SuccessAsync(cekUser.UserName, "Password Updated.");
             }
             else
             {

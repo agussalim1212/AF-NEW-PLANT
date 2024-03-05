@@ -61,40 +61,48 @@ namespace SkeletonApi.IotHub.Services
 
             if (value.Values is not null)
             {
-                using (var scope = _serviceScopeFactory.CreateScope())
+                try
                 {
-                    var notificationList = from vls in value.Values.Where(x => x.Quality == true)
-                                           join ids in Subject on vls.Vid equals ids.Vid
-                                           where vls.Vid == ids.Vid
-                                           group new { vls, ids } by vls.Vid into g
-                                           orderby g.Key descending
-                                           select new NotificationModel
-                                           {
-                                               MachineName = g.Last().ids.Subjects,
-                                               Message = g.Last().vls.Value.ToString(),
-                                               Datetime = DateTimeOffset.FromUnixTimeMilliseconds(g.Last().vls.Time).DateTime
-                                           };
 
-                    var notification = _notificationStore.GetAllSetting().Where(x => (x.SubjectName == notificationList.FirstOrDefault().MachineName
-                    && Convert.ToDecimal(notificationList.FirstOrDefault().Message) > x.Maximum && notificationList.FirstOrDefault().Message != "0") ||
-                    (x.SubjectName == notificationList.FirstOrDefault().MachineName && Convert.ToDecimal(notificationList.FirstOrDefault().Message) < x.Minimum
-                    && notificationList.FirstOrDefault().Message != "0"));
-
-                    if (notification.Count() != 0)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        var dataNotification = notificationList.Select(g => new NotificationModel
-                        {
-                            MachineName = g.MachineName,
-                            Message = $"ABNORMAL VALUE, CURRENT VALUE IS {g.Message} IN {g.MachineName}",
-                            Datetime = g.Datetime,
-                            Status = false
-                        });
-                        _notificationEventHandler.Dispatch(dataNotification);
+                        var notificationList = from vls in value.Values.Where(x => x.Quality == true)
+                                               join ids in Subject on vls.Vid equals ids.Vid
+                                               where vls.Vid == ids.Vid
+                                               group new { vls, ids } by vls.Vid into g
+                                               orderby g.Key descending
+                                               select new NotificationModel
+                                               {
+                                                   MachineName = g.Last().ids.Subjects,
+                                                   Message = g.Last().vls.Value.ToString(),
+                                                   Datetime = DateTimeOffset.FromUnixTimeMilliseconds(g.Last().vls.Time).DateTime
+                                               };
 
-                        var scoped = scope.ServiceProvider.GetRequiredService<INotificationRepository>();
-                        var mqttRawValueEntities = _mapper.Map<IEnumerable<Notifications>>(dataNotification);
-                        scoped.Creates(mqttRawValueEntities);
+                        var notification = _notificationStore.GetAllSetting().Where(x => (x.SubjectName == notificationList.FirstOrDefault().MachineName
+                        && Convert.ToDecimal(notificationList.FirstOrDefault().Message) > x.Maximum && notificationList.FirstOrDefault().Message != "0") ||
+                        (x.SubjectName == notificationList.FirstOrDefault().MachineName && Convert.ToDecimal(notificationList.FirstOrDefault().Message) < x.Minimum
+                        && notificationList.FirstOrDefault().Message != "0"));
+
+                        if (notification.Count() != 0)
+                        {
+                            var dataNotification = notificationList.Select(g => new NotificationModel
+                            {
+                                MachineName = g.MachineName,
+                                Message = $"ABNORMAL VALUE, CURRENT VALUE IS {g.Message} IN {g.MachineName}",
+                                Datetime = g.Datetime,
+                                Status = false
+                            });
+                            _notificationEventHandler.Dispatch(dataNotification);
+
+                            var scoped = scope.ServiceProvider.GetRequiredService<INotificationRepository>();
+                            var mqttRawValueEntities = _mapper.Map<IEnumerable<Notifications>>(dataNotification);
+                            scoped.Creates(mqttRawValueEntities);
+                        }
                     }
+                }
+                catch(Exception ex)
+                {
+                    await Console.Out.WriteLineAsync(ex.Message);
                 }
             }
         }

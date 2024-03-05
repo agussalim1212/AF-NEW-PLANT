@@ -6,16 +6,20 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ene
 {
     public class GetAllDetailMachineEnergyConsumptionDto : IMapFrom<GetAllDetailMachineEnergyConsumptionDto>
     {
+        [JsonIgnore]
         [JsonPropertyName("vid")]
         public string Vid { get; set; }
         [JsonPropertyName("machine_name")]
         public string MachineName { get; set; }
         [JsonPropertyName("subject_name")]
         public string SubjectName { get; set; }
+        [JsonIgnore]
         [JsonPropertyName("maximum")]
         public decimal? Maximum { get; set; }
+        [JsonIgnore]
         [JsonPropertyName("medium")]
         public decimal? Medium { get; set; }
+        [JsonIgnore]
         [JsonPropertyName("minimum")]
         public decimal? Minimum { get; set; }
 

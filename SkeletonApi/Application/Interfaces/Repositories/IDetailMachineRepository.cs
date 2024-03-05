@@ -11,6 +11,7 @@ namespace SkeletonApi.Application.Interfaces.Repositories
     public interface IDetailMachineRepository
     {
         Task<GetAllDetailMachineEnergyConsumptionDto> GetSubjectPowerAsync(Guid machineId);
-        Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetSubjectAirAsync(Guid machineId);
+        Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetSubjectAirAsync(Guid machineId, string vid);
+
     }
 }

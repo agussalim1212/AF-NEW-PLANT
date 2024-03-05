@@ -31,18 +31,31 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccou
 
         public async Task<Result<List<GetAllAccountsDto>>> Handle(GetAllAccountsQuery query, CancellationToken cancellationToken)
         {
-            var emails = await _unitOfWork.Data<User>().Entities.Where(o => o.UserName == query.Username).FirstOrDefaultAsync();
-            var accounts = await _unitOfWork.Repository<Account>().Entities.Where(o => o.Username == query.Username).Select(o => new GetAllAccountsDto
+            var Account = await _unitOfWork.Repository<Account>().FindByCondition(o => o.Username == query.Username).FirstOrDefaultAsync();
+            if(Account == null)
             {
-                Id = o.Id,
-                Foto = o.PhotoURL,
-                Username = o.Username,
-                Email = emails.Email
-            })
-            .ProjectTo<GetAllAccountsDto>(_mapper.ConfigurationProvider)
-            .ToListAsync(cancellationToken);
-
-            return await Result<List<GetAllAccountsDto>>.SuccessAsync(accounts, "Successfully fetch data");
+                var user = await _unitOfWork.Data<User>().FindByCondition(o => o.UserName == query.Username).Select(o => new GetAllAccountsDto
+                {
+                    Username = o.UserName,
+                    Email = o.Email
+                })
+                .ProjectTo<GetAllAccountsDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+                return await Result<List<GetAllAccountsDto>>.SuccessAsync(user, "Successfully fetch data");
+            }
+            else
+            {
+                var user = await _unitOfWork.Data<User>().FindByCondition(o => o.UserName == query.Username).Select(o => new GetAllAccountsDto
+                {
+                    Id = Account.Id,
+                    Foto = Account.PhotoURL,
+                    Username = o.UserName,
+                    Email = o.Email
+                })
+                .ProjectTo<GetAllAccountsDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+               return await Result<List<GetAllAccountsDto>>.SuccessAsync(user, "Successfully fetch data");
+            }
 
         }
     }

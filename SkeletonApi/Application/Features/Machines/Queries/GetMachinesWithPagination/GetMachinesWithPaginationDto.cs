@@ -18,7 +18,7 @@ namespace SkeletonApi.Application.Features.Machines.Queries.GetAllMachines
         [JsonPropertyName("machine")]
         public string Name { get; set; }
         [JsonPropertyName("last_created")]
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
     }
 }

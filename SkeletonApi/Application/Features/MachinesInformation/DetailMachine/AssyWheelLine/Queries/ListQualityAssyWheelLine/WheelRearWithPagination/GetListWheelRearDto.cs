@@ -17,9 +17,16 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
         public decimal DataDialHorizontal { get; set; }
         [JsonPropertyName("data_dial_vertical")]
         public decimal DataDialVertical { get; set; }
+        [JsonPropertyName("data_disk_brake")]
+        public decimal DiskBrake { get; set; }
         [JsonPropertyName("tire_presure")]
         public decimal TirePresure { get; set; }
         [JsonPropertyName("data_torsi")]
         public decimal DataTorQ { get; set; }
+    }
+
+    public class GetVid
+    {
+        public string Vid { get; set; }
     }
 }

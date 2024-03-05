@@ -20,23 +20,25 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpGet("energy-consumption")]
-        public async Task<ActionResult<Result<GetAllDetailMachineEnergyConsumptionDto>>> GetAllEnergyConsumption(Guid machineId, string type, DateTime startTime, DateTime endTime)
+        public async Task<ActionResult<Result<GetAllDetailMachineEnergyConsumptionDto>>> GetAllEnergyConsumption(Guid machineId, string type, DateTime start, DateTime end)
         {
-            return await _mediator.Send(new GetAllDetailMachineEnergyConsumptionQuery(machineId, type, startTime, endTime));
+            return await _mediator.Send(new GetAllDetailMachineEnergyConsumptionQuery(machineId, type, start, end));
         }
 
         [HttpGet("air-consumption")]
-        public async Task<ActionResult<Result<GetAllDetailMachineAirAndElectricConsumptionDto>>> GetAllAirConsumption(Guid machineId, string type, DateTime startTime, DateTime endTime)
+        public async Task<ActionResult<Result<GetAllDetailMachineAirAndElectricConsumptionDto>>> GetAllAirConsumption(Guid machineId, string type, DateTime start, DateTime end)
         {
             string view = "air_consumption_setting";
-            return await _mediator.Send(new GetAllDetailMachineAirAndElectricConsumptionQuery(view, machineId, type, startTime, endTime));
+            string vid = "AIR-CONSUMPTION";
+            return await _mediator.Send(new GetAllDetailMachineAirAndElectricConsumptionQuery(machineId, type, start, end, view, vid));
         }
         
         [HttpGet("electric-consumption")]
-        public async Task<ActionResult<Result<GetAllDetailMachineAirAndElectricConsumptionDto>>> GetAllElectricConsumption(Guid machineId, string type, DateTime startTime, DateTime endTime)
+        public async Task<ActionResult<Result<GetAllDetailMachineAirAndElectricConsumptionDto>>> GetAllElectricConsumption(Guid machineId, string type, DateTime start, DateTime end)
         {
             string view = "electric_consumption_setting";
-            return await _mediator.Send(new GetAllDetailMachineAirAndElectricConsumptionQuery(view, machineId, type, startTime, endTime));
+            string vid = "ELECT-GNTR";
+            return await _mediator.Send(new GetAllDetailMachineAirAndElectricConsumptionQuery(machineId, type, start, end, view, vid));
         }
     }
 }

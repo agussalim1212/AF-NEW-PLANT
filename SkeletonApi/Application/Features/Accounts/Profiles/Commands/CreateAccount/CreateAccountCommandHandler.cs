@@ -24,7 +24,7 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
             var account = _mapper.Map<Account>(request);
 
             var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" }; // ekstensi yang diizinkan
-            var fileExtension = Path.GetExtension(request.img_path.FileName).ToLower();
+            var fileExtension = Path.GetExtension(request.Img_path.FileName).ToLower();
 
             if (!allowedExtensions.Contains(fileExtension))
             {
@@ -34,16 +34,16 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
             // Membatasi ukuran berkas
             var maxFileSizeInBytes = 2 * 1024 * 1024; // ukuran maksimum (dalam byte)
 
-            if (request.img_path.Length > maxFileSizeInBytes)
+            if (request.Img_path.Length > maxFileSizeInBytes)
             {
                 return await Result<CreateAccountResponseDto>.FailureAsync("File size exceeds the maximum allowed size (2 MB).");
             }
 
-            var path = Path.Combine("wwwroot/FotoPath/", request.img_path.FileName);
+            var path = Path.Combine("wwwroot/FotoPath/", request.Img_path.FileName);
 
             using (FileStream stream = new FileStream(path, FileMode.Create))
-            {
-                await request.img_path.CopyToAsync(stream);
+            {   
+                await request.Img_path.CopyToAsync(stream);
                 stream.Close();
             }
 
@@ -51,7 +51,7 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
             if (cekAccount == false)
             {
                 var cek = _unitOfWork.Repository<Account>().FindByCondition(a => a.Username == account.Username).FirstOrDefault();
-                cek.PhotoURL = request.img_path.FileName;
+                cek.PhotoURL = request.Img_path.FileName;
                 cek.CreatedAt = DateTime.UtcNow;
                 cek.UpdatedAt = DateTime.UtcNow;
                 await _unitOfWork.Repository<Account>().UpdateAsync(cek);
@@ -60,7 +60,7 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
             }
             else
             {
-                account.PhotoURL = request.img_path.FileName;
+                account.PhotoURL = request.Img_path.FileName;
                 account.CreatedAt = DateTime.UtcNow;
                 account.UpdatedAt = DateTime.UtcNow;
                 await _unitOfWork.Repository<Account>().AddAsync(account);

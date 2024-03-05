@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.AirConsumptionAssyWheelLine;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.EnergyConsumptionAssyWheelLine;
 using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination;
 using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination;
 using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.MachineInformationAssyWheelLine;
@@ -25,11 +23,6 @@ namespace SkeletonApi.Presentation.Controllers
             _mediator = mediator;
             _logger = logger;
         }
-        [HttpGet("energy-consumption")]
-        public async Task<ActionResult<Result<GetAllEnergyConsumptionAssyWheelLineDto>>> GetEnergyConsumptionAssyWheelLine(Guid machine_id, string type, DateTime start, DateTime end)
-        {
-            return await _mediator.Send(new GetAllEnergyConsumptionAssyWheelLineQuery(machine_id, type, start, end));
-        }
 
         [HttpGet("total-production")]
         public async Task<ActionResult<Result<GetAllTotalProductionAssyWheelLineDto>>> GetTotalProductionAssyWheelLine(Guid machine_id, string type, DateTime start, DateTime end)
@@ -41,12 +34,6 @@ namespace SkeletonApi.Presentation.Controllers
         public async Task<ActionResult<Result<GetAllMachineInformationAssyWheelLineDto>>> GetMachineInformationAssyWheelLine(Guid machine_id)
         {
             return await _mediator.Send(new GetAllMachineInformationAssyWheelLineQuery(machine_id));
-        }
-
-        [HttpGet("air-consumption")]
-        public async Task<ActionResult<Result<GetAllAirConsumptionAssyWheelLineDto>>> GetAirConsumptionAssyWheelLine(Guid machine_id, string type, DateTime start, DateTime end)
-        {
-            return await _mediator.Send(new GetAllAirConsumptionAssyWheelLineQuery(machine_id, type, start, end));
         }
 
         [HttpGet("list-quality-wheel-front")]

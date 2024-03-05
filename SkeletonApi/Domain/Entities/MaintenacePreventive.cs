@@ -14,12 +14,6 @@ namespace SkeletonApi.Domain.Entities
         [Column("start_date")]
         public DateOnly? StartDate { get; set; }
 
-        [Column("count_actual")]
-        public decimal? CountActual { get; set; }
-
-        [Column("count_plan")]
-        public decimal? CountPlan { get; set; }
-
         [Column("end_date")]
         public DateOnly? EndDate { get; set; }
 

@@ -10,6 +10,6 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
     {
         [JsonPropertyName("username")]
         public string? Username { get; set; }
-        public IFormFile img_path { get; set; }
+        public IFormFile Img_path { get; set; }
     }
 }

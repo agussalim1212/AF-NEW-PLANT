@@ -1,12 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.Dashboard._5_Top_Air_Consumptions.Queries;
-using SkeletonApi.Application.Features.Dashboard._5_Top_Energy_Consumptions;
-using SkeletonApi.Application.Features.Dashboard._5_Top_Machine_Maintenance.Queries;
+using SkeletonApi.Application.Features.Dashboard.FiveTopAirConsumption.Queries;
+using SkeletonApi.Application.Features.Dashboard.FiveTopEnergyConsumption.Queries;
+using SkeletonApi.Application.Features.Dashboard.FiveTopMachineMaintenance.Queries;
 using SkeletonApi.Application.Features.Dashboard.Traceability_History.Queries;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.EnergyConsumptionAssyUnitLine;
-using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions.Queries;
 using SkeletonApi.Shared;
 
 

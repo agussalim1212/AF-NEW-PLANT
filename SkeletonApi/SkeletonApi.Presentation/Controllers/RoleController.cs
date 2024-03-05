@@ -49,7 +49,7 @@ namespace SkeletonApi.Presentation.Controllers
 
 
         [HttpGet("get-all-role")]
-        [ServiceFilter(typeof(AuditLoggingFilter))]
+        //[ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<List<GetAllRoleDto>>>> GetAll()
         {
             return await _mediator.Send(new GetAllRoleQuery());

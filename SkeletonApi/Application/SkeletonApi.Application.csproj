@@ -46,6 +46,7 @@
     <Folder Include="Features\ActivityUsers\Commands\" />
     <Folder Include="Features\MachinesInformation\DetailMachine\AssyUnitLine\Commands\" />
     <Folder Include="Features\MachinesInformation\DetailMachine\AssyWheelLine\Commands\" />
+    <Folder Include="Features\MachinesInformation\DetailMachine\ElectricCosumptionDetailMachine\" />
     <Folder Include="Features\MachinesInformation\DetailMachine\GensubAssyLine\Commands\" />
     <Folder Include="Features\MaintenanceCorrective\Queries\UploadExcel\" />
     <Folder Include="Features\ManagementUser\Login\Queries\" />

@@ -37,7 +37,7 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagina
         public async Task<PaginatedResult<GetSubjectWithPaginationDto>> Handle(GetSubjectWithPaginationQuery query, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Repository<Subject>().FindByCondition(o => o.DeletedAt == null).Where(p => (query.search_term == null) || (query.search_term.ToLower() == p.Subjects.ToLower()))
-                   .OrderBy(o => o.CreatedAt)
+                   .OrderByDescending(o => o.UpdatedAt)
                    .ProjectTo<GetSubjectWithPaginationDto>(_mapper.ConfigurationProvider)
                    .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
                    

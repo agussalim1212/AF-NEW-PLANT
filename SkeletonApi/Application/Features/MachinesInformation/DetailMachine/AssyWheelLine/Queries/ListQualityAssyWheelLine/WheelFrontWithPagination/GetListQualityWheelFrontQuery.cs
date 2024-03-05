@@ -37,18 +37,19 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
         internal class GetListQualityWheelFrontQueryHandler : IRequestHandler<GetListQualityWheelFrontQuery, PaginatedResult<GetListWheelFrontDto>>
         {
             private readonly IUnitOfWork _unitOfWork;
-            private readonly IMapper _mapper;
             private readonly IDapperReadDbConnection _dapperReadDbConnection;
+            private readonly IDetailAssyWheelLineRepository _detailAssyWheelLineRepository;
 
-            public GetListQualityWheelFrontQueryHandler(IDapperReadDbConnection dapperReadDbConnection, IUnitOfWork unitOfWork, IMapper mapper)
+            public GetListQualityWheelFrontQueryHandler(IDapperReadDbConnection dapperReadDbConnection, IUnitOfWork unitOfWork, IDetailAssyWheelLineRepository detailAssyWheelLineRepository)
             {
                 _unitOfWork = unitOfWork;
-                _mapper = mapper;
                 _dapperReadDbConnection = dapperReadDbConnection;
+                _detailAssyWheelLineRepository = detailAssyWheelLineRepository;
             }
 
             public async Task<PaginatedResult<GetListWheelFrontDto>> Handle(GetListQualityWheelFrontQuery query, CancellationToken cancellationToken)
             {
+                
                 var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)
                 .Where(m => (query.machine_id == m.MachineId)).ToListAsync();
 

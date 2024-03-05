@@ -6,6 +6,7 @@ using SkeletonApi.Application.Features.Accounts;
 using SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccountsByUsername;
 using SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAccount;
 using SkeletonApi.Application.Features.Accounts.Password.Command.ChangesPassword;
+using SkeletonApi.Application.Features.Accounts.Profiles.Commands.DeleteAccount;
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -47,6 +48,12 @@ namespace SkeletonApi.Presentation.Controllers
                 return BadRequest();
             }
             return await _mediator.Send(command);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult<Result<Guid>>> DeleteUser(Guid id)
+        {
+            return await _mediator.Send(new DeleteAccountRequest(id));
         }
 
     }

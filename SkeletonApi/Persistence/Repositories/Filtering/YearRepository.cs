@@ -1,11 +1,10 @@
-﻿using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.AirConsumption;
+﻿using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions.Queries;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumption;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Application.Interfaces.Repositories.Filtering;
 using SkeletonApi.Domain.Entities;
-using System.Globalization;
-
 
 namespace SkeletonApi.Persistence.Repositories.Filtering
 {
@@ -13,13 +12,15 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
     {
         private readonly IDapperReadDbConnection _dapperReadDbConnection;
         private readonly IGenericRepository<Setting> _repositorySetting;
-        public YearRepository(IDapperReadDbConnection dapperReadDbConnection, IGenericRepository<Setting> repositorySetting)
+        private readonly IGenRepository<SubjectHasMachine> _repositorySubjectHasMachine;
+        public YearRepository(IDapperReadDbConnection dapperReadDbConnection, IGenericRepository<Setting> repositorySetting, IGenRepository<SubjectHasMachine> repositorySubjectHasMachine)
         {
             _dapperReadDbConnection = dapperReadDbConnection;
             _repositorySetting = repositorySetting;
+            _repositorySubjectHasMachine = repositorySubjectHasMachine;
         }
 
-        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionAsync(string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
+        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionAsync(string view, string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
             var data = new GetAllDetailMachineAirAndElectricConsumptionDto();
@@ -31,10 +32,10 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             else
             {
                 var airConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumptionDetail>
-                (@"SELECT * FROM ""air_consumption_setting"" WHERE id = @id
-                        AND date_trunc('year', day_bucket) >= date_trunc('year', @starttime::date)
-                        AND date_trunc('year', day_bucket) <= date_trunc('year', @endtime::date)
-                        ORDER BY day_bucket DESC", new { id = vid, starttime = startTime.Date, endtime = endTime.Date });
+                ($@"SELECT * FROM {view} WHERE id = @id
+                        AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                        AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                        ORDER BY bucket DESC", new { id = vid, starttime = startTime.Date, endtime = endTime.Date });
 
                 //var total = energyConsumption.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
                 //{
@@ -46,7 +47,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 var groupedQuerys = airConsumption
                   .GroupBy(d => new
                   {
-                      d.DayBucket.Year
+                      d.Bucket.Year
                   })
                   .Select(g => new
                   {
@@ -61,9 +62,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
-                        Maximum = setting.Maximum,
-                        Medium = setting.Medium,
-                        Minimum = setting.Minimum,
                     };
                 }
                 else
@@ -74,9 +72,9 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
-                        Maximum = setting.Maximum,
-                        Medium = setting.Medium,
-                        Minimum = setting.Minimum,
+                        //Maximum = setting.Maximum,
+                        //Medium = setting.Medium,
+                        //Minimum = setting.Minimum,
                         Data = groupedQuerys.Select(val => new DataAir
                         {
                             Value = val.total_last - val.total_first,
@@ -90,33 +88,32 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             }
         }
 
-        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionAsync(string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
+        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionAsync(string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
             var data = new GetAllDetailMachineEnergyConsumptionDto();
 
-            if (endTime.Date < startTime.Date)
+            if (endTime.Value < startTime.Value)
             {
                 throw new ArgumentException("End day cannot be earlier than start date.");
             }
             else
             {
                 var energyConsumption = await _dapperReadDbConnection.QueryAsync<EnergyConsumption>
-                (@"SELECT * FROM ""power_consumption_setting"" WHERE id = @id
-                         AND date_trunc('week', day_bucket) >= date_trunc('week', @starttime::date)
-                         AND date_trunc('week', day_bucket) <= date_trunc('week', @endtime::date)
-                         ORDER BY day_bucket DESC",
-                 new { id = vid, starttime = startTime.Date, endtime = endTime.Date });
+                 (@"SELECT * FROM ""power_consumption_setting"" WHERE id = @id
+                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                ORDER BY bucket DESC",
+                 new { id = vid, starttime = startTime.Value.Date, endtime = endTime.Value.Date });
 
                 var groupedQuerys = energyConsumption
                 .GroupBy(d => new
                 {
-
-                    WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.DayBucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
+                    d.Bucket.Year
                 })
                   .Select(g => new
                   {
-                      date_group = new DateTime(g.Key.WeekNumber, 1, 1).AddDays((g.Key.WeekNumber - 1) * 7),
+                      date_group = new DateTime(g.Key.Year, 1, 1),
                       total_last = g.Sum(d => d.ValueLast),
                       total_first = g.Sum(d => d.ValueFirst),
                   }).ToList();
@@ -127,9 +124,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
-                        Maximum = setting.Maximum,
-                        Medium = setting.Medium,
-                        Minimum = setting.Minimum,
                     };
                 }
                 else
@@ -140,14 +134,14 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
-                        Maximum = setting.Maximum,
-                        Medium = setting.Medium,
-                        Minimum = setting.Minimum,
+                        //Maximum = setting.Maximum,
+                        //Medium = setting.Medium,
+                        //Minimum = setting.Minimum,
                         Data = groupedQuerys.Select(val => new DataPower
                         {
                             ValueKwh = val.total_last - val.total_first,
                             ValueCo2 = Math.Round((val.total_last - val.total_first) * Convert.ToDecimal(0.87), 2),
-                            Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(val.date_group, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
+                            Label = val.date_group.AddHours(7).ToString("yyy"),
                             DateTime = val.date_group,
                         }).OrderByDescending(x => x.DateTime).ToList()
 
@@ -155,6 +149,58 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 }
                 return data;
             }
+        }
+
+        public async Task<List<GetAllDetailEnergyConsumptionDto>> GetAllEnergyConsumptionSummary(DateTime? start, DateTime? end)
+        {
+            var subjectMachine = _repositorySubjectHasMachine.FindByCondition(x => x.Subject.Vid.Contains("POWER-CONSUMPTION")).Include(o => o.Subject).Include(p => p.Machine);
+            var subjects = subjectMachine.Select(o => o.Subject.Vid).ToList();
+            var setting = _repositorySetting.FindByCondition(o => o.SubjectName == "POWER CONSUMPTION ALL").FirstOrDefault();
+
+            List<GetAllDetailEnergyConsumptionDto> dt = new List<GetAllDetailEnergyConsumptionDto>();
+            var data = new GetAllDetailEnergyConsumptionDto();
+
+            if (end.Value < start.Value)
+            {
+                throw new ArgumentException("End day cannot be earlier than start date.");
+            }
+            else
+            {
+                var EnergyConsumptions = await _dapperReadDbConnection.QueryAsync<EnergyConsumption>
+                (@"SELECT * FROM ""power_consumption_setting"" WHERE id = ANY(@vid)
+                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
+                ORDER BY bucket DESC",
+                new { vid = subjects, starttime = start.Value.Date, endtime = end.Value.Date });
+
+                var Groups = EnergyConsumptions.GroupBy(p => new { p.Bucket.Year })
+                .Select(g => new
+                {
+                    date_time = new DateTime(g.Key.Year, 1, 1),
+                    totalFirst = g.Sum(k => k.ValueFirst),
+                    totalLast = g.Sum(k => k.ValueLast)
+                }).ToList();
+
+                if (EnergyConsumptions.Count() == 0)
+                {
+                    dt.Add(data);
+                }
+                else
+                {
+                    dt = Groups.Select(o => new GetAllDetailEnergyConsumptionDto
+                    {
+                        ValueKwh = o.totalLast - o.totalFirst,
+                        ValueCo2 = Math.Round((o.totalLast - o.totalFirst) * Convert.ToDecimal(0.87), 2),
+                        //Maximum = setting.Maximum,
+                        //Medium = setting.Medium,
+                        //Minimum = setting.Minimum,
+                        Label = o.date_time.ToString("yyy").ToString(),
+                        DateTime = o.date_time,
+
+                    }).ToList();
+                }
+            }
+            return dt;
         }
     }
 }

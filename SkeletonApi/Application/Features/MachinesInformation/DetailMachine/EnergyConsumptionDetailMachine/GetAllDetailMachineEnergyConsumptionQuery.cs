@@ -10,9 +10,9 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ene
     {
         public Guid MachineId { get; set; }
         public string Type { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public GetAllDetailMachineEnergyConsumptionQuery(Guid machineId, string type, DateTime startTime, DateTime endTime)
+        public DateTime? Start { get; set; }
+        public DateTime? End { get; set; }
+        public GetAllDetailMachineEnergyConsumptionQuery(Guid machineId, string type, DateTime? startTime, DateTime? endTime)
         {
             MachineId = machineId;
             Type = type;
@@ -49,17 +49,17 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ene
             }
             else if(request.Type == "week")
             {
-                var dt = await _weekRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
+                var dt = await _weekRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName, request.Start.Value, request.End.Value);
                 return await Result<GetAllDetailMachineEnergyConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             else if(request.Type == "month")
             {
-                var dt = await _monthRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
+                var dt = await _monthRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName, request.Start.Value, request.End.Value);
                 return await Result<GetAllDetailMachineEnergyConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             else if(request.Type == "year")
             {
-                var dt = await _yearRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
+                var dt = await _yearRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName, request.Start.Value, request.End.Value);
                 return await Result<GetAllDetailMachineEnergyConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             

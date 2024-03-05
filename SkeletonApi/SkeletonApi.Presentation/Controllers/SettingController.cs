@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.Settings;
 using SkeletonApi.Application.Features.Settings.Commands.CreateSetting;
 using SkeletonApi.Application.Features.Settings.Queries.GetSettingWithPagination;
-using SkeletonApi.Domain.Entities;
+using SkeletonApi.Application.Features.Settings.Queries.GetSubjectByMachineId;
 using SkeletonApi.Shared;
 using System.Text.Json;
 
@@ -54,6 +54,14 @@ namespace SkeletonApi.Presentation.Controllers
         {
             return await _mediator.Send(command);
         }
+
+
+        [HttpGet("{machineId:guid}")]
+        public async Task<ActionResult<Result<List<GetSubjectByMachineIdDto>>>> GetByMachineId(Guid machineId)
+        {
+            return await _mediator.Send(new GetSubjectByMachineIdQuery(machineId));
+        }
+
 
     }
 }

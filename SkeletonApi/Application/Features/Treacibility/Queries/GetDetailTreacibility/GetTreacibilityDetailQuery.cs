@@ -1,16 +1,8 @@
 ﻿using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using MediatR;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ElectricGeneratorConsumption;
-using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
-using SkeletonApi.Application.Features.Subjects.Queries.GetAllSubject;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Domain.Entities.Tsdb;
 

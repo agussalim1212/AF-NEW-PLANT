@@ -1205,7 +1205,8 @@
           "MediatR": "12.1.1",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.24",
-          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0"
+          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
+          "System.Runtime": "4.3.0"
         },
         "runtime": {
           "SkeletonApi.Domain.dll": {}

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,15 +75,16 @@ namespace SkeletonApi.Domain.Entities
     {
         public DateTime DayBucket { get; set; }
         public string Id { get; set; }
-        public decimal FirstValue { get; set; }
-        public decimal LastValue { get; set; }
-        public decimal Value { get; set; }
+        public double FirstValue { get; set; }
+        public double LastValue { get; set; }
+        public double Value { get; set; }
     }
     public class AirConsumption
     {
-        public DateTime Bucket { get; set; }
         public string Id { get; set; }
-        public string Value { get; set; }
+        public DateTime Bucket { get; set; }
+        public decimal ValueFirst { get; set; }
+        public decimal ValueLast { get; set; }
     }
 
     public class ProductConsumption
@@ -91,42 +94,24 @@ namespace SkeletonApi.Domain.Entities
         public string LastValue { get; set; }
     }
 
+
     public class EnergyConsumption
     {
-        public DateTime DayBucket { get; set; }
         public string Id { get; set; }
-        public decimal ValueFirst { get; set; }
+        public DateTime Bucket { get; set; }
+        public decimal ValueFirst { get; set; } 
         public decimal ValueLast { get; set; }
-        public decimal Value { get; set; }
-
     }
 
     public class AirConsumptionDetail
     {
-        public DateTime DayBucket { get; set; }
+        public DateTime Bucket { get; set; }
         public string Id { get; set; }
         public decimal ValueFirst { get; set; }
         public decimal ValueLast { get; set; }
         public decimal Value { get; set; }
     }
 
-    public class AirConsumptionTop
-    {
-        public DateTime DayBucket { get; set; }
-        public string Id { get; set; }
-        public decimal FirstValue { get; set; }
-        public decimal LastValue { get; set; }
-        public decimal Value { get; set; }
-    }
-
-    public class ElectricConsumptionDetail
-    {
-        public DateTime DayBucket { get; set; }
-        public string Id { get; set; }
-        public decimal ValueFirst { get; set; }
-        public decimal ValueLast { get; set; }
-        public decimal Value { get; set; }
-    }
 
     public class FrqConsumption
     {

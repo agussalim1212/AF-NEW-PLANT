@@ -49,6 +49,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                             Time = row.Time,
                             Quality = row.Quality,
                         };
+
                         switch (row.Vid)
 
                         {
@@ -97,7 +98,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                                     break;
                                 }
                             default:
-                                await Console.Out.WriteLineAsync("NULL");
+                                //await Console.Out.WriteLineAsync("NULL");
                                 break;
                         }
                     }

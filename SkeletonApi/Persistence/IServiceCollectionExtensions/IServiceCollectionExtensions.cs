@@ -66,6 +66,7 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient<IMonthRepository, MonthRepository>()
                 .AddTransient<IYearRepository, YearRepository>()  
                 .AddTransient<IDefaultRepository, DefaultRepository>()
+                .AddTransient<IDashboardRepository, DashboardRepository>()
                 .AddTransient<IDetailAssyWheelLineRepository, DetailAssyWheelLineRepository>();
                 
 

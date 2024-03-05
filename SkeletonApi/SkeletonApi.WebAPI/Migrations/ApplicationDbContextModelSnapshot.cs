@@ -160,7 +160,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("SkeletonApi.Domain.Entities.ActivityUser", b =>
@@ -213,7 +213,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("update_at");
+                        .HasColumnName("updated_at");
 
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid")
@@ -413,7 +413,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("update_at");
+                        .HasColumnName("updated_at");
 
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid")
@@ -485,10 +485,6 @@ namespace SkeletonApi.WebAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("category");
 
-                    b.Property<decimal?>("CountActual")
-                        .HasColumnType("numeric")
-                        .HasColumnName("count_actual");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
@@ -544,14 +540,6 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("text")
                         .HasColumnName("category");
-
-                    b.Property<decimal?>("CountActual")
-                        .HasColumnType("numeric")
-                        .HasColumnName("count_actual");
-
-                    b.Property<decimal?>("CountPlan")
-                        .HasColumnType("numeric")
-                        .HasColumnName("count_plan");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -855,7 +843,7 @@ namespace SkeletonApi.WebAPI.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("update_at");
+                        .HasColumnName("updated_at");
 
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid")

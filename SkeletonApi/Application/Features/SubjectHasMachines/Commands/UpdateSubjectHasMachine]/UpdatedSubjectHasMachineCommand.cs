@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
 using SkeletonApi.Application.Features.SubjectHasMachines.Commands.CreateSubjectHasMachine;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.Application.Features.SubjectHasMachines.Commands.UpdateSubjectHasMachine_
 {

@@ -21,12 +21,20 @@
       "PackagePath": "staticwebassets\\FotoPath\\2023-11-22 (9).png"
     },
     {
+      "Id": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\Profile-Transparent.png",
+      "PackagePath": "staticwebassets\\FotoPath\\Profile-Transparent.png"
+    },
+    {
       "Id": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\WhatsApp Image 2023-12-06 at 16.24.51.jpeg",
       "PackagePath": "staticwebassets\\FotoPath\\WhatsApp Image 2023-12-06 at 16.24.51.jpeg"
     },
     {
       "Id": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\erd.png",
       "PackagePath": "staticwebassets\\FotoPath\\erd.png"
+    },
+    {
+      "Id": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\image.png",
+      "PackagePath": "staticwebassets\\FotoPath\\image.png"
     },
     {
       "Id": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\images.jpeg",
@@ -43,6 +51,10 @@
     {
       "Id": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\profiles.png",
       "PackagePath": "staticwebassets\\FotoPath\\profiles.png"
+    },
+    {
+      "Id": "D:\\AF-NEW-PLANT\\SkeletonApi\\SkeletonApi.WebAPI\\wwwroot\\FotoPath\\th.jpg",
+      "PackagePath": "staticwebassets\\FotoPath\\th.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.SkeletonApi.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props",

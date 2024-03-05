@@ -6,6 +6,7 @@ using SkeletonApi.IotHub.Services.Store;
 using SkeletonApi.Application.Interfaces.Repositories.Dapper;
 using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
+using Dapper;
 
 namespace SkeletonApi.IotHub.Services
 {
@@ -39,6 +40,8 @@ namespace SkeletonApi.IotHub.Services
             {
                 if (val.mqttRawData != null && val.topics != null)
                 {
+                    //Convert enumrable to list
+                    List<MqttRawValue> mqttRawValues = val.mqttRawData.Values.AsList();
                     switch (val.topics)
                     {
                         case string a when a.Contains("OCR"):
@@ -47,17 +50,18 @@ namespace SkeletonApi.IotHub.Services
                         //case string a when a!.Contains("OCR") && a!.Contains("MC-STATUS"):
                         //    await PersistDeviceDataToDBAsync(val.mqttRawData);
                         //    break;
-                        default:
-                            if(val.mqttRawData.Values.Count(X => X.Vid.Contains("STATUS")) > 0) 
+                        case string a when a.Contains("P9AUA0"):
+                            //Remove value null or quality false
+                            mqttRawValues.RemoveAll(x => x.Quality != true || x.Value == null);
+                            if (val.mqttRawData.Values.Count(X => X.Vid.Contains("STATUS")) > 0) 
                             { 
                                 
                                 await PersistMachineHealthToDBAsync(val.mqttRawData);
                                 await PersistDeviceDataToDBAsync(val.mqttRawData);
                             }
-                            else
-                            {
-                                await PersistDeviceDataToDBAsync(val.mqttRawData);
-                            }
+                            break;
+                        default:
+                          
                             break;
                     }
                 }

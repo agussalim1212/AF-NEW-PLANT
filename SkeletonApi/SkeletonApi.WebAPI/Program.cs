@@ -36,7 +36,7 @@ builder.Services.ConfigureCorsPolicy(builder.Configuration);
 builder.Services.AddHttpClient<IRestApiClientService, RestApiClientService>();
 builder.Services.AddScoped<IDapperReadDbConnection, DapperReadDbConnection>();
 builder.Services.AddScoped<IDapperWriteDbConnection, DapperWriteDbConnection>();
-builder.Services.AddScoped<AuditLoggingFilter>();
+//builder.Services.AddScoped<AuditLoggingFilter>();
 builder.Services.AddScoped<AuditRepository>();
 builder.Services.ConfigureIISIntegration();
 builder.Services.AddHostedMqttClient(builder.Configuration);

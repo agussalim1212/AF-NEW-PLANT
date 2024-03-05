@@ -43,7 +43,7 @@ namespace SkeletonApi.Application.Features.Machines.Queries.GetAllMachines
         {
             return await _unitOfWork.Repository<Machine>().FindByCondition(x => x.DeletedAt == null)
             .Where(o => (query.search_term == null) || (query.search_term.ToLower() == o.Name.ToLower()))
-            .OrderBy(x => x.UpdatedAt)
+            .OrderByDescending(x => x.UpdatedAt)
             .ProjectTo<GetMachinesWithPaginationDto>(_mapper.ConfigurationProvider)
             .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }

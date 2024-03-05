@@ -40,18 +40,18 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
         {
             return await _unitOfWork.Repo<SubjectHasMachine>().Entities.Where(x => query.search_term == null || x.Machine.Name.ToLower() == query.search_term.ToLower().Trim())
                  .Include(o => o.Subject)
-                 .Include(x => x.Machine).GroupBy(x => new { x.Machine.Id, x.Machine.Name, x.Machine.UpdatedAt})
+                 .Include(x => x.Machine).GroupBy(x => new { x.Machine.Id, x.Machine.Name })
                  .Select(g => new GetSubjectMachineWithPaginationDto
                  {
                      MachineId = g.Key.Id,
                      MachineName = g.Key.Name,
-                     UpdatedAt = g.Key.UpdatedAt.Value.AddHours(7),
+                     UpdatedAt = g.OrderByDescending(p => p.UpdatedAt).Select(o => o.UpdatedAt.Value.AddHours(7)).FirstOrDefault(),
                      Subjects = g.Select(s => new SubjectDto
                      {
                          SubjectId = s.Subject.Id,
                          SubjectName = s.Subject.Subjects,
                      }).ToList(),
-                 }).ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
+                 }).OrderByDescending(d => d.UpdatedAt).ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }
 
 

@@ -9,35 +9,35 @@ namespace SkeletonApi.Persistence.Repositories
 {
     public class DetailMachineRepository : IDetailMachineRepository
     {
-        private readonly IGenericRepository<Machine> _repository;
+        private readonly IGenRepository<SubjectHasMachine> _repositorySubjectMachine;
         private readonly ApplicationDbContext _dbContext;
-        public DetailMachineRepository(ApplicationDbContext dbContext, IGenericRepository<Machine> repository)
+        public DetailMachineRepository(ApplicationDbContext dbContext, IGenRepository<SubjectHasMachine> repositorySubjectMachine)
         {
             _dbContext = dbContext;
-            _repository = repository;
+            _repositorySubjectMachine = repositorySubjectMachine;
+            
         }
 
-        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetSubjectAirAsync(Guid machineId)
+        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetSubjectAirAsync(Guid machineId, string vid)
         {
-            var machine = await _dbContext.subjectHasMachines.Include(s => s.Machine).Include(s => s.Subject)
-          .Where(m => machineId == m.MachineId && m.Subject.Vid.Contains("AIR-CONSUMPTION")).ToListAsync();
+            var machine = await _repositorySubjectMachine.Entities.Include(s => s.Machine).Include(s => s.Subject)
+           .Where(m => machineId == m.MachineId && m.Subject.Vid.Contains(vid)).ToListAsync();
 
-            string vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
-            string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
-            string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();
-            var data = new GetAllDetailMachineAirAndElectricConsumptionDto
-            {
-                Vid = vid,
-                MachineName = machineName,
-                SubjectName = subjectName
-            };
-            return data;
+            var data = new GetAllDetailMachineAirAndElectricConsumptionDto();
+
+                data = new GetAllDetailMachineAirAndElectricConsumptionDto
+                {
+                    Vid = machine.Select(p => p.Subject.Vid).FirstOrDefault(),
+                    MachineName = machine.Select(o => o.Machine.Name).FirstOrDefault(),
+                    SubjectName = machine.Select(p => p.Subject.Subjects).FirstOrDefault()
+                };
+                return data;
         }
 
         public async Task<GetAllDetailMachineEnergyConsumptionDto> GetSubjectPowerAsync(Guid machineId)
         {
             var machine = await _dbContext.subjectHasMachines.Include(s => s.Machine).Include(s => s.Subject)
-          .Where(m => machineId == m.MachineId && m.Subject.Vid.Contains("POWER-CONSUMPTION")).ToListAsync();
+           .Where(m => machineId == m.MachineId && m.Subject.Vid.Contains("POWER-CONSUMPTION")).ToListAsync();
 
             string vid = machine.Select(m => m.Subject.Vid).FirstOrDefault();
             string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();

@@ -5,10 +5,8 @@ using MQTTnet.Extensions.ManagedClient;
 using SkeletonApi.IotHub.Hubs;
 using SkeletonApi.IotHub.Model;
 using SkeletonApi.IotHub.Services.Handler;
-using System;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace SkeletonApi.IotHub.Services
 {
@@ -59,7 +57,8 @@ namespace SkeletonApi.IotHub.Services
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             await _managedMqttClient.StartAsync(_options);
-            await _managedMqttClient.SubscribeAsync("#");
+            await _managedMqttClient.SubscribeAsync("DCM/P9AUA0/#");
+            //DCM/P9AEA0/#
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
