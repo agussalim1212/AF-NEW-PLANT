@@ -14,6 +14,13 @@ namespace SkeletonApi.Domain.Entities
         public string Id { get; set; }
         public string Value { get; set; }
     }
+
+    public class MachineInformationConsumption
+    {
+        public string Id { get; set; }
+        public string Value { get; set; }
+        public DateTime DateTime { get; set; }
+    }
     public class RobotConsumption
     {
         public DateTime Bucket { get; set; }
@@ -112,6 +119,12 @@ namespace SkeletonApi.Domain.Entities
         public decimal Value { get; set; }
     }
 
+    public class CurrentConsumptions
+    {
+        public DateTime Bucket { get; set; }
+        public string Id { get; set; }
+        public decimal LastValue { get; set; }
+    }
 
     public class FrqConsumption
     {

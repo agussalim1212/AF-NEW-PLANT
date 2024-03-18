@@ -44,7 +44,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     for (int i = 0; i < pg.Data.Count(); i++)
                     {
                         worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
-                        worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).TirePresure;
+                       // worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).TirePresure;
                     }
                 }
                 else if (type_wheel == "disk_brake")
@@ -55,7 +55,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     for (int i = 0; i < pg.Data.Count(); i++)
                     {
                         worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
-                        worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).DataTorQ;
+                       // worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).DataTorQ;
                     }
                 }
                 else
@@ -72,8 +72,8 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                         {
                             worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
                             worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).Status;
-                            worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataDistance;
-                            worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).DataTonase;
+                            //worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataDistance;
+                            //worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).DataTonase;
 
                         }
                     }

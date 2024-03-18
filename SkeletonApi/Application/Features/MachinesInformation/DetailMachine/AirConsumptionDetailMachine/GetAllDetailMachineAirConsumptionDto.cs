@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine
 {
-    public class GetAllDetailMachineAirAndElectricConsumptionDto : IMapFrom<GetAllDetailMachineAirAndElectricConsumptionDto>
+    public class GetAllDetailMachineAirConsumptionDto : IMapFrom<GetAllDetailMachineAirConsumptionDto>
     {
         [JsonIgnore]
         public string Vid { get; set; }

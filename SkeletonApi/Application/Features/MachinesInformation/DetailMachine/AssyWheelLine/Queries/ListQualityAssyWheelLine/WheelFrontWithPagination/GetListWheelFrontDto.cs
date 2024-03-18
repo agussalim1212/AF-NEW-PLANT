@@ -7,20 +7,22 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
     public class GetListWheelFrontDto
     {
         [JsonPropertyName("date_time")]
-        public DateTime DateTime { get; set; }
+        public string? DateTime { get; set; }
         [JsonPropertyName("status")]
         public string Status { get; set; }
         [JsonPropertyName("data_distance")]
-        public decimal DataDistance { get; set; }
+        public string? DataDistance { get; set; }
         [JsonPropertyName("data_tonase")]
-        public decimal DataTonase { get; set; }
+        public string? DataTonase { get; set; }
         [JsonPropertyName("data_dial_horizontal")]
-        public decimal DataDialHorizontal { get; set; }
+        public string? DataDialHorizontal { get; set; }
         [JsonPropertyName("data_dial_vertical")]
-        public decimal DataDialVertical { get; set;}
+        public string? DataDialVertical { get; set;}
+        [JsonPropertyName("data_dial_disk_brake")]
+        public string? DiskBrake { get; set; }
         [JsonPropertyName("tire_presure")]
-        public decimal TirePresure { get; set; }
+        public string? TirePresure { get; set; }
         [JsonPropertyName("data_torsi")]
-        public decimal DataTorQ { get; set; }
+        public string? DataTorQ { get; set; }
     }
 }

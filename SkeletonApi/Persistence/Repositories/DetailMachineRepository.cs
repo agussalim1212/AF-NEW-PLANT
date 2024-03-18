@@ -1,31 +1,65 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine;
+using SkeletonApi.Application.DTOs.DetailMachine;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumption;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.MachineInformation;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Persistence.Contexts;
+
 
 namespace SkeletonApi.Persistence.Repositories
 {
     public class DetailMachineRepository : IDetailMachineRepository
     {
+        private readonly IDapperReadDbConnection _dapperReadDbConnection;
         private readonly IGenRepository<SubjectHasMachine> _repositorySubjectMachine;
         private readonly ApplicationDbContext _dbContext;
-        public DetailMachineRepository(ApplicationDbContext dbContext, IGenRepository<SubjectHasMachine> repositorySubjectMachine)
+        public DetailMachineRepository(IDapperReadDbConnection dapperReadDbConnection, ApplicationDbContext dbContext, IGenRepository<SubjectHasMachine> repositorySubjectMachine)
         {
             _dbContext = dbContext;
             _repositorySubjectMachine = repositorySubjectMachine;
+            _dapperReadDbConnection = dapperReadDbConnection;
             
         }
 
-        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetSubjectAirAsync(Guid machineId, string vid)
+        public async Task<GetAllMachineInformationDto> GetAllMachineInformationAsync(Guid machine_id, string vidRunning, string vidReminder, string machineName)
+        {
+            var data = new GetAllMachineInformationDto();
+
+            var runningAndReminder = await _dapperReadDbConnection.QueryAsync<MachineInformationConsumption>
+                       (@"select id,value ,date_time  from ""MachineInformation"" mi where id = @vidRun OR id = @vidRemind order by date_time desc limit 2",
+                       new { vidRun = vidRunning, vidRemind = vidReminder });
+
+            if (runningAndReminder.Count() == 0)
+            {
+                data = new GetAllMachineInformationDto
+                {
+                    MachineName = machineName,
+                };
+
+            }
+            else
+            {
+
+                data = new GetAllMachineInformationDto
+                {
+                    MachineName = machineName,
+                    LastTimeCalibration = runningAndReminder.Select(p => p.Value).FirstOrDefault(),
+                    ValueRunning = runningAndReminder.Select(p => p.Value).Skip(1).FirstOrDefault(),
+
+                };
+            }
+            return data;
+        }
+
+        public async Task<GetVidSubjectDto> GetSubjectAsync(Guid machineId, string vid)
         {
             var machine = await _repositorySubjectMachine.Entities.Include(s => s.Machine).Include(s => s.Subject)
            .Where(m => machineId == m.MachineId && m.Subject.Vid.Contains(vid)).ToListAsync();
 
-            var data = new GetAllDetailMachineAirAndElectricConsumptionDto();
+            var data = new GetVidSubjectDto();
 
-                data = new GetAllDetailMachineAirAndElectricConsumptionDto
+                data = new GetVidSubjectDto
                 {
                     Vid = machine.Select(p => p.Subject.Vid).FirstOrDefault(),
                     MachineName = machine.Select(o => o.Machine.Name).FirstOrDefault(),

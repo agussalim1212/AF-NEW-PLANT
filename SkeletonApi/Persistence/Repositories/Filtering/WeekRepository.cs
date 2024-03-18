@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions.Queries;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AmpereConsumptionDetailMachine;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumption;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Application.Interfaces.Repositories.Filtering;
@@ -22,10 +23,10 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             _repositorySubjectHasMachine = repositorySubjectHasMachine;
         }
 
-        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionAsync(string view,string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
+        public async Task<GetAllDetailMachineAirConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionWeek(string view,string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
-            var data = new GetAllDetailMachineAirAndElectricConsumptionDto();
+            var data = new GetAllDetailMachineAirConsumptionDto();
             if (endTime.Date < startTime.Date)
             {
                 throw new ArgumentException("End day cannot be earlier than start date.");
@@ -62,7 +63,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
 
                 if (airConsumption.Count() == 0)
                 {
-                    data = new GetAllDetailMachineAirAndElectricConsumptionDto
+                    data = new GetAllDetailMachineAirConsumptionDto
                     {
                         MachineName = machineName,
                         SubjectName = subjectName
@@ -72,7 +73,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 {
 
                     data =
-                    new GetAllDetailMachineAirAndElectricConsumptionDto
+                    new GetAllDetailMachineAirConsumptionDto
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
@@ -92,7 +93,68 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             }
         }
 
-        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionAsync(string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
+        public async Task<GetAllDetailMachineCurrentAndVoltageConsumptionDto> GetAllDetailMachineCurrentAndVoltageConsumptionWeek(string view, string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
+        {
+
+            var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
+            var data = new GetAllDetailMachineCurrentAndVoltageConsumptionDto();
+            if (endTime.Value < startTime.Value)
+            {
+                throw new ArgumentException("End day cannot be earlier than start date.");
+            }
+            else
+            {
+                var energyConsumption = await _dapperReadDbConnection.QueryAsync<CurrentConsumptions>
+                ($@"SELECT * FROM {view} WHERE id = @id
+                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
+                ORDER BY bucket DESC",
+                 new { id = vid, starttime = startTime.Value.Date, endtime = endTime.Value.Date });
+
+                var groupedQuerys = energyConsumption
+                .GroupBy(d => new
+                {
+                    WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.Bucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
+                })
+                  .Select(g => new
+                  {
+                      date_group = new DateTime(g.Key.WeekNumber, 1, 1).AddDays((g.Key.WeekNumber - 1) * 7),
+                      total_last = g.Sum(d => d.LastValue)
+                  }).ToList();
+
+                if (energyConsumption.Count() == 0)
+                {
+                    data = new GetAllDetailMachineCurrentAndVoltageConsumptionDto
+                    {
+                        MachineName = machineName,
+                        SubjectName = subjectName,
+                    };
+                }
+                else
+                {
+
+                    data =
+                    new GetAllDetailMachineCurrentAndVoltageConsumptionDto
+                    {
+                        MachineName = machineName,
+                        SubjectName = subjectName,
+                        //Maximum = setting.Maximum,
+                        //Medium = setting.Medium,
+                        //Minimum = setting.Minimum,
+                        Data = groupedQuerys.Select(val => new Data
+                        {
+                            Value = val.total_last,
+                            Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(val.date_group, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
+                            DateTime = val.date_group,
+                        }).OrderByDescending(x => x.DateTime).ToList()
+
+                    };
+                }
+                return data;
+            }
+        }
+
+        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionWeek(string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
             var data = new GetAllDetailMachineEnergyConsumptionDto();

@@ -7,7 +7,7 @@ using SkeletonApi.Shared;
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine
 {
   
-    public record GetAllDetailMachineAirAndElectricConsumptionQuery : IRequest<Result<GetAllDetailMachineAirAndElectricConsumptionDto>>
+    public record GetAllDetailMachineAirConsumptionQuery : IRequest<Result<GetAllDetailMachineAirConsumptionDto>>
     {
         public Guid MachineId { get; set; }
         public string Type { get; set; }
@@ -15,7 +15,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Air
         public DateTime End { get; set; }
         public string View { get; set; }
         public string Vid { get; set; }
-        public GetAllDetailMachineAirAndElectricConsumptionQuery(Guid machineId, string type, DateTime startTime, DateTime endTime, string view, string vid)
+        public GetAllDetailMachineAirConsumptionQuery(Guid machineId, string type, DateTime startTime, DateTime endTime, string view, string vid)
         {
             MachineId = machineId;
             Type = type;
@@ -26,7 +26,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Air
         }
     }
 
-    internal class GetAllDetailMachineAirConsumptionQueryHandler : IRequestHandler<GetAllDetailMachineAirAndElectricConsumptionQuery, Result<GetAllDetailMachineAirAndElectricConsumptionDto>>
+    internal class GetAllDetailMachineAirConsumptionQueryHandler : IRequestHandler<GetAllDetailMachineAirConsumptionQuery, Result<GetAllDetailMachineAirConsumptionDto>>
     {
         private readonly IDetailMachineRepository _repository;
         private readonly IDayRepository _dayRepository;
@@ -43,33 +43,33 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Air
             _yearRepository = yearRepository;
             _defaultRepository = defaultRepository;
         }
-        public async Task<Result<GetAllDetailMachineAirAndElectricConsumptionDto>> Handle(GetAllDetailMachineAirAndElectricConsumptionQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetAllDetailMachineAirConsumptionDto>> Handle(GetAllDetailMachineAirConsumptionQuery request, CancellationToken cancellationToken)
         {
-            var data = await _repository.GetSubjectAirAsync(request.MachineId, request.Vid);
+            var data = await _repository.GetSubjectAsync(request.MachineId, request.Vid);
        
             if (request.Type == "day")
             {
                 var dt = await _dayRepository.GetAllDetailMachineAirAndElectricConsumptionAsync(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
-                return await Result<GetAllDetailMachineAirAndElectricConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
+                return await Result<GetAllDetailMachineAirConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             else if (request.Type == "week")
             {
-                var dt = await _weekRepository.GetAllDetailMachineAirAndElectricConsumptionAsync(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
-                return await Result<GetAllDetailMachineAirAndElectricConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
+                var dt = await _weekRepository.GetAllDetailMachineAirAndElectricConsumptionWeek(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
+                return await Result<GetAllDetailMachineAirConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             else if (request.Type == "month")
             {
                 var dt = await _monthRepository.GetAllDetailMachineAirAndElectricConsumptionAsync(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
-                return await Result<GetAllDetailMachineAirAndElectricConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
+                return await Result<GetAllDetailMachineAirConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             else if (request.Type == "year")
             {
                 var dt = await _yearRepository.GetAllDetailMachineAirAndElectricConsumptionAsync(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
-                return await Result<GetAllDetailMachineAirAndElectricConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
+                return await Result<GetAllDetailMachineAirConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
 
-            var defaultData = await _defaultRepository.GetAllDetailMachineAirAndElectricConsumptionAsync(request.View, data.Vid, data.MachineName, data.SubjectName);
-            return await Result<GetAllDetailMachineAirAndElectricConsumptionDto>.SuccessAsync(defaultData,"Successfully fetch data");
+            var defaultData = await _defaultRepository.GetAllDetailMachineAirAndElectricConsumptionDefault(request.View, data.Vid, data.MachineName, data.SubjectName);
+            return await Result<GetAllDetailMachineAirConsumptionDto>.SuccessAsync(defaultData,"Successfully fetch data");
 
         }
     }

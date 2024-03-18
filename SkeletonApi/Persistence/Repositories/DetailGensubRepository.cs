@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.MachineInformation;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.TotalProduction;
 using SkeletonApi.Application.Interfaces;
 using SkeletonApi.Application.Interfaces.Repositories;
@@ -14,73 +13,16 @@ namespace SkeletonApi.Persistence.Repositories
         private readonly IDapperReadDbConnection _dapperReadDbConnection;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ApplicationDbContext _dbContext;
-        public DetailGensubRepository(IDapperReadDbConnection dapperReadDbConnection, IUnitOfWork unitOfWork, ApplicationDbContext dbContext)
+        private readonly IGenericRepository<Machine> _repositoryMachine;
+        public DetailGensubRepository(IDapperReadDbConnection dapperReadDbConnection, IUnitOfWork unitOfWork, ApplicationDbContext dbContext, IGenericRepository<Machine> repositoryMachine)
         {
             _dapperReadDbConnection = dapperReadDbConnection;
             _unitOfWork = unitOfWork;
             _dbContext = dbContext;
+            _repositoryMachine = repositoryMachine;
         }
 
-        public async Task<GetAllMachineInformationGensubDto> GetAllMachineInformationAsync(Guid machine_id)
-        {
-            var machine = await _dbContext.subjectHasMachines.Include(s => s.Machine).Include(s => s.Subject)
-            .Where(m => (machine_id == m.MachineId && m.Subject.Vid.Contains("CYCLE-COUNT"))
-            || (machine_id == m.MachineId && m.Subject.Vid.Contains("RUN-TIME"))
-            || (machine_id == m.MachineId && m.Subject.Vid.Contains("RIM"))).ToListAsync();
-
-
-            IEnumerable<string> vids = machine.Select(m => m.Subject.Vid).ToList();
-            string machineName = machine.Select(x => x.Machine.Name).FirstOrDefault();
-            string subjectName = machine.Select(x => x.Subject.Subjects).FirstOrDefault();
-
-            var data = new GetAllMachineInformationGensubDto();
-
-            var categorys = await _dbContext.MachineInformation
-                .Where(c => vids.Contains(c.Id))
-                .GroupBy(c => c.Id)
-                .Select(groups => new
-                {
-                    Id = groups.Key, // ID dari kelompok
-                    LastRunTime = groups.Where(g => g.Id.Contains("RUN-TIME"))
-                        .OrderByDescending(g => g.DateTime)
-                        .FirstOrDefault(), // Get the last "Run-Time" element
-                    LastCycleCount = groups.Where(g => g.Id.Contains("CYCLE-COUNT"))
-                        .OrderByDescending(g => g.DateTime)
-                        .FirstOrDefault(), // Get the last "Cycle-Count" element
-                    LastKalibrasi = groups.Where(g => g.Id.Contains("RIM"))
-                        .OrderByDescending(g => g.DateTime)
-                        .FirstOrDefault(), // Get the last "rim-calibration" element
-                })
-                .ToListAsync();
-
-
-            if (categorys.Count() == 0)
-            {
-                data = new GetAllMachineInformationGensubDto
-                {
-                    MachineName = machineName,
-                    SubjectName = subjectName,
-
-                };
-
-            }
-            else
-            {
-
-
-                data = new GetAllMachineInformationGensubDto
-                {
-                    MachineName = machineName,
-                    SubjectName = subjectName,
-                    DateTime = DateTime.Now,
-                    ValueRunning = categorys.Select(c => Convert.ToDecimal(c.LastRunTime?.Value)).Skip(1).FirstOrDefault(),
-                    CycleCount = categorys.Select(x => Convert.ToDecimal(x.LastCycleCount?.Value)).FirstOrDefault(),
-                    LastTimeCalibration = categorys.Select(n => n.LastKalibrasi?.Value).Skip(2).FirstOrDefault(),
-
-                };
-            }
-            return data;
-        }
+       
         public async Task<GetAllTotalProductionGensubDto> GetAllTotalProductionGensubDto(Guid machineId, string type, DateTime start, DateTime end)
         {
             var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)

@@ -6,17 +6,17 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.FrequencyInverter
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.MachineInformation
 {
-    public class GetAllFrequencyInverterDto : IMapFrom<GetAllFrequencyInverterDto>
+    public class GetAllMachineInformationDto : IMapFrom<GetAllMachineInformationDto>
     {
         [JsonPropertyName("machine_name")]
         public string MachineName { get; set; }
         [JsonPropertyName("subject_name")]
         public string SubjectName { get; set; }
-        [JsonPropertyName("date_time")]
-        public DateTime DateTime { get; set; }
-        [JsonPropertyName("value")]
-        public decimal Value { get; set; }
+        [JsonPropertyName("value_running")]
+        public string ValueRunning { get; set; }
+        [JsonPropertyName("value_last_time_calibration")]
+        public string LastTimeCalibration { get; set; }
     }
 }

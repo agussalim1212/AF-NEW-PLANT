@@ -71,27 +71,39 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                                     await connection.ExecuteAsync(query, deviceData);
                                     break;
                                 }
-                            case string a when a.Contains("COUNT-PRDCT"):
+                            case string a when a.Contains("TOTAL-PRODUCTION") || a.Contains("JUMLAH-PRODUKSI"):
                                 {
                                     string query = @"insert into ""TotalProductions"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
                                     await connection.ExecuteAsync(query, deviceData);
                                     break;
                                 }
-                            case string a when a.Contains("OFF-TIME"):
-                                {
-                                    string query = @"insert into ""StopLines"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
-                                    await connection.ExecuteAsync(query, deviceData);
-                                    break;
-                                }
-                            case string a when a.Contains("CYCLE-COUNT") || a.Contains("RUN-TIME") ||  a.Contains("RIM"):
+                            //case string a when a.Contains("OFF-TIME"):
+                            //    {
+                            //        string query = @"insert into ""StopLines"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
+                            //        await connection.ExecuteAsync(query, deviceData);
+                            //        break;
+                            //    }
+                            case string a when a.Contains("RUNNING-HOUR"):
                                 {
                                     string query = @"insert into ""MachineInformation"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
                                     await connection.ExecuteAsync(query, deviceData);
                                     break;
                                 }
-                            case string a when a.Contains("STATUS-PRDCT") || a.Contains("ID-PART") || a.Contains("TORQ") || a.Contains("FRQ-INVERT") || a.Contains("TIME-OPARATION")
-                                || a.Contains("VOL") || a.Contains("LEAK-TES") || a.Contains("CODE") || a.Contains("IMAG-NG") || a.Contains("DEPTH") || a.Contains("TONASE")
-                                || a.Contains("DISTANCE") || a.Contains("DIAL") || a.Contains("TIRE-PRESURE"):
+                            case string a when a.Contains("VOLTAGE"):
+                                {
+                                    string query = @"insert into ""VoltageConsumptions"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
+                                    await connection.ExecuteAsync(query, deviceData);
+                                    break;
+                                }
+                            case string a when a.Contains("CURRENT"):
+                                {
+                                    string query = @"insert into ""CurrentConsumptions"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
+                                    await connection.ExecuteAsync(query, deviceData);
+                                    break;
+                                }
+                            case string a when a.Contains("STATUS-PRDCT") || a.Contains("ID-PART") || a.Contains("TORQ") || a.Contains("STATUS-PRODUKSI") || a.Contains("JUMLAH-PRODUKSI")
+                                || a.Contains("VOL") || a.Contains("LEAK") || a.Contains("CODE") || a.Contains("FREQUENCY") || a.Contains("DEPTH") || a.Contains("DISK-BRAKE")
+                                || a.Contains("DIAL") || a.Contains("TIRE-PRASSURE") || a.Contains("DATA") ||a.Contains("TOTAL-PRODUCTION"):
                                 {
                                     string query = @"insert into ""ListQualities"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
                                     await connection.ExecuteAsync(query, deviceData);

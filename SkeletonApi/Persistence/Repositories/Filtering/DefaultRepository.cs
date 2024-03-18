@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.InkML;
+using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions.Queries;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AmpereConsumptionDetailMachine;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumption;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Application.Interfaces.Repositories.Filtering;
@@ -21,10 +23,10 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             _repositorySubjectHasMachine = repositorySubjectHasMachine;
         }
 
-        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionAsync(string view, string vid, string machineName, string subjectName)
+        public async Task<GetAllDetailMachineAirConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionDefault(string view, string vid, string machineName, string subjectName)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
-            var data = new GetAllDetailMachineAirAndElectricConsumptionDto();
+            var data = new GetAllDetailMachineAirConsumptionDto();
      
                 var airConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumptionDetail>
                 ($@"SELECT * FROM {view} WHERE id = @id
@@ -33,7 +35,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
 
                 if (airConsumption.Count() == 0)
                 {
-                    data = new GetAllDetailMachineAirAndElectricConsumptionDto
+                    data = new GetAllDetailMachineAirConsumptionDto
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
@@ -43,7 +45,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 {
 
                     data =
-                     new GetAllDetailMachineAirAndElectricConsumptionDto
+                     new GetAllDetailMachineAirConsumptionDto
                      {
                          MachineName = machineName,
                          SubjectName = subjectName,
@@ -62,7 +64,52 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 return data;
         }
 
-        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionAsync(string vid, string machineName, string subjectName)
+        public async Task<GetAllDetailMachineCurrentAndVoltageConsumptionDto> GetAllDetailMachineCurrentAndVoltageConsumptionDefault(string view, string vid, string machineName, string subjectName)
+        {
+            var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
+            var data = new GetAllDetailMachineCurrentAndVoltageConsumptionDto();
+            var currentConsumptions = await _dapperReadDbConnection.QueryAsync<CurrentConsumptions>
+                ($@"SELECT * FROM {view} WHERE id = @id
+                AND date_trunc('week', bucket) = date_trunc('week', now()) 
+                ORDER BY bucket DESC", new { id = vid });
+
+            var totals = currentConsumptions.GroupBy(p => new { p.Bucket.Year, p.Bucket.Month, p.Bucket.Day }).Select(g => new
+            {
+                date_time = new DateTime(g.Key.Year, g.Key.Month, g.Key.Day),
+                last = g.Select(p => p.LastValue).First()
+            }).ToList();
+
+            if (currentConsumptions.Count() == 0)
+            {
+                data = new GetAllDetailMachineCurrentAndVoltageConsumptionDto
+                {
+                    MachineName = machineName,
+                    SubjectName = subjectName,
+                };
+            }
+            else
+            {
+
+                data =
+                 new GetAllDetailMachineCurrentAndVoltageConsumptionDto
+                 {
+                     MachineName = machineName,
+                     SubjectName = subjectName,
+                     //Maximum = setting.Maximum,
+                     //Medium = setting.Medium,
+                     //Minimum = setting.Minimum,
+                     Data = totals.Select(val => new Data
+                     {
+                         Value = val.last,
+                         Label = val.date_time.AddHours(7).ToString("ddd"),
+                         DateTime = val.date_time,
+                     }).OrderByDescending(x => x.DateTime).ToList()
+                 };
+            }
+            return data;
+        }
+
+        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionDefault(string vid, string machineName, string subjectName)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
             var data = new GetAllDetailMachineEnergyConsumptionDto();
@@ -156,72 +203,130 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             return dt;
         }
 
-        public async Task<List<GetListWheelRearDto>> GetListQualityAssyWheelPressBearing(string typesWheel, string searchTerm, Guid machineId, DateTime? Start, DateTime? End)
+        public async Task<List<GetListWheelRearDto>> GetListQualityAssyWheelRearFinalInspectionDefault(string vidStatus, string vidHorizontal, string vidVertikal, string vidDiskBrake, Guid machineId, DateTime? Start, DateTime? End)
         {
             List<GetListWheelRearDto> dt = new List<GetListWheelRearDto>();
             var data = new GetListWheelRearDto();
 
-            var statusPressBearing = _repositorySubjectHasMachine.FindByCondition(m => m.Subject.Vid.Contains("BRNG-STATUS-PRDCT")).Include(o => o.Subject).FirstOrDefault();
-            var brngDistance = _repositorySubjectHasMachine.FindByCondition(m => m.Subject.Vid.Contains("DISTANCE")).Include(o => o.Subject).FirstOrDefault();
-            var brngTonase = _repositorySubjectHasMachine.FindByCondition(m => m.Subject.Vid.Contains("TONASE")).Include(o => o.Subject).FirstOrDefault();
+            var horizontalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+            (@"SELECT * FROM ""list_quality_wheel_rear_fi"" WHERE id = @id
+            AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+            ORDER BY bucket DESC",
+            new { id = vidHorizontal, dateNow = DateTime.Now.Date, });
 
-            var pressbearingDistnaceConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-                           (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                           AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
-                           ORDER BY  bucket DESC",
-                           new { vid = brngDistance.Subject.Vid, dateNow = DateTime.Now.Date, });
+            var vertikalConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+            (@"SELECT * FROM ""list_quality_wheel_rear_fi"" WHERE id = @id
+            AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+            ORDER BY bucket DESC",
+            new { id = vidVertikal, dateNow = DateTime.Now.Date, });
 
-            var pressbearingTonaseConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-            (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                           AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
-                           ORDER BY  bucket DESC",
-            new { vid = brngTonase.Subject.Vid, dateNow = DateTime.Now.Date, });
+            var statusInspectionConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+            (@"SELECT * FROM ""list_quality_wheel_rear_fi"" WHERE id = @id
+            AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+            ORDER BY bucket DESC",
+            new { id = vidStatus, dateNow = DateTime.Now.Date, });
 
-            var statusBearingConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
-            (@"SELECT * FROM ""list_quality_wheel_rear"" WHERE id = @vid
-                           AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
-                           ORDER BY  bucket DESC",
-            new { vid = statusPressBearing.Subject.Vid, dateNow = DateTime.Now.Date, });
+            var diskBrakeConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+            (@"SELECT * FROM ""list_quality_wheel_rear_fi"" WHERE id = @id
+            AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+            ORDER BY bucket DESC",
+            new { id = vidDiskBrake, dateNow = DateTime.Now.Date, });
 
-            if (statusBearingConsumption.Count() == 0)
+            if (horizontalConsumption.Count() == 0 || vertikalConsumption.Count() == 0)
+            {
+
+                dt = new List<GetListWheelRearDto>();
+            }
+            else
+            {
+
+                foreach (var s in vertikalConsumption)
+                {
+                    GetListWheelRearDto listQuality = new GetListWheelRearDto();
+
+                    var dataDialHorizontal = horizontalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                    if (dataDialHorizontal != null)
+                    {
+                        listQuality.DataDialHorizontal = dataDialHorizontal.Value;
+                    }
+                    else
+                    {
+                        listQuality.DataDialHorizontal = "0";
+                    }
+                    var dataDialVertikal = vertikalConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                    if (dataDialVertikal != null)
+                    {
+                        listQuality.DataDialVertical = dataDialVertikal.Value;
+                    }
+                    else
+                    {
+                        listQuality.DataDialVertical = "0";
+                    }
+                    var statuss = statusInspectionConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                    if (statuss != null && statuss.Value.Contains("1"))
+                    {
+                        listQuality.Status = "OK";
+                    }
+                    else if (statuss == null)
+                    {
+                        listQuality.Status = "-";
+                    }
+                    else
+                    {
+                        listQuality.Status = "NG";
+                    }
+                    var dataDiskBrake = diskBrakeConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
+                    if (dataDiskBrake != null)
+                    {
+                        listQuality.DiskBrake = dataDiskBrake.Value;
+                    }
+                    else
+                    {
+                        listQuality.DiskBrake = "0";
+                    }
+
+                    listQuality.DateTime = s.Bucket.AddHours(7).ToString("dd-MM-yyy HH:mm:ss");
+
+                    dt.Add(listQuality);
+
+                }
+              
+            }
+            return dt;
+        }
+
+        public async Task<List<GetListWheelRearDto>> GetListQualityAssyWheelRearTireInflationDefault(string vid, string typesWheel, string searchTerm, Guid machineId, DateTime? Start, DateTime? End)
+        {
+            List<GetListWheelRearDto> dt = new List<GetListWheelRearDto>();
+            var data = new GetListWheelRearDto();
+
+            var TireConsumption = await _dapperReadDbConnection.QueryAsync<WheelRearConsumption>
+            (@"SELECT * FROM ""list_quality_wheel_rear_ti"" WHERE id = @id
+            AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
+            ORDER BY bucket DESC",
+            new { id = vid, dateNow = DateTime.Now.Date, });
+
+            if (TireConsumption.Count() == 0)
             {
                 data =
                 new GetListWheelRearDto
                 {
-                    DateTime = DateTime.Now,
-                    Status = "-",
-                    DataDistance = 0,
-                    DataTonase = 0,
+                    DateTime = null,
+                    Status = null,
+                    DataDistance = null,
+                    DataTonase = null,
                 };
                 dt.Add(data);
             }
             else
             {
 
-                foreach (var s in statusBearingConsumption)
+                foreach (var s in TireConsumption)
                 {
                     GetListWheelRearDto listQuality = new GetListWheelRearDto();
 
-                    var dataDial = pressbearingDistnaceConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                    if (dataDial != null)
-                    {
-                        listQuality.DataDistance = Convert.ToDecimal(dataDial.Value);
-                    }
-                    var dataTonase = pressbearingTonaseConsumption.Where(k => k.Bucket == s.Bucket).FirstOrDefault();
-                    if (dataTonase != null)
-                    {
-                        listQuality.DataTonase = Convert.ToDecimal(dataTonase.Value);
-                    }
-                    var statuss = statusBearingConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
-                    if (statuss != null && statuss.Value.Contains("1"))
-                    {
-                        listQuality.Status = "OK";
-                    }
-                    else
-                    {
-                        listQuality.Status = "NG";
-                    }
-                    listQuality.DateTime = s.Bucket.AddHours(7);
+                    listQuality.TirePresure = s.Value;
+                    listQuality.DateTime = s.Bucket.ToString("dd-MM-yyy HH:mm:ss");
                     dt.Add(listQuality);
 
                 }

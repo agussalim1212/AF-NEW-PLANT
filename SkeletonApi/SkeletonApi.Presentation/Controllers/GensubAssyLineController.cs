@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.MachineInformation;
 using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.TotalProduction;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination.Download;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination.Download;
@@ -22,12 +21,6 @@ namespace SkeletonApi.Presentation.Controllers
         {
             _mediator = mediator;
             _logger = logger;
-        }
-
-        [HttpGet("machine-information")]
-        public async Task<ActionResult<Result<GetAllMachineInformationGensubDto>>> GetMachineInformationGensub(Guid machine_id)
-        {
-            return await _mediator.Send(new GetAllMachineInformationGensubQuery(machine_id));
         }
 
         [HttpGet("total-production")]

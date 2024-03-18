@@ -51,6 +51,8 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<PowerConsumption> PowerConsumptions => Set<PowerConsumption>();
         public DbSet<StopLine> StopLines => Set<StopLine>();
         public DbSet<TotalProduction> TotalProductions => Set<TotalProduction>();
+        public DbSet<CurrentConsumption> CurrentConsumptions => Set<CurrentConsumption>();
+        public DbSet<VoltageConsumption> VoltageConsumptions => Set<VoltageConsumption>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

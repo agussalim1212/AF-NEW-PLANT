@@ -49,7 +49,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ene
             }
             else if(request.Type == "week")
             {
-                var dt = await _weekRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName, request.Start.Value, request.End.Value);
+                var dt = await _weekRepository.GetAllDetailMachineEnergyConsumptionWeek(data.Vid, data.MachineName, data.SubjectName, request.Start.Value, request.End.Value);
                 return await Result<GetAllDetailMachineEnergyConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             else if(request.Type == "month")
@@ -63,7 +63,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ene
                 return await Result<GetAllDetailMachineEnergyConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
             }
             
-             var defaultData = await _defaultRepository.GetAllDetailMachineEnergyConsumptionAsync(data.Vid, data.MachineName, data.SubjectName);
+             var defaultData = await _defaultRepository.GetAllDetailMachineEnergyConsumptionDefault(data.Vid, data.MachineName, data.SubjectName);
              return await Result<GetAllDetailMachineEnergyConsumptionDto>.SuccessAsync(defaultData,"Successfully fetch data");
             
         }

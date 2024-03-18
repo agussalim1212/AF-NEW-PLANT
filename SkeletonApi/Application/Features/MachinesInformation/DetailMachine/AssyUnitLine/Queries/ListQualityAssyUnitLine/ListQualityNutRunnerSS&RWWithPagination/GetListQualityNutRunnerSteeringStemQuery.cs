@@ -32,14 +32,17 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
         internal class GetListQualityNutRunnerStreeringStemQueryHandler : IRequestHandler<GetListQualityNutRunnerSteeringStemQuery, PaginatedResult<GetListQualityNutRunnerSteeringStemDto>>
         {
             private readonly IDetailAssyUnitRepository _detailAssyUnitRepository;
+            private readonly IDetailMachineRepository _detailMachineRepository;
 
-            public GetListQualityNutRunnerStreeringStemQueryHandler(IDetailAssyUnitRepository detailAssyUnitRepository)
+            public GetListQualityNutRunnerStreeringStemQueryHandler(IDetailAssyUnitRepository detailAssyUnitRepository, IDetailMachineRepository detailMachineRepository)
             {
                 _detailAssyUnitRepository = detailAssyUnitRepository;
+                _detailMachineRepository = detailMachineRepository;
             }
 
             public async Task<PaginatedResult<GetListQualityNutRunnerSteeringStemDto>> Handle(GetListQualityNutRunnerSteeringStemQuery query, CancellationToken cancellationToken)
             {
+
                 var data = await _detailAssyUnitRepository.GetAllListQualityNutRunnerStem(query.machine_id, query.type, query.start,query.end);
                 var dt = data.Where(c => query.search_term == null || query.search_term.ToLower() == c.DataBarcode.ToLower() 
                 || query.search_term.ToLower() == c.Status.ToLower()).ToList();

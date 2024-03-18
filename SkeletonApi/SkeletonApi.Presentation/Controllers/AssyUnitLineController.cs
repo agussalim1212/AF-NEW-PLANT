@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.FrequencyInverter;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityAssyUnitLineWithPagination;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFiling;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLine;
@@ -9,8 +8,6 @@ using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQu
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrake;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRace;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.MachineInformation;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.StopLine;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.TotalProduction;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFilingWithPagination.Download;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLineWithPagination.Download;
@@ -40,25 +37,7 @@ namespace SkeletonApi.Presentation.Controllers
             return await _mediator.Send(new GetAllTotalProductionQuery(machine_id, type, start, end));
         }
 
-        [HttpGet("machine-information")]
-        public async Task<ActionResult<Result<GetAllMachineInformationDto>>> GetMachineInformation(Guid machine_id)
-        {
-            return await _mediator.Send(new GetAllMachineInformationQuery(machine_id));
-        }
-
-
-        [HttpGet("stop-line")]
-        public async Task<ActionResult<Result<GetAllStopLineDto>>> GetStopLine(Guid machine_id)
-        {
-            return await _mediator.Send(new GetAllStopLineQuery(machine_id));
-        }
-
-        [HttpGet("frequency-inverter")]
-        public async Task<ActionResult<Result<GetAllFrequencyInverterDto>>> GetFrequencyInverter(Guid machine_id, string type, DateTime start, DateTime end)
-        {
-            return await _mediator.Send(new GetAllFrequencyInverterQuery(machine_id, type, start, end));
-        }
-
+      
 
         [HttpGet("list-quality-nut-runner")]
         public async Task<ActionResult<PaginatedResult<GetListQualityNutRunnerSteeringStemDto>>> GetListQualaityNutRunnerSteringStem([FromQuery] GetListQualityNutRunnerSteeringStemQuery query)

@@ -4,7 +4,6 @@ using SkeletonApi.Application.Features.Dashboard.FiveTopEnergyConsumption.Querie
 using SkeletonApi.Application.Features.Dashboard.FiveTopMachineMaintenance.Queries;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-using SkeletonApi.Persistence.Interfaces;
 using System.Globalization;
 
 namespace SkeletonApi.Persistence.Repositories
@@ -111,7 +110,7 @@ namespace SkeletonApi.Persistence.Repositories
             var data = new GetAllTop5EnergyConsumptionsDto();
 
             var EnergyConsumption = await _dapperReadDbConnection.QueryAsync<EnergyConsumption>
-               (@"SELECT * FROM ""power_consumption_setting_ex"" WHERE id = ANY(@vid)
+               (@"SELECT * FROM ""power_consumption_setting"" WHERE id = ANY(@vid)
                AND date_trunc('year', bucket::date) = date_trunc('year', now())
                ORDER BY bucket DESC",
                new { vid = subjects });
@@ -126,7 +125,7 @@ namespace SkeletonApi.Persistence.Repositories
 
 
             var EnergyWeekConsumption = await _dapperReadDbConnection.QueryAsync<EnergyConsumption>
-                (@"SELECT * FROM ""power_consumption_setting_ex"" WHERE id = ANY(@vid)
+                (@"SELECT * FROM ""power_consumption_setting"" WHERE id = ANY(@vid)
                 AND date_trunc('week', bucket::date) = date_trunc('week', now())
                 ORDER BY bucket DESC",
                 new { vid = subjects});
@@ -144,7 +143,7 @@ namespace SkeletonApi.Persistence.Repositories
            decimal week = groupWeek.Select(p => p.totalLast - p.totalFirst).FirstOrDefault();
             
            var EnergyMonthConsumption = await _dapperReadDbConnection.QueryAsync<EnergyConsumption>
-               (@"SELECT * FROM ""power_consumption_setting_ex"" WHERE id = ANY(@vid)
+               (@"SELECT * FROM ""power_consumption_setting"" WHERE id = ANY(@vid)
                AND date_trunc('month', bucket::date) = date_trunc('month', now())
                ORDER BY  bucket DESC",
                 new { vid = subjects });

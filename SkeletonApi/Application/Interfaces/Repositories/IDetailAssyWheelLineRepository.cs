@@ -1,13 +1,11 @@
-﻿using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.MachineInformationAssyWheelLine;
+﻿using SkeletonApi.Application.DTOs.DetailMachine;
 
 namespace SkeletonApi.Application.Interfaces.Repositories
 {
     public interface IDetailAssyWheelLineRepository
     {
-        Task<List<GetVid>> GetVidsAsync(Guid machineId, string category);
-        Task<GetAllMachineInformationAssyWheelLineDto> GetAllMachineInformationAsync(Guid machine_id);
-     
+        Task<GetVidSubjectDto> GetVidsAsync(Guid machineId, string vid);
+  
 
 
     
