@@ -3,24 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces;
-using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Infrastructure.Extensions;
 using SkeletonApi.Infrastructure.Services;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.IServiceCollectionExtensions;
 using SkeletonApi.Persistence.Repositories;
 using SkeletonApi.Persistence.Repositories.Configuration;
-using SkeletonApi.Presentation.ActionFilter;
 using SkeletonApi.WebAPI.Extensions;
-using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
-builder.Services.AddSingleton<MqttClientService>();
-
 builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureIdentity();
 builder.Services.AddAuthentication();
@@ -32,6 +28,10 @@ builder.Services.AddInfrastructureLayer();
 builder.Services.AddPersistenceLayer(builder.Configuration);
 builder.Services.ConfigureApiBehavior();
 builder.Services.ConfigureCorsPolicy(builder.Configuration);
+
+//IOT
+//builder.Services.AddScoped<IClientRequest, ClientRequest>();
+//builder.Services.AddTransient<IMqttClientService, SkeletonApi.IotHub.Services.MqttClientService>();
 
 builder.Services.AddHttpClient<IRestApiClientService, RestApiClientService>();
 builder.Services.AddScoped<IDapperReadDbConnection, DapperReadDbConnection>();
@@ -50,6 +50,11 @@ builder.Services.AddControllers(
         //config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
         config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
     }).AddXmlDataContractSerializerFormatters()
+     .AddJsonOptions(options =>
+     {
+         options.JsonSerializerOptions.Converters.Add(new DateTimeFormatConverter("yyyy-MM-dd HH:mm:ss"));
+     })
+
     //.AddCustomCSVFormatter()
     .AddApplicationPart(typeof(SkeletonApi.Presentation.AssemblyReference).Assembly);
 
@@ -69,7 +74,6 @@ app.UseSwaggerUI(s =>
 {
     s.SwaggerEndpoint("/swagger/v1/swagger.json", "SkeletonAPI v1");
     s.SwaggerEndpoint("/swagger/v2/swagger.json", "SkeletonAPI v2");
-   
 });
 
 app.UseErrorHandler(Log.Logger);

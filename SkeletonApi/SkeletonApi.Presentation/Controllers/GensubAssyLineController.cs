@@ -1,14 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.TotalProduction;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination.Download;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination.Download;
 using SkeletonApi.Shared;
 using System.Text.Json;
-
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -17,16 +15,11 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public GensubAssyLineController(IMediator mediator, ILogger<GensubAssyLineController> logger)
         {
             _mediator = mediator;
             _logger = logger;
-        }
-
-        [HttpGet("total-production")]
-        public async Task<ActionResult<Result<GetAllTotalProductionGensubDto>>> GetTotalProductionGensub(Guid machine_id, string type, DateTime start, DateTime end)
-        {
-            return await _mediator.Send(new GetAllTotalProductionGensubQuery(machine_id, type, start, end));
         }
 
         [HttpGet("list-quality")]
@@ -59,6 +52,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #region Excel List Quality Auto Cover Body Assy And Conv Steering Handle
+
         [HttpGet("list-quality-download")]
         public async Task<ActionResult<PaginatedResult<GetListQualityGensubDto>>> ListQualityDownloadExcel([FromQuery] GetListQualityGensubQuery query)
         {
@@ -121,6 +115,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #region Excel List Quality Auto Tightening Front Cushion
+
         [HttpGet("list-quality-download-auto-tightening")]
         public async Task<ActionResult<PaginatedResult<GetListQualityAutoTIghteningFcDto>>> ListQualityAutoTighteningFCDownloadExcel([FromQuery] GetListQualityAutoTIghteningFcQuery query)
         {
@@ -152,9 +147,5 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #endregion Excel List Quality Auto Tightening Front Cushion
-
     }
 }
-
-
-

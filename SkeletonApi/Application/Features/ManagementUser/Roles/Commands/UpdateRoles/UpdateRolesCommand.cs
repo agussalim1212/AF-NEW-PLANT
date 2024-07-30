@@ -22,7 +22,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.UpdateR
 
         public async Task<Result<Role>> Handle(UpdateRolesRequest request, CancellationToken cancellationToken)
         {
-
             var validateRole = await _roleManager.FindByIdAsync(request.Id);
             if (validateRole == null)
             {

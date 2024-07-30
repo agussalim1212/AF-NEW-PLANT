@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.OpenApi.Models;
 
 namespace SkeletonApi.WebAPI.Extensions
 {
@@ -12,6 +13,7 @@ namespace SkeletonApi.WebAPI.Extensions
         //            .AllowAnyMethod()
         //            .AllowAnyHeader());
         //    });
+      
 
         public static void ConfigureIISIntegration(this IServiceCollection services) =>
             services.Configure<IISOptions>(options =>

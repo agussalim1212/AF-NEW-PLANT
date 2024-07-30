@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Shared;
-using System.Linq;
 
 namespace SkeletonApi.Application.Extensions
 {
@@ -13,7 +12,7 @@ namespace SkeletonApi.Application.Extensions
             int count = await source.CountAsync();
             pageNumber = pageNumber <= 0 ? 1 : pageNumber;
             List<T> items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
-   
+
             return PaginatedResult<T>.Create(items, count, pageNumber, pageSize);
         }
 
@@ -27,8 +26,5 @@ namespace SkeletonApi.Application.Extensions
 
             return PaginatedResult<T>.Create(items, count, pageNumber, pageSize);
         }
-
-
-
     }
 }

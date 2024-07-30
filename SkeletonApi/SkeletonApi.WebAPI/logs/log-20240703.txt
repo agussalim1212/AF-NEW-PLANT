@@ -1,0 +1,1 @@
+{"@t":"2024-07-03T02:45:43.4896780Z","@mt":"Overriding address(es) '{addresses}'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.","@l":"Warning","addresses":"http://0.0.0.0:5000","SourceContext":"Microsoft.AspNetCore.Server.Kestrel"}

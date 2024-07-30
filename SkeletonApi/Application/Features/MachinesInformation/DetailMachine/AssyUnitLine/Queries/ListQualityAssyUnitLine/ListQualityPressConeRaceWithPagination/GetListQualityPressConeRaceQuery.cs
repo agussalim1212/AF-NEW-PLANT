@@ -1,15 +1,12 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRace
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRaceWithPagination
 {
-        public record GetListQualityPressConeRaceQuery : IRequest<PaginatedResult<GetListQualityPressConeRaceDto>>
-        {
+    public record GetListQualityPressConeRaceQuery : IRequest<PaginatedResult<GetListQualityPressConeRaceDto>>
+    {
         public Guid machine_id { get; set; }
         public int page_number { get; set; }
         public int page_size { get; set; }
@@ -17,7 +14,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
         public string type { get; set; }
         public DateTime start { get; set; }
         public DateTime end { get; set; }
-
 
         public GetListQualityPressConeRaceQuery() { }
 

@@ -3,12 +3,12 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.DeleteAccount
 {
     internal class DeleteAccountCommandHandler : IRequestHandler<DeleteAccountRequest, Result<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public DeleteAccountCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;

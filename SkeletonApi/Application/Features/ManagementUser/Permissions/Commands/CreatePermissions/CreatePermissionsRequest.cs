@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using SkeletonApi.Shared;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.CreatePermissions
@@ -12,5 +11,4 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
         [JsonPropertyName("claim")]
         public List<ClaimType> Claim { get; set; }
     }
-
 }

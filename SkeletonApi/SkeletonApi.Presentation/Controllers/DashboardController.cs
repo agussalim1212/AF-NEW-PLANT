@@ -4,10 +4,9 @@ using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.Dashboard.FiveTopAirConsumption.Queries;
 using SkeletonApi.Application.Features.Dashboard.FiveTopEnergyConsumption.Queries;
 using SkeletonApi.Application.Features.Dashboard.FiveTopMachineMaintenance.Queries;
-using SkeletonApi.Application.Features.Dashboard.Traceability_History.Queries;
-using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions.Queries;
+using SkeletonApi.Application.Features.Dashboard.TraceabilityHistory.Queries;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumption.Queries;
 using SkeletonApi.Shared;
-
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -16,6 +15,7 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public DashboardController(IMediator mediator, ILogger<DashboardController> logger)
         {
             _mediator = mediator;
@@ -23,35 +23,30 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpGet("top-energy-consumption")]
-       // [ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<GetAllTop5EnergyConsumptionsDto>>> GetAllEnergyConsumption()
         {
             return await _mediator.Send(new GetAllTop5EnergyConsumptionsQuery());
         }
 
         [HttpGet("top-air-consumption")]
-        // [ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<GetAllTop5AirConsumptionsDto>>> GetAllAirConsumption()
         {
             return await _mediator.Send(new GetAllTop5AirConsumptionsQuery());
         }
 
         [HttpGet("top-machine-maintenance")]
-        // [ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<GetAllTop5MachineMaintenanceDto>>> GetAllMachineMaintenance()
         {
             return await _mediator.Send(new GetAllTop5MachineMaintenanceQuery());
         }
 
         [HttpGet("detail-energy-consumption")]
-        // [ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<List<GetAllDetailEnergyConsumptionDto>>>> GetEnergyConsumption(string type, DateTime start, DateTime end)
         {
             return await _mediator.Send(new GetAllDetailEnergyConsumptionQuery(type, start, end));
         }
 
         [HttpGet("traceability-history")]
-        // [ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<List<GetAllTraceabilityHistoryDto>>>> GetTraceability()
         {
             return await _mediator.Send(new GetAllTraceabilityHistoryQuery());

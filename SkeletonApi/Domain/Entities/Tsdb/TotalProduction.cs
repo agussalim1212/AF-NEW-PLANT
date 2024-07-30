@@ -1,14 +1,9 @@
 ﻿using SkeletonApi.Domain.Common.Abstracts.Tsdb;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Domain.Entities.Tsdb
 {
-     public class TotalProduction : TsdbEntity
+    public class TotalProduction : TsdbEntity
     {
         [Column("id")]
         public string Id { get; set; }

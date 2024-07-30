@@ -8,12 +8,19 @@ namespace SkeletonApi.Application.Interfaces.Repositories
         IQueryable<T> Entities { get; }
 
         Task<T> GetByIdAsync(Guid id);
+
         Task<T> GetByAsync(Guid id);
+
         Task<List<T>> GetAllAsync();
+
         Task<T> AddAsync(T entity);
+
         Task UpdateAsync(T entity);
+
         Task UpdateAsyncById(T entity, Guid id);
+
         Task DeleteAsync(T entity);
+
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
     }
 }

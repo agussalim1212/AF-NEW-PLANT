@@ -6,7 +6,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ActivityUsers.Queries.GetAllLogType
 {
     public record GetAllLogTypeQuery : IRequest<Result<List<GetAllLogTypeDto>>>;
@@ -22,20 +21,17 @@ namespace SkeletonApi.Application.Features.ActivityUsers.Queries.GetAllLogType
             _mapper = mapper;
         }
 
-
         public async Task<Result<List<GetAllLogTypeDto>>> Handle(GetAllLogTypeQuery query, CancellationToken cancellationToken)
         {
             var logType = await _unitOfWork.Data<ActivityUser>().Entities
            .Select(g => new GetAllLogTypeDto
            {
-              logType = g.LogType
-
+               logType = g.LogType
            }).Distinct()
            .ProjectTo<GetAllLogTypeDto>(_mapper.ConfigurationProvider)
            .ToListAsync(cancellationToken);
 
             return await Result<List<GetAllLogTypeDto>>.SuccessAsync(logType, "Successfully fetch data");
         }
-
     }
 }

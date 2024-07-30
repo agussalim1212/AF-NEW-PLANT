@@ -2,17 +2,11 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetAllCategoryMachine;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.CategoryHasMachine.Queries.GetCategoryMachine
+namespace SkeletonApi.Application.Features.CategoryHasMachines.Queries.GetCategoryMachine
 {
     public record GetCategoryMachineQuery : IRequest<Result<List<GetCategoryMachineDto>>>;
 
@@ -27,7 +21,6 @@ namespace SkeletonApi.Application.Features.CategoryHasMachine.Queries.GetCategor
             _mapper = mapper;
         }
 
-
         public async Task<Result<List<GetCategoryMachineDto>>> Handle(GetCategoryMachineQuery query, CancellationToken cancellationToken)
         {
             var category = await _unitOfWork.Repository<CategoryMachines>().Entities.Select(g => new GetCategoryMachineDto
@@ -40,6 +33,5 @@ namespace SkeletonApi.Application.Features.CategoryHasMachine.Queries.GetCategor
 
             return await Result<List<GetCategoryMachineDto>>.SuccessAsync(category, "Successfully fetch data");
         }
-
     }
 }

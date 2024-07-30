@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkeletonApi.Application.Features.FrameNumb
+﻿namespace SkeletonApi.Application.Features.FrameNumbers
 {
     public record FrameNumberDto
     {

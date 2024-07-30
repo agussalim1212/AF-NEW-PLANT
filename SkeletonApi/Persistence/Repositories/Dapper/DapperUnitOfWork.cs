@@ -1,14 +1,6 @@
-﻿using System;
-using System.Data.Common;
-using System.Data;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Connections;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Dapper;
 using Npgsql;
-using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Persistence.Interfaces;
-using Dapper;
 
 namespace SkeletonApi.Persistence.Repositories.Dapper;
 
@@ -35,6 +27,7 @@ public class DapperUnitOfWork : IDapperUnitOfWork, IDisposable
     {
         await _transaction.CommitAsync();
     }
+
     public void Dispose()
     {
         Dispose(true);

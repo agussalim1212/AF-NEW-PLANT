@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using SkeletonApi.Application.Features.FrameNumbers;
 using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Shared;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Shared;
 
-namespace SkeletonApi.Application.Features.FrameNumb.Commands.CreateFrameNumber
+namespace SkeletonApi.Application.Features.FrameNumbers.Commands.CreateFrameNumber
 {
     internal class CreateFrameNumberCommandHandler : IRequestHandler<CreateFrameNumberRequest, Result<CreateFrameNumberResponseDto>>
     {
@@ -29,7 +30,6 @@ namespace SkeletonApi.Application.Features.FrameNumb.Commands.CreateFrameNumber
             await _unitOfWork.Save(cancellationToken);
             var frameNumberResponse = _mapper.Map<CreateFrameNumberResponseDto>(frameNumber);
             return await Result<CreateFrameNumberResponseDto>.SuccessAsync(frameNumberResponse, "Frame Number Created.");
-
         }
     }
 }

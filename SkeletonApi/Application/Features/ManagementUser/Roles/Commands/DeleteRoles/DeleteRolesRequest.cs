@@ -8,10 +8,13 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.DeleteR
     public class DeleteRolesRequest : IRequest<Result<string>>, IMapFrom<Role>
     {
         public string Id { get; set; }
-        public DeleteRolesRequest(string id) 
+
+        public DeleteRolesRequest(string id)
         {
             Id = id;
         }
-        public DeleteRolesRequest() { }
+
+        public DeleteRolesRequest()
+        { }
     }
 }

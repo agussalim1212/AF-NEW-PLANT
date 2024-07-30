@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkeletonApi.Domain.Common.Abstracts
+﻿namespace SkeletonApi.Domain.Common.Abstracts
 {
     public abstract class ValueObject
     {

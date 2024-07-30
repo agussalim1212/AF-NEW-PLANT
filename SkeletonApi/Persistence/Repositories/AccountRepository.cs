@@ -15,14 +15,14 @@ namespace SkeletonApi.Persistence.Repositories
 
         public async Task<bool> ValidateAccount(Account account)
         {
+            //cek apakah user tersebut di temukan di database
             var x = await _repository.Entities.Where(o => o.Username.ToLower() == account.Username.ToLower()).CountAsync();
 
             if (x > 0)
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
-
     }
 }

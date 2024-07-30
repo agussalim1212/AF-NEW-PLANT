@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 
-
 namespace SkeletonApi.Application.Features.Subjects
 {
     public record SubjectDto
@@ -12,4 +11,3 @@ namespace SkeletonApi.Application.Features.Subjects
     }
     public sealed record CreateSubjectResponseDto : SubjectDto { }
 }
-    

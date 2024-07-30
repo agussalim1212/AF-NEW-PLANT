@@ -2,13 +2,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Extensions;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachinesWithPagination
+namespace SkeletonApi.Application.Features.CategoryHasMachines.Queries.GetCategoryMachineWithPagination
 {
     public record GetCategoryMachinesWithPaginationQuery : IRequest<PaginatedResult<GetCategoryMachinesWithPaginationDto>>
     {
@@ -17,7 +15,6 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMa
         public int page_size { get; set; }
         public string search_term { get; set; }
 
-
         public GetCategoryMachinesWithPaginationQuery() { }
 
         public GetCategoryMachinesWithPaginationQuery(int pageNumber, int pageSize, string SearchTerm)
@@ -25,10 +22,9 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMa
             page_number = pageNumber;
             page_size = pageSize;
             search_term = SearchTerm;
-
-
         }
     }
+
     internal class GetCategoryMachinesWithPaginationQueryHandler : IRequestHandler<GetCategoryMachinesWithPaginationQuery, PaginatedResult<GetCategoryMachinesWithPaginationDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -42,20 +38,20 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMa
 
         public async Task<PaginatedResult<GetCategoryMachinesWithPaginationDto>> Handle(GetCategoryMachinesWithPaginationQuery query, CancellationToken cancellationToken)
         {
-           return await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => query.search_term == null || x.CategoryMachine.Name.ToLower() == query.search_term.ToLower().Trim())
-                .Include(o => o.Machine)
-                .Include(x => x.CategoryMachine).GroupBy(x => new { x.CategoryMachineId, x.CategoryMachine.Name })
-                .Select(g => new GetCategoryMachinesWithPaginationDto
-                {
-                    CategoryMachineId = g.Key.CategoryMachineId,
-                    CategoryName = g.Key.Name,
-                    UpdatedAt = g.OrderByDescending(j => j.UpdatedAt).Select(o => o.UpdatedAt.Value.AddHours(7)).FirstOrDefault(),
-                    Machine = g.Select(s => new MachineDto
-                    {
-                        Id = s.Machine.Id,
-                        Name = s.Machine.Name,
-                    }).ToList(),
-                }).OrderByDescending(k => k.UpdatedAt).ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
+            return await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => query.search_term == null || x.CategoryMachine.Name.ToLower() == query.search_term.ToLower().Trim())
+                 .Include(o => o.Machine)
+                 .Include(x => x.CategoryMachine).GroupBy(x => new { x.CategoryMachineId, x.CategoryMachine.Name })
+                 .Select(g => new GetCategoryMachinesWithPaginationDto
+                 {
+                     CategoryMachineId = g.Key.CategoryMachineId,
+                     CategoryName = g.Key.Name,
+                     UpdatedAt = g.OrderByDescending(j => j.UpdatedAt).Select(o => o.UpdatedAt.Value.AddHours(7)).FirstOrDefault(),
+                     Machine = g.Select(s => new MachineDto
+                     {
+                         Id = s.Machine.Id,
+                         Name = s.Machine.Name,
+                     }).ToList(),
+                 }).OrderByDescending(k => k.UpdatedAt).ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }
     }
 }

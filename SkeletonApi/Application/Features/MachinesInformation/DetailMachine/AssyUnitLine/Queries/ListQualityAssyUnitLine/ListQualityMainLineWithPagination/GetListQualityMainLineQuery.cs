@@ -1,14 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLine
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLineWithPagination
 {
-      public record GetListQualityMainLineQuery : IRequest<PaginatedResult<GetListQualityMainLineDto>>
+    public record GetListQualityMainLineQuery : IRequest<PaginatedResult<GetListQualityMainLineDto>>
     {
         public Guid machine_id { get; set; }
         public int page_number { get; set; }
@@ -36,14 +33,14 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
 
             public GetListQualityMainLineQueryHandler(IDetailAssyUnitRepository detailAssyUnitRepository)
             {
-              _detailAssyUnitRepository = detailAssyUnitRepository;
+                _detailAssyUnitRepository = detailAssyUnitRepository;
             }
 
             public async Task<PaginatedResult<GetListQualityMainLineDto>> Handle(GetListQualityMainLineQuery query, CancellationToken cancellationToken)
             {
-                var data = await _detailAssyUnitRepository.GetAllListQualityMainLine(query.machine_id,query.type,query.start,query.end);
-                var dt = data.Where(c => query.search_term == null || query.search_term == c.FrqInverter.ToString()
-                || query.search_term == c.DurationStop.ToString()).ToList();
+                //mengambil data untuk list quality main line
+                var data = await _detailAssyUnitRepository.GetAllListQualityMainLine(query.machine_id, query.type, query.start, query.end);
+                var dt = data.Where(c => query.search_term == null || query.search_term == c.FrqInverter.ToString()).ToList();
                 return await dt.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
             }
         }

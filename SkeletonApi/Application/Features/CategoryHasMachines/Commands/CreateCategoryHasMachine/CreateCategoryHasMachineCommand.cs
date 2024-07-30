@@ -7,17 +7,16 @@ using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
 
-
-namespace SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine
+namespace SkeletonApi.Application.Features.CategoryHasMachines.Commands.CreateCategoryHasMachine
 {
     public record CreateCategoryHasMachineCommand : IRequest<Result<CategoryMachineHasMachine>>, IMapFrom<CategoryMachineHasMachine>
     {
-     
         [JsonPropertyName("category_id")]
         public Guid CategoryMachineId { get; set; }
         [JsonPropertyName("machine_id")]
         public List<Guid> MachineId { get; set; }
     }
+
     internal class CreateCategoryHasMachineCommandHandler : IRequestHandler<CreateCategoryHasMachineCommand, Result<CategoryMachineHasMachine>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -42,7 +41,7 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCatego
             {
                 var categoryMachines = await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => request.CategoryMachineId == x.CategoryMachineId && mc_id == x.MachineId).ToListAsync();
 
-                if(categoryMachines.Count() == 0)
+                if (categoryMachines.Count() == 0)
                 {
                     categoryMachine.MachineId = mc_id;
                     await _unitOfWork.Repo<CategoryMachineHasMachine>().AddAsync(categoryMachine);
@@ -54,7 +53,7 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCatego
                     return await Result<CategoryMachineHasMachine>.FailureAsync("Category Has Machine Already Exist");
                 }
             }
-                return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Has Machines Created");
+            return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Has Machines Created");
         }
     }
 }

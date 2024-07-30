@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Application.Features.Machines.Commands.DeleteMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Delete
 {
@@ -21,7 +15,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Delet
 
         public DeleteMaintPreventiveCommand()
         {
-            
         }
 
         public DeleteMaintPreventiveCommand(Guid id)
@@ -33,7 +26,8 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Delet
     internal class DeleteMaintPreventiveCommandHandle : IRequestHandler<DeleteMaintPreventiveCommand, Result<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
-       // private readonly IMaintenancesPreventive _maintenancesPreventive;
+
+        // private readonly IMaintenancesPreventive _maintenancesPreventive;
         private readonly IMapper _mapper;
 
         public DeleteMaintPreventiveCommandHandle(IUnitOfWork unitOfWork, IMapper mapper)

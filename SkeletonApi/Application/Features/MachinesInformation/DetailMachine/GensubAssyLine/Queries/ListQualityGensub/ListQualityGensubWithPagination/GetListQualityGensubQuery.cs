@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.DTOs.Consumption;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination
 {
     public record GetListQualityGensubQuery : IRequest<PaginatedResult<GetListQualityGensubDto>>
     {
@@ -32,6 +33,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
             end = End;
         }
     }
+
     internal class GetListQualityWithPaginationQueryHandler : IRequestHandler<GetListQualityGensubQuery, PaginatedResult<GetListQualityGensubDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -48,14 +50,14 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
         public async Task<PaginatedResult<GetListQualityGensubDto>> Handle(GetListQualityGensubQuery query, CancellationToken cancellationToken)
         {
             var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)
-            .Where(m => (query.machine_id == m.MachineId && m.Subject.Vid.Contains("STATUS-PRDCT"))).ToListAsync();
+            .Where(m => query.machine_id == m.MachineId && m.Subject.Vid.Contains("STATUS-PRDCT")).ToListAsync();
 
             IEnumerable<string> vids = machine.Select(m => m.Subject.Vid).ToList();
 
             List<GetListQualityGensubDto> dt = new List<GetListQualityGensubDto>();
             var data = new GetListQualityGensubDto();
-        
-            var statusConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+
+            var statusConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
             (@"SELECT * FROM ""list_quality_gensub"" WHERE id = ANY(@vid)
             AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
             ORDER BY  bucket DESC",
@@ -70,7 +72,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                     }
                     else
                     {
-                        var consumptionBucket = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                        var consumptionBucket = await _dapperReadDbConnection.QueryAsync<Consumption>
                         (@"SELECT * FROM ""list_quality_gensub"" WHERE id = ANY(@vid)
                         AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
                         AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
@@ -87,7 +89,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         }
                         else
                         {
-
                             foreach (var s in consumptionBucket)
                             {
                                 GetListQualityGensubDto listQuality = new GetListQualityGensubDto();
@@ -102,11 +103,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                                 }
                                 listQuality.DateTime = s.Bucket.AddHours(7);
                                 dt.Add(listQuality);
-
                             }
                         }
                     }
                     break;
+
                 case "month":
                     if (query.end.Date < query.start.Date)
                     {
@@ -114,7 +115,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                     }
                     else
                     {
-                        var consumptionBucket = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                        var consumptionBucket = await _dapperReadDbConnection.QueryAsync<Consumption>
                         (@"SELECT * FROM ""list_quality_gensub"" WHERE id = ANY(@vid)
                         AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
                         AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
@@ -131,7 +132,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         }
                         else
                         {
-
                             foreach (var s in consumptionBucket)
                             {
                                 GetListQualityGensubDto listQuality = new GetListQualityGensubDto();
@@ -146,57 +146,53 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                                 }
                                 listQuality.DateTime = s.Bucket.AddHours(7);
                                 dt.Add(listQuality);
-
                             }
                         }
                     }
                     break;
+
                 default:
-                var statussConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
-                (@"SELECT * FROM ""list_quality_gensub"" WHERE id = ANY(@vid)
+                    var statussConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
+                    (@"SELECT * FROM ""list_quality_gensub"" WHERE id = ANY(@vid)
                 AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
                 ORDER BY  bucket DESC",
-                new { vid = vids.ToList(), dateNow = DateTime.Now.Date, });
+                    new { vid = vids.ToList(), dateNow = DateTime.Now.Date, });
 
-                if (statusConsumption.Count() == 0)
-                {
-                    data =
-                    new GetListQualityGensubDto
+                    if (statusConsumption.Count() == 0)
                     {
-                        DateTime = DateTime.Now,
-                        Status = "-",
-                    };
-                }
-                else
-                {
-                    foreach (var s in statusConsumption)
-                    {
-                        GetListQualityGensubDto listQuality = new GetListQualityGensubDto();
-
-                        var status = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
-                        if (status != null && status.Value.Contains("1"))
+                        data =
+                        new GetListQualityGensubDto
                         {
-                            listQuality.Status = "OK";
-                        }
-                        else
-                        {
-                            listQuality.Status = "NG";
-                        }
-                        listQuality.DateTime = s.Bucket.AddHours(7);
-                        dt.Add(listQuality);
-
+                            DateTime = DateTime.Now,
+                            Status = "-",
+                        };
                     }
-                }
-                break;
+                    else
+                    {
+                        foreach (var s in statusConsumption)
+                        {
+                            GetListQualityGensubDto listQuality = new GetListQualityGensubDto();
 
+                            var status = statusConsumption.Where(g => g.Bucket == s.Bucket).FirstOrDefault();
+                            if (status != null && status.Value.Contains("1"))
+                            {
+                                listQuality.Status = "OK";
+                            }
+                            else
+                            {
+                                listQuality.Status = "NG";
+                            }
+                            listQuality.DateTime = s.Bucket.AddHours(7);
+                            dt.Add(listQuality);
+                        }
+                    }
+                    break;
             }
 
             var paginatedList = dt.Where(c => query.search_term == null
-            || (query.search_term.ToLower() == c.Status.ToLower())).ToList();
+            || query.search_term.ToLower() == c.Status.ToLower()).ToList();
 
             return await dt.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }
     }
-
 }
-    

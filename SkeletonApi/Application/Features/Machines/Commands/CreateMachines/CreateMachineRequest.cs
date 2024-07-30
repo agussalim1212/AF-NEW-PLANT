@@ -10,6 +10,5 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
         public string Vid { get; set; }
         [JsonPropertyName("machine")]
         public string Name { get; set; }
-       
     }
 }

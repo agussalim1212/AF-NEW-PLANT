@@ -4,7 +4,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.Machines.Commands.DeleteMachines
 {
     internal class DeleteMachinesCommandHandler : IRequestHandler<DeleteMachineRequest, Result<Guid>>
@@ -33,6 +32,5 @@ namespace SkeletonApi.Application.Features.Machines.Commands.DeleteMachines
             }
             return await Result<Guid>.FailureAsync("Machine Not Found");
         }
-
     }
 }

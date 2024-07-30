@@ -7,7 +7,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ManagementUser.Users.Queries.GetUserWithPagination
 {
     public record GetUserWithPaginationQuery : IRequest<PaginatedResult<GetUserWithPaginationDto>>
@@ -25,6 +24,7 @@ namespace SkeletonApi.Application.Features.ManagementUser.Users.Queries.GetUserW
             search_term = searchTerm;
         }
     }
+
     internal class GetUserWithPaginationQueryHandler : IRequestHandler<GetUserWithPaginationQuery, PaginatedResult<GetUserWithPaginationDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -38,9 +38,9 @@ namespace SkeletonApi.Application.Features.ManagementUser.Users.Queries.GetUserW
 
         public async Task<PaginatedResult<GetUserWithPaginationDto>> Handle(GetUserWithPaginationQuery query, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.Data<UserRole>().FindByCondition(x => x.User.DeletedAt == null).Where(j => (query.search_term == null) 
+            return await _unitOfWork.Data<UserRole>().FindByCondition(x => x.User.DeletedAt == null).Where(j => (query.search_term == null)
             || (query.search_term.ToLower() == j.User.UserName.ToLower())
-            || (query.search_term.ToLower() == j.Role.Name.ToLower()) 
+            || (query.search_term.ToLower() == j.Role.Name.ToLower())
             || (query.search_term.ToLower() == j.User.Email.ToLower()))
             .Include(v => v.User).Include(p => p.Role)
             .GroupBy(p => new { p.User.Id, p.User.UserName, p.User.Email, p.User.PasswordHash, p.User.UpdatedAt })
@@ -58,7 +58,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Users.Queries.GetUserW
             })
                 .ProjectTo<GetUserWithPaginationDto>(_mapper.ConfigurationProvider)
                 .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
-
         }
     }
 }

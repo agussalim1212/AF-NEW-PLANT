@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-using SkeletonApi.Persistence.Repositories;
 
-
-namespace SkeletonApi.Application.Interfaces.Repositories
+namespace SkeletonApi.Persistence.Repositories
 {
     public class SettingRepository : ISettingRepository
     {
@@ -15,7 +14,6 @@ namespace SkeletonApi.Application.Interfaces.Repositories
             if (x > 0)
             {
                 return false;
-
             }
             return true;
         }

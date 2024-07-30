@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.ExtendedProperties;
 using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
 using SkeletonApi.Domain.Entities;
-using SkeletonApi.Domain.Entities.Tsdb;
-using SkeletonApi.IotHub.DTOs;
 using SkeletonApi.IotHub.Model;
 using SkeletonApi.IotHub.Services.Handler;
 using SkeletonApi.IotHub.Services.Store;
-using System.Reactive;
 
 namespace SkeletonApi.IotHub.Services
 {
@@ -48,6 +42,7 @@ namespace SkeletonApi.IotHub.Services
                 {
                     if (val.mqttRawData != null && val.topics != null)
                     {
+
                         await PersistNotificationToDBAsync(val.mqttRawData);
                     }
                 });
@@ -63,7 +58,6 @@ namespace SkeletonApi.IotHub.Services
             {
                 try
                 {
-
                     using (var scope = _serviceScopeFactory.CreateScope())
                     {
                         var notificationList = from vls in value.Values.Where(x => x.Quality == true)
@@ -77,35 +71,38 @@ namespace SkeletonApi.IotHub.Services
                                                    Message = g.Last().vls.Value.ToString(),
                                                    Datetime = DateTimeOffset.FromUnixTimeMilliseconds(g.Last().vls.Time).DateTime
                                                };
-
-                        var notification = _notificationStore.GetAllSetting().Where(x => (x.SubjectName == notificationList.FirstOrDefault().MachineName
-                        && Convert.ToDecimal(notificationList.FirstOrDefault().Message) > x.Maximum && notificationList.FirstOrDefault().Message != "0") ||
-                        (x.SubjectName == notificationList.FirstOrDefault().MachineName && Convert.ToDecimal(notificationList.FirstOrDefault().Message) < x.Minimum
-                        && notificationList.FirstOrDefault().Message != "0"));
-
-                        if (notification.Count() != 0)
+                        foreach(var notif in notificationList)
                         {
-                            var dataNotification = notificationList.Select(g => new NotificationModel
-                            {
-                                MachineName = g.MachineName,
-                                Message = $"ABNORMAL VALUE, CURRENT VALUE IS {g.Message} IN {g.MachineName}",
-                                Datetime = g.Datetime,
-                                Status = false
-                            });
-                            _notificationEventHandler.Dispatch(dataNotification);
+                            var dt = new List<NotificationModel>();
+                            var notification = _notificationStore.GetAllSetting().Where(x => (x.SubjectName == notif.MachineName
+                            && Convert.ToDecimal(notif.Message) > x.Maximum && notif.Message != "0") ||
+                            (x.SubjectName == notif.MachineName && Convert.ToDecimal(notif.Message) < x.Minimum
+                            && notif.Message != "0"));
 
-                            var scoped = scope.ServiceProvider.GetRequiredService<INotificationRepository>();
-                            var mqttRawValueEntities = _mapper.Map<IEnumerable<Notifications>>(dataNotification);
-                            scoped.Creates(mqttRawValueEntities);
+                            if (notification.Count() != 0)
+                            {
+                                var dataNotification = new NotificationModel
+                                {
+                                    MachineName = notif.MachineName,
+                                    Message = $"ABNORMAL VALUE, CURRENT VALUE IS {notif.Message} IN {notif.MachineName}",
+                                    Datetime = notif.Datetime,
+                                    Status = false
+                                };
+                                dt.Add(dataNotification);
+                                _notificationEventHandler.Dispatch(dt);
+
+                                var scoped = scope.ServiceProvider.GetRequiredService<INotificationRepository>();
+                                var mqttRawValueEntities = _mapper.Map<Notifications>(dataNotification);
+                                scoped.Create(mqttRawValueEntities);
+                            }
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     await Console.Out.WriteLineAsync(ex.Message);
                 }
             }
         }
-
     }
 }

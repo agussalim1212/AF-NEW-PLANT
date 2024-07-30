@@ -1,11 +1,8 @@
-﻿using k8s.KubeConfigModels;
+﻿using Microsoft.AspNetCore.SignalR;
+using RxSignalrStreams.Extensions;
 using SkeletonApi.IotHub.Model;
 using SkeletonApi.IotHub.Services.Handler;
 using System.Threading.Channels;
-using RxSignalrStreams.Extensions;
-using Microsoft.AspNetCore.SignalR;
-using SkeletonApi.IotHub.Services;
-using System.Reactive.Linq;
 
 namespace SkeletonApi.IotHub.Hubs
 {

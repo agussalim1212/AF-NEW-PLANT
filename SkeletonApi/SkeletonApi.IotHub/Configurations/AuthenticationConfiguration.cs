@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SkeletonApi.IotHub.Settings;
-using System;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.IotHub.Configurations
 {

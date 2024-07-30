@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage
 {
     public class GetListQualityRobotScanImageValidator : AbstractValidator<GetListQualityRobotScanImageQuery>
     {
-        public GetListQualityRobotScanImageValidator() 
+        public GetListQualityRobotScanImageValidator()
         {
             RuleFor(x => x.page_number)
                .GreaterThanOrEqualTo(1)

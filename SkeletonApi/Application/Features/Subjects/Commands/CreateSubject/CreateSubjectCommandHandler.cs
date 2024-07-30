@@ -7,7 +7,6 @@ using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.Subjects.Commands.CreateSubject
 {
-
     internal class CreateSubjectCommandHandler : IRequestHandler<CreateSubjectRequest, Result<CreateSubjectResponseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;

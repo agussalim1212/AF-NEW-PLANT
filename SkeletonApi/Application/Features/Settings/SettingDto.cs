@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 
-
 namespace SkeletonApi.Application.Features.Settings
 {
     public record SettingDto

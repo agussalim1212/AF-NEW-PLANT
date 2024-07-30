@@ -1,13 +1,12 @@
 ﻿using ClosedXML.Excel;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrake;
 using SkeletonApi.Shared;
-
 
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrakeWithPagination.Download
 {
     public class DownloadListQualityOilBrakeToExcel
     {
         private readonly PaginatedResult<GetListQualityOilBrakeDto> pg;
+
         public DownloadListQualityOilBrakeToExcel(PaginatedResult<GetListQualityOilBrakeDto> getListQuality)
         {
             pg = getListQuality;
@@ -26,7 +25,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                 worksheet.Cell(1, 5).Value = "status";
                 worksheet.Cell(1, 6).Value = "error_code";
 
-
                 for (int i = 0; i < pg.Data.Count(); i++)
                 {
                     worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
@@ -35,7 +33,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).VolumeOilBrake;
                     worksheet.Cell(i + 2, 5).Value = pg.Data.ElementAt(i).Status;
                     worksheet.Cell(i + 2, 6).Value = pg.Data.ElementAt(i).ErrorCode;
-
                 }
                 using (var stream = new MemoryStream())
                 {

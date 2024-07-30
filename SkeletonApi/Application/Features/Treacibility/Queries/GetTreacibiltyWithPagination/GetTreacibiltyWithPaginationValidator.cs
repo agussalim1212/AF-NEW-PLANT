@@ -1,12 +1,6 @@
 ﻿using FluentValidation;
-using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagination
+namespace SkeletonApi.Application.Features.Treacibility.Queries.GetTreacibiltyWithPagination
 {
     public class GetTreacibiltyWithPaginationValidator : AbstractValidator<GetTreacibilityWithPaginationQuery>
     {
@@ -19,7 +13,6 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagina
             RuleFor(x => x.page_size)
                 .GreaterThanOrEqualTo(1)
                 .WithMessage("PageSize at least greater than or equal to 1.");
-
         }
     }
 }

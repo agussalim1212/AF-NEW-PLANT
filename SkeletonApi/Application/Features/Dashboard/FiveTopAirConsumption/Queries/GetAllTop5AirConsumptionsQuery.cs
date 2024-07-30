@@ -5,75 +5,20 @@ using SkeletonApi.Shared;
 namespace SkeletonApi.Application.Features.Dashboard.FiveTopAirConsumption.Queries
 {
     public record GetAllTop5AirConsumptionsQuery : IRequest<Result<GetAllTop5AirConsumptionsDto>>;
+
     internal class GetAllTop5AirConsumptionsQueryHandler : IRequestHandler<GetAllTop5AirConsumptionsQuery, Result<GetAllTop5AirConsumptionsDto>>
     {
         private readonly IDashboardRepository _dashboardRepository;
-
-
 
         public GetAllTop5AirConsumptionsQueryHandler(IDashboardRepository dashboardRepository)
         {
             _dashboardRepository = dashboardRepository;
         }
 
-
         public async Task<Result<GetAllTop5AirConsumptionsDto>> Handle(GetAllTop5AirConsumptionsQuery query, CancellationToken cancellationToken)
         {
-            //var querys = from shm in _unitOfWork.Repo<SubjectHasMachine>().Entities
-            //             join s in _unitOfWork.Repository<Subject>().Entities on shm.SubjectId equals s.Id
-            //             join m in _unitOfWork.Repository<Machine>().Entities on shm.MachineId equals m.Id
-            //             where s.Vid.Contains("AIR-CONSUMPTION")
-            //             select new { Machine = m, Subject = s, SubjectMachine = shm };
-
-            //var result = await querys.ToListAsync();
-
-            //var data = new GetAllTop5AirConsumptionsDto();
-            //var EnergyConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumption>
-            //         (@"SELECT * FROM ""top_five_air_consumption"" WHERE id = ANY(@vid)
-            //         AND date_trunc('year', bucket::date) = date_trunc('year', @now)
-            //         ORDER BY  bucket DESC",
-            //         new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
-
-            //var EnergyWeekConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumption>
-            //         (@"SELECT * FROM ""top_five_air_consumption"" WHERE id = ANY(@vid)
-            //         AND date_trunc('year', bucket::date) = date_trunc('year', @now)
-            //         ORDER BY  bucket DESC",
-            //         new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
-
-            //var EnergyMonthConsumption = await _dapperReadDbConnection.QueryAsync<AirConsumption>
-            //         (@"SELECT * FROM ""top_five_air_consumption"" WHERE id = ANY(@vid)
-            //         AND date_trunc('year', bucket::date) = date_trunc('year', @now)
-            //         ORDER BY  bucket DESC",
-            //         new { vid = querys.Select(o => o.Subject.Vid).ToList(), now = DateTime.Now.Date });
-
-            //if (EnergyConsumption.Count() == 0)
-            //{
-            //    data = new GetAllTop5AirConsumptionsDto
-            //    {
-            //        TotalWeek = 0,
-            //        TotalMonth = 0,
-            //        DataMachines = new List<DataMachines>(),
-            //    };
-            //}
-            //else
-            //{
-            //    data =
-            //        new GetAllTop5AirConsumptionsDto
-            //        {
-            //            TotalWeek = EnergyWeekConsumption.Sum(g => Convert.ToDecimal(g.Value)),
-            //            TotalMonth = EnergyMonthConsumption.Sum(g => Convert.ToDecimal(g.Value)),
-            //            DataMachines = EnergyConsumption.GroupBy(h => new { h.Id })
-            //            .Select(val => new DataMachines
-            //            {
-            //                Label = querys.Where(k => val.Key.Id == k.Subject.Vid).Select(v => v.Machine.Name).FirstOrDefault(),
-            //                Value = val.Max(n => Convert.ToDecimal(n.Value))
-            //            }).OrderByDescending(v => v.Value).Take(5).ToList()
-            //        };
-            //} 
             var data = await _dashboardRepository.GetAllTop5AirConsumptionsAsync();
             return await Result<GetAllTop5AirConsumptionsDto>.SuccessAsync(data, "Successfully fetch data");
         }
-
-
     }
 }

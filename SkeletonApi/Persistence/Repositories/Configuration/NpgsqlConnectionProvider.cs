@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Npgsql;
 using System.Data;
 
-namespace Repository.Configuration
+namespace SkeletonApi.Persistence.Repositories.Configuration
 {
     public interface IConnectionProvider<TConnection>
         where TConnection : IDbConnection

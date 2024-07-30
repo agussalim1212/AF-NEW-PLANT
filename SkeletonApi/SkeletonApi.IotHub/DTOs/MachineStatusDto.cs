@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SkeletonApi.IotHub.DTOs
+﻿namespace SkeletonApi.IotHub.DTOs
 {
     public class MachineStatusDto
     {

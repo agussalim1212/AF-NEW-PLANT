@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using SkeletonApi.IotHub.Hubs;
+﻿using SkeletonApi.IotHub.Hubs;
 
 namespace SkeletonApi.IotHub.Configurations
 {

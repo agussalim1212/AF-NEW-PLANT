@@ -5,9 +5,10 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.DeleteR
 {
     public class RolesDeletedEvent : BaseEvent
     {
-        public Role Role { get; set; }  
+        public Role Role { get; set; }
+
         public RolesDeletedEvent(Role role)
-        { 
+        {
             Role = role;
         }
     }

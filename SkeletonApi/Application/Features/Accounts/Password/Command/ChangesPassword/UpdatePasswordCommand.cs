@@ -6,19 +6,23 @@ using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
 
-
 namespace SkeletonApi.Application.Features.Accounts.Password.Command.ChangesPassword
 {
     public record UpdatePasswordCommand : IRequest<Result<string>>
     {
-        public string Username { get; set; }    
+        //dari user yang sedang login
+        public string Username { get; set; }
         [JsonPropertyName("current_password")]
+        //password saat ini
         public string CurrentPassword { get; set; }
         [JsonPropertyName("new_password")]
+        //password baru
         public string NewPassword { get; set; }
         [JsonPropertyName("repeat_password")]
+        //ulangi password baru
         public string RepeatPassword { get; set; }
     }
+
     internal class UpdatePasswordCommandHandler : IRequestHandler<UpdatePasswordCommand, Result<string>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -42,7 +46,8 @@ namespace SkeletonApi.Application.Features.Accounts.Password.Command.ChangesPass
             }
             else
             {
-                return await Result<string>.FailureAsync(cekUser.UserName,"User Not Found.");
+                //jika username tidak ditemukan
+                return await Result<string>.FailureAsync(cekUser.UserName, "User Not Found.");
             }
         }
     }

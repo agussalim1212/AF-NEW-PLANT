@@ -1,20 +1,12 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using MQTTnet.Client;
-using MQTTnet.Extensions.ManagedClient;
-using MQTTnet;
-using System.Text.Json;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Infrastructure.Interfaces;
-using SkeletonApi.Infrastructure.Hubs;
-using Npgsql;
-using Dapper;
-using Microsoft.Extensions.Configuration;
-using System.ComponentModel.Design;
-using SkeletonApi.Infrastructure.Helpers;
-using SkeletonApi.Infrastructure.Models;
+using MQTTnet;
+using MQTTnet.Client;
+using MQTTnet.Extensions.ManagedClient;
 using SkeletonApi.Infrastructure.DTOs;
-using System.Globalization;
+using SkeletonApi.Infrastructure.Helpers;
+using SkeletonApi.Infrastructure.Interfaces;
 
 namespace SkeletonApi.Infrastructure.Services
 {
@@ -23,10 +15,10 @@ namespace SkeletonApi.Infrastructure.Services
         private readonly IManagedMqttClient _managedMqttClient;
         private readonly ManagedMqttClientOptions options;
         private readonly ILogger<MqttClientService> _logger;
-        private readonly IConfiguration _configuration; 
+        private readonly IConfiguration _configuration;
 
-        Tools _tools = new Tools();
-        object Data = new MachineDto();
+        private Tools _tools = new Tools();
+        private object Data = new MachineDto();
 
         public MqttClientService(ManagedMqttClientOptions options,
             IServiceScopeFactory service, ILogger<MqttClientService> logger, IConfiguration configuration)
@@ -75,7 +67,7 @@ namespace SkeletonApi.Infrastructure.Services
             //        {
             //            foreach (var mc in GetData)
             //            {
-            //                Data = new 
+            //                Data = new
             //                {
             //                    id = item.Vid,
             //                    name = mc.name,
@@ -99,7 +91,7 @@ namespace SkeletonApi.Infrastructure.Services
             //                        CultureInfo.InvariantCulture),
             //                    });
             //                    Console.WriteLine("");
-            //                }catch (Exception ex) 
+            //                }catch (Exception ex)
             //                {
             //                    Console.WriteLine(ex.Message);
             //                }

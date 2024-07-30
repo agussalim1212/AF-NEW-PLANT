@@ -2,7 +2,6 @@
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 
-
 namespace SkeletonApi.Persistence.Repositories
 {
     public class SubjectRepository : ISubjectRepository

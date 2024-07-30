@@ -18,7 +18,6 @@ namespace SkeletonApi.IotHub.Hubs
         public ChannelReader<IEnumerable<NotificationModel>> RealtimeNotification()
         {
             return _notificationEventHandler.Observe().ToNewestValueStream(Context.ConnectionAborted);
-           
         }
     }
 }

@@ -2,7 +2,7 @@
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Persistence.Repositories;
 
-namespace SkeletonApi.Presentation.ActionFilter
+namespace SkeletonApi.Persistence.ActionFilter
 {
     public class AuditLoggingFilter : IAsyncActionFilter
     {
@@ -11,7 +11,6 @@ namespace SkeletonApi.Presentation.ActionFilter
         public AuditLoggingFilter(AuditRepository auditRepository)
         {
             _auditRepository = auditRepository;
-
         }
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
@@ -24,7 +23,6 @@ namespace SkeletonApi.Presentation.ActionFilter
                 UserName = context.HttpContext.User.Identity.Name,
                 LogType = context.HttpContext.Request.Method,
                 DateTime = new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second),
-
             };
 
             if (context.HttpContext.User.Identity.Name == null)
@@ -52,9 +50,6 @@ namespace SkeletonApi.Presentation.ActionFilter
             _auditRepository.AddAuditActivity(activityUser);
 
             var resultContext = await next();
-
-
         }
     }
 }
-

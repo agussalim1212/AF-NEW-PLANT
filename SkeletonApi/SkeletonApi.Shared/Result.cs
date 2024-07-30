@@ -1,5 +1,4 @@
 ﻿using SkeletonApi.Shared.Interfaces;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace SkeletonApi.Shared
@@ -8,12 +7,13 @@ namespace SkeletonApi.Shared
     {
         [JsonPropertyName("status")]
         public bool Status { get; set; }
+
         public T Data { get; set; }
         public List<string> Messages { get; set; } = new List<string>();
 
-        #region Non Async Methods 
+        #region Non Async Methods
 
-        #region Success Methods 
+        #region Success Methods
 
         public static Result<T> Success()
         {
@@ -51,9 +51,9 @@ namespace SkeletonApi.Shared
             };
         }
 
-        #endregion
+        #endregion Success Methods
 
-        #region Failure Methods 
+        #region Failure Methods
 
         public static Result<T> Failure()
         {
@@ -110,13 +110,13 @@ namespace SkeletonApi.Shared
             };
         }
 
-        #endregion
+        #endregion Failure Methods
 
-        #endregion
+        #endregion Non Async Methods
 
-        #region Async Methods 
+        #region Async Methods
 
-        #region Success Methods 
+        #region Success Methods
 
         public static Task<Result<T>> SuccessAsync()
         {
@@ -138,9 +138,9 @@ namespace SkeletonApi.Shared
             return Task.FromResult(Success(data, message));
         }
 
-        #endregion
+        #endregion Success Methods
 
-        #region Failure Methods 
+        #region Failure Methods
 
         public static Task<Result<T>> FailureAsync()
         {
@@ -172,8 +172,8 @@ namespace SkeletonApi.Shared
             return Task.FromResult(Failure(data, messages));
         }
 
-        #endregion
+        #endregion Failure Methods
 
-        #endregion
+        #endregion Async Methods
     }
 }

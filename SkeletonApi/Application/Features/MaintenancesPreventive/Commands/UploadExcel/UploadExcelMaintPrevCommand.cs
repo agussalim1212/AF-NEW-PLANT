@@ -2,16 +2,9 @@
 using ClosedXML.Excel;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Application.Features.Machines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.UploadExcel
 {
@@ -24,6 +17,7 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
             formFile = file;
         }
     }
+
     internal class UploadExcelMaintPrevCommandHandler : IRequestHandler<UploadExcelMaintPrevCommand, Result<List<UploadExcelMaintPrevDto>>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -70,7 +64,7 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Uploa
                                 out DateOnly startDate) ? startDate : startDate,
                             };
 
-                           var maintenance =  _maintenancesPreventive.GetMaintenance(excelData);
+                            var maintenance = _maintenancesPreventive.GetMaintenance(excelData);
                             resp = new UploadExcelMaintPrevDto()
                             {
                                 Id = maintenance.Id,

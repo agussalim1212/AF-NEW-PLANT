@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Services\ListQualityConsumer.cs~RF15b8ba.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="app-development.ico" />
   </ItemGroup>
 

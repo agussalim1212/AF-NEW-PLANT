@@ -13,7 +13,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.D
         private readonly IUnitOfWork _unitOfWork;
         private readonly RoleManager<Role> _roleManager;
 
-
         public DeletePermissionsCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, RoleManager<Role> roleManager)
         {
             _mapper = mapper;
@@ -23,7 +22,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.D
 
         public async Task<Result<string>> Handle(DeletePermissionsRequest request, CancellationToken cancellationToken)
         {
-           
             var validateRole = await _roleManager.FindByIdAsync(request.Id);
             if (validateRole == null)
             {

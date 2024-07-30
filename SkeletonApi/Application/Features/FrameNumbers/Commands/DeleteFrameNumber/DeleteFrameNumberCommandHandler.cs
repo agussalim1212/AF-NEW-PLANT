@@ -4,10 +4,9 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.FrameNumb.Commands.DeleteFrameNumber
+namespace SkeletonApi.Application.Features.FrameNumbers.Commands.DeleteFrameNumber
 {
-   internal class DeleteFrameNumberCommandHandler : IRequestHandler<DeleteFrameNumberRequest, Result<Guid>>
+    internal class DeleteFrameNumberCommandHandler : IRequestHandler<DeleteFrameNumberRequest, Result<Guid>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +22,6 @@ namespace SkeletonApi.Application.Features.FrameNumb.Commands.DeleteFrameNumber
             var frameNumber = await _unitOfWork.Repository<FrameNumber>().GetByIdAsync(request.Id);
             if (frameNumber != null)
             {
-               
                 frameNumber.DeletedAt = DateTime.UtcNow;
 
                 await _unitOfWork.Repository<FrameNumber>().UpdateAsync(frameNumber);
@@ -34,6 +32,5 @@ namespace SkeletonApi.Application.Features.FrameNumb.Commands.DeleteFrameNumber
             }
             return await Result<Guid>.FailureAsync("Frame Number Not Found");
         }
-
     }
 }

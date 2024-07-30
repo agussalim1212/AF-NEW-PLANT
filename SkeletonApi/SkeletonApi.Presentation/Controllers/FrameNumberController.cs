@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.FrameNumb;
-using SkeletonApi.Application.Features.FrameNumb.Commands.CreateFrameNumber;
-using SkeletonApi.Application.Features.FrameNumb.Commands.DeleteFrameNumber;
-using SkeletonApi.Application.Features.FrameNumb.Commands.UpdateFrameNumber;
-using SkeletonApi.Application.Features.FrameNumb.Queries.GetFrameNumberWithPagination;
-using SkeletonApi.Application.Features.FrameNumberHasSubject.Commands.CreateFrameNumberHasSubject;
-using SkeletonApi.Application.Features.FrameNumberSubject.Commands.DeleteFrameNumberHasSubject;
-using SkeletonApi.Application.Features.FrameNumberSubject.Commands.UpdateFrameNumberHasSubject;
-using SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetAllFrameNumber;
-using SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetFrameNumberHasSubjectWithPagination;
+using SkeletonApi.Application.Features.FrameNumbers;
+using SkeletonApi.Application.Features.FrameNumbers.Commands.CreateFrameNumber;
+using SkeletonApi.Application.Features.FrameNumbers.Commands.DeleteFrameNumber;
+using SkeletonApi.Application.Features.FrameNumbers.Commands.UpdateFrameNumber;
+using SkeletonApi.Application.Features.FrameNumbers.Queries.GetFrameNumberWithPagination;
+using SkeletonApi.Application.Features.FrameNumberSubjects.Commands.CreateFrameNumberHasSubject;
+using SkeletonApi.Application.Features.FrameNumberSubjects.Commands.DeleteFrameNumberHasSubject;
+using SkeletonApi.Application.Features.FrameNumberSubjects.Commands.UpdateFrameNumberHasSubject;
+using SkeletonApi.Application.Features.FrameNumberSubjects.Queries.GetAllFrameNumber;
+using SkeletonApi.Application.Features.FrameNumberSubjects.Queries.GetFrameNumberHasSubjectWithPagination;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json;
@@ -22,6 +22,7 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public FrameNumberController(IMediator mediator, ILogger<FrameNumberController> logger)
         {
             _mediator = mediator;
@@ -82,7 +83,7 @@ namespace SkeletonApi.Presentation.Controllers
         [HttpPost("create-frame-subject")]
         public async Task<ActionResult<Result<FrameNumberHasSubjects>>> CreateFrameNumberHasSubject(CreateNumberHasSubjectCommand command)
         {
-                return await _mediator.Send(command);
+            return await _mediator.Send(command);
         }
 
         [HttpGet("get-all-frame-number")]
@@ -90,7 +91,6 @@ namespace SkeletonApi.Presentation.Controllers
         {
             return await _mediator.Send(new GetAllFrameNumberQuery());
         }
-
 
         [HttpGet("list-frame-number-subject")]
         public async Task<ActionResult<PaginatedResult<GetFrameNumberWithPaginationDto>>> GetFrameNumberHasSubjectWithPagination([FromQuery] GetFrameNumberHasSubjectWithPaginationQuery query)
@@ -136,8 +136,5 @@ namespace SkeletonApi.Presentation.Controllers
             }
             return await _mediator.Send(command);
         }
-
     }
-
-
 }

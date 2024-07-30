@@ -7,8 +7,10 @@ namespace SkeletonApi.Application.Features.Dashboard.FiveTopAirConsumption.Queri
     {
         [JsonPropertyName("total_week")]
         public decimal TotalWeek { get; set; }
+
         [JsonPropertyName("total_month")]
         public decimal TotalMonth { get; set; }
+
         [JsonPropertyName("data_machine")]
         public List<DataMachines> DataMachines { get; set; }
     }
@@ -17,6 +19,7 @@ namespace SkeletonApi.Application.Features.Dashboard.FiveTopAirConsumption.Queri
     {
         [JsonPropertyName("label")]
         public string Label { get; set; }
+
         [JsonPropertyName("value")]
         public decimal Value { get; set; }
     }

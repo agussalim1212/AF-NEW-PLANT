@@ -1,9 +1,9 @@
-﻿using System;
-using System.Data;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using SkeletonApi.Persistence.Interfaces;
+using System.Data;
 
 namespace SkeletonApi.Persistence.Repositories.Dapper;
+
 public class DapperUnitOfWorkContext : IDapperCreateUnitOfWork, IGetConnection
 {
     private readonly string _connectionString;

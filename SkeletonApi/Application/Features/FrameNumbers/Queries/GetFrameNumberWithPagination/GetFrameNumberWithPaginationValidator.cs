@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.FrameNumb.Queries.GetFrameNumberWithPagination
+namespace SkeletonApi.Application.Features.FrameNumbers.Queries.GetFrameNumberWithPagination
 {
     public class GetFrameNumberWithPaginationValidator : AbstractValidator<GetFrameNumberWithPaginationQuery>
     {
-        public GetFrameNumberWithPaginationValidator() 
+        public GetFrameNumberWithPaginationValidator()
         {
             RuleFor(x => x.page_number)
                   .GreaterThanOrEqualTo(1)

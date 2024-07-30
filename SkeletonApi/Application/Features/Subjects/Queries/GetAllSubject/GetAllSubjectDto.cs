@@ -8,6 +8,7 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetAllSubject
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
+
         [JsonPropertyName("name")]
         public string? Subjects { get; set; }
     }

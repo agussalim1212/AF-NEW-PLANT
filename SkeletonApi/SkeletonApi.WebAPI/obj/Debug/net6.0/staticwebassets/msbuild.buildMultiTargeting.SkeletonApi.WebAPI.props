@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\SkeletonApi.WebAPI.props" />
-</Project>

@@ -1,13 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.CategoryHasMachine.Queries.GetCategoryMachine;
-using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
-using SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCategoryHasMachine;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetAllCategoryMachine;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachinesWithPagination;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination;
-using SkeletonApi.Application.Features.CategoryMachine.Queries.GetCategoryMachineWithPagination_;
+using SkeletonApi.Application.Features.CategoryHasMachines.Commands.CreateCategoryHasMachine;
+using SkeletonApi.Application.Features.CategoryHasMachines.Commands.UpdateCategoryHasMachine;
+using SkeletonApi.Application.Features.CategoryHasMachines.Queries.GetAllCategoryMachine;
+using SkeletonApi.Application.Features.CategoryHasMachines.Queries.GetCategoryMachine;
+using SkeletonApi.Application.Features.CategoryHasMachines.Queries.GetCategoryMachineWithPagination;
 using SkeletonApi.Application.Features.Machines;
 using SkeletonApi.Application.Features.Machines.Commands.CreateMachines;
 using SkeletonApi.Application.Features.Machines.Commands.DeleteMachines;
@@ -21,7 +19,6 @@ using System.Text.Json;
 namespace SkeletonApi.Presentation.Controllers
 {
     [Route("/api/machine")]
-
     public class MachineController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -45,7 +42,6 @@ namespace SkeletonApi.Presentation.Controllers
         //    return await _mediator.Send(new GetAllMachinesQuery());
         //}
 
-
         [HttpGet("list-machine")]
         public async Task<ActionResult<PaginatedResult<GetMachinesWithPaginationDto>>> GetMachinesWithPagination([FromQuery] GetMachinesWithPaginationQuery query)
         {
@@ -53,7 +49,7 @@ namespace SkeletonApi.Presentation.Controllers
             var validator = new GetMachinesWithPaginationValidator();
 
             var result = validator.Validate(query);
-            
+
             if (result.IsValid)
             {
                 var pg = await _mediator.Send(query);
@@ -114,11 +110,13 @@ namespace SkeletonApi.Presentation.Controllers
         {
             return await _mediator.Send(new GetAllCategoryMachineQuery());
         }
+
         [HttpGet("get-category-machine")]
         public async Task<ActionResult<Result<List<GetCategoryMachineDto>>>> GetCategory()
         {
             return await _mediator.Send(new GetCategoryMachineQuery());
         }
+
         [HttpPost("create-category-machine")]
         public async Task<ActionResult<Result<CategoryMachineHasMachine>>> CreateCategoryMachine(CreateCategoryHasMachineCommand command)
         {
@@ -126,7 +124,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpPut("update-category-machine/{id}")]
-        public async Task<ActionResult<Result<CategoryMachineHasMachine>>> UpdateCategory(Guid id,UpdateCategoryHasMachinesCommand command)
+        public async Task<ActionResult<Result<CategoryMachineHasMachine>>> UpdateCategory(Guid id, UpdateCategoryHasMachinesCommand command)
         {
             if (id != command.CategoryMachineId)
             {
@@ -156,7 +154,5 @@ namespace SkeletonApi.Presentation.Controllers
             }
             return await _mediator.Send(command);
         }
-
-
     }
 }

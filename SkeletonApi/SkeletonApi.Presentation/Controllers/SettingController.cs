@@ -8,7 +8,6 @@ using SkeletonApi.Application.Features.Settings.Queries.GetSubjectByMachineId;
 using SkeletonApi.Shared;
 using System.Text.Json;
 
-
 namespace SkeletonApi.Presentation.Controllers
 {
     [Route("/api/setting")]
@@ -16,6 +15,7 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public SettingController(IMediator mediator, ILogger<SettingController> logger)
         {
             _mediator = mediator;
@@ -55,13 +55,10 @@ namespace SkeletonApi.Presentation.Controllers
             return await _mediator.Send(command);
         }
 
-
         [HttpGet("{machineId:guid}")]
         public async Task<ActionResult<Result<List<GetSubjectByMachineIdDto>>>> GetByMachineId(Guid machineId)
         {
             return await _mediator.Send(new GetSubjectByMachineIdQuery(machineId));
         }
-
-
     }
 }

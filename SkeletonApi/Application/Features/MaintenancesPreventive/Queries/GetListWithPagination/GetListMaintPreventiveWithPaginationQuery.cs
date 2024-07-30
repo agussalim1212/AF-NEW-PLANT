@@ -1,17 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SkeletonApi.Application.Extensions;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetDetail;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetListWithPagination
 {
@@ -24,7 +16,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetLis
 
         public GetListMaintPreventiveWithPaginationQuery()
         {
-            
         }
 
         public GetListMaintPreventiveWithPaginationQuery(int pageNumber, int pageSize, Guid? machineid, string? searchTerm)
@@ -53,7 +44,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetLis
             {
                 if (string.IsNullOrWhiteSpace(query.search_term) == true || query.search_term == null)
                 {
-
                     return await _unitOfWork.Repository<MaintenacePreventive>().Entities
                     .Join(
                         _unitOfWork.Repository<Machine>().Entities,
@@ -105,7 +95,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetLis
             {
                 if (string.IsNullOrWhiteSpace(query.search_term) == true || query.search_term == null)
                 {
-
                     return await _unitOfWork.Repository<MaintenacePreventive>().Entities
                         .Where(x => x.MachineId.Equals(query.machine_id))
                     .Join(

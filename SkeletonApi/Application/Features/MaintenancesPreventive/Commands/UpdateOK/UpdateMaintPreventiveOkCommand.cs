@@ -1,19 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Create;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Update;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.UpdateOK
 {
@@ -26,9 +17,8 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Updat
         public DateOnly EndDate { get; set; }
 
         [NotMapped] public bool ok { get; set; }
-
-
     }
+
     internal class UpdateMaintPreventiveOkCommandHandler : IRequestHandler<UpdateMaintPreventiveOkCommand, Result<UpdateMaintPreventiveOkDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -42,7 +32,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Updat
 
         public async Task<Result<UpdateMaintPreventiveOkDto>> Handle(UpdateMaintPreventiveOkCommand request, CancellationToken cancellationToken)
         {
-
             var MaintPrevOk = await _unitOfWork.Repository<MaintenacePreventive>().GetByIdAsync(request.Id);
             if (MaintPrevOk != null)
             {
@@ -69,10 +58,8 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Updat
 
                 await _unitOfWork.Save(cancellationToken);
                 return await Result<UpdateMaintPreventiveOkDto>.SuccessAsync(data, "Maintenance Preventive OK Updated");
-
             }
             return await Result<UpdateMaintPreventiveOkDto>.FailureAsync("Maintenance Preventive OK Not Found");
         }
-
     }
 }

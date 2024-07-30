@@ -1,14 +1,8 @@
-﻿using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using SkeletonApi.Application.DTOs.RestApiData;
+using SkeletonApi.Application.Interfaces;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using SkeletonApi.Application.DTOs.RestApiData;
-using SkeletonApi.Application.Interfaces;
 
 namespace SkeletonApi.Infrastructure.Services
 {
@@ -16,10 +10,11 @@ namespace SkeletonApi.Infrastructure.Services
     {
         private readonly HttpClient _httpClient;
 
-        public RestApiClientService(HttpClient httpClient) 
-        { 
+        public RestApiClientService(HttpClient httpClient)
+        {
             _httpClient = httpClient;
         }
+
         public async Task SendAsync(RestDataTraceability request)
         {
             string username = "training103";

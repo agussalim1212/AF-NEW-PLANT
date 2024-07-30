@@ -1,9 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
-using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using System.Data;
-
 
 namespace SkeletonApi.Persistence.Repositories.Configuration
 {

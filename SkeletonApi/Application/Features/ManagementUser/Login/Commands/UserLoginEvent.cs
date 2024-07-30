@@ -1,7 +1,7 @@
 ﻿using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Entities;
 
-namespace SkeletonApi.Application.Features.Users.Login.Commands
+namespace SkeletonApi.Application.Features.ManagementUser.Login.Commands
 {
     public class UserLoginEvent : BaseEvent
     {

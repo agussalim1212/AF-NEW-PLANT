@@ -2,7 +2,6 @@
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 
-
 namespace SkeletonApi.Persistence.Repositories
 {
     public class RoleRepository : IRoleRepository
@@ -27,7 +26,5 @@ namespace SkeletonApi.Persistence.Repositories
             //}
             //return true;
         }
-
-
     }
 }

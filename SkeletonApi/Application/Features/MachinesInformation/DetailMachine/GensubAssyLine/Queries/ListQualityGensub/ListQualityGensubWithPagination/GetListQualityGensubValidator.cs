@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination
 {
     public class GetListQualityGensubValidator : AbstractValidator<GetListQualityGensubQuery>
     {
@@ -18,7 +13,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
             RuleFor(x => x.page_size)
                 .GreaterThanOrEqualTo(1)
                 .WithMessage("PageSize at least greater than or equal to 1.");
-
         }
     }
 }

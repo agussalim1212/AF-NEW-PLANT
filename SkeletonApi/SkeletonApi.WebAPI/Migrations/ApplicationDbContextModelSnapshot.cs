@@ -1029,6 +1029,33 @@ namespace SkeletonApi.WebAPI.Migrations
                     b.ToTable("ListQualities");
                 });
 
+            modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.ListQualityBarcode", b =>
+                {
+                    b.Property<string>("DataBarcode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("data_barcode");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<string>("FotoDataNg")
+                        .HasColumnType("text")
+                        .HasColumnName("foto_data_ng");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text")
+                        .HasColumnName("status");
+
+                    b.ToTable("ListQualityBarcodes");
+                });
+
             modelBuilder.Entity("SkeletonApi.Domain.Entities.Tsdb.MachineInformation", b =>
                 {
                     b.Property<DateTime>("DateTime")

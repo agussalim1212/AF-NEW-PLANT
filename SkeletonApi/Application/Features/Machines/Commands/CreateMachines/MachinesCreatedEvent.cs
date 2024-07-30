@@ -1,5 +1,6 @@
 ﻿using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Entities;
+
 namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
 {
     public class MachinesCreatedEvent : BaseEvent

@@ -1,12 +1,7 @@
 ﻿using SkeletonApi.Application.Common.Mappings;
 using SkeletonApi.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.UpdateOK
 {
@@ -33,6 +28,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Updat
         [JsonPropertyName("end_date")]
         public DateOnly? EndDate { get; set; }
 
-        [NotMapped] public bool ok { get; set; } 
+        [NotMapped] public bool ok { get; set; }
     }
 }

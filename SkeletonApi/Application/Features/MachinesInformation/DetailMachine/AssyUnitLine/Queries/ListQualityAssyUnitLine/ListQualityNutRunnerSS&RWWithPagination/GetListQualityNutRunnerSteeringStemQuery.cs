@@ -5,7 +5,6 @@ using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityAssyUnitLineWithPagination
 {
-
     public record GetListQualityNutRunnerSteeringStemQuery : IRequest<PaginatedResult<GetListQualityNutRunnerSteeringStemDto>>
     {
         public Guid machine_id { get; set; }
@@ -42,14 +41,12 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
 
             public async Task<PaginatedResult<GetListQualityNutRunnerSteeringStemDto>> Handle(GetListQualityNutRunnerSteeringStemQuery query, CancellationToken cancellationToken)
             {
-
-                var data = await _detailAssyUnitRepository.GetAllListQualityNutRunnerStem(query.machine_id, query.type, query.start,query.end);
-                var dt = data.Where(c => query.search_term == null || query.search_term.ToLower() == c.DataBarcode.ToLower() 
+                //mengambil data untuk list quality nut runner stem dan wheel
+                var data = await _detailAssyUnitRepository.GetAllListQualityNutRunnerStem(query.machine_id, query.type, query.start, query.end);
+                var dt = data.Where(c => query.search_term == null || query.search_term.ToLower() == c.DataBarcode.ToLower()
                 || query.search_term.ToLower() == c.Status.ToLower()).ToList();
                 return await dt.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
             }
         }
     }
-
 }
-

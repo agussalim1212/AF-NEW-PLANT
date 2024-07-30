@@ -6,7 +6,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleWithPagination
 {
     public record GetRolesWithPaginationQuery : IRequest<PaginatedResult<GetRolesWithPaginationDto>>
@@ -24,6 +23,7 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleW
             search_term = searchTerm;
         }
     }
+
     internal class GetRolesWithPaginationQueryHandler : IRequestHandler<GetRolesWithPaginationQuery, PaginatedResult<GetRolesWithPaginationDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -45,7 +45,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleW
                 UpdateAt = c.UpdatedAt.Value.AddHours(7)
             }).ProjectTo<GetRolesWithPaginationDto>(_mapper.ConfigurationProvider)
             .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
-
         }
     }
 }

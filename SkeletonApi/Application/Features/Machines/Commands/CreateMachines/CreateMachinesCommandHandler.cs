@@ -6,7 +6,7 @@ using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
 {
-    internal class CreateMachinesCommandHandler : IRequestHandler<CreateMachineRequest, Result<CreateMachineResponseDto>>   
+    internal class CreateMachinesCommandHandler : IRequestHandler<CreateMachineRequest, Result<CreateMachineResponseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMachinesRepository _machinesRepository;
@@ -27,7 +27,7 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
 
             if (validateData != true)
             {
-                return await Result<CreateMachineResponseDto>.FailureAsync(subjectMachineResponse,"Data already exist");
+                return await Result<CreateMachineResponseDto>.FailureAsync(subjectMachineResponse, "Data already exist");
             }
 
             Machine.CreatedAt = DateTime.UtcNow;
@@ -37,7 +37,6 @@ namespace SkeletonApi.Application.Features.Machines.Commands.CreateMachines
             Machine.AddDomainEvent(new MachinesCreatedEvent(Machine));
             await _unitOfWork.Save(cancellationToken);
             return await Result<CreateMachineResponseDto>.SuccessAsync(subjectMachineResponse, "Machine created.");
-
         }
     }
 }

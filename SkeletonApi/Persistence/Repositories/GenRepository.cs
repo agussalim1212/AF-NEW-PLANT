@@ -2,19 +2,14 @@
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Persistence.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Persistence.Repositories
 {
     public class GenRepository<T> : IGenRepository<T> where T : BaseManyToMany
     {
         private readonly ApplicationDbContext _dbContext;
-        
+
         public GenRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -27,9 +22,10 @@ namespace SkeletonApi.Persistence.Repositories
             await _dbContext.Set<T>().AddAsync(entity);
             return entity;
         }
+
         public Task UpdateAsync(Guid machineId, Guid categoryId)
         {
-            T exist = _dbContext.Set<T>().Find(machineId,categoryId);
+            T exist = _dbContext.Set<T>().Find(machineId, categoryId);
             _dbContext.Entry(exist).CurrentValues.SetValues(exist);
             return Task.CompletedTask;
         }
@@ -51,10 +47,9 @@ namespace SkeletonApi.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(machineId, categoryId);
         }
+
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
            _dbContext.Set<T>()
            .Where(expression);
-
-
     }
 }

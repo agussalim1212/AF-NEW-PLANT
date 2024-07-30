@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Http;
 using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
 
-
 namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAccount
 {
     public sealed record CreateAccountRequest : IRequest<Result<CreateAccountResponseDto>>
     {
+        //dari user yang saat ini login
         [JsonPropertyName("username")]
         public string? Username { get; set; }
         public IFormFile Img_path { get; set; }

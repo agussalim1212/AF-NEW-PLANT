@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace SkeletonApi.Domain.Entities
 {
     public class User : IdentityUser
@@ -17,7 +16,7 @@ namespace SkeletonApi.Domain.Entities
 
         [NotMapped]
         public ICollection<string>? Roles { get; set; }
+
         public ICollection<UserRole> UserRoles { get; set; }
-       
     }
 }

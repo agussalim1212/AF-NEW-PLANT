@@ -1,13 +1,7 @@
-﻿using SkeletonApi.Application.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 
 namespace SkeletonApi.Persistence.Repositories
@@ -64,7 +58,6 @@ namespace SkeletonApi.Persistence.Repositories
         public async Task<T> GetByAsync(Guid id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
-
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>

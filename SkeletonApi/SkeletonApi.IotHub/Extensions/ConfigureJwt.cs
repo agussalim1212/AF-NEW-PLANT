@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using SkeletonApi.Domain.Entities.ConfigurationModels;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Domain.Entities.ConfigurationModels;
 using SkeletonApi.Persistence.Contexts;
 
 namespace SkeletonApi.IotHub.Extensions
@@ -25,7 +25,6 @@ namespace SkeletonApi.IotHub.Extensions
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 10;
                 o.User.RequireUniqueEmail = true;
-
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 //.AddDefaultUI()
@@ -58,6 +57,7 @@ namespace SkeletonApi.IotHub.Extensions
                 };
             });
         }
+
         public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration) =>
             services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
     }

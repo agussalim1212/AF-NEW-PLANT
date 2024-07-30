@@ -5,7 +5,7 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions
     public record PermissionsDto
     {
         [JsonPropertyName("role_name")]
-        public string RoleName{ get; set; }
+        public string RoleName { get; set; }
         [JsonPropertyName("claim")]
         public List<ClaimType> Claim { get; set; }
     }
@@ -15,6 +15,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions
         [JsonPropertyName("claim_value")]
         public string ClaimValue { get; set; }
     }
- 
+
     public sealed record CreatePermissionsResponseDto : PermissionsDto { }
 }

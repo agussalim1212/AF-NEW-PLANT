@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.DTOs.DetailMachine;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Persistence.Contexts;
-using System.Collections.Immutable;
-using System.Globalization;
-
-
 
 namespace SkeletonApi.Persistence.Repositories
 {
@@ -25,10 +22,8 @@ namespace SkeletonApi.Persistence.Repositories
             _machineRepository = machineRepository;
             _dbContext = dbContext;
             _repositoryMachine = repositoryMachine;
-
         }
 
-      
         public async Task<GetVidSubjectDto> GetVidsAsync(Guid machineId, string vid)
         {
             var getVid = _machineRepository.FindByCondition(o => o.MachineId == machineId).Include(p => p.Subject)
@@ -37,4 +32,3 @@ namespace SkeletonApi.Persistence.Repositories
         }
     }
 }
-    

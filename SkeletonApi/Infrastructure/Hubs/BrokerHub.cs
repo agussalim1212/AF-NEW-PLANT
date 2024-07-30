@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using SkeletonApi.Infrastructure.Common;
 using SkeletonApi.Infrastructure.Interfaces;
 using SkeletonApi.Infrastructure.Services;
@@ -11,6 +9,7 @@ namespace SkeletonApi.Infrastructure.Hubs
     {
         private readonly IMqttClientService mqttClientService;
         private readonly BrokerCommandTopics CommandTopics;
+
         public BrokerHub(MqttClientServiceProvider provider, BrokerCommandTopics commandTopics)
         {
             mqttClientService = provider.MqttClientService;

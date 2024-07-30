@@ -6,14 +6,13 @@ using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.Machines.Commands.UpdateMachines
 {
-   
-    internal class UpdateMachinesCommandHandler : IRequestHandler<UpdateMachineRequest, Result<Machine>> 
+    internal class UpdateMachinesCommandHandler : IRequestHandler<UpdateMachineRequest, Result<Machine>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public UpdateMachinesCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
-        {   
+        {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }

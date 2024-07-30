@@ -16,7 +16,7 @@ namespace SkeletonApi.Persistence.Contexts
     {
         private readonly IDomainEventDispatcher _dispatcher;
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options , IDomainEventDispatcher dispatcher = null)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDomainEventDispatcher dispatcher = null)
             : base(options)
         {
             _dispatcher = dispatcher;
@@ -26,7 +26,7 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<Machine> Machines => Set<Machine>();
         public DbSet<Subject> Subject => Set<Subject>();
         public DbSet<Dummy> Dummy => Set<Dummy>();
-        public DbSet<CategoryMachines> CategoryMachines => Set<CategoryMachines>(); 
+        public DbSet<CategoryMachines> CategoryMachines => Set<CategoryMachines>();
         public DbSet<CategoryMachineHasMachine> CategoryMachineHasMachines => Set<CategoryMachineHasMachine>();
         public DbSet<SubjectHasMachine> subjectHasMachines => Set<SubjectHasMachine>();
         public DbSet<Setting> Settings => Set<Setting>();
@@ -53,10 +53,10 @@ namespace SkeletonApi.Persistence.Contexts
         public DbSet<TotalProduction> TotalProductions => Set<TotalProduction>();
         public DbSet<CurrentConsumption> CurrentConsumptions => Set<CurrentConsumption>();
         public DbSet<VoltageConsumption> VoltageConsumptions => Set<VoltageConsumption>();
+        public DbSet<ListQualityBarcode> ListQualityBarcodes => Set<ListQualityBarcode>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserRole>(userRole =>
@@ -72,12 +72,11 @@ namespace SkeletonApi.Persistence.Contexts
                     .HasForeignKey(ur => ur.UserId);
             });
 
-
-                modelBuilder.Entity<Role>()
-               .HasMany(e => e.Permissions)
-               .WithOne(e => e.Role)
-               .HasForeignKey(e => e.RoleId)
-               .IsRequired(false);
+            modelBuilder.Entity<Role>()
+           .HasMany(e => e.Permissions)
+           .WithOne(e => e.Role)
+           .HasForeignKey(e => e.RoleId)
+           .IsRequired(false);
 
             modelBuilder.Entity<FrameNumberHasSubjects>(m =>
             {

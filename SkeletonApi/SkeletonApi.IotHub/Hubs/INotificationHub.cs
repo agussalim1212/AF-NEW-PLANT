@@ -8,4 +8,3 @@ namespace SkeletonApi.IotHub.Hubs
         public ChannelReader<IEnumerable<MachineHealthModel>> RealtimeNotification();
     }
 }
-

@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AmpereConsumptionDetailMachine;
-using SkeletonApi.Application.Interfaces.Repositories.Filtering;
+using SkeletonApi.Application.DTOs.CurrentAndVoltageConsumption;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Filtering;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.VoltageConsumptionDetailMachine
 {
@@ -49,8 +44,11 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Vol
             }
             public async Task<Result<GetAllDetailMachineCurrentAndVoltageConsumptionDto>> Handle(GetAllDetailMachineVoltageConsumptionQuery request, CancellationToken cancellationToken)
             {
+                //untuk mendapatkan nama subject berdasarkan id machine yg dikirim dan vid
                 var data = await _repository.GetSubjectAsync(request.MachineId, request.Vid);
 
+                //jika type == day maka data akan di arahkan ke proses filtering day yang berada di SkeletonApi.Application.Interfaces.Repositories.Filtering, didalam repositories tsb 
+                //terdapat method untuk filtering tergantung type yang di pilih
                 if (request.Type == "day")
                 {
                     var dt = await _dayRepository.GetAllDetailMachineCurrentAndVoltageConsumptionDay(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
@@ -68,13 +66,12 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Vol
                 }
                 else if (request.Type == "year")
                 {
-                    var dt = await _yearRepository.GetAllDetailMachineCurrentAndVoltageConsumptionAsync(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
+                    var dt = await _yearRepository.GetAllDetailMachineCurrentAndVoltageConsumptionYear(request.View, data.Vid, data.MachineName, data.SubjectName, request.Start, request.End);
                     return await Result<GetAllDetailMachineCurrentAndVoltageConsumptionDto>.SuccessAsync(dt, "Successfully fetch data");
                 }
 
                 var defaultData = await _defaultRepository.GetAllDetailMachineCurrentAndVoltageConsumptionDefault(request.View, data.Vid, data.MachineName, data.SubjectName);
                 return await Result<GetAllDetailMachineCurrentAndVoltageConsumptionDto>.SuccessAsync(defaultData, "Successfully fetch data");
-
             }
         }
     }

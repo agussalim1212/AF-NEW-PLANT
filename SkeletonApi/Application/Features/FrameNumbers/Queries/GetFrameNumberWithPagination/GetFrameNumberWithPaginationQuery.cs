@@ -6,10 +6,9 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.FrameNumb.Queries.GetFrameNumberWithPagination
+namespace SkeletonApi.Application.Features.FrameNumbers.Queries.GetFrameNumberWithPagination
 {
-   public record GetFrameNumberWithPaginationQuery : IRequest<PaginatedResult<GetFrameNumberWithPaginationDto>>
+    public record GetFrameNumberWithPaginationQuery : IRequest<PaginatedResult<GetFrameNumberWithPaginationDto>>
     {
         public int page_number { get; set; }
         public int page_size { get; set; }
@@ -25,6 +24,7 @@ namespace SkeletonApi.Application.Features.FrameNumb.Queries.GetFrameNumberWithP
             search_term = searchTerm;
         }
     }
+
     internal class GetFrameNumberWithPaginationQueryHandler : IRequestHandler<GetFrameNumberWithPaginationQuery, PaginatedResult<GetFrameNumberWithPaginationDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -39,7 +39,7 @@ namespace SkeletonApi.Application.Features.FrameNumb.Queries.GetFrameNumberWithP
         public async Task<PaginatedResult<GetFrameNumberWithPaginationDto>> Handle(GetFrameNumberWithPaginationQuery query, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Repository<FrameNumber>().FindByCondition(x => x.DeletedAt == null)
-                   .OrderBy(x => x.Vid).Where(s => query.search_term == null || query.search_term.ToLower() == s.Vid.ToLower() 
+                   .OrderBy(x => x.Vid).Where(s => query.search_term == null || query.search_term.ToLower() == s.Vid.ToLower()
                    || query.search_term.ToLower() == s.Name.ToLower()).Select(m => new GetFrameNumberWithPaginationDto
                    {
                        Id = m.Id,

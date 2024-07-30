@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrake
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrakeWithPagination
 {
     public class GetListQualityOilBrakeValidator : AbstractValidator<GetListQualityOilBrakeQuery>
     {
-        public GetListQualityOilBrakeValidator() 
+        public GetListQualityOilBrakeValidator()
         {
             RuleFor(x => x.page_number)
            .GreaterThanOrEqualTo(1)

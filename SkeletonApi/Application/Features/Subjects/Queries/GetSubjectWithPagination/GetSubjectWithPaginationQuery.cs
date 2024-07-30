@@ -23,6 +23,7 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagina
             search_term = searchTerm;
         }
     }
+
     internal class GetSubjectWithPaginationQueryHandler : IRequestHandler<GetSubjectWithPaginationQuery, PaginatedResult<GetSubjectWithPaginationDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -40,7 +41,6 @@ namespace SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagina
                    .OrderByDescending(o => o.UpdatedAt)
                    .ProjectTo<GetSubjectWithPaginationDto>(_mapper.ConfigurationProvider)
                    .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
-                   
         }
     }
 }

@@ -1,15 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Shared;
-using SkeletonApi.Application.Features.Users;
-using SkeletonApi.Domain.Entities;
-using System.Text.Json;
+using SkeletonApi.Application.Features.ManagementUser;
 using SkeletonApi.Application.Features.ManagementUser.Users.Commands.CreateUser;
 using SkeletonApi.Application.Features.ManagementUser.Users.Commands.DeleteUser;
 using SkeletonApi.Application.Features.ManagementUser.Users.Commands.UpdateUser;
 using SkeletonApi.Application.Features.ManagementUser.Users.Queries.GetUserWithPagination;
-
+using SkeletonApi.Domain.Entities;
+using SkeletonApi.Shared;
+using System.Text.Json;
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -18,6 +17,7 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public UserController(IMediator mediator, ILogger<UserController> logger)
         {
             _mediator = mediator;
@@ -73,6 +73,5 @@ namespace SkeletonApi.Presentation.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
-
     }
 }

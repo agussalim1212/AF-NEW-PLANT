@@ -5,13 +5,11 @@ namespace SkeletonApi.Domain.Entities
 {
     public class MaintCorrective : BaseAuditableEntity
     {
-
         [Column("actual")]
         public string? Actual { get; set; }
 
         [Column("start_date")]
         public DateOnly? StartDate { get; set; }
-
 
         [Column("end_date")]
         public DateOnly? EndDate { get; set; }

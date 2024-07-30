@@ -1,19 +1,11 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetAllMachine
 {
@@ -58,9 +50,9 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetAll
             var sql = _unitOfWork.Data<MaintenacePreventive>().Entities
                             .Where(x => x.StartDate >= query.start_date && x.StartDate <= query.end_date);
             data = await sql.GroupBy(x => new { x.StartDate })
-                            .Select(c => 
+                            .Select(c =>
                             new GetAllMAchineMaintPreventiveDto
-                            { 
+                            {
                                 CountActual = c.Count(j => j.EndDate != null),
                                 CountPlan = c.Count(j => j.StartDate != null),
                                 label = new DateTime(c.Key.StartDate.Value.Year, c.Key.StartDate.Value.Month, c.Key.StartDate.Value.Day).ToString("dd MMM", new CultureInfo("en-US")),
@@ -71,4 +63,3 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetAll
         }
     }
 }
- 

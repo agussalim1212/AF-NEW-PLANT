@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetAllMachine;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenanceCorrective.Queries.GetAll
 {
@@ -51,23 +45,23 @@ namespace SkeletonApi.Application.Features.MaintenanceCorrective.Queries.GetAll
 
         public async Task<Result<List<GetAllMaintCorrectiveDto>>> Handle(GetAllMaintCorrectiveQuery query, CancellationToken cancellationToken)
         {
-                var data = new List<GetAllMaintCorrectiveDto>();
+            var data = new List<GetAllMaintCorrectiveDto>();
 
-                var sql = _unitOfWork.Data<MaintCorrective>().Entities
-                   .Where(x => x.StartDate >= query.start_date && x.StartDate <= query.end_date);
-                data = await sql.GroupBy(x => new { x.StartDate })
-                                .Select(c =>
-                                new GetAllMaintCorrectiveDto
-                                {
-                                    CountActual = c.Count(j => j.EndDate != null),
-                                    label = new DateTime(c.Key.StartDate.Value.Year,
-                                    c.Key.StartDate.Value.Month, c.Key.StartDate.Value.Day)
-                                    .ToString("dd MMM", new CultureInfo("en-US")),
-                                    StartDate = c.Key.StartDate.Value,
-                                })
-                                .ToListAsync(cancellationToken);
+            var sql = _unitOfWork.Data<MaintCorrective>().Entities
+               .Where(x => x.StartDate >= query.start_date && x.StartDate <= query.end_date);
+            data = await sql.GroupBy(x => new { x.StartDate })
+                            .Select(c =>
+                            new GetAllMaintCorrectiveDto
+                            {
+                                CountActual = c.Count(j => j.EndDate != null),
+                                label = new DateTime(c.Key.StartDate.Value.Year,
+                                c.Key.StartDate.Value.Month, c.Key.StartDate.Value.Day)
+                                .ToString("dd MMM", new CultureInfo("en-US")),
+                                StartDate = c.Key.StartDate.Value,
+                            })
+                            .ToListAsync(cancellationToken);
 
-                return await Result<List<GetAllMaintCorrectiveDto>>.SuccessAsync(data, "Successfully fetch data");
+            return await Result<List<GetAllMaintCorrectiveDto>>.SuccessAsync(data, "Successfully fetch data");
         }
     }
 }

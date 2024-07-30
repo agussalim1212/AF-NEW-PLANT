@@ -1,16 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.Machines.Queries.GetAllMachines;
 using SkeletonApi.Application.Features.Subjects.Queries.GetSubjectWithPagination;
 using SkeletonApi.Application.Features.Treacibility.Queries.GetDetailTreacibility;
+using SkeletonApi.Application.Features.Treacibility.Queries.GetTreacibiltyWithPagination;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Presentation.Controllers
 {

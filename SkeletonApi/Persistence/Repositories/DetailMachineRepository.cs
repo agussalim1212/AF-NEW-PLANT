@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.DTOs.Consumption;
 using SkeletonApi.Application.DTOs.DetailMachine;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumption;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityDataBarcodeWithPagination;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumptionDetailMachine;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.MachineInformation;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.Persistence.Contexts;
-
 
 namespace SkeletonApi.Persistence.Repositories
 {
@@ -14,42 +17,69 @@ namespace SkeletonApi.Persistence.Repositories
         private readonly IDapperReadDbConnection _dapperReadDbConnection;
         private readonly IGenRepository<SubjectHasMachine> _repositorySubjectMachine;
         private readonly ApplicationDbContext _dbContext;
+
         public DetailMachineRepository(IDapperReadDbConnection dapperReadDbConnection, ApplicationDbContext dbContext, IGenRepository<SubjectHasMachine> repositorySubjectMachine)
         {
             _dbContext = dbContext;
             _repositorySubjectMachine = repositorySubjectMachine;
             _dapperReadDbConnection = dapperReadDbConnection;
-            
         }
 
         public async Task<GetAllMachineInformationDto> GetAllMachineInformationAsync(Guid machine_id, string vidRunning, string vidReminder, string machineName)
         {
             var data = new GetAllMachineInformationDto();
+            DateTime today = DateTime.Now.Date.AddHours(7);
+            var running = await _dapperReadDbConnection.QueryAsync<MachineInformationConsumption>
+                       (@"select id,value ,date_time  from ""MachineInformation"" mi where id = @vidRun order by date_time desc limit 1",
+                       new { vidRun = vidRunning });
 
-            var runningAndReminder = await _dapperReadDbConnection.QueryAsync<MachineInformationConsumption>
-                       (@"select id,value ,date_time  from ""MachineInformation"" mi where id = @vidRun OR id = @vidRemind order by date_time desc limit 2",
-                       new { vidRun = vidRunning, vidRemind = vidReminder });
+            var reminder = await _dapperReadDbConnection.QueryAsync<MachineInformationConsumption>
+                       (@"select id,value ,date_time  from ""MachineInformation"" mi where id = @vidRemind order by date_time desc limit 1",
+                       new { vidRemind = vidReminder });
 
-            if (runningAndReminder.Count() == 0)
+            if (running.Count() == 0 && reminder.Count() == 0)
             {
                 data = new GetAllMachineInformationDto
                 {
                     MachineName = machineName,
                 };
-
             }
             else
             {
-
                 data = new GetAllMachineInformationDto
                 {
                     MachineName = machineName,
-                    LastTimeCalibration = runningAndReminder.Select(p => p.Value).FirstOrDefault(),
-                    ValueRunning = runningAndReminder.Select(p => p.Value).Skip(1).FirstOrDefault(),
-
+                    ValueRunning = running.Select(p => p.Value).FirstOrDefault(),
+                    LastTimeCalibration = reminder.Select(p => p.Value).FirstOrDefault(),
                 };
             }
             return data;
+        }
+
+        public async Task<List<GetListQualityBarcodeDto>> GetListQualitYBarcode(string vid)
+        {
+            var data = await _dapperReadDbConnection.QueryAsync<ListQualityBarcodeDto>(@$"select * from ""ListQualityBarcodes"" lqb where lqb.id = '{vid}' and lqb.data_barcode != 'NULL' and date(lqb.date_time) = current_date order by lqb.date_time desc");
+            List<GetListQualityBarcodeDto> listQuality = new List<GetListQualityBarcodeDto>();
+            var dataBarcode = new GetListQualityBarcodeDto();
+            if (data.Count() == 0)
+            {
+                dataBarcode.DataBarcode = null;
+                dataBarcode.Status = null;
+                dataBarcode.FotoDataNg = null;
+                dataBarcode.DateTime = null;
+            }
+            else
+            {
+                listQuality = data.Select(p => new GetListQualityBarcodeDto
+                {
+                    DataBarcode = p.DataBarcode,
+                    Status = p.Status,
+                    FotoDataNg = p.FotoDataNg,
+                    DateTime = p.DateTime.AddHours(7)
+                }).ToList();
+            }
+
+            return listQuality;
         }
 
         public async Task<GetVidSubjectDto> GetSubjectAsync(Guid machineId, string vid)
@@ -59,13 +89,13 @@ namespace SkeletonApi.Persistence.Repositories
 
             var data = new GetVidSubjectDto();
 
-                data = new GetVidSubjectDto
-                {
-                    Vid = machine.Select(p => p.Subject.Vid).FirstOrDefault(),
-                    MachineName = machine.Select(o => o.Machine.Name).FirstOrDefault(),
-                    SubjectName = machine.Select(p => p.Subject.Subjects).FirstOrDefault()
-                };
-                return data;
+            data = new GetVidSubjectDto
+            {
+                Vid = machine.Select(p => p.Subject.Vid).FirstOrDefault(),
+                MachineName = machine.Select(o => o.Machine.Name).FirstOrDefault(),
+                SubjectName = machine.Select(p => p.Subject.Subjects).FirstOrDefault()
+            };
+            return data;
         }
 
         public async Task<GetAllDetailMachineEnergyConsumptionDto> GetSubjectPowerAsync(Guid machineId)

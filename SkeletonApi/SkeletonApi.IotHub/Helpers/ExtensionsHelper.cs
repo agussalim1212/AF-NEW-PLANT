@@ -1,9 +1,8 @@
-﻿using System.Text.RegularExpressions;
-using System.Text;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SkeletonApi.IotHub.Helpers
 {
-
     public static class ExtensionHelper
     {
         public static string GetReverseString(this string str)
@@ -19,6 +18,7 @@ namespace SkeletonApi.IotHub.Helpers
             string alternateReversedString = new string(chars);
             return alternateReversedString;
         }
+
         public static string RemoveUnicode(this string arg)
         {
             var a = arg.GetReverseString();
@@ -27,7 +27,7 @@ namespace SkeletonApi.IotHub.Helpers
             {
                 if ((int)c > 127) // you probably don't want 127 either
                     continue;
-                if ((int)c < 32)  // I bet you don't want control characters 
+                if ((int)c < 32)  // I bet you don't want control characters
                     continue;
                 if (c == '%')
                     continue;

@@ -1,27 +1,19 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.FrameNumberSubject.Commands.UpdateFrameNumberHasSubject
+namespace SkeletonApi.Application.Features.FrameNumberSubjects.Commands.UpdateFrameNumberHasSubject
 {
-   public record UpdateFrameNumberHasSubjectCommand : IRequest<Result<FrameNumberHasSubjects>>
+    public record UpdateFrameNumberHasSubjectCommand : IRequest<Result<FrameNumberHasSubjects>>
     {
-
         [JsonPropertyName("frame_number_id")]
         public Guid FrameNumberId { get; set; }
         [JsonPropertyName("subject_id")]
         public List<Guid> SubjectId { get; set; }
-
     }
 
     internal class UpdateCategoryHasMachinesCommandHandler : IRequestHandler<UpdateFrameNumberHasSubjectCommand, Result<FrameNumberHasSubjects>>
@@ -37,12 +29,10 @@ namespace SkeletonApi.Application.Features.FrameNumberSubject.Commands.UpdateFra
 
         public async Task<Result<FrameNumberHasSubjects>> Handle(UpdateFrameNumberHasSubjectCommand request, CancellationToken cancellationToken)
         {
-
             var frameNumberSubject = await _unitOfWork.Repo<FrameNumberHasSubjects>().Entities.Where(x => request.FrameNumberId == x.FrameNumberId).ToListAsync();
-          
+
             if (frameNumberSubject.Count != 0)
             {
-
                 foreach (var cM in frameNumberSubject)
                 {
                     await _unitOfWork.Repo<FrameNumberHasSubjects>().DeleteAsync(cM);

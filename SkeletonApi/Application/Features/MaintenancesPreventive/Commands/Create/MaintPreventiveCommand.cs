@@ -1,19 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Common.Mappings;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Create
 {
@@ -31,6 +23,7 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Creat
         [JsonPropertyName("machine_id")]
         public Guid? MachineId { get; set; }
     }
+
     internal class CreateMaintPreventiveCommandHandler : IRequestHandler<CreateMaintPreventiveCommand, Result<CreateMaintPreventiveDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -84,7 +77,5 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Creat
                 return Result<CreateMaintPreventiveDto>.Failure("Machine Not Found");
             }
         }
-
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-
 namespace SkeletonApi.Application.Features.Accounts
 {
     public record AccountDto

@@ -2,17 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityAssyUnitLineWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFiling;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLine;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityNutRunnerSteeringStemWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrake;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRace;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage;
-using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.TotalProduction;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFilingWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFilingWithPagination.Download;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityDataBarcodeWithPagination;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityDataBarcodeWithPagination.Download;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLineWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLineWithPagination.Download;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityNutRunnerSS_RWWithPagination.Download;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrakeWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrakeWithPagination.Download;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRaceWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityPressConeRaceWithPagination.Download;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage_AbsTesterWithPagination.Download;
 using SkeletonApi.Shared;
@@ -25,19 +26,12 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public AssyUnitLineController(IMediator mediator, ILogger<AssyUnitLineController> logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
-
-        [HttpGet("total-production")]
-        public async Task<ActionResult<Result<GetAllTotalProductionDto>>> GetTotalProduction(Guid machine_id, string type, DateTime start, DateTime end)
-        {
-            return await _mediator.Send(new GetAllTotalProductionQuery(machine_id, type, start, end));
-        }
-
-      
 
         [HttpGet("list-quality-nut-runner")]
         public async Task<ActionResult<PaginatedResult<GetListQualityNutRunnerSteeringStemDto>>> GetListQualaityNutRunnerSteringStem([FromQuery] GetListQualityNutRunnerSteeringStemQuery query)
@@ -68,7 +62,8 @@ namespace SkeletonApi.Presentation.Controllers
             return BadRequest(errorMessages);
         }
 
-    #region Excel Nut Runner Steering Stem And Rear Wheel
+        #region Excel Nut Runner Steering Stem And Rear Wheel
+
         [HttpGet("list-quality-download-nut-runner")]
         public async Task<ActionResult<PaginatedResult<GetListQualityNutRunnerSteeringStemDto>>> DownloadExcelNutRunner([FromQuery] GetListQualityNutRunnerSteeringStemQuery query)
         {
@@ -99,6 +94,7 @@ namespace SkeletonApi.Presentation.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
         #endregion Excel Nut Runner Steering Stem And Rear Wheel
 
         [HttpGet("list-quality-robot-and-abs-tester")]
@@ -112,7 +108,7 @@ namespace SkeletonApi.Presentation.Controllers
             if (result.IsValid)
             {
                 var pg = await _mediator.Send(query);
-                
+
                 var paginationData = new
                 {
                     pg.page_number,
@@ -135,7 +131,7 @@ namespace SkeletonApi.Presentation.Controllers
 
         [HttpGet("list-quality-download-robot-and-abs-tester")]
         public async Task<ActionResult<PaginatedResult<GetListQualityRobotScanImageDto>>> DownloadExcelScanImageAndAbsTester([FromQuery] GetListQualityRobotScanImageQuery query)
-        {        
+        {
             var validator = new GetListQualityRobotScanImageValidator();
 
             var result = validator.Validate(query);
@@ -163,7 +159,8 @@ namespace SkeletonApi.Presentation.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
-        #endregion Robot And Abs Tester
+
+        #endregion Excel Robot And Abs Tester
 
         [HttpGet("list-quality-main-line")]
         public async Task<ActionResult<PaginatedResult<GetListQualityMainLineDto>>> GetListQualityMainLine([FromQuery] GetListQualityMainLineQuery query)
@@ -226,6 +223,7 @@ namespace SkeletonApi.Presentation.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
         #endregion Excel Main Line
 
         [HttpGet("list-quality-coolant-filing")]
@@ -258,6 +256,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #region Excel Coolant Filing
+
         [HttpGet("list-quality-download-coolant-filing")]
         public async Task<ActionResult<PaginatedResult<GetListQualityCoolantFilingDto>>> DownloadExcelCoolantFiling([FromQuery] GetListQualityCoolantFilingQuery query)
         {
@@ -284,11 +283,11 @@ namespace SkeletonApi.Presentation.Controllers
                     if (ex.InnerException == null) { return Problem(ex.Message); }
                     return Problem(ex.InnerException.Message);
                 }
-
             }
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
         #endregion Excel Coolant Filing
 
         [HttpGet("list-quality-oil-brake")]
@@ -321,6 +320,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #region Excel Oil Brake
+
         [HttpGet("list-quality-download-oil-brake")]
         public async Task<ActionResult<PaginatedResult<GetListQualityOilBrakeDto>>> DownloadExcelOilBrake([FromQuery] GetListQualityOilBrakeQuery query)
         {
@@ -347,11 +347,11 @@ namespace SkeletonApi.Presentation.Controllers
                     if (ex.InnerException == null) { return Problem(ex.Message); }
                     return Problem(ex.InnerException.Message);
                 }
-
             }
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
         #endregion Excel Oil Brake
 
         [HttpGet("list-quality-press-cone-race")]
@@ -384,6 +384,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #region Excel Press Cone Race
+
         [HttpGet("list-quality-download-press-cone-race")]
         public async Task<ActionResult<PaginatedResult<GetListQualityPressConeRaceDto>>> DownloadExcelPressConeRace([FromQuery] GetListQualityPressConeRaceQuery query)
         {
@@ -417,9 +418,68 @@ namespace SkeletonApi.Presentation.Controllers
 
         #endregion Excel Press Cone Race
 
+        [HttpGet("list-quality-data-barcode")]
+        public async Task<ActionResult<PaginatedResult<GetListQualityBarcodeDto>>> GetListQuality([FromQuery] GetListQualityBarcodeQuery query)
+        {
+            // Call Validate or ValidateAsync and pass the object which needs to be validated
+            var validator = new GetListQualityBarcodeValidator();
 
+            var result = validator.Validate(query);
+
+            if (result.IsValid)
+            {
+                var pg = await _mediator.Send(query);
+                var paginationData = new
+                {
+                    pg.page_number,
+                    pg.total_pages,
+                    pg.page_size,
+                    pg.total_count,
+                    pg.has_previous,
+                    pg.has_next
+                };
+
+                Response.Headers.Add("x-pagination", JsonSerializer.Serialize(paginationData));
+                return Ok(pg);
+            }
+
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            return BadRequest(errorMessages);
+        }
+
+        #region Excel Auto Q Date
+
+        [HttpGet("list-quality-download-auto-gate")]
+        public async Task<ActionResult<PaginatedResult<GetListQualityBarcodeDto>>> DownloadExcelAutoGate([FromQuery] GetListQualityBarcodeQuery query)
+        {
+            var validator = new GetListQualityBarcodeValidator();
+
+            var result = validator.Validate(query);
+            if (result.IsValid)
+            {
+                var pg = await _mediator.Send(query);
+                byte[]? bytes = null;
+                string filename = string.Empty;
+                try
+                {
+                    if (pg != null)
+                    {
+                        var Export = new DownloadListQualityAutoQGateToExcel(pg);
+                        Export.GetListExcel(ref bytes, ref filename);
+                    }
+                    Response.Headers.Add("x-download", filename);
+                    return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException == null) { return Problem(ex.Message); }
+                    return Problem(ex.InnerException.Message);
+                }
+            }
+            var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+            return BadRequest(errorMessages);
+        }
+
+        #endregion Excel Auto Q Date
     }
-
 }
-
-

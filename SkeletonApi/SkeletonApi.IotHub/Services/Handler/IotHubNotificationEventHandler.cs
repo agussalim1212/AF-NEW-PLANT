@@ -27,10 +27,12 @@ namespace SkeletonApi.IotHub.Services.Handler
                 _subscribers.Add(subscriberName, _subject.Subscribe(action));
             }
         }
+
         public IObservable<IEnumerable<NotificationModel>> Observe()
         {
             return _subject;
         }
+
         public void Subscribe(string subscriberName, Func<IEnumerable<NotificationModel>, bool> predicate, Action<IEnumerable<NotificationModel>> action)
         {
             if (!_subscribers.ContainsKey(subscriberName))
@@ -52,6 +54,4 @@ namespace SkeletonApi.IotHub.Services.Handler
             }
         }
     }
-
-
 }

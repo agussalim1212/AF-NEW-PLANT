@@ -17,11 +17,9 @@ using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json;
 
-
 namespace SkeletonApi.Presentation.Controllers
 {
     [Route("/api/maintenance-preventive")]
-
     public class MaintenancesPreventiveController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -139,14 +137,14 @@ namespace SkeletonApi.Presentation.Controllers
                     if (pg != null)
                     {
                         var Export = new DownloadListMaintPrevToExcel(pg);
-                        Export.GetListExcel(ref bytes,ref filename);
+                        Export.GetListExcel(ref bytes, ref filename);
                     }
                     Response.Headers.Add("x-download", filename);
                     return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
                 }
                 catch (Exception ex)
                 {
-                    if (ex.InnerException == null){return Problem(ex.Message);}
+                    if (ex.InnerException == null) { return Problem(ex.Message); }
                     return Problem(ex.InnerException.Message);
                 }
             }
@@ -156,7 +154,6 @@ namespace SkeletonApi.Presentation.Controllers
 
         [AllowAnonymous]
         [HttpPost("upload-excel")]
-        //[ServiceFilter(typeof(ValidationforExcell))]
         public async Task<ActionResult<Result<List<UploadExcelMaintPrevDto>>>> UploadExcel(IFormFile file)
         {
             var upload = new UploadExcelMaintPrevCommand(file);

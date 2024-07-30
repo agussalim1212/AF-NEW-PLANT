@@ -69,6 +69,17 @@ namespace SkeletonApi.Domain.Entities.Tsdb
         public DateTime DateTime { get; set; }
     }
 
+    public record MqttRawListQualityEntity
+    {
+        public string Vid { get; init; }
+        public virtual object Value { get; init; }
+        public bool Quality { get; init; }
+
+        public long Time { get; init; }
+
+        public DateTime Datetime { get; init; }
+    }
+
     public record MqttRawValueEntity
     {
         public string Vid { get; init; }

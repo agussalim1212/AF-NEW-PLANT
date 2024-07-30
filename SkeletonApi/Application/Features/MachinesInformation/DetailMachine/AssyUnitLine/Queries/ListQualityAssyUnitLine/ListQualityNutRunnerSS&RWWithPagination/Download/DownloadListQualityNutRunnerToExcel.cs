@@ -7,6 +7,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
     public class DownloadListQualityNutRunnerToExcel
     {
         private readonly PaginatedResult<GetListQualityNutRunnerSteeringStemDto> pg;
+
         public DownloadListQualityNutRunnerToExcel(PaginatedResult<GetListQualityNutRunnerSteeringStemDto> getListQuality)
         {
             pg = getListQuality;
@@ -29,7 +30,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).Status;
                     worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataBarcode;
                     worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).DataTorQ;
-
                 }
                 using (var stream = new MemoryStream())
                 {

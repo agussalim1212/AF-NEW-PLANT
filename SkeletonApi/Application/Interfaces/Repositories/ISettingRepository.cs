@@ -1,7 +1,6 @@
 ﻿using SkeletonApi.Domain.Entities;
 
-
-namespace SkeletonApi.Persistence.Repositories
+namespace SkeletonApi.Application.Interfaces.Repositories
 {
     public interface ISettingRepository
     {

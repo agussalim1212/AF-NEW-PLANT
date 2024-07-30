@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SkeletonApi.Application.Features.Users;
-using SkeletonApi.Application.Features.Users.Login.Commands;
-
+using SkeletonApi.Application.Features.ManagementUser;
+using SkeletonApi.Application.Features.ManagementUser.Login.Commands;
 
 namespace SkeletonApi.Application.Interfaces.Repositories
 {

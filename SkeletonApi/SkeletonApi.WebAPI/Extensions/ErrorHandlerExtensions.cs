@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using SkeletonApi.Application.Common.Exceptions;
-using SkeletonApi.Application.Interfaces;
-using SkeletonApi.Domain.ErrorModel;
 using System.Net;
 using System.Text.Json;
 using ILogger = Serilog.ILogger;
@@ -16,7 +14,7 @@ namespace SkeletonApi.WebAPI.Extensions
             {
                 appError.Run(async context =>
                 {
-                        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature == null) return;
 
                     context.Response.Headers.Add("Access-Control-Allow-Origin", "*");

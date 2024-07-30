@@ -1,10 +1,12 @@
-﻿using DocumentFormat.OpenXml.Vml;
-using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions.Queries;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AmpereConsumptionDetailMachine;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumption;
+﻿using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.DTOs.AirAndElectricConsumption;
+using SkeletonApi.Application.DTOs.Consumption;
+using SkeletonApi.Application.DTOs.CurrentAndVoltageConsumption;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumption.Queries;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumptionDetailMachine;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.TotalProduction;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Application.Interfaces.Repositories.Filtering;
 using SkeletonApi.Domain.Entities;
 using System.Globalization;
@@ -16,6 +18,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
         private readonly IDapperReadDbConnection _dapperReadDbConnection;
         private readonly IGenericRepository<Setting> _repositorySetting;
         private readonly IGenRepository<SubjectHasMachine> _repositorySubjectHasMachine;
+
         public WeekRepository(IDapperReadDbConnection dapperReadDbConnection, IGenericRepository<Setting> repositorySetting, IGenRepository<SubjectHasMachine> repositorySubjectHasMachine)
         {
             _dapperReadDbConnection = dapperReadDbConnection;
@@ -23,10 +26,10 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             _repositorySubjectHasMachine = repositorySubjectHasMachine;
         }
 
-        public async Task<GetAllDetailMachineAirConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionWeek(string view,string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
+        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionWeek(string view, string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
-            var data = new GetAllDetailMachineAirConsumptionDto();
+            var data = new GetAllDetailMachineAirAndElectricConsumptionDto();
             if (endTime.Date < startTime.Date)
             {
                 throw new ArgumentException("End day cannot be earlier than start date.");
@@ -63,7 +66,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
 
                 if (airConsumption.Count() == 0)
                 {
-                    data = new GetAllDetailMachineAirConsumptionDto
+                    data = new GetAllDetailMachineAirAndElectricConsumptionDto
                     {
                         MachineName = machineName,
                         SubjectName = subjectName
@@ -71,9 +74,8 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 }
                 else
                 {
-
                     data =
-                    new GetAllDetailMachineAirConsumptionDto
+                    new GetAllDetailMachineAirAndElectricConsumptionDto
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
@@ -86,7 +88,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                             Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(val.date_group, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
                             DateTime = val.date_group,
                         }).OrderByDescending(x => x.DateTime).ToList()
-
                     };
                 }
                 return data;
@@ -95,7 +96,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
 
         public async Task<GetAllDetailMachineCurrentAndVoltageConsumptionDto> GetAllDetailMachineCurrentAndVoltageConsumptionWeek(string view, string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
         {
-
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
             var data = new GetAllDetailMachineCurrentAndVoltageConsumptionDto();
             if (endTime.Value < startTime.Value)
@@ -132,7 +132,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 }
                 else
                 {
-
                     data =
                     new GetAllDetailMachineCurrentAndVoltageConsumptionDto
                     {
@@ -147,7 +146,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                             Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(val.date_group, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
                             DateTime = val.date_group,
                         }).OrderByDescending(x => x.DateTime).ToList()
-
                     };
                 }
                 return data;
@@ -193,7 +191,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 }
                 else
                 {
-
                     data =
                     new GetAllDetailMachineEnergyConsumptionDto
                     {
@@ -209,7 +206,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                             Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(val.date_group, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
                             DateTime = val.date_group,
                         }).OrderByDescending(x => x.DateTime).ToList()
-
                     };
                 }
                 return data;
@@ -238,7 +234,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 ORDER BY bucket DESC",
                 new { vid = subjects, starttime = start.Value.Date, endtime = end.Value.Date });
 
-                var Groups = EnergyConsumptions.GroupBy(p => new 
+                var Groups = EnergyConsumptions.GroupBy(p => new
                 {
                     WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(p.Bucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
                 })
@@ -264,11 +260,64 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                         //Minimum = setting.Minimum,
                         Label = "Week " + CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(o.date_time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(),
                         DateTime = o.date_time,
-
                     }).ToList();
                 }
             }
             return dt;
+        }
+
+        public async Task<GetAllTotalProductionDto> GetAllTotalProductionWeek(Guid machineId, string vidOK, string vidNG, string machineName, DateTime? start, DateTime? end)
+        {
+            var data = new GetAllTotalProductionDto();
+
+            if (end.Value.Date < start.Value.Date)
+            {
+                throw new ArgumentException("End day cannot be earlier than start date.");
+            }
+            else
+            {
+                var consumptionBucket = await _dapperReadDbConnection.QueryAsync<ProductConsumption>
+                (@"SELECT * FROM ""production_consumption"" WHERE id = @vidok OR id = @vidng
+                AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
+                AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)",
+                new { vidok = vidOK, vidng = vidNG, starttime = start.Value.Date, endtime = end.Value.Date });
+
+                var groupedQuerys = consumptionBucket
+                  .GroupBy(d => new
+                  {
+                      WeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.Bucket, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
+                  })
+                  .Select(g => new
+                  {
+                      date_group = new DateTime(g.Key.WeekNumber, 1, 1).AddDays((g.Key.WeekNumber - 1) * 7),
+                      total_ok = g.Where(p => p.Id.Contains(vidOK)).Sum(o => Convert.ToDecimal(o.LastValue)),
+                      total_ng = g.Where(p => p.Id.Contains(vidNG)).Sum(o => Convert.ToDecimal(o.LastValue)),
+                  }).ToList();
+
+                decimal TotalOk = groupedQuerys.Select(o => o.total_ok).FirstOrDefault();
+                decimal TotalNg = groupedQuerys.Select(p => p.total_ng).FirstOrDefault();
+
+                if (consumptionBucket.Count() == 0)
+                {
+                    data = new GetAllTotalProductionDto
+                    {
+                        MachineName = machineName,
+                    };
+                }
+                else
+                {
+                    data =
+                    new GetAllTotalProductionDto
+                    {
+                        MachineName = machineName,
+                        ValueOkTotal = TotalOk,
+                        ValueNgTotal = TotalNg,
+                        ValueOKPresentase = Math.Round((TotalOk / (TotalOk + TotalNg)) * 100, 2),
+                        ValueNgPresentase = Math.Round((TotalNg / (TotalNg + TotalOk)) * 100, 2),
+                    };
+                }
+            }
+            return data;
         }
     }
 }

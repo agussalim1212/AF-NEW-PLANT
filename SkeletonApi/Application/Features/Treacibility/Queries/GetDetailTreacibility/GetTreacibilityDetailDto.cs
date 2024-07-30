@@ -1,12 +1,6 @@
 ﻿using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Domain.Entities;
 using SkeletonApi.Domain.Entities.Tsdb;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.Treacibility.Queries.GetDetailTreacibility
 {
@@ -29,6 +23,5 @@ namespace SkeletonApi.Application.Features.Treacibility.Queries.GetDetailTreacib
 
         [JsonPropertyName("coolant")]
         public string? Coolant { get; set; }
-
     }
-} 
+}

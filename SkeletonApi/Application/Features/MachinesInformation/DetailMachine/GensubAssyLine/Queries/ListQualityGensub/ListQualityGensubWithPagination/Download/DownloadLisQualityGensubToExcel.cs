@@ -1,5 +1,4 @@
 ﻿using ClosedXML.Excel;
-using SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination;
 using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityGensubWithPagination.Download
@@ -7,6 +6,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Gen
     public class DownloadLisQualityGensubToExcel
     {
         private readonly PaginatedResult<GetListQualityGensubDto> pg;
+
         public DownloadLisQualityGensubToExcel(PaginatedResult<GetListQualityGensubDto> getListQuality)
         {
             pg = getListQuality;
@@ -25,7 +25,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Gen
                 {
                     worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
                     worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).Status;
-
                 }
                 using (var stream = new MemoryStream())
                 {
@@ -34,7 +33,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Gen
                     FileName = $"List_Quality_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx";
                 }
             }
-
         }
     }
 }

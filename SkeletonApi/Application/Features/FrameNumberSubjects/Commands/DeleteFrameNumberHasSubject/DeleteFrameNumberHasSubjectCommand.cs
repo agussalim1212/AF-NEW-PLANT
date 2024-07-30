@@ -6,8 +6,7 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.FrameNumberSubject.Commands.DeleteFrameNumberHasSubject
+namespace SkeletonApi.Application.Features.FrameNumberSubjects.Commands.DeleteFrameNumberHasSubject
 {
     public record DeleteFrameNumberHasSubjectCommand : IRequest<Result<Guid>>, IMapFrom<FrameNumberHasSubjects>
     {
@@ -15,7 +14,6 @@ namespace SkeletonApi.Application.Features.FrameNumberSubject.Commands.DeleteFra
 
         public DeleteFrameNumberHasSubjectCommand()
         {
-
         }
         public DeleteFrameNumberHasSubjectCommand(Guid id)
         {
@@ -51,7 +49,5 @@ namespace SkeletonApi.Application.Features.FrameNumberSubject.Commands.DeleteFra
 
             return await Result<Guid>.FailureAsync("Frame Number Has Subject Not Found");
         }
-
-
     }
 }

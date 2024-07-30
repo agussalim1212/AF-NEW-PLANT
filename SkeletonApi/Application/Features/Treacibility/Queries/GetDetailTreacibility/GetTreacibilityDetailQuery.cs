@@ -1,16 +1,15 @@
-﻿using AutoMapper.QueryableExtensions;
-using AutoMapper;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
-using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Shared;
 using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities.Tsdb;
+using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.Treacibility.Queries.GetDetailTreacibility
 {
     public record GetTreacibilityDetailQuery : IRequest<Result<GetTreacibilityDetailDto>>
     {
-
         public string EngineId { get; set; }
         public string Torsi { get; set; }
 
@@ -34,15 +33,11 @@ namespace SkeletonApi.Application.Features.Treacibility.Queries.GetDetailTreacib
 
         public async Task<Result<GetTreacibilityDetailDto>> Handle(GetTreacibilityDetailQuery query, CancellationToken cancellationToken)
         {
-            var Treacibility  = await _unitOfWork.Data<EnginePart>().Entities.Where(x => x.EngineId.ToUpper() == query.EngineId.ToUpper() && x.Torsi.ToUpper() == query.Torsi.ToUpper())
+            var Treacibility = await _unitOfWork.Data<EnginePart>().Entities.Where(x => x.EngineId.ToUpper() == query.EngineId.ToUpper() && x.Torsi.ToUpper() == query.Torsi.ToUpper())
                             .ProjectTo<GetTreacibilityDetailDto>(_mapper.ConfigurationProvider)
                             .FirstOrDefaultAsync(cancellationToken);
 
             return await Result<GetTreacibilityDetailDto>.SuccessAsync(Treacibility, "Successfully fetch data");
         }
     }
-
-
-
-
 }

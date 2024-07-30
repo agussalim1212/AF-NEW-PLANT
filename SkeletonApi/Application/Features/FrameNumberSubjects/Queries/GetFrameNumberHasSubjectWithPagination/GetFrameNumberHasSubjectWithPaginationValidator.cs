@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetFrameNumberHasSubjectWithPagination
+namespace SkeletonApi.Application.Features.FrameNumberSubjects.Queries.GetFrameNumberHasSubjectWithPagination
 {
     public class GetFrameNumberHasSubjectWithPaginationValidator : AbstractValidator<GetFrameNumberHasSubjectWithPaginationQuery>
     {
@@ -18,7 +13,6 @@ namespace SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetFrameNu
             RuleFor(x => x.page_size)
                 .GreaterThanOrEqualTo(1)
                 .WithMessage("PageSize at least greater than or equal to 1.");
-
         }
     }
 }

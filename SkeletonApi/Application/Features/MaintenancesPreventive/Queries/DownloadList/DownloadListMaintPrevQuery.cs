@@ -5,7 +5,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.DownloadList
 {
     public record DownloadListMaintPrevQuery : IRequest<PaginatedResult<DownloadListMaintPrevDto>>
@@ -15,7 +14,7 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.Downlo
         public Guid? machine_id { get; set; }
         public string? search_term { get; set; }
 
-        public DownloadListMaintPrevQuery(){}
+        public DownloadListMaintPrevQuery() { }
 
         public DownloadListMaintPrevQuery(int pageNumber, int pageSize, Guid? machineid, string? searchTerm)
         {
@@ -43,7 +42,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.Downlo
             {
                 if (string.IsNullOrWhiteSpace(query.search_term) == true || query.search_term == null)
                 {
-
                     return await _unitOfWork.Repository<MaintenacePreventive>().Entities
                     .Join(
                         _unitOfWork.Repository<Machine>().Entities,
@@ -91,7 +89,6 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.Downlo
             {
                 if (string.IsNullOrWhiteSpace(query.search_term) == true || query.search_term == null)
                 {
-
                     return await _unitOfWork.Repository<MaintenacePreventive>().Entities
                         .Where(x => x.MachineId.Equals(query.machine_id))
                     .Join(

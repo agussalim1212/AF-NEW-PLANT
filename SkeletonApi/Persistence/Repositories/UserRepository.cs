@@ -2,8 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.GetRoleWithPagination;
-using SkeletonApi.Application.Features.Users;
+using SkeletonApi.Application.Features.ManagementUser;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Domain.Entities.ConfigurationModels;
@@ -14,7 +13,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-
 
 namespace SkeletonApi.Persistence.Repositories
 {
@@ -28,7 +26,7 @@ namespace SkeletonApi.Persistence.Repositories
         private readonly ApplicationDbContext _dbContext;
 
         private User? _user;
-       
+
         public async Task<bool> ValidateData(User user)
         {
             var x = await _repository.Entities.Where(o => o.UserName.ToLower() == user.UserName.ToLower()).CountAsync();
@@ -192,4 +190,3 @@ namespace SkeletonApi.Persistence.Repositories
         //}
     }
 }
-

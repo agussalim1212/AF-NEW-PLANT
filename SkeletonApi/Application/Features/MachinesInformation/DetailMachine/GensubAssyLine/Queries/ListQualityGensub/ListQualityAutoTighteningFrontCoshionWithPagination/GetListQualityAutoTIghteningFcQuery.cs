@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SkeletonApi.Application.DTOs.Consumption;
 using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.GensubAssyLine.Queries.ListQualityGensub.ListQualityAutoTighteningFrontCoshionWithPagination
 {
     public record GetListQualityAutoTIghteningFcQuery : IRequest<PaginatedResult<GetListQualityAutoTIghteningFcDto>>
     {
@@ -48,7 +49,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
             public async Task<PaginatedResult<GetListQualityAutoTIghteningFcDto>> Handle(GetListQualityAutoTIghteningFcQuery query, CancellationToken cancellationToken)
             {
                 var machine = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Include(s => s.Machine).Include(s => s.Subject)
-                .Where(m => (query.machine_id == m.MachineId)).ToListAsync();
+                .Where(m => query.machine_id == m.MachineId).ToListAsync();
 
                 List<GetListQualityAutoTIghteningFcDto> dt = new List<GetListQualityAutoTIghteningFcDto>();
                 var data = new GetListQualityAutoTIghteningFcDto();
@@ -63,20 +64,20 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         }
                         else
                         {
-                           var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
-                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
+                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
+                            (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                            AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
                            AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
                            ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_ID-PART", starttime = query.start.Date, endtime = query.end.Date });
 
-                           var torsiConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
-                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
+                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
+                            (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                            AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
                            AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
                            ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_TORQ", starttime = query.start.Date, endtime = query.end.Date });
 
-                           var statusConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
-                           (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
+                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
+                            (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                            AND date_trunc('day', bucket) >= date_trunc('day', @starttime::date)
                            AND date_trunc('day', bucket) <= date_trunc('day', @endtime::date)
                            ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_STATUS-PRDCT", starttime = query.start.Date, endtime = query.end.Date });
@@ -94,7 +95,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                             }
                             else
                             {
-
                                 foreach (var f in barcodeConsumption)
                                 {
                                     GetListQualityAutoTIghteningFcDto listQuality = new GetListQualityAutoTIghteningFcDto();
@@ -121,11 +121,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                                     }
                                     listQuality.DateTime = f.Bucket.AddHours(7);
                                     dt.Add(listQuality);
-
                                 }
                             }
                         }
                         break;
+
                     case "week":
                         if (query.end.Date < query.start.Date)
                         {
@@ -133,20 +133,19 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         }
                         else
                         {
-
-                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
                             AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
                             ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_ID-PART", starttime = query.start.Date, endtime = query.end.Date });
 
-                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
                             AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
                             ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_TORQ", starttime = query.start.Date, endtime = query.end.Date });
 
-                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('week', bucket) >= date_trunc('week', @starttime::date)
                             AND date_trunc('week', bucket) <= date_trunc('week', @endtime::date)
@@ -165,7 +164,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                             }
                             else
                             {
-
                                 foreach (var f in barcodeConsumption)
                                 {
                                     GetListQualityAutoTIghteningFcDto listQuality = new GetListQualityAutoTIghteningFcDto();
@@ -192,11 +190,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                                     }
                                     listQuality.DateTime = f.Bucket.AddHours(7);
                                     dt.Add(listQuality);
-
                                 }
                             }
                         }
                         break;
+
                     case "month":
                         if (query.end.Date < query.start.Date)
                         {
@@ -204,20 +202,19 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         }
                         else
                         {
-
-                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id =@vid
                             AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
                             AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
                             ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_ID-PART", starttime = query.start.Date, endtime = query.end.Date });
 
-                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
                             AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
                             ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_TORQ", starttime = query.start.Date, endtime = query.end.Date });
 
-                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('month', bucket) >= date_trunc('month', @starttime::date)
                             AND date_trunc('month', bucket) <= date_trunc('month', @endtime::date)
@@ -236,7 +233,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                             }
                             else
                             {
-
                                 foreach (var f in barcodeConsumption)
                                 {
                                     GetListQualityAutoTIghteningFcDto listQuality = new GetListQualityAutoTIghteningFcDto();
@@ -263,11 +259,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                                     }
                                     listQuality.DateTime = f.Bucket.AddHours(7);
                                     dt.Add(listQuality);
-
                                 }
                             }
                         }
                         break;
+
                     case "year":
                         if (query.end.Date < query.start.Date)
                         {
@@ -275,20 +271,19 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         }
                         else
                         {
-
-                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
                             AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
                             ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_ID-PART", starttime = query.start.Date, endtime = query.end.Date });
 
-                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
                             AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
                             ORDER BY id DESC, bucket DESC", new { vid = "DCM_P9AEA0_MC21_TORQ", starttime = query.start.Date, endtime = query.end.Date });
 
-                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
                             AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)
@@ -307,7 +302,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                             }
                             else
                             {
-
                                 foreach (var f in barcodeConsumption)
                                 {
                                     GetListQualityAutoTIghteningFcDto listQuality = new GetListQualityAutoTIghteningFcDto();
@@ -334,11 +328,11 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                                     }
                                     listQuality.DateTime = f.Bucket.AddHours(7);
                                     dt.Add(listQuality);
-
                                 }
                             }
                         }
                         break;
+
                     default:
                         if (query.end.Date < query.start.Date)
                         {
@@ -346,19 +340,19 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                         }
                         else
                         {
-                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var barcodeConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('day', bucket::date) = date_trunc('day', @now)
                             ORDER BY  bucket DESC",
                             new { vid = "DCM_P9AEA0_MC21_ID-PART", now = DateTime.Now.Date });
 
-                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var torsiConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('day', bucket::date) = date_trunc('day', @now)
                             ORDER BY  bucket DESC",
                             new { vid = "DCM_P9AEA0_MC21_TORQ", now = DateTime.Now.Date });
 
-                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<ListQualityConsumption>
+                            var statusConsumption = await _dapperReadDbConnection.QueryAsync<Consumption>
                             (@"SELECT * FROM ""list_quality_auto_tightening_front_cusion"" WHERE id = @vid
                             AND date_trunc('day', bucket::date) = date_trunc('day', @dateNow)
                             ORDER BY  bucket DESC",
@@ -403,21 +397,18 @@ namespace SkeletonApi.Application.Features.DetailMachine.GensubAssyLine.Queries.
                                     }
                                     listQuality.DateTime = f.Bucket.AddHours(7);
                                     dt.Add(listQuality);
-
                                 }
                             }
                         }
                         break;
                 }
 
+                var paginatedList = dt.Where(c => query.search_term == null
+                || query.search_term.ToLower() == c.Status.ToLower()
+                || query.search_term.ToLower() == c.DataBarcode.ToLower()).ToList();
 
-              var paginatedList = dt.Where(c => query.search_term == null
-              || (query.search_term.ToLower() == c.Status.ToLower())
-              || (query.search_term.ToLower() == c.DataBarcode.ToLower())).ToList();
-
-               return await dt.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
+                return await dt.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
             }
         }
     }
-
 }

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using HealthChecks.UI.Client;
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace SkeletonApi.IotHub.Configurations
 {
-
     public static class HealthChecksConfiguration
     {
         public static void AddConfiguredHealthChecks(this IServiceCollection services, IConfiguration configuration)
@@ -19,6 +18,7 @@ namespace SkeletonApi.IotHub.Configurations
                 setup.AddHealthCheckEndpoint("Queue Processing Service", "https://localhost:7145/health");
             }).AddSqliteStorage("Data Source = healthchecks.db");
         }
+
         public static void UseConfiguredHealthChecks(this IApplicationBuilder app)
         {
             app.UseEndpoints(endpoints =>
@@ -30,7 +30,6 @@ namespace SkeletonApi.IotHub.Configurations
                 });
 
                 endpoints.MapHealthChecksUI();
-
             });
         }
     }

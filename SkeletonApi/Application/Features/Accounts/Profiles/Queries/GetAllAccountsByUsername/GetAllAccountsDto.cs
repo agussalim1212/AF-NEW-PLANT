@@ -1,5 +1,4 @@
 ﻿using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Domain.Entities;
 
 namespace SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccountsByUsername
 {
@@ -9,6 +8,5 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccou
         public string Email { get; init; }
         public string Username { get; init; }
         public string Foto { get; init; }
-
     }
 }

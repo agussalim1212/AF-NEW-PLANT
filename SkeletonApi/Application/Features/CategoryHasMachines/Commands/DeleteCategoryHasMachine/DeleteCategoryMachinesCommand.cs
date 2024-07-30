@@ -2,17 +2,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Common.Mappings;
-using SkeletonApi.Application.Features.Machines.Commands.DeleteMachines;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.CategoryMachine.Commands.DeleteCategoryHasMachine
+namespace SkeletonApi.Application.Features.CategoryHasMachines.Commands.DeleteCategoryHasMachine
 {
     public record DeleteCategoryHasMachinesCommand : IRequest<Result<Guid>>, IMapFrom<CategoryMachineHasMachine>
     {
@@ -20,7 +14,6 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.DeleteCatego
 
         public DeleteCategoryHasMachinesCommand()
         {
-
         }
         public DeleteCategoryHasMachinesCommand(Guid id)
         {
@@ -28,8 +21,8 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.DeleteCatego
         }
     }
 
-   internal class DeleteCategoryHasMachinesHandler : IRequestHandler<DeleteCategoryHasMachinesCommand, Result<Guid>>
-   {
+    internal class DeleteCategoryHasMachinesHandler : IRequestHandler<DeleteCategoryHasMachinesCommand, Result<Guid>>
+    {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -57,8 +50,5 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.DeleteCatego
 
             return await Result<Guid>.FailureAsync("Category Has Machines not found");
         }
-
-
     }
-
 }

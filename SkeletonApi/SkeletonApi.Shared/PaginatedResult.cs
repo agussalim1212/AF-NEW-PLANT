@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Shared
 {
@@ -7,7 +6,6 @@ namespace SkeletonApi.Shared
     {
         public PaginatedResult()
         {
-            
         }
 
         public PaginatedResult(List<T> data)
@@ -27,31 +25,28 @@ namespace SkeletonApi.Shared
         }
 
         public new List<T> Data { get; set; }
+
         [JsonPropertyName("page_number")]
         public int page_number { get; set; }
+
         [JsonPropertyName("total_pages")]
         public int total_pages { get; set; }
+
         [JsonPropertyName("page_size")]
         public int page_size { get; set; }
+
         [JsonPropertyName("total_count")]
         public int total_count { get; set; }
 
         [JsonPropertyName("has_previous")]
         public bool has_previous => page_number > 1;
+
         [JsonPropertyName("has_next")]
         public bool has_next => page_number < total_pages;
-
-
-
 
         public static PaginatedResult<T> Create(List<T> data, int count, int pageNumber, int pageSize)
         {
             return new PaginatedResult<T>(true, data, null, count, pageNumber, pageSize);
-
         }
-     
-
-
-
     }
 }

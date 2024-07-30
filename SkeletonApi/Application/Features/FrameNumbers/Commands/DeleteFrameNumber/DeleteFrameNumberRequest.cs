@@ -3,8 +3,7 @@ using SkeletonApi.Application.Common.Mappings;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.FrameNumb.Commands.DeleteFrameNumber
+namespace SkeletonApi.Application.Features.FrameNumbers.Commands.DeleteFrameNumber
 {
     public record DeleteFrameNumberRequest : IRequest<Result<Guid>>, IMapFrom<FrameNumber>
     {

@@ -1,5 +1,4 @@
 ﻿using MQTTnet.Extensions.ManagedClient;
-using System;
 
 namespace SkeletonApi.IotHub.Options
 {

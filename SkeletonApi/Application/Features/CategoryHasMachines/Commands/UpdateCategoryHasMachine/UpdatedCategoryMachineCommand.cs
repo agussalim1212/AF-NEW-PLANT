@@ -1,23 +1,20 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.CategoryMachine.Commands.CreateCategoryHasMachine;
+using SkeletonApi.Application.Features.CategoryHasMachines.Commands.CreateCategoryHasMachine;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
 
-
-namespace SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCategoryHasMachine
+namespace SkeletonApi.Application.Features.CategoryHasMachines.Commands.UpdateCategoryHasMachine
 {
     public record UpdateCategoryHasMachinesCommand : IRequest<Result<CategoryMachineHasMachine>>
     {
-     
         [JsonPropertyName("category_id")]
         public Guid CategoryMachineId { get; set; }
         [JsonPropertyName("machine_id")]
         public List<Guid> MachineId { get; set; }
-
     }
 
     internal class UpdateCategoryHasMachinesCommandHandler : IRequestHandler<UpdateCategoryHasMachinesCommand, Result<CategoryMachineHasMachine>>
@@ -33,13 +30,11 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCatego
 
         public async Task<Result<CategoryMachineHasMachine>> Handle(UpdateCategoryHasMachinesCommand request, CancellationToken cancellationToken)
         {
-
             var categoryMachines = await _unitOfWork.Repo<CategoryMachineHasMachine>().Entities.Where(x => request.CategoryMachineId == x.CategoryMachineId).ToListAsync();
             Console.WriteLine(categoryMachines);
 
             if (categoryMachines.Count != 0)
             {
-
                 foreach (var cM in categoryMachines)
                 {
                     await _unitOfWork.Repo<CategoryMachineHasMachine>().DeleteAsync(cM);
@@ -58,11 +53,11 @@ namespace SkeletonApi.Application.Features.CategoryMachine.Commands.UpdateCatego
                     categoryMachine.AddDomainEvent(new CategoryCreatedEvent(categoryMachine));
                     await _unitOfWork.Save(cancellationToken);
                 }
-                    return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Machines Updated");
+                return await Result<CategoryMachineHasMachine>.SuccessAsync(categoryMachine, "Category Machines Updated");
             }
             else
             {
-              return await Result<CategoryMachineHasMachine>.FailureAsync("Category Machines Not Found");
+                return await Result<CategoryMachineHasMachine>.FailureAsync("Category Machines Not Found");
             }
         }
     }

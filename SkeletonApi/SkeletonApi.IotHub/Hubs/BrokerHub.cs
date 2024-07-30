@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using SkeletonApi.IotHub.Commons;
 using SkeletonApi.IotHub.Services;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.IotHub.Hubs
 {
@@ -11,6 +9,7 @@ namespace SkeletonApi.IotHub.Hubs
     {
         private readonly IMqttClientService mqttClientService;
         private readonly BrokerCommandTopics CommandTopics;
+
         public BrokerHub(MqttClientServiceProvider provider, BrokerCommandTopics commandTopics)
         {
             mqttClientService = provider.MqttClientService;

@@ -6,10 +6,9 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetAllRole
 {
-     public record GetAllRoleQuery : IRequest<Result<List<GetAllRoleDto>>>;
+    public record GetAllRoleQuery : IRequest<Result<List<GetAllRoleDto>>>;
 
     internal class GetAllRoleQueryHandler : IRequestHandler<GetAllRoleQuery, Result<List<GetAllRoleDto>>>
     {
@@ -22,21 +21,18 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetAllRo
             _mapper = mapper;
         }
 
-
         public async Task<Result<List<GetAllRoleDto>>> Handle(GetAllRoleQuery query, CancellationToken cancellationToken)
         {
             var role = await _unitOfWork.Data<Role>().FindByCondition(h => h.DeletedAt == null)
            .Select(g => new GetAllRoleDto
-            {
-                Id = g.Id,
-                Name = g.Name,
-               
-            })
+           {
+               Id = g.Id,
+               Name = g.Name,
+           })
             .ProjectTo<GetAllRoleDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
             return await Result<List<GetAllRoleDto>>.SuccessAsync(role, "Successfully fetch data");
         }
-
     }
 }

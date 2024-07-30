@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Queries.GetPermissionsWithPagination
 {
     public class GetPermissionsWithPaginationValidator : AbstractValidator<GetPermissionsWithPaginationQuery>
     {
-        public GetPermissionsWithPaginationValidator() 
+        public GetPermissionsWithPaginationValidator()
         {
             RuleFor(x => x.page_number)
                  .GreaterThanOrEqualTo(1)

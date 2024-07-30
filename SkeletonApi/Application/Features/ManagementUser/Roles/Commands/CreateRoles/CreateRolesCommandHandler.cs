@@ -5,7 +5,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.CreateRoles
 {
     internal class CreateRolesCommandHandler : IRequestHandler<CreateRolesRequest, Result<CreateRolesResponseDto>>
@@ -23,7 +22,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.CreateR
 
         public async Task<Result<CreateRolesResponseDto>> Handle(CreateRolesRequest request, CancellationToken cancellationToken)
         {
-
             var role = _mapper.Map<Role>(request);
             role.UpdatedAt = DateTime.UtcNow;
             role.CreatedAt = DateTime.UtcNow;
@@ -38,7 +36,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Roles.Commands.CreateR
             var roleResponse = _mapper.Map<CreateRolesResponseDto>(role);
 
             return await Result<CreateRolesResponseDto>.SuccessAsync(roleResponse, "Role created.");
-
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using MediatR;
-//using SkeletonApi.Application.Features.MainSubjects;
-using SkeletonApi.Shared;
-using System;
+﻿//using SkeletonApi.Application.Features.MainSubjects;
 using System.Text.Json.Serialization;
 
 namespace SkeletonApi.IotHub.Model;
@@ -15,24 +12,20 @@ internal record ChatMessage(
 
 //public class SubjectStore { }
 
-
 internal record IdentifiedChatMessage(
     string Message,
     string SenderName,
     DateTime SendDate
 );
 
-
 public record MqttRawDataEncapsulation(string topics, MqttRawData mqttRawData);
 public record MqttRawData
 {
-
     [JsonPropertyName("timestamp")]
     public virtual long timestamps { get; init; }
 
     [JsonPropertyName("values")]
     public IEnumerable<MqttRawValue> Values { get; init; }
-
 }
 
 public record MqttRawValue
@@ -47,9 +40,7 @@ public record MqttRawValue
 
     [JsonPropertyName("t")]
     public long Time { get; init; }
-
 }
-
 
 //public sealed record MainSubjectListDto
 //{

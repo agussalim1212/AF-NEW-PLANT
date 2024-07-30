@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.Update;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Update
 {
@@ -31,6 +24,7 @@ namespace SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Update
         [JsonPropertyName("end_date")]
         public DateOnly? EndDate { get; init; }
     }
+
     internal class UpdateMaintCorrectiveCommandHandle : IRequestHandler<UpdateMaintCorrectiveCommand, Result<UpdateMaintCorrectiveDto>>
     {
         private readonly IUnitOfWork _unitOfWork;

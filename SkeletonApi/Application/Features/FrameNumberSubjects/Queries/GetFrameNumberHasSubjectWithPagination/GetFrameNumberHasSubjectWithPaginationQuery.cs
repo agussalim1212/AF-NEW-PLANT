@@ -1,19 +1,15 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Extensions;
-using SkeletonApi.Application.Features.FrameNumb.Queries.GetFrameNumberWithPagination;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetFrameNumberHasSubjectWithPagination
+namespace SkeletonApi.Application.Features.FrameNumberSubjects.Queries.GetFrameNumberHasSubjectWithPagination
 {
     public record GetFrameNumberHasSubjectWithPaginationQuery : IRequest<PaginatedResult<GetFrameNumberHasSubjectWithPaginationDto>>
     {
-
         public int page_number { get; set; }
         public int page_size { get; set; }
         public string search_term { get; set; }
@@ -25,10 +21,9 @@ namespace SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetFrameNu
             page_number = pageNumber;
             page_size = pageSize;
             search_term = searchTerm;
-
-
         }
     }
+
     internal class GetSubjectMachinesWithPaginationQueryHandler : IRequestHandler<GetFrameNumberHasSubjectWithPaginationQuery, PaginatedResult<GetFrameNumberHasSubjectWithPaginationDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -43,11 +38,11 @@ namespace SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetFrameNu
         public async Task<PaginatedResult<GetFrameNumberHasSubjectWithPaginationDto>> Handle(GetFrameNumberHasSubjectWithPaginationQuery query, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Repo<FrameNumberHasSubjects>().FindByCondition(x => x.DeletedAt == null)
-            .Where(s => query.search_term == null 
+            .Where(s => query.search_term == null
             || query.search_term.ToLower() == s.Subject.Subjects
             || query.search_term.ToLower() == s.FrameNumber.Name.ToLower())
             .OrderBy(x => x.UpdatedAt).Include(c => c.Subject).Include(n => n.FrameNumber)
-            .GroupBy(k => new {k.FrameNumber.Id, k.FrameNumber.Name, k.FrameNumber.UpdatedAt})
+            .GroupBy(k => new { k.FrameNumber.Id, k.FrameNumber.Name, k.FrameNumber.UpdatedAt })
             .Select(m => new GetFrameNumberHasSubjectWithPaginationDto
             {
                 FrameNumberId = m.Key.Id,
@@ -57,12 +52,9 @@ namespace SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetFrameNu
                 {
                     Id = p.Subject.Id,
                     SubjectName = p.Subject.Subjects
-
                 }).ToList()
             })
             .ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }
-
-
     }
 }

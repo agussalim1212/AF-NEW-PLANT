@@ -1,11 +1,11 @@
-﻿using SkeletonApi.Shared;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
+using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.DownloadList
 {
     public class DownloadListMaintPrevToExcel
     {
-       private readonly PaginatedResult<DownloadListMaintPrevDto> pg;
+        private readonly PaginatedResult<DownloadListMaintPrevDto> pg;
 
         public DownloadListMaintPrevToExcel(PaginatedResult<DownloadListMaintPrevDto> downloads)
         {

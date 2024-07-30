@@ -4,14 +4,14 @@ using System.Reactive.Subjects;
 
 namespace SkeletonApi.IotHub.Services.Handler
 {
-    public class IotHubMqttEventHandler : IIoTHubEventHandler<MqttRawDataEncapsulation>,IDisposable
+    public class IotHubMqttEventHandler : IIoTHubEventHandler<MqttRawDataEncapsulation>, IDisposable
     {
         private readonly BehaviorSubject<MqttRawDataEncapsulation> _subject;
         private readonly Dictionary<string, IDisposable> _subscribers;
 
         public IotHubMqttEventHandler()
         {
-            _subject = new BehaviorSubject<MqttRawDataEncapsulation>(new MqttRawDataEncapsulation(null,new MqttRawData()));
+            _subject = new BehaviorSubject<MqttRawDataEncapsulation>(new MqttRawDataEncapsulation(null, new MqttRawData()));
             _subscribers = new Dictionary<string, IDisposable>();
         }
 

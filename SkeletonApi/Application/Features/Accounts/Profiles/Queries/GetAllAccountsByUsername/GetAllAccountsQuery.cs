@@ -6,11 +6,11 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccountsByUsername
 {
     public record GetAllAccountsQuery : IRequest<Result<List<GetAllAccountsDto>>>
     {
+        //dari user yang sedang login
         public string Username { get; set; }
         public GetAllAccountsQuery(string username)
         {
@@ -31,9 +31,11 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccou
 
         public async Task<Result<List<GetAllAccountsDto>>> Handle(GetAllAccountsQuery query, CancellationToken cancellationToken)
         {
+
             var Account = await _unitOfWork.Repository<Account>().FindByCondition(o => o.Username == query.Username).FirstOrDefaultAsync();
-            if(Account == null)
+            if (Account == null)
             {
+                //jika user tdb tidak di temukan pada table account artinya user tsb blm memiliki foto profile dan hanya menampilkan username dan email dari tbl aspnetuser
                 var user = await _unitOfWork.Data<User>().FindByCondition(o => o.UserName == query.Username).Select(o => new GetAllAccountsDto
                 {
                     Username = o.UserName,
@@ -45,18 +47,18 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Queries.GetAllAccou
             }
             else
             {
+                //jika tidak null maka akan mencari nama user tsb di table asp net user dan mengambil data foto dari table account
                 var user = await _unitOfWork.Data<User>().FindByCondition(o => o.UserName == query.Username).Select(o => new GetAllAccountsDto
                 {
                     Id = Account.Id,
-                    Foto = Account.PhotoURL,
+                    Foto = Account.PhotoURL, 
                     Username = o.UserName,
                     Email = o.Email
                 })
                 .ProjectTo<GetAllAccountsDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
-               return await Result<List<GetAllAccountsDto>>.SuccessAsync(user, "Successfully fetch data");
+                return await Result<List<GetAllAccountsDto>>.SuccessAsync(user, "Successfully fetch data");
             }
-
         }
     }
 }

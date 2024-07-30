@@ -1,7 +1,5 @@
 ﻿using ClosedXML.Excel;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination;
 using SkeletonApi.Shared;
-
 
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination.Download
 {
@@ -13,6 +11,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
         {
             pg = getListQuality;
         }
+
         public void GetListExcel(ref byte[] _content, ref string type_wheel, ref string FileName)
         {
             using (var workbook = new XLWorkbook())
@@ -21,7 +20,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
 
                 if (type_wheel == "final_inspection")
                 {
-
                     worksheet.Cell(1, 1).Value = "date_time";
                     worksheet.Cell(1, 2).Value = "status";
                     worksheet.Cell(1, 3).Value = "data_dial_horizontal";
@@ -39,7 +37,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                 {
                     worksheet.Cell(1, 1).Value = "date_time";
                     worksheet.Cell(1, 2).Value = "tire_inflation";
-
 
                     for (int i = 0; i < pg.Data.Count(); i++)
                     {
@@ -67,14 +64,12 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                         worksheet.Cell(1, 3).Value = "data_distance";
                         worksheet.Cell(1, 4).Value = "data_tonase";
 
-
                         for (int i = 0; i < pg.Data.Count(); i++)
                         {
                             worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
                             worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).Status;
                             worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataDistance;
                             worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).DataTonase;
-
                         }
                     }
                 }
@@ -83,7 +78,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     workbook.SaveAs(stream);
                     _content = stream.ToArray();
                     FileName = $"List_Quality_{type_wheel}_{DateTime.Now.ToString("yyyy-MMMM-dddd")}.xlsx";
-
                 }
             }
         }

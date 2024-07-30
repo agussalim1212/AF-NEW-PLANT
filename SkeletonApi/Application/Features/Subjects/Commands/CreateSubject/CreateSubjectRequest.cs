@@ -10,6 +10,5 @@ namespace SkeletonApi.Application.Features.Subjects.Commands.CreateSubject
         public string Vid { get; set; }
         [JsonPropertyName("subject")]
         public string Subjects { get; set; }
-
     }
 }

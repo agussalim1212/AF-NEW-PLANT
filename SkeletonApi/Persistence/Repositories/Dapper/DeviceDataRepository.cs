@@ -4,12 +4,7 @@ using SkeletonApi.Application.Interfaces;
 using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
 using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.Persistence.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Persistence.Repositories.Dapper
 {
@@ -19,7 +14,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
         private readonly IGetConnection _getConnection;
         private readonly IRestApiClientService _restApiClient;
 
-        public DeviceDataRepository (DapperUnitOfWorkContext dapperUwow, IRestApiClientService restClient)
+        public DeviceDataRepository(DapperUnitOfWorkContext dapperUwow, IRestApiClientService restClient)
         {
             _dapperUwow = dapperUwow;
             _getConnection = dapperUwow;
@@ -41,7 +36,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                         deviceData.Value = Convert.ToString(row.Value);
                         deviceData.Quality = row.Quality;
                         deviceData.Time = row.Time;
-                        deviceData.DateTime = row.Datetime;
+                        deviceData.DateTime = row.Datetime.AddHours(7);
                         var sample = new RestDataTraceability()
                         {
                             Id = row.Vid,
@@ -71,7 +66,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                                     await connection.ExecuteAsync(query, deviceData);
                                     break;
                                 }
-                            case string a when a.Contains("TOTAL-PRODUCTION") || a.Contains("JUMLAH-PRODUKSI"):
+                            case string a when a.Contains("PRODUKSI-OK") || a.Contains("PRODUKSI-NG"):
                                 {
                                     string query = @"insert into ""TotalProductions"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
                                     await connection.ExecuteAsync(query, deviceData);
@@ -103,7 +98,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                                 }
                             case string a when a.Contains("STATUS-PRDCT") || a.Contains("ID-PART") || a.Contains("TORQ") || a.Contains("STATUS-PRODUKSI") || a.Contains("JUMLAH-PRODUKSI")
                                 || a.Contains("VOL") || a.Contains("LEAK") || a.Contains("CODE") || a.Contains("FREQUENCY") || a.Contains("DEPTH") || a.Contains("DISK-BRAKE")
-                                || a.Contains("DIAL") || a.Contains("TIRE-PRASSURE") || a.Contains("DATA") ||a.Contains("TOTAL-PRODUCTION"):
+                                || a.Contains("DIAL") || a.Contains("TIRE-PRASSURE") || a.Contains("DATA") || a.Contains("TOTAL-PRODUCTION"):
                                 {
                                     string query = @"insert into ""ListQualities"" (id,value,quality,time,date_time) values (@Id,@Value,@Quality,@Time,@DateTime)";
                                     await connection.ExecuteAsync(query, deviceData);
@@ -125,6 +120,5 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
 
             await Task.CompletedTask;
         }
-
     }
 }

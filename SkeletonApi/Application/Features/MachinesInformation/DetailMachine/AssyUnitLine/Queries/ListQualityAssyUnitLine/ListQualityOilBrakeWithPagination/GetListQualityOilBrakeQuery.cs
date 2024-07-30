@@ -3,8 +3,7 @@ using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrake
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityOilBrakeWithPagination
 {
     public record GetListQualityOilBrakeQuery : IRequest<PaginatedResult<GetListQualityOilBrakeDto>>
     {
@@ -18,7 +17,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
 
         public GetListQualityOilBrakeQuery() { }
 
-        public GetListQualityOilBrakeQuery(string searchTerm, Guid machineId, int pageNumber, int pageSize, string types, DateTime startTime, DateTime endTime )
+        public GetListQualityOilBrakeQuery(string searchTerm, Guid machineId, int pageNumber, int pageSize, string types, DateTime startTime, DateTime endTime)
         {
             machine_id = machineId;
             page_number = pageNumber;

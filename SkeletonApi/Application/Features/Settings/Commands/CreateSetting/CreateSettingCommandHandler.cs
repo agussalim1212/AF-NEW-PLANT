@@ -3,10 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-using SkeletonApi.Persistence.Repositories;
 using SkeletonApi.Shared;
-using System.Text.Json.Serialization;
-
 
 namespace SkeletonApi.Application.Features.Settings.Commands.CreateSetting
 {
@@ -56,6 +53,5 @@ namespace SkeletonApi.Application.Features.Settings.Commands.CreateSetting
             var settingResponse = _mapper.Map<CreateSettingResponseDto>(settings);
             return await Result<CreateSettingResponseDto>.SuccessAsync(settingResponse, "Setting Created");
         }
-
     }
 }

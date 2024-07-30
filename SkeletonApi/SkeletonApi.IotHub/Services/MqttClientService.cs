@@ -7,7 +7,6 @@ using SkeletonApi.IotHub.Model;
 using SkeletonApi.IotHub.Services.Handler;
 using System.Text.Json;
 
-
 namespace SkeletonApi.IotHub.Services
 {
     public class MqttClientService : IMqttClientService
@@ -16,6 +15,7 @@ namespace SkeletonApi.IotHub.Services
         private readonly ManagedMqttClientOptions _options;
         private readonly IHubContext<BrokerHub, IBrokerEvent> _hubContext;
         private readonly IIoTHubEventHandler<MqttRawDataEncapsulation> _mqttStoreEventHandler;
+
         public MqttClientService(ManagedMqttClientOptions options, IHubContext<BrokerHub, IBrokerEvent> hubContext, IIoTHubEventHandler<MqttRawDataEncapsulation> mqttStoreEventHandler)
         {
             _hubContext = hubContext;
@@ -55,7 +55,7 @@ namespace SkeletonApi.IotHub.Services
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
-        {
+         {
             await _managedMqttClient.StartAsync(_options);
             await _managedMqttClient.SubscribeAsync("DCM/P9AUA0/#");
             //DCM/P9AEA0/#
@@ -68,6 +68,7 @@ namespace SkeletonApi.IotHub.Services
 
         public async Task PublishAsync(string topic, string payload)
         {
+            
             var applicationMessage = new MqttApplicationMessageBuilder().WithTopic(topic)
                                                                         .WithPayload(payload)
                                                                         .Build();

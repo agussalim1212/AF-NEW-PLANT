@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SkeletonApi.Application.Interfaces;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
-using SkeletonApi.Application.Interfaces.Repositories.Dapper;
 using SkeletonApi.Application.Interfaces.Repositories.Filtering;
 using SkeletonApi.Persistence.Contexts;
 using SkeletonApi.Persistence.Repositories;
@@ -20,7 +18,6 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
             //services.AddMappings();
             services.AddDbContext(configuration);
             services.AddRepositories();
-           
         }
 
         //private static void AddMappings(this IServiceCollection services)
@@ -64,12 +61,12 @@ namespace SkeletonApi.Persistence.IServiceCollectionExtensions
                 .AddTransient<IDayRepository, DayRepository>()
                 .AddTransient<IWeekRepository, WeekRepository>()
                 .AddTransient<IMonthRepository, MonthRepository>()
-                .AddTransient<IYearRepository, YearRepository>()  
+                .AddTransient<IYearRepository, YearRepository>()
                 .AddTransient<IDefaultRepository, DefaultRepository>()
                 .AddTransient<IDashboardRepository, DashboardRepository>()
+                
                 .AddTransient<IDetailAssyWheelLineRepository, DetailAssyWheelLineRepository>();
                 
-
         }
     }
 }

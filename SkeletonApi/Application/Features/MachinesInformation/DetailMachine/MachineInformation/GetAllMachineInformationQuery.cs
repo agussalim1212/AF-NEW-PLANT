@@ -1,11 +1,6 @@
 ﻿using MediatR;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.MachineInformation
 {
@@ -17,8 +12,8 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Mac
         {
             MachineId = machineId;
         }
-
     }
+
     internal class GetAllMachineInformationHandler : IRequestHandler<GetAllMachineInformationQuery, Result<GetAllMachineInformationDto>>
     {
         private readonly IDetailMachineRepository _detailMachineRepository;
@@ -30,13 +25,13 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Mac
 
         public async Task<Result<GetAllMachineInformationDto>> Handle(GetAllMachineInformationQuery query, CancellationToken cancellationToken)
         {
-
+            //untuk mendapatkan nama subject berdasarkan id machine yg dikirim dan vid yang mendandung running hour atau reminder calibration
             var vidRunning = await _detailMachineRepository.GetSubjectAsync(query.MachineId, "RUNNING-HOUR");
             var vidReminder = await _detailMachineRepository.GetSubjectAsync(query.MachineId, "REMINDER-CALIBRATION");
 
+            //untuk mengambil value terakhir dari running hour atau reminder calibration
             var data = await _detailMachineRepository.GetAllMachineInformationAsync(query.MachineId, vidRunning.Vid, vidReminder.Vid, vidRunning.MachineName);
             return await Result<GetAllMachineInformationDto>.SuccessAsync(data, "Successfully fetch data");
         }
-
     }
 }

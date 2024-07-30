@@ -1,10 +1,5 @@
 ﻿using SkeletonApi.Domain.Common.Abstracts;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Domain.Entities
 {
@@ -12,6 +7,7 @@ namespace SkeletonApi.Domain.Entities
     {
         [Column("vid")]
         public string? Vid { get; set; }
+
         [Column("subject")]
         public string? Subjects { get; set; }
 

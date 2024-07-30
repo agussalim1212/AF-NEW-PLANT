@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SkeletonApi.Application.Features.Notification.Commands.Update;
@@ -7,12 +6,7 @@ using SkeletonApi.Application.Features.Notification.Queries.GetAllNotif;
 using SkeletonApi.Application.Features.Notification.Queries.GetListNotif;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Presentation.Controllers
 {

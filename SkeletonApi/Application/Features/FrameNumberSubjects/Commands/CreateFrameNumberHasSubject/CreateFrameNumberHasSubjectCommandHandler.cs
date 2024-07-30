@@ -1,24 +1,22 @@
 ﻿using AutoMapper;
 using MediatR;
-using SkeletonApi.Application.Interfaces.Repositories;
-using SkeletonApi.Shared;
-using SkeletonApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.FrameNumb.Commands.CreateFrameNumber;
-using SkeletonApi.Application.Features.FrameNumberSubject.Commands.CreateFrameNumberHasSubject;
 using SkeletonApi.Application.Common.Mappings;
+using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Domain.Entities;
+using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
 
-namespace SkeletonApi.Application.Features.FrameNumberHasSubject.Commands.CreateFrameNumberHasSubject
+namespace SkeletonApi.Application.Features.FrameNumberSubjects.Commands.CreateFrameNumberHasSubject
 {
     public record CreateNumberHasSubjectCommand : IRequest<Result<FrameNumberHasSubjects>>, IMapFrom<FrameNumberHasSubjects>
     {
-
         [JsonPropertyName("frame_number_id")]
         public Guid FrameNumberId { get; set; }
         [JsonPropertyName("subject_id")]
         public List<Guid> SubjectId { get; set; }
     }
+
     internal class CreateSubjectHasMachineCommandHandler : IRequestHandler<CreateNumberHasSubjectCommand, Result<FrameNumberHasSubjects>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -32,7 +30,6 @@ namespace SkeletonApi.Application.Features.FrameNumberHasSubject.Commands.Create
 
         public async Task<Result<FrameNumberHasSubjects>> Handle(CreateNumberHasSubjectCommand request, CancellationToken cancellationToken)
         {
-
             var subjectMachine = new FrameNumberHasSubjects()
             {
                 FrameNumberId = request.FrameNumberId,
@@ -60,4 +57,3 @@ namespace SkeletonApi.Application.Features.FrameNumberHasSubject.Commands.Create
         }
     }
 }
-

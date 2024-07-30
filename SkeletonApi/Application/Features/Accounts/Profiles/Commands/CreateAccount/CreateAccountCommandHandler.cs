@@ -1,8 +1,8 @@
-﻿using MediatR;
-using SkeletonApi.Shared;
-using AutoMapper;
+﻿using AutoMapper;
+using MediatR;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
+using SkeletonApi.Shared;
 
 namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAccount
 {
@@ -11,6 +11,7 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IAccountRepository _accountRepository;
+
 
         public CreateAccountCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IAccountRepository accountRepository)
         {
@@ -21,9 +22,10 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
 
         public async Task<Result<CreateAccountResponseDto>> Handle(CreateAccountRequest request, CancellationToken cancellationToken)
         {
+
             var account = _mapper.Map<Account>(request);
 
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" }; // ekstensi yang diizinkan
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" }; //cek ekstensi yang diizinkan
             var fileExtension = Path.GetExtension(request.Img_path.FileName).ToLower();
 
             if (!allowedExtensions.Contains(fileExtension))
@@ -31,35 +33,36 @@ namespace SkeletonApi.Application.Features.Accounts.Profiles.Commands.CreateAcco
                 return await Result<CreateAccountResponseDto>.FailureAsync("Invalid file extension. Only JPG, JPEG, and PNG are allowed.");
             }
 
-            // Membatasi ukuran berkas
+            // membatasi ukuran berkas
             var maxFileSizeInBytes = 2 * 1024 * 1024; // ukuran maksimum (dalam byte)
 
             if (request.Img_path.Length > maxFileSizeInBytes)
             {
                 return await Result<CreateAccountResponseDto>.FailureAsync("File size exceeds the maximum allowed size (2 MB).");
             }
-
+            //FotoPath adalah folder public untuk menyimpan foto profile user
             var path = Path.Combine("wwwroot/FotoPath/", request.Img_path.FileName);
 
             using (FileStream stream = new FileStream(path, FileMode.Create))
-            {   
+            {
                 await request.Img_path.CopyToAsync(stream);
                 stream.Close();
             }
 
             var cekAccount = await _accountRepository.ValidateAccount(account);
-            if (cekAccount == false)
+            if (cekAccount == true)
             {
+                //jika true artinya user tsb sudah memiliki foto profile dan data akan di update di table account
                 var cek = _unitOfWork.Repository<Account>().FindByCondition(a => a.Username == account.Username).FirstOrDefault();
                 cek.PhotoURL = request.Img_path.FileName;
                 cek.CreatedAt = DateTime.UtcNow;
                 cek.UpdatedAt = DateTime.UtcNow;
                 await _unitOfWork.Repository<Account>().UpdateAsync(cek);
                 await _unitOfWork.Save(cancellationToken);
-
             }
             else
             {
+                //jika selain true artinya user tsb tidak memiliki foto profile dan data akan di tambah di table account 
                 account.PhotoURL = request.Img_path.FileName;
                 account.CreatedAt = DateTime.UtcNow;
                 account.UpdatedAt = DateTime.UtcNow;

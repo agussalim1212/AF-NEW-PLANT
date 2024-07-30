@@ -5,7 +5,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.Subjects.Commands.DeleteSubject
 {
     public record DeleteSubjectCommand : IRequest<Result<Guid>>, IMapFrom<Subject>

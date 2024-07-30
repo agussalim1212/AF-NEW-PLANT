@@ -4,11 +4,10 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.UpdatePermissions
 {
-     internal class UpdatePermissionsCommand : IRequestHandler<UpdatePermissionsRequest, Result<Permission>>
-     {
+    internal class UpdatePermissionsCommand : IRequestHandler<UpdatePermissionsRequest, Result<Permission>>
+    {
         private readonly IUnitOfWork _unitOfWork;
         private readonly RoleManager<Role> _roleManager;
 
@@ -20,7 +19,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.U
 
         public async Task<Result<Permission>> Handle(UpdatePermissionsRequest request, CancellationToken cancellationToken)
         {
-          
             var validateRole = await _roleManager.FindByIdAsync(request.Id);
             if (validateRole != null)
             {
@@ -32,14 +30,13 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.U
                 }
             }
 
-            if(request.Claim.Count == 0)
+            if (request.Claim.Count == 0)
             {
                 return await Result<Permission>.FailureAsync("Permissions cannot be null.");
             }
 
             foreach (var type in request.Claim)
             {
-               
                 var pms = new Permission
                 {
                     CreatedAt = DateTime.UtcNow,
@@ -75,8 +72,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.U
             }
 
             return await Result<Permission>.SuccessAsync("Permissions Update.");
-
         }
     }
-
 }

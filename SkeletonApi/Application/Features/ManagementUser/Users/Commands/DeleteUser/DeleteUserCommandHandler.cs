@@ -5,7 +5,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ManagementUser.Users.Commands.DeleteUser
 {
     internal class DeleteUserCommandHandle : IRequestHandler<DeleteUserRequest, Result<string>>
@@ -23,7 +22,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Users.Commands.DeleteU
 
         public async Task<Result<string>> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
         {
-
             var validateUser = await _userManager.FindByIdAsync(request.Id);
             if (validateUser == null)
             {

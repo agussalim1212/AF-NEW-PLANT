@@ -1,20 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MQTTnet.Client;
+﻿using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using SkeletonApi.IotHub.Commons;
-using SkeletonApi.IotHub.Configurations;
 using SkeletonApi.IotHub.Options;
 using SkeletonApi.IotHub.Services;
 using SkeletonApi.IotHub.Settings;
-using System;
 
 namespace SkeletonApi.IotHub.Configurations
 {
     public static class MqttClientConfiguration
     {
-        public static void AddHostedMqttClient(this IServiceCollection services, IConfiguration configuration)
+        public static void AddHostedMqttClients(this IServiceCollection services, IConfiguration configuration)
         {
             var agentSettings = new AgentMqttClientSettings();
             var brokerSettings = new MqttBrokerSettings();

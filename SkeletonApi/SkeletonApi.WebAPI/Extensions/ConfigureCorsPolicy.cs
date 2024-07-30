@@ -10,7 +10,6 @@ namespace SkeletonApi.WebAPI.Extensions
             configuration.GetSection(nameof(CorsSettings)).Bind(corsSetting);
             services.AddCors(opt =>
             {
-
                 opt.AddPolicy("CorsPolicy", builder => builder
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -20,9 +19,7 @@ namespace SkeletonApi.WebAPI.Extensions
                     .WithExposedHeaders("x-download")
                     .WithExposedHeaders("x-pagination")
                     .SetIsOriginAllowed((hosts) => true));
-
-        });
+            });
         }
     }
 }
-

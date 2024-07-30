@@ -1,7 +1,7 @@
 ﻿using Dapper;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Persistence.Contexts;
 using System.Data;
-
 
 namespace SkeletonApi.Persistence.Repositories.Configuration
 {

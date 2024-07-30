@@ -1,14 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.TotalProductionAssyWheelLine;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelFrontWithPagination.Download;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination;
 using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination.Download;
 using SkeletonApi.Shared;
 using System.Text.Json;
-
 
 namespace SkeletonApi.Presentation.Controllers
 {
@@ -17,16 +15,11 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public AssyWheelLineController(IMediator mediator, ILogger<AssyWheelLineController> logger)
         {
             _mediator = mediator;
             _logger = logger;
-        }
-
-        [HttpGet("total-production")]
-        public async Task<ActionResult<Result<GetAllTotalProductionAssyWheelLineDto>>> GetTotalProductionAssyWheelLine(Guid machine_id, string type, DateTime start, DateTime end)
-        {
-            return await _mediator.Send(new GetAllTotalProductionAssyWheelLineQuery(machine_id, type, start, end));
         }
 
         [HttpGet("list-quality-wheel-front")]
@@ -59,6 +52,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #region Excel Wheel Front
+
         [HttpGet("list-quality-download-wheel-front")]
         public async Task<ActionResult<PaginatedResult<GetListWheelFrontDto>>> DownloadExcelWheelFront([FromQuery] GetListQualityWheelFrontQuery query)
         {
@@ -86,11 +80,11 @@ namespace SkeletonApi.Presentation.Controllers
                     if (ex.InnerException == null) { return Problem(ex.Message); }
                     return Problem(ex.InnerException.Message);
                 }
-
             }
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
         #endregion Excel Wheel Front
 
         [HttpGet("list-quality-wheel-rear")]
@@ -123,6 +117,7 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         #region Excel Wheel Rear
+
         [HttpGet("list-quality-download-wheel-rear")]
         public async Task<ActionResult<PaginatedResult<GetListWheelRearDto>>> DownloadExcelWheelRear([FromQuery] GetListWheelRearQuery query)
         {
@@ -154,10 +149,7 @@ namespace SkeletonApi.Presentation.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
         #endregion Excel Wheel Rear
-
-
-
     }
-
 }

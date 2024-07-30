@@ -7,17 +7,14 @@ using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
 
-
 namespace SkeletonApi.Application.Features.SubjectHasMachines.Commands.UpdateSubjectHasMachine_
 {
     public record UpdateSubjectHasMachinesCommand : IRequest<Result<SubjectHasMachine>>
     {
-
         [JsonPropertyName("machine_id")]
         public Guid MachineId { get; set; }
         [JsonPropertyName("subject_id")]
         public List<Guid> SubjectId { get; set; }
-
     }
 
     internal class UpdateSubjectHasMachinesCommandHandler : IRequestHandler<UpdateSubjectHasMachinesCommand, Result<SubjectHasMachine>>
@@ -33,13 +30,11 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Commands.UpdateSub
 
         public async Task<Result<SubjectHasMachine>> Handle(UpdateSubjectHasMachinesCommand request, CancellationToken cancellationToken)
         {
-
             var subjectMachines = await _unitOfWork.Repo<SubjectHasMachine>().Entities.Where(x => request.MachineId == x.MachineId).ToListAsync();
             Console.WriteLine(subjectMachines);
 
             if (subjectMachines.Count != 0)
             {
-
                 foreach (var sM in subjectMachines)
                 {
                     await _unitOfWork.Repo<SubjectHasMachine>().DeleteAsync(sM);

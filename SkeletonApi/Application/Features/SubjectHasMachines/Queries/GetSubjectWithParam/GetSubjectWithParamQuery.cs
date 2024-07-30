@@ -6,7 +6,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectWithParam
 {
     public record GetSubjectWithParamQuery : IRequest<Result<List<GetSubjectWithParamDto>>>
@@ -17,8 +16,8 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
         {
             MachineId = machineId;
         }
-
     }
+
     internal class GetSubjectWithParamQueryHandler : IRequestHandler<GetSubjectWithParamQuery, Result<List<GetSubjectWithParamDto>>>
     {
         private readonly IUnitOfWork _unitOfWork;

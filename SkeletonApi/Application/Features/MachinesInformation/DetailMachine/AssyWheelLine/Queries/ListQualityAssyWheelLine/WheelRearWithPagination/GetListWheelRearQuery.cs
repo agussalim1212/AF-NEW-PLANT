@@ -4,7 +4,7 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Application.Interfaces.Repositories.Filtering;
 using SkeletonApi.Shared;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination
 {
     public record GetListWheelRearQuery : IRequest<PaginatedResult<GetListWheelRearDto>>
     {
@@ -27,7 +27,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
             search_term = searchTerm;
             type_wheel = typesWheel;
             type = Type;
-            start = Start; 
+            start = Start;
             end = End;
         }
 
@@ -56,24 +56,23 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
                 //Tire Inflation
                 var vidTire = await _detailMachineRepository.GetSubjectAsync(query.machine_id, "TIQ-TIRE-PRASSURE");
 
-
                 if (query.type == "day" || query.type == "week" || query.type == "month" || query.type == "year")
                 {
                     if (query.type_wheel == "final_inspection")
                     {
                         var day = await _dayRepository.GetListQualityAssyWheelRearFinalInspectioDay(vidStatus.Vid, vidHorizontal.Vid, vidVertikal.Vid, vidDiskBrake.Vid, query.machine_id, query.start, query.end);
-                        var paged = day.Where(c => (query.search_term == null)
-                          || (query.search_term.ToLower() == c.Status.ToLower())
-                          || (query.search_term.ToLower() == c.DataDialHorizontal.ToLower())
-                          || (query.search_term.ToLower() == c.DataDialVertical.ToLower())
-                          || (query.search_term.ToLower() == c.DiskBrake.ToLower())).ToList();
+                        var paged = day.Where(c => query.search_term == null
+                          || query.search_term.ToLower() == c.Status.ToLower()
+                          || query.search_term.ToLower() == c.DataDialHorizontal.ToLower()
+                          || query.search_term.ToLower() == c.DataDialVertical.ToLower()
+                          || query.search_term.ToLower() == c.DiskBrake.ToLower()).ToList();
                         data.AddRange(paged);
                     }
                     else
                     {
                         var day = await _dayRepository.GetListQualityAssyWheelRearTireInflationDay(vidTire.Vid, query.type_wheel, query.search_term, query.machine_id, query.start, query.end);
-                        var paged = day.Where(c => (query.search_term == null)
-                          || (query.search_term.ToLower() == c.TirePresure.ToLower())).ToList();
+                        var paged = day.Where(c => query.search_term == null
+                          || query.search_term.ToLower() == c.TirePresure.ToLower()).ToList();
                         data.AddRange(paged);
                     }
                 }
@@ -81,19 +80,19 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.L
                 {
                     if (query.type_wheel == "final_inspection")
                     {
-                        var day = await _defaultRepository.GetListQualityAssyWheelRearFinalInspectionDefault(vidStatus.Vid, vidHorizontal.Vid, vidVertikal.Vid, vidDiskBrake.Vid, query.machine_id, query.start, query.end);
-                        var paged = day.Where(c => (query.search_term == null)
-                          || (query.search_term.ToLower() == c.Status.ToLower())
-                          || (query.search_term.ToLower() == c.DataDialHorizontal.ToLower())
-                          || (query.search_term.ToLower() == c.DataDialVertical.ToLower())
-                          || (query.search_term.ToLower() == c.DiskBrake.ToLower())).ToList();
+                        var day = await _defaultRepository.GetListQualityAssyWheelRearFinalInspectionDefault(vidStatus.Vid, vidHorizontal.Vid, vidVertikal.Vid, vidDiskBrake.Vid);
+                        var paged = day.Where(c => query.search_term == null
+                          || query.search_term.ToLower() == c.Status.ToLower()
+                          || query.search_term.ToLower() == c.DataDialHorizontal.ToLower()
+                          || query.search_term.ToLower() == c.DataDialVertical.ToLower()
+                          || query.search_term.ToLower() == c.DiskBrake.ToLower()).ToList();
                         data.AddRange(paged);
                     }
                     else
                     {
-                        var defaultData = await _defaultRepository.GetListQualityAssyWheelRearTireInflationDefault(vidTire.Vid, query.type_wheel, query.search_term, query.machine_id, query.start, query.end);
-                        var paged = defaultData.Where(c => (query.search_term == null)
-                           || (query.search_term.ToLower() == c.TirePresure.ToLower())).ToList();
+                        var defaultData = await _defaultRepository.GetListQualityAssyWheelRearTireInflationDefault(vidTire.Vid);
+                        var paged = defaultData.Where(c => query.search_term == null
+                           || query.search_term.ToLower() == c.TirePresure.ToLower()).ToList();
                         data.AddRange(paged);
                     }
                 }

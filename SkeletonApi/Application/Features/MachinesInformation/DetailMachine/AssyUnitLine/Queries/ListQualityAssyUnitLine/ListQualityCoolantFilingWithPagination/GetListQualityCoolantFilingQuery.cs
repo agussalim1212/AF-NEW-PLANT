@@ -3,7 +3,7 @@ using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Shared;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFiling
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFilingWithPagination
 {
     public record GetListQualityCoolantFilingQuery : IRequest<PaginatedResult<GetListQualityCoolantFilingDto>>
     {
@@ -33,14 +33,14 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
 
             public GetListQualityCoolantFilingQueryHandler(IDetailAssyUnitRepository detailAssyUnitRepository)
             {
-               _detailAssyUnitRepository = detailAssyUnitRepository;
+                _detailAssyUnitRepository = detailAssyUnitRepository;
             }
 
             public async Task<PaginatedResult<GetListQualityCoolantFilingDto>> Handle(GetListQualityCoolantFilingQuery query, CancellationToken cancellationToken)
             {
                 var data = await _detailAssyUnitRepository.GetAllListQualityCoolantFiling(query.machine_id, query.type, query.start, query.end);
                 var dt = data.Where(o => query.search_term == null || query.search_term.ToLower() == o.DataBarcode.ToLower() || query.search_term.ToLower() == o.VolumeCoolant.ToString()).ToList();
-                return await dt.ToPaginatedListAsync(query.page_number,query.page_size,cancellationToken);
+                return await dt.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
             }
         }
     }

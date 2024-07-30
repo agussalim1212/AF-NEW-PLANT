@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 
-
 namespace SkeletonApi.Application.Features.Accounts
 {
     public record PasswordDto

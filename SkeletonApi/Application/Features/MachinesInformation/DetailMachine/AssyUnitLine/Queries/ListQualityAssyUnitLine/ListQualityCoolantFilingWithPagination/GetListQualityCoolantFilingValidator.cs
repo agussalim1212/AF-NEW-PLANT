@@ -1,17 +1,11 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFiling
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityCoolantFilingWithPagination
 {
     public class GetListQualityCoolantFilingValidator : AbstractValidator<GetListQualityCoolantFilingQuery>
     {
-       public GetListQualityCoolantFilingValidator() 
-       {
+        public GetListQualityCoolantFilingValidator()
+        {
             RuleFor(x => x.page_number)
               .GreaterThanOrEqualTo(1)
               .WithMessage("PageNumber at least greater than or equal to 1.");

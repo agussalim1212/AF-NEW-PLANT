@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using SkeletonApi.Application.DTOs.RestApiData;
 using SkeletonApi.Application.Interfaces;
-using SkeletonApi.Application.Interfaces.Repositories.Dapper;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration.Dapper;
 using SkeletonApi.Domain.Entities.Tsdb;
 using SkeletonApi.Persistence.Interfaces;
 using System.Text.Json;
@@ -13,7 +13,8 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
         private readonly IDapperCreateUnitOfWork _dapperUwow;
         private readonly IGetConnection _getConnection;
         private readonly IRestApiClientService _restApiClient;
-        public EnginePartRepository(DapperUnitOfWorkContext dapperUwow,IRestApiClientService restClient)
+
+        public EnginePartRepository(DapperUnitOfWorkContext dapperUwow, IRestApiClientService restClient)
         {
             _dapperUwow = dapperUwow;
             _getConnection = dapperUwow;
@@ -45,7 +46,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
         public async Task Creates(IEnumerable<MqttRawValueEntity> mqttRawValues)
         {
             //await Console.Out.WriteLineAsync("Masuk SINI");
-            
+
             try
             {
                 using (var uwow = _dapperUwow.Create())
@@ -68,7 +69,7 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                             Time = row.Time,
                             Quality = row.Quality,
                         };
-                        await _restApiClient.SendAsync(sample);
+                        // await _restApiClient.SendAsync(sample);
                         //string query;
                         switch (row.Vid)
 
@@ -135,6 +136,60 @@ namespace SkeletonApi.Persistence.Repositories.Dapper
                     }
                     await uwow.CommitAsync();
                     uwow.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(JsonSerializer.Serialize(ex.Message));
+            }
+
+            await Task.CompletedTask;
+        }
+
+        public async Task Create(IEnumerable<MqttRawValueEntity> listQuality)
+        {
+            try
+            {
+                using (var uwow = _dapperUwow.Create())
+                {
+                    var connection = _getConnection.GetConnection();
+                    foreach (var row in listQuality)
+                    {
+                        if (row.Vid.Contains("DATA-BARCODE"))
+                        {
+                            var data = row.Value.ToString().ConvertCustomStringArrayToArray();
+                            var dt = new ListQualityBarcode();
+                            dt.Id = row.Vid.ToString();
+                            dt.DataBarcode = data[0];
+                            dt.Status = data[1];
+                            if (data.Count() > 2)
+                            {
+                                dt.FotoDataNg = data[2];
+                            }
+                            dt.DateTime = row.Datetime.AddHours(7);
+                            switch (row.Vid)
+
+                            {
+                                case string a when a.Contains("AUTO-Q-GATE"):
+                                    {
+                                        string query = @"insert into ""ListQualityBarcodes"" (id,data_barcode,status,date_time) values (@Id,@DataBarcode,@Status,@Datetime)";
+                                        await connection.ExecuteAsync(query, dt);
+                                        break;
+                                    }
+                                case string a when a.Contains("NUMBERING"):
+                                    {
+                                        string query = @"insert into ""ListQualityBarcodes"" (id,data_barcode,status,foto_data_ng,date_time) values (@Id,@DataBarcode,@Status,@FotoDataNg,@Datetime)";
+                                        await connection.ExecuteAsync(query, dt);
+                                        break;
+                                    }
+                                default:
+                                    // await Console.Out.WriteLineAsync("NULL");
+                                    break;
+                            }
+                        }
+                    }
+                    await uwow.CommitAsync();
+                    //uwow.Dispose();
                 }
             }
             catch (Exception ex)

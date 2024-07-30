@@ -8,7 +8,6 @@ using SkeletonApi.Application.Features.ManagementUser.Roles.Commands.UpdateRoles
 using SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetAllRole;
 using SkeletonApi.Application.Features.ManagementUser.Roles.Queries.GetRoleWithPagination;
 using SkeletonApi.Domain.Entities;
-using SkeletonApi.Presentation.ActionFilter;
 using SkeletonApi.Shared;
 using System.Text.Json;
 
@@ -19,6 +18,7 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public RoleController(IMediator mediator, ILogger<RoleController> logger)
         {
             _mediator = mediator;
@@ -47,9 +47,7 @@ namespace SkeletonApi.Presentation.Controllers
             return await _mediator.Send(command);
         }
 
-
         [HttpGet("get-all-role")]
-        //[ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<List<GetAllRoleDto>>>> GetAll()
         {
             return await _mediator.Send(new GetAllRoleQuery());
@@ -82,7 +80,5 @@ namespace SkeletonApi.Presentation.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
-
     }
-
 }

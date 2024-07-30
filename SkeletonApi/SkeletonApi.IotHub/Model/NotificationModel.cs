@@ -12,8 +12,10 @@ namespace SkeletonApi.IotHub.Model
 
         [JsonPropertyName("date_time")]
         public string DateTimeString { get; init; }
+
         [JsonIgnore]
         public DateTime? Datetime { get; init; }
+
         public bool Status { get; init; }
     }
 }

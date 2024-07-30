@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SkeletonApi.Presentation.Controllers
@@ -8,6 +7,5 @@ namespace SkeletonApi.Presentation.Controllers
     [Produces("text/json")]
     public abstract class ApiControllerBase : ControllerBase
     {
-
     }
 }

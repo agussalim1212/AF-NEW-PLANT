@@ -2,8 +2,7 @@
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-namespace SkeletonApi.Application.Features.FrameNumb.Commands.UpdateFrameNumber
+namespace SkeletonApi.Application.Features.FrameNumbers.Commands.UpdateFrameNumber
 {
     public record UpdateFrameNumberRequest : IRequest<Result<FrameNumber>>
     {

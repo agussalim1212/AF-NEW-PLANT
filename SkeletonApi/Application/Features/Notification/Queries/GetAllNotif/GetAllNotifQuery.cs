@@ -4,11 +4,6 @@ using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.Notification.Queries.GetAllNotif
 {
@@ -19,7 +14,6 @@ namespace SkeletonApi.Application.Features.Notification.Queries.GetAllNotif
 
         public GetAllNotifQuery()
         {
-            
         }
 
         public GetAllNotifQuery(int pageNumber, int pageSize)
@@ -43,7 +37,7 @@ namespace SkeletonApi.Application.Features.Notification.Queries.GetAllNotif
         public async Task<PaginatedResult<GetAllNotifDto>> Handle(GetAllNotifQuery query, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Repository<Notifications>().Entities
-                .OrderByDescending(x => x.DateTime)
+                .OrderByDescending(x => x.CreatedAt)
                 .Select(x => new GetAllNotifDto
                 {
                     Id = x.Id,

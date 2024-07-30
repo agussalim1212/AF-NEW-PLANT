@@ -1,12 +1,7 @@
 ﻿using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Persistence.Contexts;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Persistence.Repositories
 {
@@ -75,6 +70,7 @@ namespace SkeletonApi.Persistence.Repositories
             //dispose unmanaged resources
             disposed = true;
         }
+
         public IGenRepository<T> Repo<T>() where T : BaseManyToMany
         {
             if (_repositories == null)

@@ -2,19 +2,13 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.Subjects.Queries.GetAllSubject;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.FrameNumberSubject.Queries.GetAllFrameNumber
+namespace SkeletonApi.Application.Features.FrameNumberSubjects.Queries.GetAllFrameNumber
 {
-     public record GetAllFrameNumberQuery : IRequest<Result<List<GetAllFrameNumberDto>>>;
+    public record GetAllFrameNumberQuery : IRequest<Result<List<GetAllFrameNumberDto>>>;
 
     internal class GetAllFrameNumberQueryHandler : IRequestHandler<GetAllFrameNumberQuery, Result<List<GetAllFrameNumberDto>>>
     {

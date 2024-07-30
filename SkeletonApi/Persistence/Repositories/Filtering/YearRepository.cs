@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumptions.Queries;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AirConsumptionDetailMachine;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AmpereConsumptionDetailMachine;
-using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumption;
+using SkeletonApi.Application.DTOs.AirAndElectricConsumption;
+using SkeletonApi.Application.DTOs.Consumption;
+using SkeletonApi.Application.DTOs.CurrentAndVoltageConsumption;
+using SkeletonApi.Application.Features.MachinesInformation.DetailEnergyConsumption.Queries;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.EnergyConsumptionDetailMachine;
+using SkeletonApi.Application.Features.MachinesInformation.DetailMachine.TotalProduction;
 using SkeletonApi.Application.Interfaces.Repositories;
+using SkeletonApi.Application.Interfaces.Repositories.Configuration;
 using SkeletonApi.Application.Interfaces.Repositories.Filtering;
 using SkeletonApi.Domain.Entities;
 
@@ -14,6 +17,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
         private readonly IDapperReadDbConnection _dapperReadDbConnection;
         private readonly IGenericRepository<Setting> _repositorySetting;
         private readonly IGenRepository<SubjectHasMachine> _repositorySubjectHasMachine;
+
         public YearRepository(IDapperReadDbConnection dapperReadDbConnection, IGenericRepository<Setting> repositorySetting, IGenRepository<SubjectHasMachine> repositorySubjectHasMachine)
         {
             _dapperReadDbConnection = dapperReadDbConnection;
@@ -21,10 +25,10 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
             _repositorySubjectHasMachine = repositorySubjectHasMachine;
         }
 
-        public async Task<GetAllDetailMachineAirConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionAsync(string view, string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
+        public async Task<GetAllDetailMachineAirAndElectricConsumptionDto> GetAllDetailMachineAirAndElectricConsumptionYear(string view, string vid, string machineName, string subjectName, DateTime startTime, DateTime endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
-            var data = new GetAllDetailMachineAirConsumptionDto();
+            var data = new GetAllDetailMachineAirAndElectricConsumptionDto();
 
             if (endTime.Date < startTime.Date)
             {
@@ -59,7 +63,7 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
 
                 if (airConsumption.Count() == 0)
                 {
-                    data = new GetAllDetailMachineAirConsumptionDto
+                    data = new GetAllDetailMachineAirAndElectricConsumptionDto
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
@@ -67,9 +71,8 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 }
                 else
                 {
-
                     data =
-                    new GetAllDetailMachineAirConsumptionDto
+                    new GetAllDetailMachineAirAndElectricConsumptionDto
                     {
                         MachineName = machineName,
                         SubjectName = subjectName,
@@ -79,17 +82,16 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                         Data = groupedQuerys.Select(val => new DataAir
                         {
                             Value = val.total_last - val.total_first,
-                            Label = val.date_group.AddHours(7).ToString("yyy"),
+                            Label = val.date_group.ToString("yyy"),
                             DateTime = val.date_group,
                         }).OrderByDescending(x => x.DateTime).ToList()
-
                     };
                 }
                 return data;
             }
         }
 
-        public async Task<GetAllDetailMachineCurrentAndVoltageConsumptionDto> GetAllDetailMachineCurrentAndVoltageConsumptionAsync(string view, string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
+        public async Task<GetAllDetailMachineCurrentAndVoltageConsumptionDto> GetAllDetailMachineCurrentAndVoltageConsumptionYear(string view, string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
             var data = new GetAllDetailMachineCurrentAndVoltageConsumptionDto();
@@ -128,7 +130,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 }
                 else
                 {
-
                     data =
                     new GetAllDetailMachineCurrentAndVoltageConsumptionDto
                     {
@@ -140,17 +141,16 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                         Data = groupedQuerys.Select(val => new Data
                         {
                             Value = val.total_last,
-                            Label = val.date_group.AddHours(7).ToString("yyy"),
+                            Label = val.date_group.ToString("yyy"),
                             DateTime = val.date_group,
                         }).OrderByDescending(x => x.DateTime).ToList()
-
                     };
                 }
                 return data;
             }
         }
 
-        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionAsync(string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
+        public async Task<GetAllDetailMachineEnergyConsumptionDto> GetAllDetailMachineEnergyConsumptionYear(string vid, string machineName, string subjectName, DateTime? startTime, DateTime? endTime)
         {
             var setting = _repositorySetting.FindByCondition(o => o.MachineName == machineName && o.SubjectName == subjectName).FirstOrDefault();
             var data = new GetAllDetailMachineEnergyConsumptionDto();
@@ -190,7 +190,6 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                 }
                 else
                 {
-
                     data =
                     new GetAllDetailMachineEnergyConsumptionDto
                     {
@@ -203,10 +202,9 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                         {
                             ValueKwh = val.total_last - val.total_first,
                             ValueCo2 = Math.Round((val.total_last - val.total_first) * Convert.ToDecimal(0.87), 2),
-                            Label = val.date_group.AddHours(7).ToString("yyy"),
+                            Label = val.date_group.ToString("yyy"),
                             DateTime = val.date_group,
                         }).OrderByDescending(x => x.DateTime).ToList()
-
                     };
                 }
                 return data;
@@ -258,11 +256,64 @@ namespace SkeletonApi.Persistence.Repositories.Filtering
                         //Minimum = setting.Minimum,
                         Label = o.date_time.ToString("yyy").ToString(),
                         DateTime = o.date_time,
-
                     }).ToList();
                 }
             }
             return dt;
+        }
+
+        public async Task<GetAllTotalProductionDto> GetAllTotalProductionYear(Guid machineId, string vidOK, string vidNG, string machineName, DateTime? start, DateTime? end)
+        {
+            var data = new GetAllTotalProductionDto();
+
+            if (end.Value.Date < start.Value.Date)
+            {
+                throw new ArgumentException("End day cannot be earlier than start date.");
+            }
+            else
+            {
+                var consumptionBucket = await _dapperReadDbConnection.QueryAsync<ProductConsumption>
+                (@"SELECT * FROM ""production_consumption"" WHERE id = @vidok OR id = @vidng
+                AND date_trunc('year', bucket) >= date_trunc('year', @starttime::date)
+                AND date_trunc('year', bucket) <= date_trunc('year', @endtime::date)",
+                new { vidok = vidOK, vidng = vidNG, starttime = start.Value.Date, endtime = end.Value.Date });
+
+                var groupedQuerys = consumptionBucket
+                .GroupBy(d => new
+                {
+                    d.Bucket.Year,
+                })
+                .Select(g => new
+                {
+                    date_group = new DateTime(g.Key.Year, 1, 1),
+                    total_ok = g.Where(p => p.Id.Contains(vidOK)).Sum(o => Convert.ToDecimal(o.LastValue)),
+                    total_ng = g.Where(p => p.Id.Contains(vidNG)).Sum(o => Convert.ToDecimal(o.LastValue)),
+                }).ToList();
+
+                decimal TotalOk = groupedQuerys.Select(o => o.total_ok).FirstOrDefault();
+                decimal TotalNg = groupedQuerys.Select(p => p.total_ng).FirstOrDefault();
+
+                if (consumptionBucket.Count() == 0)
+                {
+                    data = new GetAllTotalProductionDto
+                    {
+                        MachineName = machineName
+                    };
+                }
+                else
+                {
+                    data =
+                    new GetAllTotalProductionDto
+                    {
+                        MachineName = machineName,
+                        ValueOkTotal = TotalOk,
+                        ValueNgTotal = TotalNg,
+                        ValueOKPresentase = Math.Round((TotalOk / (TotalOk + TotalNg)) * 100, 2),
+                        ValueNgPresentase = Math.Round((TotalNg / (TotalNg + TotalOk)) * 100, 2),
+                    };
+                }
+                return data;
+            }
         }
     }
 }

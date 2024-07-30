@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLine
+namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityMainLineWithPagination
 {
     public class GetListQualityMainLineValidator : AbstractValidator<GetListQualityMainLineQuery>
     {
-        public GetListQualityMainLineValidator() 
+        public GetListQualityMainLineValidator()
         {
             RuleFor(x => x.page_number)
                   .GreaterThanOrEqualTo(1)

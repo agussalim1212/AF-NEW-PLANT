@@ -1,7 +1,6 @@
 ﻿using SkeletonApi.IotHub.Model;
-using System.Reactive.Subjects;
 using System.Reactive.Linq;
-using YamlDotNet.Core.Tokens;
+using System.Reactive.Subjects;
 
 namespace SkeletonApi.IotHub.Services.Handler
 {
@@ -28,10 +27,12 @@ namespace SkeletonApi.IotHub.Services.Handler
                 _subscribers.Add(subscriberName, _subject.Subscribe(action));
             }
         }
+
         public IObservable<IEnumerable<MachineHealthModel>> Observe()
         {
             return _subject;
         }
+
         public void Subscribe(string subscriberName, Func<IEnumerable<MachineHealthModel>, bool> predicate, Action<IEnumerable<MachineHealthModel>> action)
         {
             if (!_subscribers.ContainsKey(subscriberName))

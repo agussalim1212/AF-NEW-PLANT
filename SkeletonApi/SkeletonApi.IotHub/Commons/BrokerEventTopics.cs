@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkeletonApi.IotHub.Commons
+﻿namespace SkeletonApi.IotHub.Commons
 {
     public class BrokerEventTopics
     {
@@ -18,6 +12,7 @@ namespace SkeletonApi.IotHub.Commons
         public string ConnectedClientsCount { get; } = $"{ClientBase}/connected/count";
         public string DisconnectedClientsCount { get; } = $"{ClientBase}/disconnected/count";
         public string SubscriptionsCount { get; } = $"{Base}/subscriptions/count";
+
         public string ClientIP(string clientId)
         {
             return $"{ClientBase}/{clientId}/ip";

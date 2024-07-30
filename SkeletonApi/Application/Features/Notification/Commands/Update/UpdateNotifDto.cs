@@ -2,7 +2,6 @@
 using SkeletonApi.Domain.Entities;
 using System.Text.Json.Serialization;
 
-
 namespace SkeletonApi.Application.Features.Notification.Commands.Update
 {
     public class UpdateNotifDto : IMapFrom<Notifications>

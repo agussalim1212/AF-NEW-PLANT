@@ -1,0 +1,44 @@
+﻿using SkeletonApi.Application.Common.Mappings;
+using System.Text.Json.Serialization;
+
+namespace SkeletonApi.Application.DTOs.AirAndElectricConsumption
+{
+    public class GetAllDetailMachineAirAndElectricConsumptionDto : IMapFrom<GetAllDetailMachineAirAndElectricConsumptionDto>
+    {
+        [JsonIgnore]
+        public string Vid { get; set; }
+
+        [JsonPropertyName("machine_name")]
+        public string MachineName { get; set; }
+
+        [JsonPropertyName("subject_name")]
+        public string SubjectName { get; set; }
+
+        [JsonIgnore]
+        [JsonPropertyName("maximum")]
+        public decimal? Maximum { get; set; }
+
+        [JsonIgnore]
+        [JsonPropertyName("medium")]
+        public decimal? Medium { get; set; }
+
+        [JsonIgnore]
+        [JsonPropertyName("minimum")]
+        public decimal? Minimum { get; set; }
+
+        [JsonPropertyName("data")]
+        public List<DataAir> Data { get; set; }
+    }
+
+    public class DataAir
+    {
+        [JsonPropertyName("value")]
+        public decimal Value { get; set; }
+
+        [JsonPropertyName("label")]
+        public string Label { get; set; }
+
+        [JsonPropertyName("date_time")]
+        public DateTime DateTime { get; set; }
+    }
+}

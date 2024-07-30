@@ -1,13 +1,12 @@
 ﻿using ClosedXML.Excel;
-using SkeletonApi.Application.Features.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination;
 using SkeletonApi.Shared;
-
 
 namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.AssyWheelLine.Queries.ListQualityAssyWheelLine.WheelRearWithPagination.Download
 {
     public class DownloadListQualityWheelRearToExcel
     {
         private readonly PaginatedResult<GetListWheelRearDto> pg;
+
         public DownloadListQualityWheelRearToExcel(PaginatedResult<GetListWheelRearDto> getListQuality)
         {
             pg = getListQuality;
@@ -21,7 +20,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
 
                 if (type_wheel == "final_inspection")
                 {
-
                     worksheet.Cell(1, 1).Value = "date_time";
                     worksheet.Cell(1, 2).Value = "status";
                     worksheet.Cell(1, 3).Value = "data_dial_horizontal";
@@ -40,11 +38,10 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     worksheet.Cell(1, 1).Value = "date_time";
                     worksheet.Cell(1, 2).Value = "tire_inflation";
 
-
                     for (int i = 0; i < pg.Data.Count(); i++)
                     {
                         worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
-                       // worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).TirePresure;
+                        // worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).TirePresure;
                     }
                 }
                 else if (type_wheel == "disk_brake")
@@ -55,7 +52,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     for (int i = 0; i < pg.Data.Count(); i++)
                     {
                         worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
-                       // worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).DataTorQ;
+                        // worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).DataTorQ;
                     }
                 }
                 else
@@ -67,14 +64,12 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                         worksheet.Cell(1, 3).Value = "data_distance";
                         worksheet.Cell(1, 4).Value = "data_tonase";
 
-
                         for (int i = 0; i < pg.Data.Count(); i++)
                         {
                             worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
                             worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).Status;
                             //worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).DataDistance;
                             //worksheet.Cell(i + 2, 4).Value = pg.Data.ElementAt(i).DataTonase;
-
                         }
                     }
                 }

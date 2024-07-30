@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
 using MediatR;
-using System.Reflection;
-using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using SkeletonApi.Application.Common.Behaviors;
+using System.Reflection;
 
 namespace SkeletonApi.Application.Extensions
 {

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SkeletonApi.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63f0a0a3cb8af7702dfff51dc36506441ecda537")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c490c01b9bfca8be5fc37fd7271c0f4aa3cd3ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("SkeletonApi.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SkeletonApi.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

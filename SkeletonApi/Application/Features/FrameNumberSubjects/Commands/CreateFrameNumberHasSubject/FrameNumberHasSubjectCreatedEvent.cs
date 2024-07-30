@@ -1,11 +1,12 @@
 ﻿using SkeletonApi.Domain.Common.Abstracts;
 using SkeletonApi.Domain.Entities;
 
-namespace SkeletonApi.Application.Features.FrameNumberSubject.Commands.CreateFrameNumberHasSubject
+namespace SkeletonApi.Application.Features.FrameNumberSubjects.Commands.CreateFrameNumberHasSubject
 {
     public class FrameNumberHasSubjectCreatedEvent : BaseEvent
     {
-       public FrameNumberHasSubjects FrameNumberHasSubjects { get; set; }
+        public FrameNumberHasSubjects FrameNumberHasSubjects { get; set; }
+
         public FrameNumberHasSubjectCreatedEvent(FrameNumberHasSubjects frameNumberHasSubjects)
         {
             FrameNumberHasSubjects = frameNumberHasSubjects;

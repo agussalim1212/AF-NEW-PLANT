@@ -1,10 +1,5 @@
 ﻿using SkeletonApi.Application.Common.Mappings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.Dashboard.FiveTopEnergyConsumption.Queries
 {
@@ -12,8 +7,10 @@ namespace SkeletonApi.Application.Features.Dashboard.FiveTopEnergyConsumption.Qu
     {
         [JsonPropertyName("total_week")]
         public decimal TotalWeek { get; set; }
+
         [JsonPropertyName("total_month")]
         public decimal TotalMonth { get; set; }
+
         [JsonPropertyName("data_machine")]
         public List<DataMachine> DataMachines { get; set; }
     }
@@ -22,6 +19,7 @@ namespace SkeletonApi.Application.Features.Dashboard.FiveTopEnergyConsumption.Qu
     {
         [JsonPropertyName("label")]
         public string Label { get; set; }
+
         [JsonPropertyName("value")]
         public decimal Value { get; set; }
     }

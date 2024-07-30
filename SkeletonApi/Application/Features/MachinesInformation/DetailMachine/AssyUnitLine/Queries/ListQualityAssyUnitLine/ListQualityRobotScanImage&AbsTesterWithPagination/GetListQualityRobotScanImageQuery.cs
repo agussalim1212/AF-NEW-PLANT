@@ -3,10 +3,9 @@ using SkeletonApi.Application.Extensions;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityRobotScanImage
 {
-   public record GetListQualityRobotScanImageQuery : IRequest<PaginatedResult<GetListQualityRobotScanImageDto>>
+    public record GetListQualityRobotScanImageQuery : IRequest<PaginatedResult<GetListQualityRobotScanImageDto>>
     {
         public Guid machine_id { get; set; }
         public int page_number { get; set; }
@@ -15,7 +14,6 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
         public string type { get; set; }
         public DateTime start { get; set; }
         public DateTime end { get; set; }
-
 
         public GetListQualityRobotScanImageQuery() { }
 
@@ -41,7 +39,7 @@ namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.Li
 
             public async Task<PaginatedResult<GetListQualityRobotScanImageDto>> Handle(GetListQualityRobotScanImageQuery query, CancellationToken cancellationToken)
             {
-                var data = await _detailAssyUnitRepository.GetAllListQualityRobotScanImage(query.machine_id,query.type,query.start,query.end);
+                var data = await _detailAssyUnitRepository.GetAllListQualityRobotScanImage(query.machine_id, query.type, query.start, query.end);
                 var dt = data.Where(c => query.search_term == null || query.search_term.ToLower() == c.DataBarcode.ToLower()
                 || query.search_term.ToLower() == c.Status.ToLower()).ToList();
                 return await dt.ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);

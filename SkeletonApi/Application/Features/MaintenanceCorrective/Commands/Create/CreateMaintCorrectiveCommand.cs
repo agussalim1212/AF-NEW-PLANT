@@ -6,7 +6,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Create
 {
@@ -26,7 +25,6 @@ namespace SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Create
 
         [JsonPropertyName("end_date")]
         public DateOnly EndtDate { get; set; }
-
     }
 
     internal class CreateMaintCorrectiveCommandHandler : IRequestHandler<CreateMaintCorrectiveCommand, Result<CreateMaintCorrectiveDto>>
@@ -42,7 +40,6 @@ namespace SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Create
 
         public async Task<Result<CreateMaintCorrectiveDto>> Handle(CreateMaintCorrectiveCommand request, CancellationToken cancellationToken)
         {
-
             // Periksa apakah Machine dengan ID yang diberikan ada
             var machine = await _unitOfWork.Repository<Machine>().Entities
                 .Where(x => x.Id == request.MachineId)
@@ -82,6 +79,5 @@ namespace SkeletonApi.Application.Features.MaintenanceCorrective.Commands.Create
                 return Result<CreateMaintCorrectiveDto>.Failure("Machine Not Found");
             }
         }
-
     }
 }

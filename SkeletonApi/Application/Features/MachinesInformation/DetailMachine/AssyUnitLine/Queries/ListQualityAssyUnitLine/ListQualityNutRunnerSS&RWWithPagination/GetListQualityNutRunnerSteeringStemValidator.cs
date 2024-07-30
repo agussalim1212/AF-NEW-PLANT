@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityAssyUnitLineWithPagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.DetailMachine.AssyUnitLine.Queries.ListQualityAssyUnitLine.ListQualityNutRunnerSteeringStemWithPagination
 {
     public class GetListQualityNutRunnerSteeringStemValidator : AbstractValidator<GetListQualityNutRunnerSteeringStemQuery>
     {
-        public GetListQualityNutRunnerSteeringStemValidator() 
+        public GetListQualityNutRunnerSteeringStemValidator()
         {
             RuleFor(x => x.page_number)
                  .GreaterThanOrEqualTo(1)

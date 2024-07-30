@@ -2,7 +2,6 @@
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 
-
 namespace SkeletonApi.Persistence.Repositories
 {
     public class MachinesRepository : IMachinesRepository
@@ -22,10 +21,8 @@ namespace SkeletonApi.Persistence.Repositories
             if (x > 0)
             {
                 return false;
-
             }
             return true;
         }
-
     }
 }

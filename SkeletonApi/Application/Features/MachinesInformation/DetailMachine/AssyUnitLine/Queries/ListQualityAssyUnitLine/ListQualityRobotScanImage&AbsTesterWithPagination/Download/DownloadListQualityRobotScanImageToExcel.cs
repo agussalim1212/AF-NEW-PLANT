@@ -7,6 +7,7 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
     public class DownloadListQualityRobotScanImageToExcel
     {
         private readonly PaginatedResult<GetListQualityRobotScanImageDto> pg;
+
         public DownloadListQualityRobotScanImageToExcel(PaginatedResult<GetListQualityRobotScanImageDto> getListQuality)
         {
             pg = getListQuality;
@@ -27,7 +28,6 @@ namespace SkeletonApi.Application.Features.MachinesInformation.DetailMachine.Ass
                     worksheet.Cell(i + 2, 1).Value = pg.Data.ElementAt(i).DateTime;
                     worksheet.Cell(i + 2, 2).Value = pg.Data.ElementAt(i).DataBarcode;
                     worksheet.Cell(i + 2, 3).Value = pg.Data.ElementAt(i).Status;
-
                 }
                 using (var stream = new MemoryStream())
                 {

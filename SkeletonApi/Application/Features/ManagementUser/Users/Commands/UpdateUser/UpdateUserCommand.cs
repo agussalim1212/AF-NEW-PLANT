@@ -5,8 +5,6 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
-
 namespace SkeletonApi.Application.Features.ManagementUser.Users.Commands.UpdateUser
 {
     internal class UpdateUserCommandHandler : IRequestHandler<UpdateUserRequest, Result<User>>
@@ -21,11 +19,12 @@ namespace SkeletonApi.Application.Features.ManagementUser.Users.Commands.UpdateU
             _mapper = mapper;
             _userManager = userManager;
         }
+
         private async Task<List<string>> GetUserRoles(User user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
-
         }
+
         public async Task<Result<User>> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
         {
             var validateUser = await _userManager.FindByIdAsync(request.Id);

@@ -14,6 +14,7 @@ namespace SkeletonApi.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private ILogger _logger;
+
         public ActivityUserController(IMediator mediator, ILogger<ActivityUserController> logger)
         {
             _mediator = mediator;
@@ -49,18 +50,15 @@ namespace SkeletonApi.Presentation.Controllers
         }
 
         [HttpGet("get-list-log-type")]
-        //[ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<List<GetAllLogTypeDto>>>> GetAllLogType()
         {
             return await _mediator.Send(new GetAllLogTypeQuery());
         }
 
         [HttpGet("get-list-username")]
-       // [ServiceFilter(typeof(AuditLoggingFilter))]
         public async Task<ActionResult<Result<List<GetAllUsernameDto>>>> GetAllUsername()
         {
             return await _mediator.Send(new GetAllUsernameQuery());
         }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using SkeletonApi.Domain.Common.Abstracts;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SkeletonApi.Domain.Entities 
+namespace SkeletonApi.Domain.Entities
 {
     public class MaintenacePreventive : BaseAuditableEntity
     {

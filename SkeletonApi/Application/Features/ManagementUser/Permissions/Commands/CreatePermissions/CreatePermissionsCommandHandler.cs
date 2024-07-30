@@ -5,10 +5,9 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.CreatePermissions
 {
-   internal class CreatePermissionsCommandHandler : IRequestHandler<CreatePermissionsRequest, Result<CreatePermissionsResponseDto>>
+    internal class CreatePermissionsCommandHandler : IRequestHandler<CreatePermissionsRequest, Result<CreatePermissionsResponseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -24,9 +23,9 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
         public async Task<Result<CreatePermissionsResponseDto>> Handle(CreatePermissionsRequest request, CancellationToken cancellationToken)
         {
             var permission = _mapper.Map<Permission>(request);
-          
+
             var validateRole = await _roleManager.FindByNameAsync(request.RoleName);
-            if (validateRole == null) 
+            if (validateRole == null)
             {
                 return await Result<CreatePermissionsResponseDto>.FailureAsync("Role not found.");
             }
@@ -41,7 +40,6 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
 
             foreach (var type in request.Claim)
             {
-
                 if (type.ClaimValue == "Edit")
                 {
                     permission.ClaimType = type.ClaimValue;
@@ -61,7 +59,7 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
                 {
                     permission.ClaimType = type.ClaimValue;
                     permission.ClaimValue = "Permissions.Users.View";
-                }    
+                }
 
                 var pms = new Permission
                 {
@@ -70,16 +68,14 @@ namespace SkeletonApi.Application.Features.ManagementUser.Permissions.Commands.C
                     RoleId = validateRole.Id,
                     ClaimType = type.ClaimValue,
                     ClaimValue = permission.ClaimValue,
-                    
                 };
 
                 await _unitOfWork.Data<Permission>().AddAsync(pms);
                 await _unitOfWork.Save(cancellationToken);
             }
-                var rolePermission = _mapper.Map<CreatePermissionsResponseDto>(permission);
+            var rolePermission = _mapper.Map<CreatePermissionsResponseDto>(permission);
 
-            return await Result<CreatePermissionsResponseDto>.SuccessAsync(rolePermission,"Permissions created.");
-
+            return await Result<CreatePermissionsResponseDto>.SuccessAsync(rolePermission, "Permissions created.");
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Domain.Entities
 {
@@ -28,8 +23,10 @@ namespace SkeletonApi.Domain.Entities
 
         [NotMapped]
         public string DateTimeString { get; set; }
+
         [NotMapped]
         public Subject Subject { get; set; }
+
         [NotMapped]
         public Machine Machine { get; set; }
     }

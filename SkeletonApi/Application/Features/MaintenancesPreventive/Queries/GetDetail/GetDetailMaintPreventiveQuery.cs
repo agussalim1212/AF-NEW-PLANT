@@ -4,26 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetDetail
 {
-    public record GetDetailMaintPreventiveQuery : IRequest<Result<List<GetDetailMaintPreventiveDto>>> 
+    public record GetDetailMaintPreventiveQuery : IRequest<Result<List<GetDetailMaintPreventiveDto>>>
     {
         [JsonPropertyName("id")]
-        public Guid Id { get; set; } 
+        public Guid Id { get; set; }
 
         public GetDetailMaintPreventiveQuery(Guid id)
         {
             Id = id;
         }
     }
+
     internal class GetDetailMaintPreventiveQueryHandle : IRequestHandler<GetDetailMaintPreventiveQuery, Result<List<GetDetailMaintPreventiveDto>>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -61,6 +56,5 @@ namespace SkeletonApi.Application.Features.MaintenancesPreventive.Queries.GetDet
 
             return Result<List<GetDetailMaintPreventiveDto>>.Failure("Data Not Found");
         }
-
     }
 }

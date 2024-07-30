@@ -3,7 +3,6 @@
 //using IotHub.Repositories.User;
 //using IotHub.Services.Profile;
 //using IotHub.Services.User;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace SkeletonApi.IotHub.Configurations
 {

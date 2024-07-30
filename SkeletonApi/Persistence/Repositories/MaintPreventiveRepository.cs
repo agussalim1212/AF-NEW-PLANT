@@ -1,13 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SkeletonApi.Application.Features.MaintenancesPreventive.Commands.UploadExcel;
 using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 using Machine = SkeletonApi.Domain.Entities.Machine;
 
 namespace SkeletonApi.Persistence.Repositories
@@ -16,12 +9,11 @@ namespace SkeletonApi.Persistence.Repositories
     {
         private readonly IGenericRepository<MaintenacePreventive> _repository;
         private readonly IGenericRepository<Machine> _machineRepository;
-        public MaintPreventiveRepository(IGenericRepository<MaintenacePreventive> repository,IGenericRepository<Machine> machineRepository )
-        {
 
+        public MaintPreventiveRepository(IGenericRepository<MaintenacePreventive> repository, IGenericRepository<Machine> machineRepository)
+        {
             _repository = repository;
             _machineRepository = machineRepository;
-
         }
 
         public void DeleteMachines(MaintenacePreventive maintenacePreventive) => _repository.DeleteAsync(maintenacePreventive);
@@ -48,7 +40,7 @@ namespace SkeletonApi.Persistence.Repositories
                 Name = maintenance.Name,
                 MachineId = category,
                 Plan = maintenance.Plan,
-                StartDate = (DateOnly)maintenance.StartDate,         
+                StartDate = (DateOnly)maintenance.StartDate,
             };
             return Resp;
         }

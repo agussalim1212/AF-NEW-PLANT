@@ -6,12 +6,10 @@ using SkeletonApi.Application.Interfaces.Repositories;
 using SkeletonApi.Domain.Entities;
 using SkeletonApi.Shared;
 
-
 namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubjectMachineWithPagination
 {
     public record GetSubjectMachineWithPaginationQuery : IRequest<PaginatedResult<GetSubjectMachineWithPaginationDto>>
     {
-        
         public int page_number { get; set; }
         public int page_size { get; set; }
         public string search_term { get; set; }
@@ -25,6 +23,7 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
             search_term = searchTerm;
         }
     }
+
     internal class GetSubjectMachinesWithPaginationQueryHandler : IRequestHandler<GetSubjectMachineWithPaginationQuery, PaginatedResult<GetSubjectMachineWithPaginationDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -53,7 +52,5 @@ namespace SkeletonApi.Application.Features.SubjectHasMachines.Queries.GetSubject
                      }).ToList(),
                  }).OrderByDescending(d => d.UpdatedAt).ToPaginatedListAsync(query.page_number, query.page_size, cancellationToken);
         }
-
-
     }
 }

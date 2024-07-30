@@ -4,7 +4,6 @@ using SkeletonApi.Persistence.Contexts;
 
 namespace SkeletonApi.WebAPI.ContextFactory
 {
- 
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext CreateDbContext(string[] args)
